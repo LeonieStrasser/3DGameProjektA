@@ -40,7 +40,7 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] float neutralRotation;
 
     private Rigidbody myRigidbody;
-    
+
     float currentSpeed;
 
 
@@ -61,6 +61,10 @@ public class WhingMovement01 : MonoBehaviour
     Quaternion currentRightRotationTarget;
     Quaternion currentLeftRotationTarget;
 
+    private void Awake()
+    {
+        myRigidbody = GetComponent<Rigidbody>();
+    }
 
     private void Start()
     {
@@ -73,7 +77,7 @@ public class WhingMovement01 : MonoBehaviour
         Debug.Log("Speed: " + currentSpeed);
 
         Move();
-        AddGravity();
+        //AddGravity();
         RotateWhings();
     }
 
@@ -101,20 +105,46 @@ public class WhingMovement01 : MonoBehaviour
 
     private void Move()
     {
+        //// Speed wird schneller und langsamer je nach Blickruchtung hoch oder Runter
+        //currentSpeed += fallVelocity * -transform.forward.y * Time.deltaTime;
+        //currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);                                        // Beschläunigt nur bis zum Maximalspeed 
+
+        //// Vorwärtsbewegung
+        //transform.position += transform.forward * currentSpeed * Time.deltaTime;
+
+        ////Rotation hoch und runter
+        //currentRotationUpDown = rotationSpeedUpDown * (rightControlY / 2 + lefttControlY / 2);
+        //transform.RotateAround(transform.position, transform.right, Time.deltaTime * currentRotationUpDown);
+
+        ////Rotation rechts und links
+        //currentRotationLeftRight = (rightControlY - lefttControlY) / 2;
+        //transform.RotateAround(transform.position, transform.up, Time.deltaTime * currentRotationLeftRight * rotationSpeedLeftRight);
+
+        //// Rotation an der Blickrichtung
+
+        //Quaternion rightRotation = rightWhing.transform.rotation;                                    // Einen Mittelwert aus den Flügelvektoren berechnen
+        //Quaternion leftRotation = leftWhing.transform.rotation;
+        //Quaternion midRotation = Quaternion.Slerp(rightRotation, leftRotation, 0.5f);
+
+        //transform.rotation = Quaternion.Lerp(transform.rotation, midRotation, stabilizeSpeed * Time.deltaTime);     // Aktuelle Rotation an der z Achse richtung des Mittelwerts anpassen - !!!Hier ist noch was nicht ganz richtig am Start
+
+
+
+
         // Speed wird schneller und langsamer je nach Blickruchtung hoch oder Runter
-        currentSpeed += fallVelocity * -transform.forward.y * Time.deltaTime;
+        currentSpeed = (myRigidbody.velocity.magnitude) + (fallVelocity * -transform.forward.y * Time.deltaTime);
         currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);                                        // Beschläunigt nur bis zum Maximalspeed 
 
         // Vorwärtsbewegung
-        transform.position += transform.forward * currentSpeed * Time.deltaTime;
+        myRigidbody.position += transform.forward * currentSpeed * Time.deltaTime;
 
         //Rotation hoch und runter
         currentRotationUpDown = rotationSpeedUpDown * (rightControlY / 2 + lefttControlY / 2);
-        transform.RotateAround(transform.position, transform.right, Time.deltaTime * currentRotationUpDown);
+        myRigidbody.transform.RotateAround(transform.position, transform.right, Time.deltaTime * currentRotationUpDown);
 
         //Rotation rechts und links
         currentRotationLeftRight = (rightControlY - lefttControlY) / 2;
-        transform.RotateAround(transform.position, transform.up, Time.deltaTime * currentRotationLeftRight * rotationSpeedLeftRight);
+        myRigidbody.transform.RotateAround(transform.position, transform.up, Time.deltaTime * currentRotationLeftRight * rotationSpeedLeftRight);
 
         // Rotation an der Blickrichtung
 
@@ -122,20 +152,19 @@ public class WhingMovement01 : MonoBehaviour
         Quaternion leftRotation = leftWhing.transform.rotation;
         Quaternion midRotation = Quaternion.Slerp(rightRotation, leftRotation, 0.5f);
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, midRotation, stabilizeSpeed * Time.deltaTime);     // Aktuelle Rotation an der z Achse richtung des Mittelwerts anpassen - !!!Hier ist noch was nicht ganz richtig am Start
-        Debug.LogWarning("Der Stabilisator dreht hier am Anfang den Flieger etwas zu weit nach rechts - why!?");
+        myRigidbody.transform.rotation = Quaternion.Lerp(transform.rotation, midRotation, stabilizeSpeed * Time.deltaTime);     // Aktuelle Rotation an der z Achse richtung des Mittelwerts anpassen - !!!Hier ist noch was nicht ganz richtig am Start
     }
 
-    private void AddGravity()
-    {
-        if (currentSpeed < gravitySpeedBoundery)
-        {
-            float slowMultoplyer = 1 - (Mathf.InverseLerp(0, gravitySpeedBoundery, currentSpeed));
-            float t = Time.deltaTime * gravity * gravitySpeedBoundery;
+    //private void AddGravity()
+    //{
+    //    if (currentSpeed < gravitySpeedBoundery)
+    //    {
+    //        float slowMultoplyer = 1 - (Mathf.InverseLerp(0, gravitySpeedBoundery, currentSpeed));
+    //        float t = Time.deltaTime * gravity * gravitySpeedBoundery;
 
-            transform.rotation = Quaternion.Lerp(transform.rotation, downRotation, t);
-        }
-    }
+    //        transform.rotation = Quaternion.Lerp(transform.rotation, downRotation, t);
+    //    }
+    //}
 
     private void RotateWhings()
     {
