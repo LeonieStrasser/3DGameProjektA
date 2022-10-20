@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody))]
 public class WhingMovement01 : MonoBehaviour
 {
     [Header("Movement")]
@@ -38,6 +39,8 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] float minRotation;
     [SerializeField] float neutralRotation;
 
+    private Rigidbody myRigidbody;
+    
     float currentSpeed;
 
 
