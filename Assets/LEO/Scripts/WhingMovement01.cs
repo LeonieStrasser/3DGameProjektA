@@ -131,7 +131,7 @@ public class WhingMovement01 : MonoBehaviour
         }
         else
         {
-            currentSpeed = (myRigidbody.velocity.magnitude) + (glideUpVelocity * -transform.forward.y);
+            currentSpeed = currentSpeed - (glideUpVelocity * transform.forward.y);
         }
 
         currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);                                        // Beschläunigt nur bis zum Maximalspeed 
