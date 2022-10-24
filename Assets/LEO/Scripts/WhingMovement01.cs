@@ -19,13 +19,13 @@ public class WhingMovement01 : MonoBehaviour
     [Tooltip("Maximal erreichbarer Speed im Sturzflug.")]
     [SerializeField] float maxSpeed = float.MaxValue;
     [Tooltip("Geschwindigkeit mit der der Flieger an der x-Achse rotiert.")]
-    [SerializeField] [Range(10, 400)] float rotationSpeedUpDown;
+    [SerializeField] [Range(10, 800)] float rotationSpeedUpDown;
     [Tooltip("Geschwindigkeit mit der der Flieger an der y-Achse rotiert.")]
-    [SerializeField] [Range(10, 400)] float rotationSpeedLeftRight;
+    [SerializeField] [Range(10, 800)] float rotationSpeedLeftRight;
     [Tooltip("Geschwindigkeit mit der der Flieger an der z-Achse rotiert rotiert.")]
-    [SerializeField] [Range(0, 80)] float stabilizeSpeed;
+    [SerializeField] [Range(10, 800)] float stabilizeSpeed;
     [Tooltip("Kraft mit der der Flugkörper richtung Boden gedrückt wird.")]
-    [SerializeField] [Range(0, 0.1f)] float gravity;
+    [SerializeField] [Range(0, 0.5f)] float gravity;
     [Tooltip("Geschwindigkeits Obergrenze ab der die Kraft nach Unten anfängt zu wirken. (Von da an wirkt sie umso stärker, je langsamer das Flugobjekt wird)")]
     [SerializeField] float gravitySpeedBoundery = 20f;
     [Space(10)]
@@ -83,9 +83,14 @@ public class WhingMovement01 : MonoBehaviour
     {
         Debug.Log("Speed: " + currentSpeed);
 
+    }
+
+    private void FixedUpdate()
+    {
         Move();
-        //AddGravity();
+        AddGravity();
         RotateWhings();
+        
     }
 
     void OnRightWhing(InputValue value)                                                             // Inputs vom rechten Joystick werden ausgelesen
@@ -138,7 +143,7 @@ public class WhingMovement01 : MonoBehaviour
 
         // Vorwärtsbewegung
         //myRigidbody.position += transform.forward * currentSpeed * Time.deltaTime;
-        myRigidbody.AddForce(transform.forward * currentSpeed);
+        myRigidbody.AddForce(transform.forward * currentSpeed * 10);
 
 
 
@@ -167,16 +172,18 @@ public class WhingMovement01 : MonoBehaviour
         //myRigidbody.transform.rotation = Quaternion.Lerp(transform.rotation, midRotation, stabilizeSpeed * Time.deltaTime);     // Aktuelle Rotation an der z Achse richtung des Mittelwerts anpassen - !!!Hier ist noch was nicht ganz richtig am Start
     }
 
-    //private void AddGravity()
-    //{
-    //    if (currentSpeed < gravitySpeedBoundery)
-    //    {
-    //        float slowMultoplyer = 1 - (Mathf.InverseLerp(0, gravitySpeedBoundery, currentSpeed));
-    //        float t = Time.deltaTime * gravity * gravitySpeedBoundery;
+    private void AddGravity()
+    {
+        if (currentSpeed < gravitySpeedBoundery)
+        {
+            //float slowMultiplyer = 1 - (Mathf.InverseLerp(0, gravitySpeedBoundery, currentSpeed));
+            //float t = Time.deltaTime * gravity * slowMultiplyer;
 
-    //        transform.rotation = Quaternion.Lerp(transform.rotation, downRotation, t);
-    //    }
-    //}
+            ////transform.rotation = Quaternion.Lerp(transform.rotation, downRotation, t);
+            //Quaternion deltaDownRotation = Quaternion.Euler(Vector3.down * t);
+            //myRigidbody.MoveRotation(myRigidbody.rotation * deltaDownRotation);
+        }
+    }
 
     private void RotateWhings()
     {
