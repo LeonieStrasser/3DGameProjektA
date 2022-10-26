@@ -7,6 +7,8 @@ public class Plane_Movement : MonoBehaviour
 {
     public GameObject Player;
 
+    Vector3 moveCamTo;
+
     [Header("Speed")]
     public float speed = 0;
 
@@ -16,9 +18,15 @@ public class Plane_Movement : MonoBehaviour
 
     Vector2 rightWhingControlStick;
     float rightControlY;
+    float leftControlX;
 
     Vector2 lefttWhingControlStick;
-    float lefttControlY;
+    float leftControlY;
+    float rightControlX;
+
+    float currentRotationLeftRight;
+
+    [SerializeField][Range(10, 400)] float rotationSpeedLeftRight;
 
     [SerializeField][Range(0, 0.5f)] float inputSensitivity;
 
@@ -26,11 +34,19 @@ public class Plane_Movement : MonoBehaviour
 
     private void Start()
     {
-       rb = Player.GetComponent<Rigidbody>();
+        rb = Player.GetComponent<Rigidbody>();
+
     }
 
-    void Update()
+    void FixedUpdate()
     {
+
+        Vector3 moveCamTo = transform.position - transform.forward * 2.0f + Vector3.up * 2.0f;
+        float bias = 0.96f;
+        Camera.main.transform.position = Camera.main.transform.position * bias + moveCamTo * (1.0f - bias);
+        Camera.main.transform.LookAt(transform.position + transform.forward * 20.0f);
+
+        //Movement();
 
         // Vorwärsbewegung 
         transform.position += transform.forward * verticalMovement * speed * Time.deltaTime;
@@ -38,21 +54,23 @@ public class Plane_Movement : MonoBehaviour
         //Geschwindigkeit
         speed -= transform.forward.y * 2.0f * Time.deltaTime;
 
-        if(speed < 2.0f)
+        //Minimum und Maximum speed, damit Player nie zum Stillstand kommt und nicht unkontrollierbar wird
+
+        if (speed < 2.0f)
         {
             speed = 2.0f;
         }
 
-        if(speed > 5.0f)
+        if(speed > 40.0f)
         {
-            speed = 5.0f;
+            speed = 40.0f;
         }
 
 
         //Rotation auf den Achsen
         transform.Rotate(Input.GetAxis("Vertical"), 0.0f, Input.GetAxis("Horizontal") * -1.0f);
 
-        //Kollision Ground
+        //Collision Ground
         float terrainHeight = Terrain.activeTerrain.SampleHeight(transform.position);
         if (terrainHeight > Player.transform.position.y)
         {
@@ -65,23 +83,42 @@ public class Plane_Movement : MonoBehaviour
     {
         rightWhingControlStick = value.Get<Vector2>();
         rightControlY = -rightWhingControlStick.y;
+        rightControlX = rightWhingControlStick.x;
+
 
         if (rightControlY < inputSensitivity && rightControlY > -inputSensitivity)                   // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
         {
             rightControlY = 0;
+        }
+
+        if (rightControlX < inputSensitivity && rightControlX > -inputSensitivity)                   // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
+        {
+            rightControlX = 0;
         }
     }
 
     void OnLeftWhing(InputValue value)                                                              // Inputs vom linken Joystick werden ausgelesen
     {
         lefttWhingControlStick = value.Get<Vector2>();
-        lefttControlY = -lefttWhingControlStick.y;
+        leftControlY = -lefttWhingControlStick.y;
 
-        if (lefttControlY < inputSensitivity && lefttControlY > -inputSensitivity)                  // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
+
+        if (leftControlY < inputSensitivity && leftControlY > -inputSensitivity)                   // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
         {
-            lefttControlY = 0;
+            leftControlY = 0;
+        }
+
+        if (leftControlX < inputSensitivity && leftControlX > -inputSensitivity)                  // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
+        {
+            leftControlX = 0;
         }
     }
 
-
+    private void Movement()
+    {
+        //Rotation rechts und links
+        currentRotationLeftRight = rotationSpeedLeftRight * ((rightControlX - leftControlX) / 2);
+        Quaternion deltaYRotation = Quaternion.Euler(new Vector3(0, currentRotationLeftRight, 0) * Time.fixedDeltaTime);
+        rb.MoveRotation(rb.rotation * deltaYRotation);
+    }
 }
