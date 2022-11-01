@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 502884031767454821}
   - component: {fileID: 502884031767454820}
   - component: {fileID: 502884031767454823}
+  - component: {fileID: 7069661740001588461}
   - component: {fileID: 7701056464925569004}
   m_Layer: 0
   m_Name: Player_WhingMovement_01.1
@@ -455,6 +456,18 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &7069661740001588461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502884031767454843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed233c8565effae439cac1c9a7667c6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &7701056464925569004
 BoxCollider:
   m_ObjectHideFlags: 0
