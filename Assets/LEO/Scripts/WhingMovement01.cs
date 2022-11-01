@@ -11,7 +11,7 @@ public class WhingMovement01 : MonoBehaviour
 
     [Tooltip("Speed der am Start gesetzt wird.")]
     [SerializeField] float startSpeed = 10f;
-    [Tooltip("Faktor um den sich der Flugkï¿½rper verschnellert, wenn er abwï¿½rts fliegt. Selber Faktor um den sich der Flugkï¿½rper verlangsamt, wenn er aufwï¿½rts fliegt. ")] // eigentlich wï¿½r es sinnvoll wenn der faktor aufwï¿½rts grï¿½ï¿½er ist - Wegen der Schwerkraft
+    [Tooltip("Faktor um den sich der Flugkörper verschnellert, wenn er abwärts fliegt. Selber Faktor um den sich der Flugkörper verlangsamt, wenn er aufwärts fliegt. ")] // eigentlich wär es sinnvoll wenn der faktor aufwärts größer ist - Wegen der Schwerkraft
     [SerializeField] float fallVelocity = 90f;
 
     [SerializeField] float glideUpVelocity;
@@ -19,17 +19,17 @@ public class WhingMovement01 : MonoBehaviour
     [Tooltip("Maximal erreichbarer Speed im Sturzflug.")]
     [SerializeField] float maxSpeed = float.MaxValue;
     [Tooltip("Geschwindigkeit mit der der Flieger an der x-Achse rotiert.")]
-    [SerializeField] [Range(10, 400)] float rotationSpeedUpDown;
+    [SerializeField] [Range(10, 800)] float rotationSpeedUpDown;
     [Tooltip("Geschwindigkeit mit der der Flieger an der y-Achse rotiert.")]
-    [SerializeField] [Range(10, 400)] float rotationSpeedLeftRight;
+    [SerializeField] [Range(10, 800)] float rotationSpeedLeftRight;
     [Tooltip("Geschwindigkeit mit der der Flieger an der z-Achse rotiert rotiert.")]
-    [SerializeField] [Range(0, 80)] float stabilizeSpeed;
-    [Tooltip("Kraft mit der der Flugkï¿½rper richtung Boden gedrï¿½ckt wird.")]
-    [SerializeField] [Range(0, 0.1f)] float gravity;
-    [Tooltip("Geschwindigkeits Obergrenze ab der die Kraft nach Unten anfï¿½ngt zu wirken. (Von da an wirkt sie umso stï¿½rker, je langsamer das Flugobjekt wird)")]
+    [SerializeField] [Range(10, 800)] float stabilizeSpeed;
+    [Tooltip("Kraft mit der der Flugkörper richtung Boden gedrückt wird.")]
+    [SerializeField] [Range(0, 0.5f)] float gravity;
+    [Tooltip("Geschwindigkeits Obergrenze ab der die Kraft nach Unten anfängt zu wirken. (Von da an wirkt sie umso stärker, je langsamer das Flugobjekt wird)")]
     [SerializeField] float gravitySpeedBoundery = 20f;
     [Space(10)]
-    [Tooltip("Sensitivitï¿½t fï¿½r den Joystick Input.")]
+    [Tooltip("Sensitivität für den Joystick Input.")]
     [SerializeField] [Range(0, 0.5f)] float inputSensitivity;
 
     [Space(20)]
@@ -81,11 +81,16 @@ public class WhingMovement01 : MonoBehaviour
     }
     private void Update()
     {
-       // Debug.Log("Speed: " + currentSpeed);
+        Debug.Log("Speed: " + currentSpeed);
 
+    }
+
+    private void FixedUpdate()
+    {
         Move();
-        //AddGravity();
+        AddGravity();
         RotateWhings();
+        
     }
 
     void OnRightWhing(InputValue value)                                                             // Inputs vom rechten Joystick werden ausgelesen
@@ -134,11 +139,11 @@ public class WhingMovement01 : MonoBehaviour
             currentSpeed = currentSpeed - (glideUpVelocity * transform.forward.y);
         }
 
-        currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);                                        // Beschlï¿½unigt nur bis zum Maximalspeed 
+        currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);                                        // Beschläunigt nur bis zum Maximalspeed 
 
-        // Vorwï¿½rtsbewegung
+        // Vorwärtsbewegung
         //myRigidbody.position += transform.forward * currentSpeed * Time.deltaTime;
-        myRigidbody.AddForce(transform.forward * currentSpeed);
+        myRigidbody.AddForce(transform.forward * currentSpeed * 10);
 
 
 
@@ -159,7 +164,7 @@ public class WhingMovement01 : MonoBehaviour
 
 
 
-        //Quaternion rightRotation = rightWhing.transform.rotation;                                    // Einen Mittelwert aus den Flï¿½gelvektoren berechnen
+        //Quaternion rightRotation = rightWhing.transform.rotation;                                    // Einen Mittelwert aus den Flügelvektoren berechnen
         //Quaternion leftRotation = leftWhing.transform.rotation;
         //Quaternion midRotation = Quaternion.Slerp(rightRotation, leftRotation, 0.5f);
 
@@ -167,22 +172,24 @@ public class WhingMovement01 : MonoBehaviour
         //myRigidbody.transform.rotation = Quaternion.Lerp(transform.rotation, midRotation, stabilizeSpeed * Time.deltaTime);     // Aktuelle Rotation an der z Achse richtung des Mittelwerts anpassen - !!!Hier ist noch was nicht ganz richtig am Start
     }
 
-    //private void AddGravity()
-    //{
-    //    if (currentSpeed < gravitySpeedBoundery)
-    //    {
-    //        float slowMultoplyer = 1 - (Mathf.InverseLerp(0, gravitySpeedBoundery, currentSpeed));
-    //        float t = Time.deltaTime * gravity * gravitySpeedBoundery;
+    private void AddGravity()
+    {
+        if (currentSpeed < gravitySpeedBoundery)
+        {
+            //float slowMultiplyer = 1 - (Mathf.InverseLerp(0, gravitySpeedBoundery, currentSpeed));
+            //float t = Time.deltaTime * gravity * slowMultiplyer;
 
-    //        transform.rotation = Quaternion.Lerp(transform.rotation, downRotation, t);
-    //    }
-    //}
+            ////transform.rotation = Quaternion.Lerp(transform.rotation, downRotation, t);
+            //Quaternion deltaDownRotation = Quaternion.Euler(Vector3.down * t);
+            //myRigidbody.MoveRotation(myRigidbody.rotation * deltaDownRotation);
+        }
+    }
 
     private void RotateWhings()
     {
         // right Whing
         Quaternion newTargetRotationRight = Quaternion.identity;
-        switch (rightControlY)                                                                      // Je nach Input des Joysticks wird ein anderer Ziel - Vektor fï¿½r den Flï¿½gel eingesetzt
+        switch (rightControlY)                                                                      // Je nach Input des Joysticks wird ein anderer Ziel - Vektor für den Flügel eingesetzt
         {
             case < 0:
                 newTargetRotationRight.z = maxRotation;
@@ -205,7 +212,7 @@ public class WhingMovement01 : MonoBehaviour
 
         // left Whing
         Quaternion newTargetRotationLeft = Quaternion.identity;
-        switch (lefttControlY)                                                                      // Je nach Input des Joysticks wird ein anderer Ziel - Vektor fï¿½r den Flï¿½gel eingesetzt
+        switch (lefttControlY)                                                                      // Je nach Input des Joysticks wird ein anderer Ziel - Vektor für den Flügel eingesetzt
         {
             case < 0:
                 newTargetRotationLeft.z = -maxRotation;
@@ -224,14 +231,5 @@ public class WhingMovement01 : MonoBehaviour
         // left Whing Rotate in Target Direction over Time
         leftWhing.transform.localRotation = Quaternion.Lerp(leftWhing.transform.localRotation, currentLeftRotationTarget, whingRotationSpeed * Time.deltaTime);
     }
-      private void OnTriggerEnter(Collider other) //Triggert Boost wenn Obj Booster Collider berÃ¼hrt
-    {
-        if(other.gameObject.tag == "Booster")
-        {
-            Debug.Log("BOOST!" + currentSpeed);
-            currentSpeed = currentSpeed * 2;
-        }
-    }
-
 
 }
