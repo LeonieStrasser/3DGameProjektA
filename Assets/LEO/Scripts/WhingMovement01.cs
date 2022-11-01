@@ -182,12 +182,17 @@ public class WhingMovement01 : MonoBehaviour
     {
         if (currentSpeed < gravitySpeedBoundery)
         {
+            myRigidbody.useGravity = true;
             //float slowMultiplyer = 1 - (Mathf.InverseLerp(0, gravitySpeedBoundery, currentSpeed));
             //float t = Time.deltaTime * gravity * slowMultiplyer;
 
             ////transform.rotation = Quaternion.Lerp(transform.rotation, downRotation, t);
             //Quaternion deltaDownRotation = Quaternion.Euler(Vector3.down * t);
             //myRigidbody.MoveRotation(myRigidbody.rotation * deltaDownRotation);
+        }
+        else
+        {
+            myRigidbody.useGravity = false;
         }
     }
 
