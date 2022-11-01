@@ -90,7 +90,7 @@ public class WhingMovement01 : MonoBehaviour
         Move();
         AddGravity();
         RotateWhings();
-        
+
     }
 
     void OnRightWhing(InputValue value)                                                             // Inputs vom rechten Joystick werden ausgelesen
@@ -132,18 +132,24 @@ public class WhingMovement01 : MonoBehaviour
         if (transform.forward.y < 0)
         {
             // Speed wird schneller und langsamer je nach Blickruchtung hoch oder Runter
-            currentSpeed = (myRigidbody.velocity.magnitude) + (fallVelocity * -transform.forward.y);
+            currentSpeed = (myRigidbody.velocity.magnitude);
+            currentSpeed += (fallVelocity * -transform.forward.y);
         }
         else
         {
-            currentSpeed = currentSpeed - (glideUpVelocity * transform.forward.y);
+            currentSpeed -= (glideUpVelocity * transform.forward.y);
+            if (myRigidbody.velocity.magnitude < currentSpeed)
+                currentSpeed = myRigidbody.velocity.magnitude;
         }
 
         currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);                                        // Beschläunigt nur bis zum Maximalspeed 
 
         // Vorwärtsbewegung
         //myRigidbody.position += transform.forward * currentSpeed * Time.deltaTime;
-        myRigidbody.AddForce(transform.forward * currentSpeed * 10);
+
+        myRigidbody.AddForce(transform.forward * currentSpeed * 10, ForceMode.Force);
+
+
 
 
 
