@@ -337,7 +337,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 2000
   field of view: 76.1
   orthographic: 0
   orthographic size: 5
@@ -433,8 +433,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startSpeed: 0
   fallVelocity: 8
-  glideUpVelocity: 0.013
-  maxSpeed: 200000
+  glideUpVelocity: 1
+  maxSpeed: 1000
   rotationSpeedUpDown: 398
   rotationSpeedLeftRight: 406
   stabilizeSpeed: 436
@@ -484,7 +484,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7792701049413567939}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b9c279df641317d4aa663e7354e203a5, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
