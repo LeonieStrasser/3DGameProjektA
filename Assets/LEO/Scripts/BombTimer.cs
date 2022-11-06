@@ -36,12 +36,23 @@ public class BombTimer : MonoBehaviour
     [SerializeField] GameObject bombObject;
     [SerializeField] ParticleSystem bombVFX1;
     [SerializeField] ParticleSystem bombVFX2;
+
+    List<Vector3> collectableSpawnPoints;
+    [SerializeField] GameObject collectiblePrefab;
+
     private void Awake()
     {
         myRigidbody = GetComponent<Rigidbody>();
+        collectableSpawnPoints = new List<Vector3>();
     }
     private void Start()
     {
+        SpawnPoint[] allSpawnpoints = FindObjectsOfType<SpawnPoint>();
+        foreach (var item in allSpawnpoints)
+        {
+            collectableSpawnPoints.Add(item.gameObject.transform.position);
+        }
+
         Timer = maxTime;
         StopBomb();
     }
@@ -72,12 +83,20 @@ public class BombTimer : MonoBehaviour
         }
     }
 
+    void spawnNextBomb()
+    {
+        int x = Random.Range(0, collectableSpawnPoints.Count);
+        Vector3 spawnPosition = collectableSpawnPoints[x];
+        Instantiate(collectiblePrefab, spawnPosition, Quaternion.identity);
+    }
+
     public void StopBomb()
     {
         textMP.gameObject.SetActive(false);
         bombObject.SetActive(false);
         bombIsActive = false;
         Timer = maxTime;
+        spawnNextBomb();
     }
 
     public void PickUpBomb()
@@ -87,4 +106,5 @@ public class BombTimer : MonoBehaviour
         bombObject.SetActive(true);
         bombIsActive = true;
     }
+
 }
