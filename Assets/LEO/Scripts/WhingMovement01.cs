@@ -19,18 +19,18 @@ public class WhingMovement01 : MonoBehaviour
     [Tooltip("Maximal erreichbarer Speed im Sturzflug.")]
     [SerializeField] float maxSpeed = float.MaxValue;
     [Tooltip("Geschwindigkeit mit der der Flieger an der x-Achse rotiert.")]
-    [SerializeField] [Range(10, 800)] float rotationSpeedUpDown;
+    [SerializeField][Range(10, 800)] float rotationSpeedUpDown;
     [Tooltip("Geschwindigkeit mit der der Flieger an der y-Achse rotiert.")]
-    [SerializeField] [Range(10, 800)] float rotationSpeedLeftRight;
+    [SerializeField][Range(10, 800)] float rotationSpeedLeftRight;
     [Tooltip("Geschwindigkeit mit der der Flieger an der z-Achse rotiert rotiert.")]
-    [SerializeField] [Range(10, 800)] float stabilizeSpeed;
+    [SerializeField][Range(10, 800)] float stabilizeSpeed;
     [Tooltip("Kraft mit der der Flugkörper richtung Boden gedrückt wird.")]
-    [SerializeField] [Range(0, 0.5f)] float gravity;
+    [SerializeField][Range(0, 0.5f)] float gravity;
     [Tooltip("Geschwindigkeits Obergrenze ab der die Kraft nach Unten anfängt zu wirken. (Von da an wirkt sie umso stärker, je langsamer das Flugobjekt wird)")]
     [SerializeField] float gravitySpeedBoundery = 20f;
     [Space(10)]
     [Tooltip("Sensitivität für den Joystick Input.")]
-    [SerializeField] [Range(0, 0.5f)] float inputSensitivity;
+    [SerializeField][Range(0, 0.5f)] float inputSensitivity;
 
     [Space(20)]
     [Header("Whing Animation")]
@@ -61,6 +61,8 @@ public class WhingMovement01 : MonoBehaviour
 
     float currentRotationForward;
 
+    public bool isPlayerTopUp;
+
     Quaternion downRotation;
 
 
@@ -81,7 +83,9 @@ public class WhingMovement01 : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log("Speed: " + currentSpeed);
+        //Debug.Log("Speed: " + currentSpeed);
+
+        CheckAxisUpY();
 
     }
 
@@ -112,6 +116,7 @@ public class WhingMovement01 : MonoBehaviour
 
     void OnLeftWhing(InputValue value)                                                              // Inputs vom linken Joystick werden ausgelesen
     {
+
         lefttWhingControlStick = value.Get<Vector2>();
         lefttControlX = -lefttWhingControlStick.x;
         lefttControlY = -lefttWhingControlStick.y;
@@ -178,6 +183,18 @@ public class WhingMovement01 : MonoBehaviour
         //myRigidbody.transform.rotation = Quaternion.Lerp(transform.rotation, midRotation, stabilizeSpeed * Time.deltaTime);     // Aktuelle Rotation an der z Achse richtung des Mittelwerts anpassen - !!!Hier ist noch was nicht ganz richtig am Start
     }
 
+    private void CheckAxisUpY()
+    {
+
+        if (this.transform.up.y > 0)
+        {
+            isPlayerTopUp = true;
+        }
+        else
+        {
+            isPlayerTopUp = false;
+        }
+    }
     private void AddGravity()
     {
         if (currentSpeed < gravitySpeedBoundery)
@@ -242,5 +259,4 @@ public class WhingMovement01 : MonoBehaviour
         // left Whing Rotate in Target Direction over Time
         leftWhing.transform.localRotation = Quaternion.Lerp(leftWhing.transform.localRotation, currentLeftRotationTarget, whingRotationSpeed * Time.deltaTime);
     }
-
 }
