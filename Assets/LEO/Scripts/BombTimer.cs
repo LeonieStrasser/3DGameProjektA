@@ -34,8 +34,8 @@ public class BombTimer : MonoBehaviour
     [SerializeField] TextMeshProUGUI textMP;
     [SerializeField] Animator uiAnim;
     [SerializeField] GameObject bombObject;
-    [SerializeField] ParticleSystem bombVFX1;
-    [SerializeField] ParticleSystem bombVFX2;
+  //  [SerializeField] ParticleSystem bombVFX1;
+   // [SerializeField] ParticleSystem bombVFX2;
 
     List<Vector3> collectableSpawnPoints;
     [SerializeField] GameObject collectiblePrefab;
@@ -62,7 +62,7 @@ public class BombTimer : MonoBehaviour
         if (bombIsActive)
         {
             RunBombTimer();
-            RunBombVFX();
+         //   RunBombVFX();
         }
     }
 
@@ -72,7 +72,7 @@ public class BombTimer : MonoBehaviour
         Timer = Mathf.Clamp(Timer, 0, maxTime);
     }
 
-    void RunBombVFX()
+   /* void RunBombVFX()
     {
         if (myRigidbody.velocity.magnitude < speedLimit)
         {
@@ -81,7 +81,7 @@ public class BombTimer : MonoBehaviour
         {
             bombVFX1.gameObject.SetActive(false);
         }
-    }
+    }*/
 
     void spawnNextBomb()
     {
