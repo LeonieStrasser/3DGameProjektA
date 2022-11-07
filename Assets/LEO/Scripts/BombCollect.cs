@@ -6,11 +6,18 @@ public class BombCollect : MonoBehaviour
 {
     BombTimer playerBomb;
     CollectableBombTimer collectTimer;
+    [SerializeField] GameObject packageMarkerPrefab;
+    GameObject myMarker;
 
     private void Awake()
     {
         playerBomb = FindObjectOfType<BombTimer>();
         collectTimer = FindObjectOfType<CollectableBombTimer>();
+    }
+    private void Start()
+    {
+        myMarker = Instantiate(packageMarkerPrefab, Vector3.zero, Quaternion.identity);
+        myMarker.GetComponent<PackageMarkerUI>().SetFollowTarget(this.transform);
     }
 
     private void OnTriggerEnter(Collider other)
