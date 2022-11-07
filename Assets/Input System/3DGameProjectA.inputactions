@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "RelodeScene",
+                    "type": "Button",
+                    "id": "d706a82e-0db7-4e7e-9444-4e0793a9f8bc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -291,6 +300,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "LeftWhing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4c36ed6d-024a-4a15-98a5-0ced81e9bad4",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "RelodeScene",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
