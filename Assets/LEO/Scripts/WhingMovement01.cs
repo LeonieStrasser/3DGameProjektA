@@ -81,11 +81,17 @@ public class WhingMovement01 : MonoBehaviour
         downRotation = Quaternion.identity;
         downRotation.x = 1;
     }
+
+    
     private void Update()
     {
         //Debug.Log("Speed: " + currentSpeed);
 
         CheckAxisUpY();
+        if (lefttWhingControlStick == Vector2.zero && rightWhingControlStick == Vector2.zero && !isPlayerTopUp)
+        {
+            
+        }
 
     }
 
@@ -115,13 +121,7 @@ public class WhingMovement01 : MonoBehaviour
 
     }
 
-    void RightWhing(InputAction.CallbackContext context)
-    {
-        if(context.canceled)
-        {
-            Debug.Log("bla");
-        }
-    }
+    
     void OnLeftWhing(InputValue value)                                                              // Inputs vom linken Joystick werden ausgelesen
     {
 
@@ -193,6 +193,7 @@ public class WhingMovement01 : MonoBehaviour
 
     private void CheckAxisUpY()
     {
+        
 
         if (this.transform.up.y > 0)
         {
@@ -203,6 +204,8 @@ public class WhingMovement01 : MonoBehaviour
             isPlayerTopUp = false;
         }
     }
+
+   
     private void AddGravity()
     {
         if (currentSpeed < gravitySpeedBoundery)
