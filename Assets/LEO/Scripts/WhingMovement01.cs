@@ -108,8 +108,16 @@ public class WhingMovement01 : MonoBehaviour
         {
             rightControlX = 0;
         }
+
     }
 
+    void RightWhing(InputAction.CallbackContext context)
+    {
+        if(context.canceled)
+        {
+            Debug.Log("bla");
+        }
+    }
     void OnLeftWhing(InputValue value)                                                              // Inputs vom linken Joystick werden ausgelesen
     {
         lefttWhingControlStick = value.Get<Vector2>();
