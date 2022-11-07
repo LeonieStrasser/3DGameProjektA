@@ -16,6 +16,8 @@ public class WhingMovement01 : MonoBehaviour
 
     [SerializeField] float glideUpVelocity;
 
+    [Tooltip("Minimaler Speed beim Hochfliegen.")]
+    [SerializeField] float minSpeed = 100f;
     [Tooltip("Maximal erreichbarer Speed im Sturzflug.")]
     [SerializeField] float maxSpeed = float.MaxValue;
     [Tooltip("Geschwindigkeit mit der der Flieger an der x-Achse rotiert.")]
@@ -147,7 +149,7 @@ public class WhingMovement01 : MonoBehaviour
                 currentSpeed = myRigidbody.velocity.magnitude;
         }
 
-        currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);                                        // Beschläunigt nur bis zum Maximalspeed 
+        currentSpeed = Mathf.Clamp(currentSpeed, minSpeed, maxSpeed);                                        // Beschläunigt nur bis zum Maximalspeed 
 
         // Vorwärtsbewegung
         //myRigidbody.position += transform.forward * currentSpeed * Time.deltaTime;
