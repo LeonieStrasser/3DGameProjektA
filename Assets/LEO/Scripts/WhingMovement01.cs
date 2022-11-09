@@ -44,6 +44,9 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] float minRotation;
     [SerializeField] float neutralRotation;
 
+    [SerializeField] float boostSpeed;
+    [SerializeField] float initialBoostSpeed;
+
     private Rigidbody myRigidbody;
 
     float currentSpeed;
@@ -74,11 +77,25 @@ public class WhingMovement01 : MonoBehaviour
     Quaternion currentRightRotationTarget;
     Quaternion currentLeftRotationTarget;
 
+    //InputSystem
+    Controls myControls;
+
+
     private void Awake()
     {
         myRigidbody = GetComponent<Rigidbody>();
+        myControls = new Controls();
+ 
+    }
+    void OnEnable()
+    {
+        myControls.Player.Enable();
     }
 
+    private void OnDisable()
+    {
+        myControls.Player.Disable();
+    }
     private void Start()
     {
         currentSpeed = startSpeed;                                                                  // Startspeed wird gesetzt
@@ -93,8 +110,7 @@ public class WhingMovement01 : MonoBehaviour
         //Debug.Log("Speed: " + currentSpeed);
         if (noInput)
             CheckAxisUpY();
-
-
+        BoostInput();
     }
 
     private void FixedUpdate()
@@ -145,6 +161,7 @@ public class WhingMovement01 : MonoBehaviour
 
     }
 
+  
 
     void OnLeftWhing(InputValue value)                                                              // Inputs vom linken Joystick werden ausgelesen
     {
@@ -185,6 +202,11 @@ public class WhingMovement01 : MonoBehaviour
 
 
 
+    }
+
+    void OnBoost(InputValue value)
+    {
+        ActivateBoost();
     }
 
     private void Move()
@@ -249,9 +271,6 @@ public class WhingMovement01 : MonoBehaviour
         {
             isPlayerTopUp = false;
         }
-
-
-
     }
 
 
@@ -318,5 +337,22 @@ public class WhingMovement01 : MonoBehaviour
 
         // left Whing Rotate in Target Direction over Time
         leftWhing.transform.localRotation = Quaternion.Lerp(leftWhing.transform.localRotation, currentLeftRotationTarget, whingRotationSpeed * Time.deltaTime);
+    }
+
+    void ActivateBoost()
+    {
+       // myRigidbody.AddForce(transform.forward * boostSpeed * 10, ForceMode.VelocityChange);
+    }
+
+    private void BoostInput()
+    {
+        if (myControls.Player.Boost.WasPressedThisFrame())
+        {
+            myRigidbody.AddForce(transform.forward * initialBoostSpeed, ForceMode.VelocityChange);
+        }
+            if (myControls.Player.Boost.IsInProgress())
+        {
+            myRigidbody.AddForce(transform.forward * boostSpeed, ForceMode.VelocityChange);
+        }
     }
 }
