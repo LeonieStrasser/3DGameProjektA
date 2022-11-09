@@ -214,7 +214,7 @@ public class WhingMovement01 : MonoBehaviour
 
 
         //Rotation hoch und runter
-        currentRotationUpDown = rotationSpeedUpDown * (rightControlY / 2 + lefttControlY / 2);
+        currentRotationUpDown = rotationSpeedUpDown * (rightControlY / 3.5f + lefttControlY / 3.5f);
         Quaternion deltaXRotation = Quaternion.Euler(new Vector3(currentRotationUpDown, 0, 0) * Time.fixedDeltaTime);
         myRigidbody.MoveRotation(myRigidbody.rotation * deltaXRotation);
 
