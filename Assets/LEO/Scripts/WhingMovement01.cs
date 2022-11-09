@@ -46,6 +46,7 @@ public class WhingMovement01 : MonoBehaviour
 
     [SerializeField] float boostSpeed;
     [SerializeField] float initialBoostSpeed;
+    [SerializeField] [Range(0.1f,1)] float slowMoTimescale; 
 
     private Rigidbody myRigidbody;
 
@@ -111,6 +112,7 @@ public class WhingMovement01 : MonoBehaviour
         if (noInput)
             CheckAxisUpY();
         BoostInput();
+        SlowmoInput();
     }
 
     private void FixedUpdate()
@@ -353,6 +355,19 @@ public class WhingMovement01 : MonoBehaviour
             if (myControls.Player.Boost.IsInProgress())
         {
             myRigidbody.AddForce(transform.forward * boostSpeed, ForceMode.VelocityChange);
+        }
+    }
+    void SlowmoInput()
+    {
+        if(myControls.Player.SlowMo.WasPressedThisFrame())
+        {
+            Time.timeScale = slowMoTimescale;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        }
+        if (myControls.Player.SlowMo.WasReleasedThisFrame())
+        {
+            Time.timeScale = 1;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
         }
     }
 }

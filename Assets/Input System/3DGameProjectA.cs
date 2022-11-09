@@ -379,10 +379,10 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""94f9ec3a-44b6-486b-b9f5-af62a79ae66d"",
-                    ""path"": """",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""SlowMo"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
