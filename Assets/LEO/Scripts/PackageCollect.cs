@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombCollect : MonoBehaviour
+public class PackageCollect : MonoBehaviour
 {
     BombTimer playerBomb;
-    CollectableBombTimer collectTimer;
+    DeliveryManager collectTimer;
     [SerializeField] GameObject packageMarkerPrefab;
     GameObject myMarker;
 
     private void Awake()
     {
         playerBomb = FindObjectOfType<BombTimer>();
-        collectTimer = FindObjectOfType<CollectableBombTimer>();
+        collectTimer = FindObjectOfType<DeliveryManager>();
     }
     private void Start()
     {
