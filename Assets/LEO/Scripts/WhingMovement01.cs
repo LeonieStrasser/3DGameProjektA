@@ -33,6 +33,8 @@ public class WhingMovement01 : MonoBehaviour
     [Space(10)]
     [Tooltip("Sensitivität für den Joystick Input.")]
     [SerializeField] [Range(0, 0.5f)] float inputSensitivity;
+    [SerializeField] [Tooltip("Mit diesem Wert kann man einstellen ab welcher Twirlgeschwindigkeit der Twirl-Effect getriggert wird")] [Range(0, 1)] float twirlInput;
+    [SerializeField] [Tooltip("Inputsensitivity ab der der Twirl-Effect getriggert wird. (0 => beide Sticks müssen exakt die entgegengesetzte Position auf Y erreichen)")] [Range(0, 1)] float twirlSensitivity;
 
     [Space(20)]
     [Header("Whing Animation")]
@@ -46,7 +48,7 @@ public class WhingMovement01 : MonoBehaviour
 
     [SerializeField] float boostSpeed;
     [SerializeField] float initialBoostSpeed;
-    [SerializeField] [Range(0.1f,1)] float slowMoTimescale; 
+    [SerializeField] [Range(0.1f, 1)] float slowMoTimescale;
 
     private Rigidbody myRigidbody;
 
@@ -69,7 +71,7 @@ public class WhingMovement01 : MonoBehaviour
 
     public bool isPlayerTopUp;
     public bool noInput;
-
+    public bool twirl;
 
     Quaternion downRotation;
 
@@ -86,7 +88,7 @@ public class WhingMovement01 : MonoBehaviour
     {
         myRigidbody = GetComponent<Rigidbody>();
         myControls = new Controls();
- 
+
     }
     void OnEnable()
     {
@@ -113,6 +115,7 @@ public class WhingMovement01 : MonoBehaviour
             CheckAxisUpY();
         BoostInput();
         SlowmoInput();
+        TwirlEffect();
     }
 
     private void FixedUpdate()
@@ -163,7 +166,7 @@ public class WhingMovement01 : MonoBehaviour
 
     }
 
-  
+
 
     void OnLeftWhing(InputValue value)                                                              // Inputs vom linken Joystick werden ausgelesen
     {
@@ -275,7 +278,18 @@ public class WhingMovement01 : MonoBehaviour
         }
     }
 
+    private void TwirlEffect()
+    {
+        if (Mathf.Abs(rightControlY) >= twirlInput && Mathf.Abs(lefttControlY) >= twirlInput)
+        {
+            twirl = (rightControlY + lefttControlY < twirlSensitivity);                 // Twirl ist wahr wenn die Sticks genau entgegengesetzt zeigen
+        }
+        else
+        {
+            twirl = false;
+        }
 
+    }
     private void AddGravity()
     {
         if (currentSpeed < gravitySpeedBoundery)
@@ -343,7 +357,7 @@ public class WhingMovement01 : MonoBehaviour
 
     void ActivateBoost()
     {
-       // myRigidbody.AddForce(transform.forward * boostSpeed * 10, ForceMode.VelocityChange);
+        // myRigidbody.AddForce(transform.forward * boostSpeed * 10, ForceMode.VelocityChange);
     }
 
     private void BoostInput()
@@ -352,14 +366,14 @@ public class WhingMovement01 : MonoBehaviour
         {
             myRigidbody.AddForce(transform.forward * initialBoostSpeed, ForceMode.VelocityChange);
         }
-            if (myControls.Player.Boost.IsInProgress())
+        if (myControls.Player.Boost.IsInProgress())
         {
             myRigidbody.AddForce(transform.forward * boostSpeed, ForceMode.VelocityChange);
         }
     }
     void SlowmoInput()
     {
-        if(myControls.Player.SlowMo.WasPressedThisFrame())
+        if (myControls.Player.SlowMo.WasPressedThisFrame())
         {
             Time.timeScale = slowMoTimescale;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;

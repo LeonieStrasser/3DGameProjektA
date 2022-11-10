@@ -443,9 +443,10 @@ GameObject:
   - component: {fileID: 7069661740001588461}
   - component: {fileID: 7701056464925569004}
   - component: {fileID: 4508742748498286311}
+  - component: {fileID: 74960183}
   m_Layer: 0
   m_Name: Player_WhingMovement_01.1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -457,7 +458,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 502884031767454843}
-  m_LocalRotation: {x: -0, y: 0.99965405, z: -0, w: -0.026301172}
+  m_LocalRotation: {x: 0, y: 0.9996541, z: -0, w: -0.026298966}
   m_LocalPosition: {x: -2050.6296, y: 843.78174, z: 4104.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -498,28 +499,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af57abf8cd5e28d4491c67eea53bbb34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSpeed: 100
-  fallVelocity: 6
-  glideUpVelocity: 0.013
+  startSpeed: 200
+  fallVelocity: 8
+  glideUpVelocity: 0.3
   minSpeed: 100
-  maxSpeed: 200
-  rotationSpeedUpDown: 398
-  rotationSpeedLeftRight: 406
+  maxSpeed: 300
+  rotationSpeedUpDown: 300
+  rotationSpeedLeftRight: 300
   stabilizeSpeed: 436
-  gravity: 0.38
+  gravity: 0.28
   gravitySpeedBoundery: 100
-  inputSensitivity: 0.128
+  inputSensitivity: 0.17
+  twirlInput: 0.826
+  twirlSensitivity: 0.135
   rightWhing: {fileID: 502884031545410587}
   leftWhing: {fileID: 502884031601966656}
-  whingRotationSpeed: 10
-  maxRotation: 0.7
-  minRotation: -0.7
+  whingRotationSpeed: 7
+  maxRotation: 0.3
+  minRotation: -0.3
   neutralRotation: 0
   boostSpeed: 20
   initialBoostSpeed: 1000
   slowMoTimescale: 0.29
   isPlayerTopUp: 0
   noInput: 0
+  twirl: 0
 --- !u!114 &502884031767454823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,12 +594,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTime: 10
-  speedLimit: 150
+  speedLimit: 175
   bombIsActive: 0
   textMP: {fileID: 0}
   uiAnim: {fileID: 0}
   bombObject: {fileID: 8898740853209873473}
   collectiblePrefab: {fileID: 2478225675878064580, guid: 4d067201c9168d3429b7824ef34f1421, type: 3}
+--- !u!114 &74960183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502884031767454843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33fcd5b49dd4a3146b092fd398e919dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1805539283453920510
 GameObject:
   m_ObjectHideFlags: 0
