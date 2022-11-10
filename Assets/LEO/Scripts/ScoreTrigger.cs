@@ -7,15 +7,11 @@ public class ScoreTrigger : MonoBehaviour
 {
     [SerializeField][Tooltip("Anzahl an Punkten die bei normalem durchfliegen auf den Score gerechnet werden")] int points;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        GetComponent<Collider>().isTrigger = true;   
-    }
+    
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.tag == "Player" && ScoreSystem.Instance != null)
         {
             ScoreSystem.Instance.AddScore(points);
         }
