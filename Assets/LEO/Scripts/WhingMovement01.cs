@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,6 +40,9 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] [Tooltip("Mit diesem Wert kann man einstellen ab welcher Twirlgeschwindigkeit der Twirl-Effect getriggert wird")] [Range(0, 1)] float twirlInput;
     [SerializeField] [Tooltip("Inputsensitivity ab der der Twirl-Effect getriggert wird. (0 => beide Sticks müssen exakt die entgegengesetzte Position auf Y erreichen)")] [Range(0, 1)] float twirlSensitivity;
 
+
+
+
     [Space(20)]
     [Header("Wing Animation")]
     [SerializeField] GameObject rightWhing;
@@ -58,8 +62,15 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] [Range(0.1f, 1)] float slowMoTimescale;
 
     [Space(20)]
+    [Header("Camera behaviour")]
+    [SerializeField] float deadZoneRadius;
+
+
+    [Space(20)]
     [Header("Player States")]
     [SerializeField] bool isPlayerTopUp;
+    [SerializeField] bool straightUp;
+    [SerializeField] bool straightDown;
     [SerializeField] bool noInput;
     [SerializeField] bool twirl;
 
@@ -83,7 +94,7 @@ public class WhingMovement01 : MonoBehaviour
 
     float currentRotationForward;
 
-   
+
 
     Quaternion downRotation;
 
@@ -94,6 +105,9 @@ public class WhingMovement01 : MonoBehaviour
 
     //InputSystem
     Controls myControls;
+
+    // 
+    public event Action<bool,bool> OnDeadzoneValueChanged; // erster bool ist up, zweiter bool ist down
 
 
     private void Awake()
@@ -121,13 +135,14 @@ public class WhingMovement01 : MonoBehaviour
 
     private void Update()
     {
-        noInput = (lefttWhingControlStick == Vector2.zero && rightWhingControlStick == Vector2.zero);
+        noInput = (lefttWhingControlStick == Vector2.zero && rightWhingControlStick == Vector2.zero); // CHeck ob der Player einen input gibt
         //Debug.Log("Speed: " + currentSpeed);
         if (noInput)
-            CheckAxisUpY();
+            CheckUpPosition();
         BoostInput();
         SlowmoInput();
         TwirlEffect();
+        CheckDeadzonePositions();
     }
 
     private void FixedUpdate()
@@ -277,9 +292,9 @@ public class WhingMovement01 : MonoBehaviour
         //myRigidbody.transform.rotation = Quaternion.Lerp(transform.rotation, midRotation, stabilizeSpeed * Time.deltaTime);     // Aktuelle Rotation an der z Achse richtung des Mittelwerts anpassen - !!!Hier ist noch was nicht ganz richtig am Start
     }
 
-    private void CheckAxisUpY()
+    private void CheckUpPosition()
     {
-
+        // Is Top oben?
         if (this.transform.up.y > 0)
         {
             isPlayerTopUp = true;
@@ -287,6 +302,24 @@ public class WhingMovement01 : MonoBehaviour
         else
         {
             isPlayerTopUp = false;
+        }
+
+    }
+
+    private void CheckDeadzonePositions()
+    {
+        // STeile Checken
+        float upAngle = Vector3.Angle(this.transform.forward, Vector3.up);
+        // ALter State wird gespeichert um ihn später mit dem neuen zu vergleichen
+        bool lastUpBool = straightUp;
+        bool lastDownBool = straightDown;
+        // Winkel zur Welt mit Deadzone Winkel abgleichen
+        straightUp = (upAngle < deadZoneRadius);
+        straightDown = (upAngle < 180 + deadZoneRadius && upAngle > 180 - deadZoneRadius);
+        // ALter und neuer Winkel vergleichen
+        if(lastDownBool != straightDown || lastUpBool != straightUp)
+        {
+            OnDeadzoneValueChanged?.Invoke(lastUpBool, lastDownBool);
         }
     }
 
@@ -396,4 +429,5 @@ public class WhingMovement01 : MonoBehaviour
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
         }
     }
+
 }
