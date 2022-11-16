@@ -21,7 +21,7 @@ public class ScoreSystem : MonoBehaviour
         private set
         {
             currentScore = value;
-            scoreText.text = currentScore.ToString();
+            
         }
 
         get
@@ -32,10 +32,7 @@ public class ScoreSystem : MonoBehaviour
 
 
 
-    // UI
-    [Header("HUD")]
-
-    [SerializeField] TextMeshProUGUI scoreText;
+    
 
 
     private void Awake()

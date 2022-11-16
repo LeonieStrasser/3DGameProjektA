@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody))]
 public class WhingMovement01 : MonoBehaviour
 {
+    #region inspectorValues
     [Header("Movement")]
 
     [Tooltip("Speed der am Start gesetzt wird.")]
@@ -53,17 +54,24 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] float neutralRotation;
 
     [Space(20)]
+    [Header("Recources")]
+    [SerializeField] float startMaxRecourceA = 10;
+
+    [Space(5)]
     [Header("Boost Power")]
     [SerializeField] float boostSpeed;
     [SerializeField] float initialBoostSpeed;
+    [SerializeField] float initialBoostCosts;
+    [SerializeField] float boostCosts;
 
-    [Space(20)]
+    [Space(5)]
     [Header("Slowmotion Power")]
-    [SerializeField] [Range(0.1f, 1)] float slowMoTimescale;
+    [SerializeField] [Range(0.1f, 1)] float slowmoTimescale;
+    [SerializeField] float slowmoCosts;
 
     [Space(20)]
     [Header("Camera behaviour")]
-    [SerializeField][Range(0, 60)] float deadZoneRadius;
+    [SerializeField] [Range(0, 60)] float deadZoneRadius;
 
 
     [Space(20)]
@@ -74,11 +82,21 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] bool noInput;
     [SerializeField] bool twirl;
 
-    //----------Hidden in Inspector--------------------------
+    #endregion
+
+
+
+
+
+
+
+
+    #region hiddenValues
+
+    //-------------MOVEMENT
     private Rigidbody myRigidbody;
 
     float currentSpeed;
-
 
     Vector2 rightWhingControlStick;
     float rightControlX;
@@ -89,14 +107,29 @@ public class WhingMovement01 : MonoBehaviour
     float lefttControlY;
 
     float currentRotationUpDown;
-
     float currentRotationLeftRight;
-
     float currentRotationForward;
 
-
-
     Quaternion downRotation;
+
+
+    //-------------RESOURCES
+    private float resourceA;
+    public float ResourceA
+    {
+        private set
+        {
+            resourceA = Mathf.Clamp(value, 0, startMaxRecourceA); // ACHTUNG! Sollte sich die max Resource im laufe des Games ändern, muss hier der Code angepasst werden!!!
+            resourceAInRelationToMax = resourceA / startMaxRecourceA;
+        }
+        get
+        {
+            return resourceA;
+        }
+    }
+
+    private float resourceAInRelationToMax;
+    public float ResourceAInRelationToMax { get => resourceAInRelationToMax; }
 
 
     // Animation
@@ -105,9 +138,19 @@ public class WhingMovement01 : MonoBehaviour
 
     //InputSystem
     Controls myControls;
+    #endregion
 
-    // 
-    public event Action<bool,bool> OnDeadzoneValueChanged; // erster bool ist up, zweiter bool ist down
+
+    #region events
+
+    public event Action<bool, bool> OnDeadzoneValueChanged; // erster bool ist up, zweiter bool ist down
+
+
+    #endregion
+
+
+
+
 
 
     private void Awake()
@@ -127,9 +170,11 @@ public class WhingMovement01 : MonoBehaviour
     }
     private void Start()
     {
-        currentSpeed = startSpeed;                                                                  // Startspeed wird gesetzt
+        currentSpeed = startSpeed;                                                                  // Startspeed wird grade nicht genutzt!!!! glaub ich...
         downRotation = Quaternion.identity;
         downRotation.x = 1;
+
+        ResourceA = startMaxRecourceA; // Tank wird auf voll gesetzt
     }
 
 
@@ -139,8 +184,13 @@ public class WhingMovement01 : MonoBehaviour
         //Debug.Log("Speed: " + currentSpeed);
         if (noInput)
             CheckUpPosition();
-        BoostInput();
-        SlowmoInput();
+
+        if (resourceA > 0)
+        {
+            BoostInput();
+            SlowmoInput();
+        }
+
         TwirlEffect();
         CheckDeadzonePositions();
     }
@@ -152,6 +202,12 @@ public class WhingMovement01 : MonoBehaviour
         RotateWhings();
 
     }
+
+
+
+
+
+    #region inputs
 
     void OnRightWhing(InputValue value)                                                             // Inputs vom rechten Joystick werden ausgelesen
     {
@@ -188,9 +244,6 @@ public class WhingMovement01 : MonoBehaviour
                 lefttControlX = 0;
             }
         }
-
-
-
     }
 
 
@@ -231,15 +284,20 @@ public class WhingMovement01 : MonoBehaviour
             }
 
         }
-
-
-
     }
 
     void OnBoost(InputValue value)
     {
         ActivateBoost();
     }
+    #endregion
+
+
+
+
+
+
+    #region playerMotion
 
     private void Move()
     {
@@ -292,49 +350,6 @@ public class WhingMovement01 : MonoBehaviour
         //myRigidbody.transform.rotation = Quaternion.Lerp(transform.rotation, midRotation, stabilizeSpeed * Time.deltaTime);     // Aktuelle Rotation an der z Achse richtung des Mittelwerts anpassen - !!!Hier ist noch was nicht ganz richtig am Start
     }
 
-    private void CheckUpPosition()
-    {
-        // Is Top oben?
-        if (this.transform.up.y > 0)
-        {
-            isPlayerTopUp = true;
-        }
-        else
-        {
-            isPlayerTopUp = false;
-        }
-
-    }
-
-    private void CheckDeadzonePositions()
-    {
-        // STeile Checken
-        float upAngle = Vector3.Angle(this.transform.forward, Vector3.up);
-        // ALter State wird gespeichert um ihn später mit dem neuen zu vergleichen
-        bool lastUpBool = straightUp;
-        bool lastDownBool = straightDown;
-        // Winkel zur Welt mit Deadzone Winkel abgleichen
-        straightUp = (upAngle < deadZoneRadius);
-        straightDown = (upAngle < 180 + deadZoneRadius && upAngle > 180 - deadZoneRadius);
-        // ALter und neuer Winkel vergleichen
-        if(lastDownBool != straightDown || lastUpBool != straightUp)
-        {
-            OnDeadzoneValueChanged?.Invoke(lastUpBool, lastDownBool);
-        }
-    }
-
-    private void TwirlEffect()
-    {
-        if (Mathf.Abs(rightControlY) >= twirlInput && Mathf.Abs(lefttControlY) >= twirlInput)
-        {
-            twirl = (rightControlY + lefttControlY < twirlSensitivity);                 // Twirl ist wahr wenn die Sticks genau entgegengesetzt zeigen
-        }
-        else
-        {
-            twirl = false;
-        }
-
-    }
     private void AddGravity()
     {
         if (currentSpeed < gravitySpeedBoundery)
@@ -399,6 +414,57 @@ public class WhingMovement01 : MonoBehaviour
         // left Whing Rotate in Target Direction over Time
         leftWhing.transform.localRotation = Quaternion.Lerp(leftWhing.transform.localRotation, currentLeftRotationTarget, whingRotationSpeed * Time.deltaTime);
     }
+    #endregion
+
+
+
+
+
+
+    private void CheckUpPosition()
+    {
+        // Is Top oben?
+        if (this.transform.up.y > 0)
+        {
+            isPlayerTopUp = true;
+        }
+        else
+        {
+            isPlayerTopUp = false;
+        }
+
+    }
+
+    private void CheckDeadzonePositions()
+    {
+        // STeile Checken
+        float upAngle = Vector3.Angle(this.transform.forward, Vector3.up);
+        // ALter State wird gespeichert um ihn später mit dem neuen zu vergleichen
+        bool lastUpBool = straightUp;
+        bool lastDownBool = straightDown;
+        // Winkel zur Welt mit Deadzone Winkel abgleichen
+        straightUp = (upAngle < deadZoneRadius);
+        straightDown = (upAngle < 180 + deadZoneRadius && upAngle > 180 - deadZoneRadius);
+        // ALter und neuer Winkel vergleichen
+        if (lastDownBool != straightDown || lastUpBool != straightUp)
+        {
+            OnDeadzoneValueChanged?.Invoke(lastUpBool, lastDownBool);
+        }
+    }
+
+    private void TwirlEffect()
+    {
+        if (Mathf.Abs(rightControlY) >= twirlInput && Mathf.Abs(lefttControlY) >= twirlInput)
+        {
+
+            twirl = (rightControlY + lefttControlY < twirlSensitivity);                 // Twirl ist wahr wenn die Sticks genau entgegengesetzt zeigen
+        }
+        else
+        {
+            twirl = false;
+        }
+
+    }
 
     void ActivateBoost()
     {
@@ -410,24 +476,42 @@ public class WhingMovement01 : MonoBehaviour
         if (myControls.Player.Boost.WasPressedThisFrame())
         {
             myRigidbody.AddForce(transform.forward * initialBoostSpeed, ForceMode.VelocityChange);
+            ResourceA -= initialBoostCosts; // Ressource wird verbraucht
         }
         if (myControls.Player.Boost.IsInProgress())
         {
             myRigidbody.AddForce(transform.forward * boostSpeed, ForceMode.VelocityChange);
+            ResourceA -= boostCosts * Time.deltaTime; // Ressource wird verbraucht in diesem frame gemessen an der Frametime verbraucht
         }
     }
     void SlowmoInput()
     {
         if (myControls.Player.SlowMo.WasPressedThisFrame())
         {
-            Time.timeScale = slowMoTimescale;
+            Time.timeScale = slowmoTimescale;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        }
+        if (myControls.Player.SlowMo.IsInProgress())
+        {
+            ResourceA -= slowmoCosts * Time.deltaTime; // Ressource wird verbraucht in diesem frame gemessen an der Frametime verbraucht
         }
         if (myControls.Player.SlowMo.WasReleasedThisFrame())
         {
             Time.timeScale = 1;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
         }
+    }
+
+
+
+    //-------------------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------PUBLIC------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    public void AddResourcePoints(int newPoints)
+    {
+        ResourceA += newPoints;
     }
 
 }

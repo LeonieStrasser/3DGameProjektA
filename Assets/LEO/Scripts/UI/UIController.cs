@@ -7,17 +7,22 @@ public class UIController : MonoBehaviour
 {
     [Header("Game Timer")]
     [SerializeField] Image progressBarImage;
+    [SerializeField] Image raceProgressBarImage;
 
+    [Header("Resource Bar")]
+    [SerializeField] Image recourceBarImage;
 
     [Space(20)]
     [Header("UI-Sreens")]
     [SerializeField] GameObject looseScreen;
 
     LevelManager myLevelTimer;
+    WhingMovement01 myPlayer;
 
     private void Awake()
     {
         myLevelTimer = FindObjectOfType<LevelManager>();
+        myPlayer = FindObjectOfType<WhingMovement01>();
     }
     private void Start()
     {
@@ -27,6 +32,8 @@ public class UIController : MonoBehaviour
     private void Update()
     {
         progressBarImage.fillAmount = myLevelTimer.LevelProgress;
+        raceProgressBarImage.fillAmount = myLevelTimer.CurrentBonusTimeInWorldTimeProgress;
+        recourceBarImage.fillAmount = myPlayer.ResourceAInRelationToMax;
     }
 
     private void ActivateLooseScreen()

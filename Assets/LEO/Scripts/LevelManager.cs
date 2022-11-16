@@ -62,12 +62,20 @@ public class LevelManager : MonoBehaviour
         {
             raceTimer = value;
             raceTimeProgress = raceTimer/raceMaxTime;
+            currentBonusTime = RaceTimeProgress * maxBonusTime;
+            currentBonusTimeInWorldTimeProgress = (currentBonusTime / startTime) + LevelProgress;
         }
     }
     private float raceTimeProgress; // Zahl zwischen 0 und 1 - Für den Balken im UI
     public float RaceTimeProgress { get => raceTimeProgress; }
 
-    
+    private float currentBonusTime;
+    public float CurrentBonusTime { get => currentBonusTime; }
+
+    private float currentBonusTimeInWorldTimeProgress;
+    public float CurrentBonusTimeInWorldTimeProgress { get => currentBonusTimeInWorldTimeProgress; }
+
+
 
     private void Start()
     {
@@ -111,8 +119,10 @@ public class LevelManager : MonoBehaviour
 
     private void AddBonusTimeToWorldTimer()
     {
-        LevelTimer += RaceTimeProgress * maxBonusTime;
+        LevelTimer += CurrentBonusTime;
         raceTimeProgress = 0;
+        currentBonusTime = 0;
+        currentBonusTimeInWorldTimeProgress = 0;
     }
 
 
