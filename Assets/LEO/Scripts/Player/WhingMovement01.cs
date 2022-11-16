@@ -63,7 +63,7 @@ public class WhingMovement01 : MonoBehaviour
 
     [Space(20)]
     [Header("Camera behaviour")]
-    [SerializeField] float deadZoneRadius;
+    [SerializeField][Range(0, 60)] float deadZoneRadius;
 
 
     [Space(20)]

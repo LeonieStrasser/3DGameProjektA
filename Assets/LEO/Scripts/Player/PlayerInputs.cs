@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerInputs : MonoBehaviour
 {
-    void OnRelodeScene()
+    public void OnRelodeScene()
     {
         SceneManager.LoadScene(0);
     }

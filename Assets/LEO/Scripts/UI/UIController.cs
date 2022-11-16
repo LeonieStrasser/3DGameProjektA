@@ -9,15 +9,29 @@ public class UIController : MonoBehaviour
     [SerializeField] Image progressBarImage;
 
 
-    LevelTimer myLevelTimer;
+    [Space(20)]
+    [Header("UI-Sreens")]
+    [SerializeField] GameObject looseScreen;
+
+    LevelManager myLevelTimer;
 
     private void Awake()
     {
-        myLevelTimer = FindObjectOfType<LevelTimer>();
+        myLevelTimer = FindObjectOfType<LevelManager>();
+    }
+    private void Start()
+    {
+        myLevelTimer.OnGameLoose += ActivateLooseScreen;
     }
 
     private void Update()
     {
         progressBarImage.fillAmount = myLevelTimer.LevelProgress;
     }
+
+    private void ActivateLooseScreen()
+    {
+        looseScreen.SetActive(true);
+    }
+
 }
