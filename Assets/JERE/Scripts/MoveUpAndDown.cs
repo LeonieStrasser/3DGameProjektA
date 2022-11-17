@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveUpAndDown : MonoBehaviour
 {
     [SerializeField][Range(0, 1)] float speed = 1f;
-    [SerializeField][Range(0, 100)] float range = 1f;
+    [SerializeField][Range(0, 500)] float range = 1f;
     void Update()
     {
         loop();
