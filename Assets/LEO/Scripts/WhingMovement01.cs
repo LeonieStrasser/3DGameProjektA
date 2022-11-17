@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class WhingMovement01 : MonoBehaviour
 {
     [Header("Movement")]
-    [Space(10)]
 
     [Tooltip("Speed der am Start gesetzt wird.")]
     [SerializeField] float startSpeed = 10f;
@@ -30,13 +29,18 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] [Range(0, 0.5f)] float gravity;
     [Tooltip("Geschwindigkeits Obergrenze ab der die Kraft nach Unten anfängt zu wirken. (Von da an wirkt sie umso stärker, je langsamer das Flugobjekt wird)")]
     [SerializeField] float gravitySpeedBoundery = 20f;
+
     [Space(10)]
     [Tooltip("Sensitivität für den Joystick Input.")]
     [SerializeField] [Range(0, 0.5f)] float inputSensitivity;
 
     [Space(20)]
-    [Header("Whing Animation")]
-    [Space(10)]
+    [Header("Twirl")]
+    [SerializeField] [Tooltip("Mit diesem Wert kann man einstellen ab welcher Twirlgeschwindigkeit der Twirl-Effect getriggert wird")] [Range(0, 1)] float twirlInput;
+    [SerializeField] [Tooltip("Inputsensitivity ab der der Twirl-Effect getriggert wird. (0 => beide Sticks müssen exakt die entgegengesetzte Position auf Y erreichen)")] [Range(0, 1)] float twirlSensitivity;
+
+    [Space(20)]
+    [Header("Wing Animation")]
     [SerializeField] GameObject rightWhing;
     [SerializeField] GameObject leftWhing;
     [SerializeField] float whingRotationSpeed = 10f;
@@ -44,10 +48,22 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] float minRotation;
     [SerializeField] float neutralRotation;
 
+    [Space(20)]
+    [Header("Boost Power")]
     [SerializeField] float boostSpeed;
     [SerializeField] float initialBoostSpeed;
-    [SerializeField] [Range(0.1f,1)] float slowMoTimescale; 
 
+    [Space(20)]
+    [Header("Slowmotion Power")]
+    [SerializeField] [Range(0.1f, 1)] float slowMoTimescale;
+
+    [Space(20)]
+    [Header("Player States")]
+    [SerializeField] bool isPlayerTopUp;
+    [SerializeField] bool noInput;
+    [SerializeField] bool twirl;
+
+    //----------Hidden in Inspector--------------------------
     private Rigidbody myRigidbody;
 
     float currentSpeed;
@@ -67,9 +83,7 @@ public class WhingMovement01 : MonoBehaviour
 
     float currentRotationForward;
 
-    public bool isPlayerTopUp;
-    public bool noInput;
-
+   
 
     Quaternion downRotation;
 
@@ -86,7 +100,7 @@ public class WhingMovement01 : MonoBehaviour
     {
         myRigidbody = GetComponent<Rigidbody>();
         myControls = new Controls();
- 
+
     }
     void OnEnable()
     {
@@ -113,6 +127,7 @@ public class WhingMovement01 : MonoBehaviour
             CheckAxisUpY();
         BoostInput();
         SlowmoInput();
+        TwirlEffect();
     }
 
     private void FixedUpdate()
@@ -163,7 +178,7 @@ public class WhingMovement01 : MonoBehaviour
 
     }
 
-  
+
 
     void OnLeftWhing(InputValue value)                                                              // Inputs vom linken Joystick werden ausgelesen
     {
@@ -275,7 +290,18 @@ public class WhingMovement01 : MonoBehaviour
         }
     }
 
+    private void TwirlEffect()
+    {
+        if (Mathf.Abs(rightControlY) >= twirlInput && Mathf.Abs(lefttControlY) >= twirlInput)
+        {
+            twirl = (rightControlY + lefttControlY < twirlSensitivity);                 // Twirl ist wahr wenn die Sticks genau entgegengesetzt zeigen
+        }
+        else
+        {
+            twirl = false;
+        }
 
+    }
     private void AddGravity()
     {
         if (currentSpeed < gravitySpeedBoundery)
@@ -343,7 +369,7 @@ public class WhingMovement01 : MonoBehaviour
 
     void ActivateBoost()
     {
-       // myRigidbody.AddForce(transform.forward * boostSpeed * 10, ForceMode.VelocityChange);
+        // myRigidbody.AddForce(transform.forward * boostSpeed * 10, ForceMode.VelocityChange);
     }
 
     private void BoostInput()
@@ -352,14 +378,14 @@ public class WhingMovement01 : MonoBehaviour
         {
             myRigidbody.AddForce(transform.forward * initialBoostSpeed, ForceMode.VelocityChange);
         }
-            if (myControls.Player.Boost.IsInProgress())
+        if (myControls.Player.Boost.IsInProgress())
         {
             myRigidbody.AddForce(transform.forward * boostSpeed, ForceMode.VelocityChange);
         }
     }
     void SlowmoInput()
     {
-        if(myControls.Player.SlowMo.WasPressedThisFrame())
+        if (myControls.Player.SlowMo.WasPressedThisFrame())
         {
             Time.timeScale = slowMoTimescale;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
