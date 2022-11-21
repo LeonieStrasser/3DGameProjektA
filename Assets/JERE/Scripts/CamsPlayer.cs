@@ -25,7 +25,7 @@ public class CamsPlayer : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A))
+        if(Input.GetButtonDown("Fire2"))
         {
             if(CameraSwitcher.IsActiveCamera(mainCam))
             {
