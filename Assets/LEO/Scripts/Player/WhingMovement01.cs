@@ -10,8 +10,10 @@ public class WhingMovement01 : MonoBehaviour
     #region inspectorValues
     [Header("Movement")]
 
-    [Tooltip("Speed der am Start gesetzt wird.")]
-    [SerializeField] float startSpeed = 10f;
+    [SerializeField] bool easyMovement;
+
+    //[Tooltip("Speed der am Start gesetzt wird.")]
+    //[SerializeField] float startSpeed = 10f;
     [Tooltip("Faktor um den sich der Flugkörper verschnellert, wenn er abwärts fliegt. Selber Faktor um den sich der Flugkörper verlangsamt, wenn er aufwärts fliegt. ")] // eigentlich wär es sinnvoll wenn der faktor aufwärts größer ist - Wegen der Schwerkraft
     [SerializeField] float fallVelocity = 90f;
 
@@ -98,6 +100,9 @@ public class WhingMovement01 : MonoBehaviour
 
     float currentSpeed;
 
+    Vector2 leftStickInput;
+    Vector2 rightStickInput;
+
     Vector2 rightWhingControlStick;
     float rightControlX;
     float rightControlY;
@@ -170,7 +175,7 @@ public class WhingMovement01 : MonoBehaviour
     }
     private void Start()
     {
-        currentSpeed = startSpeed;                                                                  // Startspeed wird grade nicht genutzt!!!! glaub ich...
+
         downRotation = Quaternion.identity;
         downRotation.x = 1;
 
@@ -199,7 +204,8 @@ public class WhingMovement01 : MonoBehaviour
     {
         Move();
         AddGravity();
-        RotateWhings();
+        if (!easyMovement)
+            RotateWhings();
 
     }
 
@@ -211,9 +217,10 @@ public class WhingMovement01 : MonoBehaviour
 
     void OnRightWhing(InputValue value)                                                             // Inputs vom rechten Joystick werden ausgelesen
     {
+        rightStickInput = value.Get<Vector2>();
         if (isPlayerTopUp)
         {
-            rightWhingControlStick = value.Get<Vector2>();
+            rightWhingControlStick = rightStickInput;
             rightControlX = rightWhingControlStick.x;
             rightControlY = -rightWhingControlStick.y;
 
@@ -230,7 +237,7 @@ public class WhingMovement01 : MonoBehaviour
         else
         {
 
-            lefttWhingControlStick = value.Get<Vector2>();
+            lefttWhingControlStick = rightStickInput;
             lefttControlX = lefttWhingControlStick.x;
             lefttControlY = lefttWhingControlStick.y;
 
@@ -250,9 +257,10 @@ public class WhingMovement01 : MonoBehaviour
 
     void OnLeftWhing(InputValue value)                                                              // Inputs vom linken Joystick werden ausgelesen
     {
+        leftStickInput = value.Get<Vector2>();
         if (isPlayerTopUp)
         {
-            lefttWhingControlStick = value.Get<Vector2>();
+            lefttWhingControlStick = leftStickInput;
             lefttControlX = -lefttWhingControlStick.x;
             lefttControlY = -lefttWhingControlStick.y;
 
@@ -269,7 +277,7 @@ public class WhingMovement01 : MonoBehaviour
         }
         else
         {
-            rightWhingControlStick = value.Get<Vector2>();
+            rightWhingControlStick = leftStickInput;
             rightControlX = -rightWhingControlStick.x;
             rightControlY = rightWhingControlStick.y;
 
@@ -289,6 +297,7 @@ public class WhingMovement01 : MonoBehaviour
     void OnBoost(InputValue value)
     {
         ActivateBoost();
+
     }
     #endregion
 
@@ -323,31 +332,54 @@ public class WhingMovement01 : MonoBehaviour
 
 
 
+        if (!easyMovement)
+        {
+            //Rotation hoch und runter
+            currentRotationUpDown = rotationSpeedUpDown * (rightControlY / 3.5f + lefttControlY / 3.5f);
+            Quaternion deltaXRotation = Quaternion.Euler(new Vector3(currentRotationUpDown, 0, 0) * Time.fixedDeltaTime);
+            myRigidbody.MoveRotation(myRigidbody.rotation * deltaXRotation);
+
+            //Rotation rechts und links
+            currentRotationLeftRight = rotationSpeedLeftRight * ((rightControlX - lefttControlX) / 2);
+            Quaternion deltaYRotation = Quaternion.Euler(new Vector3(0, currentRotationLeftRight, 0) * Time.fixedDeltaTime);
+            myRigidbody.MoveRotation(myRigidbody.rotation * deltaYRotation);
+
+            // Rotation an der Blickrichtung
+            currentRotationForward = stabilizeSpeed * ((rightControlY - lefttControlY) / 2);
+            Quaternion deltaZRotation = Quaternion.Euler(new Vector3(0, 0, -currentRotationForward) * Time.fixedDeltaTime);
+            myRigidbody.MoveRotation(myRigidbody.rotation * deltaZRotation);
+        }
+        else
+        {
+            if (isPlayerTopUp)
+            {
+                currentRotationUpDown = rotationSpeedUpDown * -leftStickInput.y;
+                currentRotationLeftRight = rotationSpeedLeftRight * leftStickInput.x;
+            }
+            else
+            {
+                currentRotationUpDown = rotationSpeedUpDown * leftStickInput.y;
+                currentRotationLeftRight = rotationSpeedLeftRight * -leftStickInput.x;
+
+            }
+            //Rotation hoch und runter
+            Quaternion deltaXRotation = Quaternion.Euler(new Vector3(currentRotationUpDown, 0, 0) * Time.fixedDeltaTime);
+            myRigidbody.MoveRotation(myRigidbody.rotation * deltaXRotation);
+
+            //Rotation rechts und links
+            Quaternion deltaYRotation = Quaternion.Euler(new Vector3(0, currentRotationLeftRight, 0) * Time.fixedDeltaTime);
+            myRigidbody.MoveRotation(myRigidbody.rotation * deltaYRotation);
+
+            // Rotation an der Blickrichtung
+            currentRotationForward = stabilizeSpeed * rightStickInput.x;
+            Quaternion deltaZRotation = Quaternion.Euler(new Vector3(0, 0, -currentRotationForward) * Time.fixedDeltaTime);
+            myRigidbody.MoveRotation(myRigidbody.rotation * deltaZRotation);
+        }
 
 
-        //Rotation hoch und runter
-        currentRotationUpDown = rotationSpeedUpDown * (rightControlY / 3.5f + lefttControlY / 3.5f);
-        Quaternion deltaXRotation = Quaternion.Euler(new Vector3(currentRotationUpDown, 0, 0) * Time.fixedDeltaTime);
-        myRigidbody.MoveRotation(myRigidbody.rotation * deltaXRotation);
-
-        //Rotation rechts und links
-        currentRotationLeftRight = rotationSpeedLeftRight * ((rightControlX - lefttControlX) / 2);
-        Quaternion deltaYRotation = Quaternion.Euler(new Vector3(0, currentRotationLeftRight, 0) * Time.fixedDeltaTime);
-        myRigidbody.MoveRotation(myRigidbody.rotation * deltaYRotation);
-
-        // Rotation an der Blickrichtung
-        currentRotationForward = stabilizeSpeed * ((rightControlY - lefttControlY) / 2);
-        Quaternion deltaZRotation = Quaternion.Euler(new Vector3(0, 0, -currentRotationForward) * Time.fixedDeltaTime);
-        myRigidbody.MoveRotation(myRigidbody.rotation * deltaZRotation);
 
 
 
-        //Quaternion rightRotation = rightWhing.transform.rotation;                                    // Einen Mittelwert aus den Flügelvektoren berechnen
-        //Quaternion leftRotation = leftWhing.transform.rotation;
-        //Quaternion midRotation = Quaternion.Slerp(rightRotation, leftRotation, 0.5f);
-
-
-        //myRigidbody.transform.rotation = Quaternion.Lerp(transform.rotation, midRotation, stabilizeSpeed * Time.deltaTime);     // Aktuelle Rotation an der z Achse richtung des Mittelwerts anpassen - !!!Hier ist noch was nicht ganz richtig am Start
     }
 
     private void AddGravity()
