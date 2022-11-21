@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIController : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class UIController : MonoBehaviour
 
     [Header("Resource Bar")]
     [SerializeField] Image recourceBarImage;
+
+    [Header("XP")]
+    [SerializeField] TextMeshProUGUI xpText;
 
     [Space(20)]
     [Header("UI-Sreens")]
@@ -23,9 +27,11 @@ public class UIController : MonoBehaviour
     {
         myLevelTimer = FindObjectOfType<LevelManager>();
         myPlayer = FindObjectOfType<WhingMovement01>();
+       
     }
     private void Start()
     {
+        ScoreSystem.Instance.OnXpChange += UpdateXpText;
         myLevelTimer.OnGameLoose += ActivateLooseScreen;
     }
 
@@ -41,4 +47,8 @@ public class UIController : MonoBehaviour
         looseScreen.SetActive(true);
     }
 
+    private void UpdateXpText(int newScore)
+    {
+        xpText.text = newScore.ToString();
+    }
 }

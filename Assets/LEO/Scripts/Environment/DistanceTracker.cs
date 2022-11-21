@@ -9,6 +9,7 @@ public class DistanceTracker : MonoBehaviour
     [SerializeField] GameObject spawnVFX;
     [SerializeField] [Range(0, 0.5f)] float spawnDelay;
     [SerializeField] SphereCollider distanceTrigger;
+    [SerializeField] int points;
 
     bool spawnTimer;
 
@@ -38,6 +39,7 @@ public class DistanceTracker : MonoBehaviour
     {
         spawnTimer = true;
         Instantiate(spawnVFX, spawnPosition, Quaternion.identity);
+        ScoreSystem.Instance.AddScore(points);
         yield return new WaitForSeconds(spawnDelay);
         spawnTimer = false;
 
