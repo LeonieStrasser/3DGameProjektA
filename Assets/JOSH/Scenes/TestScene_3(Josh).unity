@@ -3157,7 +3157,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 0.8
+    m_Time: 0.2
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -42812,12 +42812,13 @@ MonoBehaviour:
   boostCosts: 0
   slowmoTimescale: 0
   slowmoCosts: 0
-  deadZoneRadius: 0
+  deadZoneRadius: 30
   isPlayerTopUp: 1
   straightUp: 0
   straightDown: 0
   noInput: 0
   twirl: 0
+  flipControls: 1
 --- !u!54 &502884031289328265
 Rigidbody:
   m_ObjectHideFlags: 0
