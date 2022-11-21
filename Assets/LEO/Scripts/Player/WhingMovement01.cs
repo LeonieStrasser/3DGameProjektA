@@ -12,7 +12,7 @@ public class WhingMovement01 : MonoBehaviour
 
     [Tooltip("Speed der am Start gesetzt wird.")]
     [SerializeField] float startSpeed = 10f;
-    [Tooltip("Faktor um den sich der Flugkörper verschnellert, wenn er abwärts fliegt. Selber Faktor um den sich der Flugkörper verlangsamt, wenn er aufwärts fliegt. ")] // eigentlich wär es sinnvoll wenn der faktor aufwärts größer ist - Wegen der Schwerkraft
+    [Tooltip("Faktor um den sich der Flugkï¿½rper verschnellert, wenn er abwï¿½rts fliegt. Selber Faktor um den sich der Flugkï¿½rper verlangsamt, wenn er aufwï¿½rts fliegt. ")] // eigentlich wï¿½r es sinnvoll wenn der faktor aufwï¿½rts grï¿½ï¿½er ist - Wegen der Schwerkraft
     [SerializeField] float fallVelocity = 90f;
 
     [SerializeField] float glideUpVelocity;
@@ -27,19 +27,19 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] [Range(10, 800)] float rotationSpeedLeftRight;
     [Tooltip("Geschwindigkeit mit der der Flieger an der z-Achse rotiert rotiert.")]
     [SerializeField] [Range(10, 800)] float stabilizeSpeed;
-    [Tooltip("Kraft mit der der Flugkörper richtung Boden gedrückt wird.")]
+    [Tooltip("Kraft mit der der Flugkï¿½rper richtung Boden gedrï¿½ckt wird.")]
     [SerializeField] [Range(0, 0.5f)] float gravity;
-    [Tooltip("Geschwindigkeits Obergrenze ab der die Kraft nach Unten anfängt zu wirken. (Von da an wirkt sie umso stärker, je langsamer das Flugobjekt wird)")]
+    [Tooltip("Geschwindigkeits Obergrenze ab der die Kraft nach Unten anfï¿½ngt zu wirken. (Von da an wirkt sie umso stï¿½rker, je langsamer das Flugobjekt wird)")]
     [SerializeField] float gravitySpeedBoundery = 20f;
 
     [Space(10)]
-    [Tooltip("Sensitivität für den Joystick Input.")]
+    [Tooltip("Sensitivitï¿½t fï¿½r den Joystick Input.")]
     [SerializeField] [Range(0, 0.5f)] float inputSensitivity;
 
     [Space(20)]
     [Header("Twirl")]
     [SerializeField] [Tooltip("Mit diesem Wert kann man einstellen ab welcher Twirlgeschwindigkeit der Twirl-Effect getriggert wird")] [Range(0, 1)] float twirlInput;
-    [SerializeField] [Tooltip("Inputsensitivity ab der der Twirl-Effect getriggert wird. (0 => beide Sticks müssen exakt die entgegengesetzte Position auf Y erreichen)")] [Range(0, 1)] float twirlSensitivity;
+    [SerializeField] [Tooltip("Inputsensitivity ab der der Twirl-Effect getriggert wird. (0 => beide Sticks mï¿½ssen exakt die entgegengesetzte Position auf Y erreichen)")] [Range(0, 1)] float twirlSensitivity;
 
 
 
@@ -109,6 +109,7 @@ public class WhingMovement01 : MonoBehaviour
     float currentRotationUpDown;
     float currentRotationLeftRight;
     float currentRotationForward;
+    public bool flipControls;
 
     Quaternion downRotation;
 
@@ -119,7 +120,7 @@ public class WhingMovement01 : MonoBehaviour
     {
         private set
         {
-            resourceA = Mathf.Clamp(value, 0, startMaxRecourceA); // ACHTUNG! Sollte sich die max Resource im laufe des Games ändern, muss hier der Code angepasst werden!!!
+            resourceA = Mathf.Clamp(value, 0, startMaxRecourceA); // ACHTUNG! Sollte sich die max Resource im laufe des Games ï¿½ndern, muss hier der Code angepasst werden!!!
             resourceAInRelationToMax = resourceA / startMaxRecourceA;
         }
         get
@@ -182,7 +183,7 @@ public class WhingMovement01 : MonoBehaviour
     {
         noInput = (lefttWhingControlStick == Vector2.zero && rightWhingControlStick == Vector2.zero); // CHeck ob der Player einen input gibt
         //Debug.Log("Speed: " + currentSpeed);
-        if (noInput)
+        if (noInput && flipControls == true)
             CheckUpPosition();
 
         if (resourceA > 0)
@@ -314,9 +315,9 @@ public class WhingMovement01 : MonoBehaviour
                 currentSpeed = myRigidbody.velocity.magnitude;
         }
 
-        currentSpeed = Mathf.Clamp(currentSpeed, minSpeed, maxSpeed);                                        // Beschläunigt nur bis zum Maximalspeed 
+        currentSpeed = Mathf.Clamp(currentSpeed, minSpeed, maxSpeed);                                        // Beschlï¿½unigt nur bis zum Maximalspeed 
 
-        // Vorwärtsbewegung
+        // Vorwï¿½rtsbewegung
         //myRigidbody.position += transform.forward * currentSpeed * Time.deltaTime;
 
         myRigidbody.AddForce(transform.forward * currentSpeed * 10, ForceMode.Force);
@@ -342,7 +343,7 @@ public class WhingMovement01 : MonoBehaviour
 
 
 
-        //Quaternion rightRotation = rightWhing.transform.rotation;                                    // Einen Mittelwert aus den Flügelvektoren berechnen
+        //Quaternion rightRotation = rightWhing.transform.rotation;                                    // Einen Mittelwert aus den Flï¿½gelvektoren berechnen
         //Quaternion leftRotation = leftWhing.transform.rotation;
         //Quaternion midRotation = Quaternion.Slerp(rightRotation, leftRotation, 0.5f);
 
@@ -372,7 +373,7 @@ public class WhingMovement01 : MonoBehaviour
     {
         // right Whing
         Quaternion newTargetRotationRight = Quaternion.identity;
-        switch (rightControlY)                                                                      // Je nach Input des Joysticks wird ein anderer Ziel - Vektor für den Flügel eingesetzt
+        switch (rightControlY)                                                                      // Je nach Input des Joysticks wird ein anderer Ziel - Vektor fï¿½r den Flï¿½gel eingesetzt
         {
             case < 0:
                 newTargetRotationRight.z = maxRotation;
@@ -395,7 +396,7 @@ public class WhingMovement01 : MonoBehaviour
 
         // left Whing
         Quaternion newTargetRotationLeft = Quaternion.identity;
-        switch (lefttControlY)                                                                      // Je nach Input des Joysticks wird ein anderer Ziel - Vektor für den Flügel eingesetzt
+        switch (lefttControlY)                                                                      // Je nach Input des Joysticks wird ein anderer Ziel - Vektor fï¿½r den Flï¿½gel eingesetzt
         {
             case < 0:
                 newTargetRotationLeft.z = -maxRotation;
@@ -439,7 +440,7 @@ public class WhingMovement01 : MonoBehaviour
     {
         // STeile Checken
         float upAngle = Vector3.Angle(this.transform.forward, Vector3.up);
-        // ALter State wird gespeichert um ihn später mit dem neuen zu vergleichen
+        // ALter State wird gespeichert um ihn spï¿½ter mit dem neuen zu vergleichen
         bool lastUpBool = straightUp;
         bool lastDownBool = straightDown;
         // Winkel zur Welt mit Deadzone Winkel abgleichen
