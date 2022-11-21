@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeliveryGoal : MonoBehaviour
+public class RaceGoal : MonoBehaviour
 {
-    BombTimer playerBomb;
+    LevelManager myLevelmanager;
 
     private void Awake()
     {
-        playerBomb = FindObjectOfType<BombTimer>();
+        myLevelmanager = FindObjectOfType<LevelManager>();
     }
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
-            playerBomb.StopBomb();
+            myLevelmanager.FinishRace();
         }
     }
 }
