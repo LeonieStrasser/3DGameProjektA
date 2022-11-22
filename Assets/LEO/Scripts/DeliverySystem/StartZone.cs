@@ -18,9 +18,9 @@ public class StartZone : MonoBehaviour
     }
     private void Start()
     {
-        // UI Element erstellen, das die STartzone anzeigt
-        myMarker = Instantiate(packageMarkerPrefab, Vector3.zero, Quaternion.identity);
-        myMarker.GetComponent<PackageMarkerUI>().SetFollowTarget(this.transform);
+        //// UI Element erstellen, das die STartzone anzeigt
+        //myMarker = Instantiate(packageMarkerPrefab, Vector3.zero, Quaternion.identity);
+        //myMarker.GetComponent<PackageMarkerUI>().SetFollowTarget(this.transform);
     }
 
     private void OnTriggerEnter(Collider other) // Wenn der Player durchfliegt, startet er das Race
