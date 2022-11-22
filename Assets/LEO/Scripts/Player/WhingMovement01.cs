@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MoreMountains.Feedbacks;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 public class WhingMovement01 : MonoBehaviour
@@ -83,6 +85,13 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] bool straightDown;
     [SerializeField] bool noInput;
     [SerializeField] bool twirl;
+
+    [Space(20)]
+    [Header("Feedbacks")]
+    /// a MMFeedbacks to play when we Boost
+    public MMFeedbacks BoostStartFeedback;
+    public MMFeedbacks SlowMoFeedback;
+
 
     #endregion
 
@@ -508,6 +517,8 @@ public class WhingMovement01 : MonoBehaviour
     {
         if (myControls.Player.Boost.WasPressedThisFrame())
         {
+            BoostStartFeedback?.PlayFeedbacks();
+
             myRigidbody.AddForce(transform.forward * initialBoostSpeed, ForceMode.VelocityChange);
             ResourceA -= initialBoostCosts; // Ressource wird verbraucht
         }
@@ -527,6 +538,7 @@ public class WhingMovement01 : MonoBehaviour
         if (myControls.Player.SlowMo.IsInProgress())
         {
             ResourceA -= slowmoCosts * Time.deltaTime; // Ressource wird verbraucht in diesem frame gemessen an der Frametime verbraucht
+            SlowMoFeedback?.PlayFeedbacks();
         }
         if (myControls.Player.SlowMo.WasReleasedThisFrame())
         {
