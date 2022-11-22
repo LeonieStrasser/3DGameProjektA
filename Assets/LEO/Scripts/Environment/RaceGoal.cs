@@ -9,6 +9,7 @@ public class RaceGoal : MonoBehaviour
     private void Awake()
     {
         myLevelmanager = FindObjectOfType<LevelManager>();
+        this.gameObject.SetActive(false);
     }
     private void OnTriggerEnter(Collider other)
     {
