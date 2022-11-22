@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,8 @@ public class ScoreSystem : MonoBehaviour
         private set
         {
             currentScore = value;
-            
+
+            OnXpChange?.Invoke(Mathf.RoundToInt(value));
         }
 
         get
@@ -29,16 +31,17 @@ public class ScoreSystem : MonoBehaviour
             return currentScore;
         }
     }
+    public event Action<int> OnXpChange;
 
 
 
-    
+
 
 
     private void Awake()
     {
         // Levelmanager setzen, Wenn schon ein LevelManager existiert mach ihn kaputt
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }

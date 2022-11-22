@@ -10,8 +10,7 @@ public class LevelManager : MonoBehaviour
 
     [Space(20)]
     [Header("Races")]
-    [SerializeField] GameObject startZonePrefab;
-    [SerializeField] GameObject goalZonePrefab;
+
 
     [SerializeField] float raceMaxTime;
 
@@ -31,15 +30,12 @@ public class LevelManager : MonoBehaviour
     }
 
     private float levelProgress;
-    public float LevelProgress { get => levelProgress;  }
+    public float LevelProgress { get => levelProgress; }
 
 
 
     // GAMESTATES
-    enum gameStates
-    {
-       
-    }
+
     enum raceState
     {
         noRace,
@@ -52,8 +48,8 @@ public class LevelManager : MonoBehaviour
 
     // CURRENT RACE
     [Header("debug")]
-    [SerializeField] GameObject currentGoal;  // SOLLTE SPÄTER NICHT MEHR IM INSPECTOR ZU SEHEN SEIN _ NUR ZUM DBUGGEN
-    [SerializeField] GameObject startZone;    // SOLLTE SPÄTER NICHT MEHR IM INSPECTOR ZU SEHEN SEIN _ NUR ZUM DBUGGEN
+    private GameObject currentGoal;
+    private GameObject currentStartZone;
 
     private float raceTimer;
     private float RaceTimer
@@ -61,7 +57,7 @@ public class LevelManager : MonoBehaviour
         set
         {
             raceTimer = value;
-            raceTimeProgress = raceTimer/raceMaxTime;
+            raceTimeProgress = raceTimer / raceMaxTime;
             currentBonusTime = RaceTimeProgress * maxBonusTime;
             currentBonusTimeInWorldTimeProgress = (currentBonusTime / startTime) + LevelProgress;
         }
@@ -77,17 +73,36 @@ public class LevelManager : MonoBehaviour
 
 
 
+    [SerializeField] RaceData[] allRaces;
+    private int raceNumber = 0;
+
+    [System.Serializable]
+    public struct RaceData
+    {
+        [SerializeField] public GameObject startZone;
+        [SerializeField] public GameObject goal;
+        [SerializeField] public float raceMaxTime;
+    }
+
+
     private void Start()
     {
         LevelTimer = startTime;
         thisRace = raceState.noRace;
+
+
+        // Erstes Rennen wird gespawnt und zugewiesen
+        raceNumber = -1;
+        SpawnNextRace();
+
+       
     }
 
     private void Update()
     {
         RunWorldTimer();
 
-        if(thisRace == raceState.raceIsRunning)
+        if (thisRace == raceState.raceIsRunning)
         {
             RunRaceTimer();
         }
@@ -108,8 +123,14 @@ public class LevelManager : MonoBehaviour
 
     private void SpawnNextRace()
     {
-        // STart und Ziel fürs nächste Rennen müssen gespawnt werden
+        raceNumber++; // Racenummer wird erstmal hochgerechnet - heißt die Rennen laufen der Reihe nach ab. Später sollten wir hier ein zufälliges Ziehen ohne zurücklegen reinbauen.
+        if (raceNumber > allRaces.Length - 1) { raceNumber = 1; } // Tutorial Strecke wird nicht wiederholt
 
+        currentStartZone = allRaces[raceNumber].startZone;
+        currentGoal = allRaces[raceNumber].goal;
+        raceMaxTime = allRaces[raceNumber].raceMaxTime;
+
+        currentStartZone.SetActive(true);
     }
 
     private void RunRaceTimer()
@@ -130,10 +151,12 @@ public class LevelManager : MonoBehaviour
 
     public void StartRace()
     {
+
         thisRace = raceState.raceIsRunning;
         RaceTimer = raceMaxTime;
 
-        // Hier sollte das STart Objekt getötet werden
+        currentStartZone.SetActive(false);
+        currentGoal.SetActive(true);
     }
 
     public void FinishRace()
@@ -141,11 +164,9 @@ public class LevelManager : MonoBehaviour
         thisRace = raceState.noRace;
         AddBonusTimeToWorldTimer();
 
+        currentGoal.SetActive(false);
 
-
-        // Hier sollte das Zielobjekt getötet werden und ein neues Race gespawnt
-
-        // Hier sollte die Bonuszeit auf den Timer gerechnet wewrden
+        SpawnNextRace();
     }
 
 

@@ -73,7 +73,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""RelodeScene"",
+                    ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""d706a82e-0db7-4e7e-9444-4e0793a9f8bc"",
                     ""expectedControlType"": ""Button"",
@@ -350,7 +350,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""RelodeScene"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -976,7 +976,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_RightWhing = m_Player.FindAction("RightWhing", throwIfNotFound: true);
         m_Player_LeftWhing = m_Player.FindAction("LeftWhing", throwIfNotFound: true);
-        m_Player_RelodeScene = m_Player.FindAction("RelodeScene", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
         m_Player_SlowMo = m_Player.FindAction("SlowMo", throwIfNotFound: true);
         // UI
@@ -1055,7 +1055,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_RightWhing;
     private readonly InputAction m_Player_LeftWhing;
-    private readonly InputAction m_Player_RelodeScene;
+    private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Boost;
     private readonly InputAction m_Player_SlowMo;
     public struct PlayerActions
@@ -1067,7 +1067,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @RightWhing => m_Wrapper.m_Player_RightWhing;
         public InputAction @LeftWhing => m_Wrapper.m_Player_LeftWhing;
-        public InputAction @RelodeScene => m_Wrapper.m_Player_RelodeScene;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Boost => m_Wrapper.m_Player_Boost;
         public InputAction @SlowMo => m_Wrapper.m_Player_SlowMo;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1094,9 +1094,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @LeftWhing.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftWhing;
                 @LeftWhing.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftWhing;
                 @LeftWhing.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftWhing;
-                @RelodeScene.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRelodeScene;
-                @RelodeScene.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRelodeScene;
-                @RelodeScene.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRelodeScene;
+                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Boost.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBoost;
                 @Boost.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBoost;
                 @Boost.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBoost;
@@ -1122,9 +1122,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @LeftWhing.started += instance.OnLeftWhing;
                 @LeftWhing.performed += instance.OnLeftWhing;
                 @LeftWhing.canceled += instance.OnLeftWhing;
-                @RelodeScene.started += instance.OnRelodeScene;
-                @RelodeScene.performed += instance.OnRelodeScene;
-                @RelodeScene.canceled += instance.OnRelodeScene;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
                 @Boost.started += instance.OnBoost;
                 @Boost.performed += instance.OnBoost;
                 @Boost.canceled += instance.OnBoost;
@@ -1292,7 +1292,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnRightWhing(InputAction.CallbackContext context);
         void OnLeftWhing(InputAction.CallbackContext context);
-        void OnRelodeScene(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
         void OnSlowMo(InputAction.CallbackContext context);
     }
