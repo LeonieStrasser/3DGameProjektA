@@ -487,10 +487,10 @@ public class WhingMovement01 : MonoBehaviour
 
     private void TwirlEffect()
     {
-        if (Mathf.Abs(rightControlY) >= twirlInput && Mathf.Abs(lefttControlY) >= twirlInput)
+        if (Mathf.Abs(rightStickInput.y) >= twirlInput && Mathf.Abs(leftStickInput.y) >= twirlInput)
         {
 
-            twirl = (rightControlY + lefttControlY < twirlSensitivity);                 // Twirl ist wahr wenn die Sticks genau entgegengesetzt zeigen
+            twirl = (rightStickInput.y + leftStickInput.y < twirlSensitivity && rightStickInput.y + leftStickInput.y > -twirlSensitivity);                 // Twirl ist wahr wenn die Sticks genau entgegengesetzt zeigen
         }
         else
         {
