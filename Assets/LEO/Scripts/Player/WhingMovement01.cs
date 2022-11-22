@@ -88,9 +88,11 @@ public class WhingMovement01 : MonoBehaviour
 
     [Space(20)]
     [Header("Feedbacks")]
+    public GameObject twirlVFX;
     /// a MMFeedbacks to play when we Boost
     public MMFeedbacks BoostStartFeedback;
     public MMFeedbacks SlowMoFeedback;
+    // public MMFeedbacks TwirlFeedback;
 
 
     #endregion
@@ -498,14 +500,15 @@ public class WhingMovement01 : MonoBehaviour
     {
         if (Mathf.Abs(rightStickInput.y) >= twirlInput && Mathf.Abs(leftStickInput.y) >= twirlInput)
         {
-
             twirl = (rightStickInput.y + leftStickInput.y < twirlSensitivity && rightStickInput.y + leftStickInput.y > -twirlSensitivity);                 // Twirl ist wahr wenn die Sticks genau entgegengesetzt zeigen
+            //TwirlFeedback?.PlayFeedbacks();
+           
         }
         else
         {
             twirl = false;
         }
-
+        twirlVFX.SetActive(twirl);
     }
 
     void ActivateBoost()
