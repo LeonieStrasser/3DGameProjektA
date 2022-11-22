@@ -14,6 +14,7 @@ public class StartZone : MonoBehaviour
     private void Awake()
     {
         myLevelManager = FindObjectOfType<LevelManager>();
+        this.gameObject.SetActive(false);
     }
     private void Start()
     {
@@ -27,7 +28,7 @@ public class StartZone : MonoBehaviour
         if (other.tag == "Player")
         {
             myLevelManager.StartRace();
-            Destroy(this.gameObject);
+            
         }
     }
 }
