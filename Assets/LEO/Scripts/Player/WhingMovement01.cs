@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MoreMountains.Feedbacks;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 public class WhingMovement01 : MonoBehaviour
@@ -83,6 +85,15 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] bool straightDown;
     [SerializeField] bool noInput;
     [SerializeField] bool twirl;
+
+    [Space(20)]
+    [Header("Feedbacks")]
+    public GameObject twirlVFX;
+    /// a MMFeedbacks to play when we Boost
+    public MMFeedbacks BoostStartFeedback;
+    public MMFeedbacks SlowMoFeedback;
+    // public MMFeedbacks TwirlFeedback;
+
 
     #endregion
 
@@ -489,14 +500,15 @@ public class WhingMovement01 : MonoBehaviour
     {
         if (Mathf.Abs(rightStickInput.y) >= twirlInput && Mathf.Abs(leftStickInput.y) >= twirlInput)
         {
-
             twirl = (rightStickInput.y + leftStickInput.y < twirlSensitivity && rightStickInput.y + leftStickInput.y > -twirlSensitivity);                 // Twirl ist wahr wenn die Sticks genau entgegengesetzt zeigen
+            //TwirlFeedback?.PlayFeedbacks();
+           
         }
         else
         {
             twirl = false;
         }
-
+        twirlVFX.SetActive(twirl);
     }
 
     void ActivateBoost()
@@ -508,6 +520,8 @@ public class WhingMovement01 : MonoBehaviour
     {
         if (myControls.Player.Boost.WasPressedThisFrame())
         {
+            BoostStartFeedback?.PlayFeedbacks();
+
             myRigidbody.AddForce(transform.forward * initialBoostSpeed, ForceMode.VelocityChange);
             ResourceA -= initialBoostCosts; // Ressource wird verbraucht
         }
@@ -527,6 +541,7 @@ public class WhingMovement01 : MonoBehaviour
         if (myControls.Player.SlowMo.IsInProgress())
         {
             ResourceA -= slowmoCosts * Time.deltaTime; // Ressource wird verbraucht in diesem frame gemessen an der Frametime verbraucht
+            SlowMoFeedback?.PlayFeedbacks();
         }
         if (myControls.Player.SlowMo.WasReleasedThisFrame())
         {
