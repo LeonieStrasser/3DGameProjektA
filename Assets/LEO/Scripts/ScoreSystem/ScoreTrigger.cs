@@ -13,11 +13,6 @@ public class ScoreTrigger : MonoBehaviour
     private void Start()
     {
         myPlayer = FindObjectOfType<WhingMovement01>();
-
-        // DEBUG!!!!!!!! ACHTUNG!!!!!!!!!!!!!!!!!
-        resourcePoints = 5;
-        Debug.LogError("LEO HAT HIER WAS PROVISORISCH HARD GECODET!!!! Bitte dran denken das zu löschen, wenn entschieden ist wie Score Objekte funktionieren!");
-        //DEBUG!!! ACHTUNG!!!!!!!
     }
 
     private void OnTriggerEnter(Collider other)
