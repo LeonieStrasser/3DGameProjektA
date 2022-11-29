@@ -492,7 +492,7 @@ public class WhingMovement01 : MonoBehaviour
         // ALter und neuer Winkel vergleichen
         if (lastDownBool != straightDown || lastUpBool != straightUp)
         {
-            OnDeadzoneValueChanged?.Invoke(lastUpBool, lastDownBool);
+            OnDeadzoneValueChanged?.Invoke(straightUp, straightDown);
         }
     }
 

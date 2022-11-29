@@ -11,7 +11,8 @@ public class CameraMovement : MonoBehaviour
     enum cameraState
     {
         normal,
-        nosedive
+        nosedive,
+        skyDive
     }
     bool switchPhase;
 
@@ -19,9 +20,8 @@ public class CameraMovement : MonoBehaviour
 
     Quaternion currentRotation;
 
-    Quaternion downRotation;
 
-    public float downRotationSpeed;
+    public float diveRotationSpeed;
     [SerializeField] float camSwitchSpeed = 100f;
     [SerializeField] float switchTime = 1f;
     [SerializeField] AnimationCurve switchSpeedCurve;
@@ -41,8 +41,6 @@ public class CameraMovement : MonoBehaviour
     private void Start()
     {
         currentState = cameraState.normal;
-        downRotation = Quaternion.identity;
-        downRotation.x = 1;
 
     }
 
@@ -56,9 +54,33 @@ public class CameraMovement : MonoBehaviour
         {
             Nosedive();
         }
+        else if (currentState == cameraState.skyDive)
+        {
+            SkyDive();
+        }
     }
 
     void Nosedive()
+    {
+        // Camera Position
+        Vector3 moveCamTo = transform.position - transform.forward * distanceToPlayer;
+        float bias = 0.84f;
+        Camera.main.transform.position = Camera.main.transform.position * bias + moveCamTo * (1.0f - bias);
+
+        // Camera Rotation
+
+        Vector3 directionDown = Vector3.down;
+        Vector3 directionUpWhileDive = Vector3.Cross(directionDown, Camera.main.transform.right); // Rechnet aus down und camera.right den up Vektor aus den die Kamera von hioer haben müsste
+        //Debug.DrawRay(transform.position, directionDown * 100f, Color.red);
+        //Debug.DrawRay(transform.position, directionUpWhileDive * 100f, Color.blue);
+
+        Quaternion rotationToDown = Quaternion.LookRotation(directionDown, directionUpWhileDive); // rechnet die richtige Zielrotation aus
+       
+        Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, rotationToDown, diveRotationSpeed); // Dreht die cam von ihrer ausgangsrotation über speed auf die Zielrotation
+
+    }
+
+    void SkyDive()
     {
         // Camera Position
         Vector3 moveCamTo = transform.position - transform.forward * distanceToPlayer + Vector3.up * 2.0f;
@@ -66,17 +88,15 @@ public class CameraMovement : MonoBehaviour
         Camera.main.transform.position = Camera.main.transform.position * bias + moveCamTo * (1.0f - bias);
 
         // Camera Rotation
-        downRotation.y = 0;
 
-        Vector3 directionDown = Vector3.down;
-        Vector3 directionUpWhileDive = Vector3.Cross(directionDown, Camera.main.transform.right);
-        Debug.DrawRay(transform.position, directionDown * 100f, Color.red);
+        Vector3 directionForwardUp = Vector3.up;
+        Vector3 directionUpWhileDive = Vector3.Cross(directionForwardUp, Camera.main.transform.right);
+        Debug.DrawRay(transform.position, directionForwardUp * 100f, Color.red);
         Debug.DrawRay(transform.position, directionUpWhileDive * 100f, Color.blue);
 
-        Quaternion rotationToDown = Quaternion.LookRotation(directionDown, directionUpWhileDive);
-       
-        Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, rotationToDown, downRotationSpeed);
+        Quaternion rotationToUp = Quaternion.LookRotation(directionForwardUp, directionUpWhileDive);
 
+        Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, rotationToUp, diveRotationSpeed);
     }
 
     void NormalMovement()
@@ -113,16 +133,21 @@ public class CameraMovement : MonoBehaviour
 
     void ChangeCamera(bool up, bool down)
     {
+        Debug.Log("up is: " + up.ToString());
         currentRotation = Camera.main.transform.rotation;
-        if (currentState == cameraState.nosedive)
+        if (!up && !down)
         {
             currentState = cameraState.normal;
             switchPhase = true;
             elapsedSwitchPhaseTime = 0;
         }
-        else
+        else if(down)
         {
             currentState = cameraState.nosedive;
+        }
+        else
+        {
+            currentState = cameraState.skyDive;
         }
     }
 }
