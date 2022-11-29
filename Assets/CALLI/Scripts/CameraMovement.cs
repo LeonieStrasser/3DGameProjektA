@@ -13,6 +13,7 @@ public class CameraMovement : MonoBehaviour
         normal,
         nosedive
     }
+    bool switchPhase;
 
     [SerializeField] cameraState currentState;
 
@@ -21,6 +22,9 @@ public class CameraMovement : MonoBehaviour
     Quaternion downRotation;
 
     public float downRotationSpeed;
+    [SerializeField] float camSwitchSpeed = 100f;
+    [SerializeField] [Tooltip("Abweichungswinkel vom Kamera LookAt auf den Player " +
+        "Fixpunkt bei dem die Kamera wieder in ihr normales Behaviour wechselt")] float snapBackValue = 1;
 
 
 
@@ -52,20 +56,44 @@ public class CameraMovement : MonoBehaviour
 
     void Nosedive()
     {
+        // Camera Position
         Vector3 moveCamTo = transform.position - transform.forward * distanceToPlayer + Vector3.up * 2.0f;
         float bias = 0.84f;
         Camera.main.transform.position = Camera.main.transform.position * bias + moveCamTo * (1.0f - bias);
+
+        // Camera Rotation
         downRotation.y = 0;
         Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, downRotation, downRotationSpeed);
 
     }
     void NormalMovement()
     {
-        //Camera Movement
+        Debug.DrawLine(transform.position, transform.position + transform.forward * focalPointCamera);
+
+
+        // Camera Position
         Vector3 moveCamTo = transform.position - transform.forward * distanceToPlayer + Vector3.up * 2.0f;
         float bias = 0.84f;
         Camera.main.transform.position = Camera.main.transform.position * bias + moveCamTo * (1.0f - bias);
-        Camera.main.transform.LookAt(transform.position + transform.forward * focalPointCamera);
+
+        // Camera Rotation
+        if (!switchPhase)
+        {
+            Camera.main.transform.LookAt(transform.position + transform.forward * focalPointCamera);
+        }
+        else
+        {
+            Vector3 targetDirection = (transform.position + transform.forward * focalPointCamera) - Camera.main.transform.position;
+
+            Quaternion rotationToTarget = Quaternion.LookRotation(targetDirection, Vector3.up);
+            Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, rotationToTarget, camSwitchSpeed);
+
+            //Wenn die Cam wieder in die richtige Richtung guckt, snapp wieder direkt auf den fixpunkt
+            if(Vector3.Angle(targetDirection, Camera.main.transform.forward)< snapBackValue)
+            {
+                switchPhase = false;
+            }
+        }
     }
 
     void ChangeCamera(bool up, bool down)
@@ -74,7 +102,7 @@ public class CameraMovement : MonoBehaviour
         if (currentState == cameraState.nosedive)
         {
             currentState = cameraState.normal;
-            //Camera.main.transform.position = this.transform.position;
+            switchPhase = true;
         }
         else
         {
