@@ -23,9 +23,13 @@ public class CameraMovement : MonoBehaviour
 
     public float downRotationSpeed;
     [SerializeField] float camSwitchSpeed = 100f;
-    [SerializeField] [Tooltip("Abweichungswinkel vom Kamera LookAt auf den Player " +
-        "Fixpunkt bei dem die Kamera wieder in ihr normales Behaviour wechselt")] float snapBackValue = 1;
-
+    [SerializeField] float switchTime = 1f;
+    [SerializeField] AnimationCurve switchSpeedCurve;
+    [SerializeField]
+    [Tooltip("Abweichungswinkel vom Kamera LookAt auf den Player " +
+        "Fixpunkt bei dem die Kamera wieder in ihr normales Behaviour wechselt")]
+    float snapBackValue = 1;
+    float elapsedSwitchPhaseTime = 0;
 
 
     private void Awake()
@@ -63,9 +67,18 @@ public class CameraMovement : MonoBehaviour
 
         // Camera Rotation
         downRotation.y = 0;
-        Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, downRotation, downRotationSpeed);
+
+        Vector3 directionDown = Vector3.down;
+        Vector3 directionUpWhileDive = Vector3.Cross(directionDown, Camera.main.transform.right);
+        Debug.DrawRay(transform.position, directionDown * 100f, Color.red);
+        Debug.DrawRay(transform.position, directionUpWhileDive * 100f, Color.blue);
+
+        Quaternion rotationToDown = Quaternion.LookRotation(directionDown, directionUpWhileDive);
+       
+        Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, rotationToDown, downRotationSpeed);
 
     }
+
     void NormalMovement()
     {
         Debug.DrawLine(transform.position, transform.position + transform.forward * focalPointCamera);
@@ -83,13 +96,15 @@ public class CameraMovement : MonoBehaviour
         }
         else
         {
+            elapsedSwitchPhaseTime += Time.fixedDeltaTime;
+
             Vector3 targetDirection = (transform.position + transform.forward * focalPointCamera) - Camera.main.transform.position;
 
             Quaternion rotationToTarget = Quaternion.LookRotation(targetDirection, Vector3.up);
-            Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, rotationToTarget, camSwitchSpeed);
+            Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, rotationToTarget, switchSpeedCurve.Evaluate(elapsedSwitchPhaseTime / switchTime) * camSwitchSpeed);
 
             //Wenn die Cam wieder in die richtige Richtung guckt, snapp wieder direkt auf den fixpunkt
-            if(Vector3.Angle(targetDirection, Camera.main.transform.forward)< snapBackValue)
+            if (Vector3.Angle(targetDirection, Camera.main.transform.forward) < snapBackValue)
             {
                 switchPhase = false;
             }
@@ -103,6 +118,7 @@ public class CameraMovement : MonoBehaviour
         {
             currentState = cameraState.normal;
             switchPhase = true;
+            elapsedSwitchPhaseTime = 0;
         }
         else
         {
