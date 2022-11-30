@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LevelManager : MonoBehaviour
 {
@@ -44,6 +45,7 @@ public class LevelManager : MonoBehaviour
     raceState thisRace;
 
     public event Action OnGameLoose;
+    public event Action OnGamePaused;
 
 
     // CURRENT RACE
@@ -62,7 +64,7 @@ public class LevelManager : MonoBehaviour
             currentBonusTimeInWorldTimeProgress = (currentBonusTime / startTime) + LevelProgress;
         }
     }
-    private float raceTimeProgress; // Zahl zwischen 0 und 1 - Für den Balken im UI
+    private float raceTimeProgress; // Zahl zwischen 0 und 1 - Fï¿½r den Balken im UI
     public float RaceTimeProgress { get => raceTimeProgress; }
 
     private float currentBonusTime;
@@ -71,6 +73,8 @@ public class LevelManager : MonoBehaviour
     private float currentBonusTimeInWorldTimeProgress;
     public float CurrentBonusTimeInWorldTimeProgress { get => currentBonusTimeInWorldTimeProgress; }
 
+    [SerializeField] private InputActionAsset inputActions;
+    [SerializeField] private InputActionReference pauseAction;
 
 
     [SerializeField] RaceData[] allRaces;
@@ -90,29 +94,28 @@ public class LevelManager : MonoBehaviour
         LevelTimer = startTime;
         thisRace = raceState.noRace;
 
-
         // Erstes Rennen wird gespawnt und zugewiesen
         raceNumber = -1;
         SpawnNextRace();
-
-       
     }
 
     private void Update()
     {
-        RunWorldTimer();
-
         if (thisRace == raceState.raceIsRunning)
         {
             RunRaceTimer();
         }
-    }
-    private void RunWorldTimer() // World-Timer läuft ab
-    {
-        LevelTimer = Mathf.Clamp(levelTimer - Time.deltaTime, 0, startTime);
 
-        if (levelTimer == 0)
-            GameLoose();
+        PauseGame();
+    }
+
+    public void PauseGame()
+    {
+        if(pauseAction.action.WasPressedThisFrame())
+        {
+            OnGamePaused?.Invoke();
+            Time.timeScale = 0;
+        }
     }
 
     private void GameLoose()
@@ -123,7 +126,7 @@ public class LevelManager : MonoBehaviour
 
     private void SpawnNextRace()
     {
-        raceNumber++; // Racenummer wird erstmal hochgerechnet - heißt die Rennen laufen der Reihe nach ab. Später sollten wir hier ein zufälliges Ziehen ohne zurücklegen reinbauen.
+        raceNumber++; // Racenummer wird erstmal hochgerechnet - heiï¿½t die Rennen laufen der Reihe nach ab. Spï¿½ter sollten wir hier ein zufï¿½lliges Ziehen ohne zurï¿½cklegen reinbauen.
         if (raceNumber > allRaces.Length - 1) { raceNumber = 1; } // Tutorial Strecke wird nicht wiederholt
 
         currentStartZone = allRaces[raceNumber].startZone;
@@ -135,7 +138,7 @@ public class LevelManager : MonoBehaviour
 
     private void RunRaceTimer()
     {
-        RaceTimer = Mathf.Clamp(raceTimer - Time.deltaTime, 0, raceMaxTime); // Timer runterzählen
+        RaceTimer = Mathf.Clamp(raceTimer - Time.deltaTime, 0, raceMaxTime); // Timer runterzï¿½hlen
     }
 
     private void AddBonusTimeToWorldTimer()
@@ -146,12 +149,8 @@ public class LevelManager : MonoBehaviour
         currentBonusTimeInWorldTimeProgress = 0;
     }
 
-
-
-
     public void StartRace()
     {
-
         thisRace = raceState.raceIsRunning;
         RaceTimer = raceMaxTime;
 
@@ -168,6 +167,5 @@ public class LevelManager : MonoBehaviour
 
         SpawnNextRace();
     }
-
 
 }

@@ -20,6 +20,8 @@ public class UIController : MonoBehaviour
     [Header("UI-Sreens")]
     [SerializeField] GameObject looseScreen;
 
+    [SerializeField] GameObject pauseScreen;
+
     LevelManager myLevelTimer;
     WhingMovement01 myPlayer;
 
@@ -27,7 +29,6 @@ public class UIController : MonoBehaviour
     {
         myLevelTimer = FindObjectOfType<LevelManager>();
         myPlayer = FindObjectOfType<WhingMovement01>();
-       
     }
     private void Start()
     {
@@ -45,6 +46,16 @@ public class UIController : MonoBehaviour
     private void ActivateLooseScreen()
     {
         looseScreen.SetActive(true);
+    }
+
+    void ActivatePauseScreen()
+    {
+        pauseScreen.SetActive(true);
+    }
+
+    void DeactivatePauseScreen()
+    {
+        pauseScreen.SetActive(false);
     }
 
     private void UpdateXpText(int newScore)
