@@ -13162,6 +13162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScorePoints: 5
   resourcePoints: 20
+  cooldownTime: 0
 --- !u!1001 &393538097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19872,6 +19873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScorePoints: 5
   resourcePoints: 20
+  cooldownTime: 0
 --- !u!135 &632435056
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -21182,6 +21184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScorePoints: 5
   resourcePoints: 20
+  cooldownTime: 0
 --- !u!135 &664153810
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -24807,6 +24810,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScorePoints: 5
   resourcePoints: 20
+  cooldownTime: 0
 --- !u!1001 &797940220
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28409,6 +28413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScorePoints: 5
   resourcePoints: 20
+  cooldownTime: 0
 --- !u!1001 &926090932
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28940,6 +28945,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScorePoints: 5
   resourcePoints: 20
+  cooldownTime: 0
 --- !u!1 &933616147
 GameObject:
   m_ObjectHideFlags: 0
@@ -33025,6 +33031,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScorePoints: 5
   resourcePoints: 20
+  cooldownTime: 0
 --- !u!135 &1088047847
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -33539,6 +33546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScorePoints: 5
   resourcePoints: 20
+  cooldownTime: 0
 --- !u!1001 &1105266298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33897,6 +33905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScorePoints: 5
   resourcePoints: 20
+  cooldownTime: 0
 --- !u!1001 &1113045542
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40609,6 +40618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScorePoints: 5
   resourcePoints: 20
+  cooldownTime: 0
 --- !u!1 &1405814146
 GameObject:
   m_ObjectHideFlags: 0
@@ -44297,6 +44307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScorePoints: 5
   resourcePoints: 20
+  cooldownTime: 0
 --- !u!1001 &1512696596
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53509,6 +53520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScorePoints: 5
   resourcePoints: 20
+  cooldownTime: 0
 --- !u!1 &1782177249
 GameObject:
   m_ObjectHideFlags: 0
@@ -62647,6 +62659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScorePoints: 5
   resourcePoints: 20
+  cooldownTime: 0
 --- !u!1001 &2071672920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63184,6 +63197,54 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1548254499, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: spawnVFXCloseState
+      value: 
+      objectReference: {fileID: 5046607309030252068, guid: 20f57ed573179334894136ac90341d57, type: 3}
+    - target: {fileID: 1548254499, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: multiplyerCloseZone
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548254499, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: spawnVFXMediumState
+      value: 
+      objectReference: {fileID: 841743600663670621, guid: e12f54923c9d4f641b1f2568f37d5266, type: 3}
+    - target: {fileID: 1548254499, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: multiplyerMediumZone
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548254499, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: maxValueCloseDistance
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548254499, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: maxValueMediumDistance
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548254500, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: spawnVFXCloseState
+      value: 
+      objectReference: {fileID: 5046607309030252068, guid: 20f57ed573179334894136ac90341d57, type: 3}
+    - target: {fileID: 1548254500, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: multiplyerCloseZone
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548254500, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: spawnVFXMediumState
+      value: 
+      objectReference: {fileID: 841743600663670621, guid: e12f54923c9d4f641b1f2568f37d5266, type: 3}
+    - target: {fileID: 1548254500, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: multiplyerMediumZone
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548254500, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: maxValueCloseDistance
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548254500, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: maxValueMediumDistance
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 163658693110273655, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -63191,6 +63252,10 @@ PrefabInstance:
     - target: {fileID: 502884031767454820, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
       propertyPath: startSpeed
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 502884031767454820, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: twirlSpeed
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 502884031767454820, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
       propertyPath: twirlStartValue
@@ -63267,6 +63332,18 @@ PrefabInstance:
     - target: {fileID: 4508742748498286311, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
       propertyPath: speedLimit
       value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 5916760930918020568, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137642548867854310, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360484710142570790, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8791750504879275412, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
       propertyPath: m_RootOrder
@@ -71710,6 +71787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScorePoints: 5
   resourcePoints: 20
+  cooldownTime: 0
 --- !u!135 &2764574391941115283
 SphereCollider:
   m_ObjectHideFlags: 0
