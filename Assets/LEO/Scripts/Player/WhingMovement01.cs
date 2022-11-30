@@ -13,6 +13,7 @@ public class WhingMovement01 : MonoBehaviour
     [Header("Movement")]
 
     [SerializeField] bool easyMovement;
+    [SerializeField] [Range(1, 10)] float easyMovementRotSpeed;
 
     //[Tooltip("Speed der am Start gesetzt wird.")]
     //[SerializeField] float startSpeed = 10f;
@@ -85,7 +86,7 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] bool straightDown;
     [SerializeField] bool noInput;
     [SerializeField] bool twirl;
-    
+
     public bool Twirl
     {
         get { return twirl; }
@@ -213,7 +214,10 @@ public class WhingMovement01 : MonoBehaviour
             SlowmoInput();
         }
 
-        TwirlEffect();
+
+        if (!easyMovement)
+            TwirlEffect();
+
         CheckDeadzonePositions();
     }
 
@@ -373,29 +377,26 @@ public class WhingMovement01 : MonoBehaviour
         }
         else // EASY MOVEMENT
         {
-            if (isPlayerTopUp)
-            {
-                currentRotationUpDown = rotationSpeedUpDown * -leftStickInput.y;
-                currentRotationLeftRight = rotationSpeedLeftRight * leftStickInput.x;
-            }
-            else
-            {
-                currentRotationUpDown = rotationSpeedUpDown * leftStickInput.y;
-                currentRotationLeftRight = rotationSpeedLeftRight * -leftStickInput.x;
 
-            }
+
+
+
             //Rotation hoch und runter
-            Quaternion deltaXRotation = Quaternion.Euler(new Vector3(currentRotationUpDown, 0, 0) * Time.fixedDeltaTime);
-            myRigidbody.MoveRotation(myRigidbody.rotation * deltaXRotation);
 
-            //Rotation rechts und links
-            Quaternion deltaYRotation = Quaternion.Euler(new Vector3(0, currentRotationLeftRight, 0) * Time.fixedDeltaTime);
-            myRigidbody.MoveRotation(myRigidbody.rotation * deltaYRotation);
+
+            Vector3 playerWorldDown = -Camera.main.transform.up;
+
+            Vector3 x = (transform.position + transform.forward + (playerWorldDown * Time.fixedDeltaTime * -leftStickInput.y * easyMovementRotSpeed));
+            transform.LookAt(x);
+
+            ////Rotation rechts und links
+            Vector3 playerWorldRight = Camera.main.transform.right;
+
+            Vector3 y = (transform.position + transform.forward + (playerWorldRight * Time.fixedDeltaTime * leftStickInput.x * easyMovementRotSpeed));
+            transform.LookAt(y);
 
             // Rotation an der Blickrichtung
-            currentRotationForward = stabilizeSpeed * rightStickInput.x;
-            Quaternion deltaZRotation = Quaternion.Euler(new Vector3(0, 0, -currentRotationForward) * Time.fixedDeltaTime);
-            myRigidbody.MoveRotation(myRigidbody.rotation * deltaZRotation);
+            // transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, rightStickInput.x), stabilizeSpeed );
         }
 
 
@@ -512,12 +513,12 @@ public class WhingMovement01 : MonoBehaviour
         {
             twirl = (rightStickInput.y + leftStickInput.y < twirlSensitivity && rightStickInput.y + leftStickInput.y > -twirlSensitivity);                 // Twirl ist wahr wenn die Sticks genau entgegengesetzt zeigen
                                                                                                                                                            //TwirlFeedback?.PlayFeedbacks();
-           
+
         }
         else
         {
             twirl = false;
-            
+
         }
         twirlVFX.SetActive(twirl);
     }
