@@ -621,7 +621,7 @@ MonoBehaviour:
   boostCosts: 3
   slowmoTimescale: 0.32
   slowmoCosts: 5
-  deadZoneRadius: 14.4
+  deadZoneRadius: 20
   isPlayerTopUp: 0
   straightUp: 0
   straightDown: 0
@@ -675,6 +675,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceToPlayer: 0.2
   focalPointCamera: 20
+  currentState: 0
+  diveRotationSpeed: 0.05
+  camSwitchSpeed: 0.3
+  switchTime: 1.3
+  switchSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  snapBackValue: 0.05
 --- !u!65 &7701056464925569004
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -713,7 +742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 100
-  spawnVFX: {fileID: 6410553321870994811, guid: efc59e5686a6e7542ae42f5f4ed1175b, type: 3}
+  spawnVFX: {fileID: 6410553321870994811, guid: 9a22dee4641e2aa489209ff3f750ce23, type: 3}
   spawnDelay: 0.103
   distanceTrigger: {fileID: 2137022343}
   points: 2
@@ -730,7 +759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 100
-  spawnVFX: {fileID: 6410553321870994811, guid: efc59e5686a6e7542ae42f5f4ed1175b, type: 3}
+  spawnVFX: {fileID: 6410553321870994811, guid: 9a22dee4641e2aa489209ff3f750ce23, type: 3}
   spawnDelay: 0.103
   distanceTrigger: {fileID: 324489369}
   points: 2

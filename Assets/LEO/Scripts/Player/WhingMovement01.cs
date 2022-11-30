@@ -468,7 +468,7 @@ public class WhingMovement01 : MonoBehaviour
     private void CheckUpPosition()
     {
         // Is Top oben?
-        if (this.transform.up.y > 0)
+        if (Vector3.Angle(this.transform.up, Camera.main.transform.up) < 90)
         {
             isPlayerTopUp = true;
         }
@@ -492,7 +492,7 @@ public class WhingMovement01 : MonoBehaviour
         // ALter und neuer Winkel vergleichen
         if (lastDownBool != straightDown || lastUpBool != straightUp)
         {
-            OnDeadzoneValueChanged?.Invoke(lastUpBool, lastDownBool);
+            OnDeadzoneValueChanged?.Invoke(straightUp, straightDown);
         }
     }
 
