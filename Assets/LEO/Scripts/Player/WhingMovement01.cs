@@ -44,7 +44,7 @@ public class WhingMovement01 : MonoBehaviour
     [Header("Twirl")]
     [SerializeField] [Tooltip("Mit diesem Wert kann man einstellen ab welcher Twirlgeschwindigkeit der Twirl-Effect getriggert wird")] [Range(0, 1)] float twirlInput;
     [SerializeField] [Tooltip("Inputsensitivity ab der der Twirl-Effect getriggert wird. (0 => beide Sticks m�ssen exakt die entgegengesetzte Position auf Y erreichen)")] [Range(0, 1)] float twirlSensitivity;
-
+    [SerializeField] [Range(10, 800)] float twirlSpeed;
 
 
 
@@ -85,6 +85,12 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] bool straightDown;
     [SerializeField] bool noInput;
     [SerializeField] bool twirl;
+    
+    public bool Twirl
+    {
+        get { return twirl; }
+        private set { twirl = value; }
+    }
 
     [Space(20)]
     [Header("Feedbacks")]
@@ -161,7 +167,6 @@ public class WhingMovement01 : MonoBehaviour
     #region events
 
     public event Action<bool, bool> OnDeadzoneValueChanged; // erster bool ist up, zweiter bool ist down
-
 
     #endregion
 
@@ -357,11 +362,16 @@ public class WhingMovement01 : MonoBehaviour
             myRigidbody.MoveRotation(myRigidbody.rotation * deltaYRotation);
 
             // Rotation an der Blickrichtung
-            currentRotationForward = stabilizeSpeed * ((rightControlY - lefttControlY) / 2);
+
+            float currentStabilizeSpeed = stabilizeSpeed; // Wenn der Twirl Aktiv ist, wird statt dem normalenm Speed der extra Twirl speed genutzt
+            if (twirl)
+                currentStabilizeSpeed = twirlSpeed;
+
+            currentRotationForward = currentStabilizeSpeed * ((rightControlY - lefttControlY) / 2);
             Quaternion deltaZRotation = Quaternion.Euler(new Vector3(0, 0, -currentRotationForward) * Time.fixedDeltaTime);
             myRigidbody.MoveRotation(myRigidbody.rotation * deltaZRotation);
         }
-        else
+        else // EASY MOVEMENT
         {
             if (isPlayerTopUp)
             {
@@ -501,12 +511,13 @@ public class WhingMovement01 : MonoBehaviour
         if (Mathf.Abs(rightStickInput.y) >= twirlInput && Mathf.Abs(leftStickInput.y) >= twirlInput)
         {
             twirl = (rightStickInput.y + leftStickInput.y < twirlSensitivity && rightStickInput.y + leftStickInput.y > -twirlSensitivity);                 // Twirl ist wahr wenn die Sticks genau entgegengesetzt zeigen
-            //TwirlFeedback?.PlayFeedbacks();
+                                                                                                                                                           //TwirlFeedback?.PlayFeedbacks();
            
         }
         else
         {
             twirl = false;
+            
         }
         twirlVFX.SetActive(twirl);
     }

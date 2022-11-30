@@ -33,9 +33,10 @@ public class ScoreSystem : MonoBehaviour
     }
     public event Action<int> OnXpChange;
 
+    [SerializeField] int twirlMultiplikator = 2;
 
 
-
+    WhingMovement01 myPlayer;
 
 
     private void Awake()
@@ -50,7 +51,11 @@ public class ScoreSystem : MonoBehaviour
             Destroy(this);
             return;
         }
+
+        myPlayer = FindObjectOfType<WhingMovement01>();
     }
+
+    
 
     private void Start()
     {
@@ -59,6 +64,10 @@ public class ScoreSystem : MonoBehaviour
 
     public void AddScore(int newScorePoints)
     {
+        if(myPlayer.Twirl)
+        {
+            newScorePoints *= twirlMultiplikator;
+        }
         CurrentScore += newScorePoints;
     }
 
