@@ -114,6 +114,8 @@ public class WhingMovement01 : MonoBehaviour
     #region hiddenValues
 
     //-------------MOVEMENT
+
+    private LevelManager myManager;
     private Rigidbody myRigidbody;
 
     float currentSpeed;
@@ -178,9 +180,9 @@ public class WhingMovement01 : MonoBehaviour
 
     private void Awake()
     {
+        myManager = FindObjectOfType<LevelManager>();
         myRigidbody = GetComponent<Rigidbody>();
         myControls = new Controls();
-
     }
     void OnEnable()
     {
@@ -203,6 +205,8 @@ public class WhingMovement01 : MonoBehaviour
 
     private void Update()
     {
+        if(myManager.CurrentGameState == LevelManager.gameState.running)
+        {
         noInput = (lefttWhingControlStick == Vector2.zero && rightWhingControlStick == Vector2.zero); // CHeck ob der Player einen input gibt
         //Debug.Log("Speed: " + currentSpeed);
         if (noInput && flipControls == true)
@@ -219,6 +223,8 @@ public class WhingMovement01 : MonoBehaviour
             TwirlEffect();
 
         CheckDeadzonePositions();
+
+        }
     }
 
     private void FixedUpdate()
