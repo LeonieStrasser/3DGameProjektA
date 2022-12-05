@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -42,10 +43,27 @@ public class LevelManager : MonoBehaviour
         noRace,
         raceIsRunning
     }
+
+    public enum gameState
+    {
+        running,
+        pause
+    }
     raceState thisRace;
+
+    gameState currentGameState;
+    public gameState CurrentGameState
+    {
+        get
+        {
+            return currentGameState;
+        }
+    }
 
     public event Action OnGameLoose;
     public event Action OnGamePaused;
+
+    public event Action OnGameResume;
 
 
     // CURRENT RACE
@@ -91,6 +109,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        ResumeGame();   
         LevelTimer = startTime;
         thisRace = raceState.noRace;
 
@@ -100,22 +119,39 @@ public class LevelManager : MonoBehaviour
     }
 
     private void Update()
-    {
-        if (thisRace == raceState.raceIsRunning)
+    {   
+        if(currentGameState == gameState.running)
         {
-            RunRaceTimer();
+            if (thisRace == raceState.raceIsRunning)
+            {
+                RunRaceTimer();
+            }
         }
-
-        PauseGame();
+            if(pauseAction.action.WasPressedThisFrame())
+            {
+                PauseGame();
+            } 
     }
 
-    public void PauseGame()
+    void PauseGame()
     {
-        if(pauseAction.action.WasPressedThisFrame())
+        if(currentGameState == gameState.running)
         {
             OnGamePaused?.Invoke();
+            currentGameState = gameState.pause;
             Time.timeScale = 0;
         }
+        else if(currentGameState == gameState.pause)
+        {
+            ResumeGame();
+        }
+    }
+
+     public void ResumeGame()
+    {
+        OnGameResume?.Invoke();
+        Time.timeScale = 1;
+        currentGameState = gameState.running;
     }
 
     private void GameLoose()
@@ -147,6 +183,18 @@ public class LevelManager : MonoBehaviour
         raceTimeProgress = 0;
         currentBonusTime = 0;
         currentBonusTimeInWorldTimeProgress = 0;
+    }
+
+    public void BackToMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
+    }
+
+    public void RestartLevel()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
     }
 
     public void StartRace()

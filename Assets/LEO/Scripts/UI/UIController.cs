@@ -16,31 +16,42 @@ public class UIController : MonoBehaviour
     [Header("XP")]
     [SerializeField] TextMeshProUGUI xpText;
 
+
+
     [Space(20)]
     [Header("UI-Sreens")]
     [SerializeField] GameObject looseScreen;
 
     [SerializeField] GameObject pauseScreen;
 
-    LevelManager myLevelTimer;
+    [Header("Buttons")]
+    [SerializeField] Button resumeButton;
+    [SerializeField] Button backButtonControls;
+
+    LevelManager myManager;
     WhingMovement01 myPlayer;
 
     private void Awake()
     {
-        myLevelTimer = FindObjectOfType<LevelManager>();
+        myManager = FindObjectOfType<LevelManager>();
         myPlayer = FindObjectOfType<WhingMovement01>();
+
     }
     private void Start()
     {
         ScoreSystem.Instance.OnXpChange += UpdateXpText;
-        myLevelTimer.OnGameLoose += ActivateLooseScreen;
+        myManager.OnGameLoose += ActivateLooseScreen;
+        myManager.OnGameResume += DeactivatePauseScreen;
+
     }
 
     private void Update()
     {
-        progressBarImage.fillAmount = myLevelTimer.LevelProgress;
-        raceProgressBarImage.fillAmount = myLevelTimer.CurrentBonusTimeInWorldTimeProgress;
+        progressBarImage.fillAmount = myManager.LevelProgress;
+        raceProgressBarImage.fillAmount = myManager.CurrentBonusTimeInWorldTimeProgress;
         recourceBarImage.fillAmount = myPlayer.ResourceAInRelationToMax;
+
+        myManager.OnGamePaused += ActivatePauseScreen;
     }
 
     private void ActivateLooseScreen()
@@ -48,12 +59,13 @@ public class UIController : MonoBehaviour
         looseScreen.SetActive(true);
     }
 
-    void ActivatePauseScreen()
+    private void ActivatePauseScreen()
     {
         pauseScreen.SetActive(true);
+        resumeButton.Select();
     }
 
-    void DeactivatePauseScreen()
+    public void DeactivatePauseScreen()
     {
         pauseScreen.SetActive(false);
     }
