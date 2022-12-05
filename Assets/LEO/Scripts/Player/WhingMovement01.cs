@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
+using Lofelt.NiceVibrations;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -92,6 +93,12 @@ public class WhingMovement01 : MonoBehaviour
     /// a MMFeedbacks to play when we Boost
     public MMFeedbacks BoostStartFeedback;
     public MMFeedbacks SlowMoFeedback;
+    public MMFeedbacks SlowMoHoldingFeedback;
+    [SerializeField] bool StraightUpDownOnceTrigger = false;
+    public HapticClip straightUpDownHaptic;
+    public GameObject straightUpDownVFX;
+    public MMFeedbacks StraightUpFeedback;
+    public MMFeedbacks StraightDownFeedback;
     // public MMFeedbacks TwirlFeedback;
 
 
@@ -208,6 +215,7 @@ public class WhingMovement01 : MonoBehaviour
             SlowmoInput();
         }
 
+        StraightUpDownFeedbackTrigger();
         TwirlEffect();
         CheckDeadzonePositions();
     }
@@ -496,6 +504,42 @@ public class WhingMovement01 : MonoBehaviour
         }
     }
 
+    private void StraightUpDownFeedbackTrigger()
+    {
+        if(StraightUpDownOnceTrigger == false)
+        {
+            if(straightDown == true)
+            {
+                //HapticPatterns.PlayConstant(1.0f, 0.0f, 1.0f);
+                //HapticController.Load(straightUpDownHaptic);
+                //HapticController.Loop(true);
+                //HapticController.Play();
+
+                straightUpDownVFX.SetActive(true);
+                StraightDownFeedback?.PlayFeedbacks();
+            }
+            if(straightUp == true)
+            {
+                //HapticController.Load(straightUpDownHaptic);
+                //HapticController.Loop(true);
+                //HapticController.Play();
+
+                straightUpDownVFX.SetActive(true);
+                StraightUpFeedback?.PlayFeedbacks();
+            }
+
+            StraightUpDownOnceTrigger = true;
+        }
+
+        if(straightDown == false && straightUp == false)
+        {
+            //HapticController.Stop();
+
+            straightUpDownVFX.SetActive(false);
+            StraightUpDownOnceTrigger = false;
+        }
+    }
+
     private void TwirlEffect()
     {
         if (Mathf.Abs(rightStickInput.y) >= twirlInput && Mathf.Abs(leftStickInput.y) >= twirlInput)
@@ -537,11 +581,12 @@ public class WhingMovement01 : MonoBehaviour
         {
             Time.timeScale = slowmoTimescale;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            SlowMoFeedback?.PlayFeedbacks();
         }
         if (myControls.Player.SlowMo.IsInProgress())
         {
             ResourceA -= slowmoCosts * Time.deltaTime; // Ressource wird verbraucht in diesem frame gemessen an der Frametime verbraucht
-            SlowMoFeedback?.PlayFeedbacks();
+            SlowMoHoldingFeedback?.PlayFeedbacks();
         }
         if (myControls.Player.SlowMo.WasReleasedThisFrame())
         {
