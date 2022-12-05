@@ -110,7 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5493486822d499646969d9820ccd7c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 10
+  ScorePoints: 5
+  resourcePoints: 20
+  cooldownTime: 0
 --- !u!1 &2095084521457725725
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,7 +223,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5493486822d499646969d9820ccd7c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 10
+  ScorePoints: 5
+  resourcePoints: 20
+  cooldownTime: 0
 --- !u!1 &2495492919394805346
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,7 +336,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5493486822d499646969d9820ccd7c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 10
+  ScorePoints: 5
+  resourcePoints: 20
+  cooldownTime: 0
 --- !u!1 &2977670045545636749
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +449,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5493486822d499646969d9820ccd7c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 10
+  ScorePoints: 5
+  resourcePoints: 20
+  cooldownTime: 0
 --- !u!1 &4469620658547297716
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,7 +562,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5493486822d499646969d9820ccd7c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 10
+  ScorePoints: 5
+  resourcePoints: 20
+  cooldownTime: 0
 --- !u!1 &4510839395549988707
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +675,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5493486822d499646969d9820ccd7c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 10
+  ScorePoints: 5
+  resourcePoints: 20
+  cooldownTime: 0
 --- !u!1 &5044229744997508251
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,7 +788,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5493486822d499646969d9820ccd7c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 10
+  ScorePoints: 5
+  resourcePoints: 20
+  cooldownTime: 0
 --- !u!1 &5606337193437289408
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,7 +901,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5493486822d499646969d9820ccd7c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 10
+  ScorePoints: 5
+  resourcePoints: 20
+  cooldownTime: 0
 --- !u!1 &5900527007242974097
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,7 +1014,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5493486822d499646969d9820ccd7c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 10
+  ScorePoints: 5
+  resourcePoints: 20
+  cooldownTime: 0
 --- !u!1 &7541059703739108678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,6 +1026,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7874514785412899047}
+  - component: {fileID: 5902232710863730200}
   m_Layer: 0
   m_Name: "K\xFCrbis_Ding"
   m_TagString: Untagged
@@ -1041,6 +1060,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5902232710863730200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7541059703739108678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a08d79ef9789119408f84d9c23dd02ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behaviourToActivate: {fileID: 0}
+  myObjectType: 0
 --- !u!1 &7897090954977668352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,7 +1184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5493486822d499646969d9820ccd7c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 10
+  ScorePoints: 5
+  resourcePoints: 20
+  cooldownTime: 0
 --- !u!1001 &3219167752888398335
 PrefabInstance:
   m_ObjectHideFlags: 0
