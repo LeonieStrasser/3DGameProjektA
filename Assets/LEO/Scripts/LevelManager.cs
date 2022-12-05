@@ -19,6 +19,9 @@ public class LevelManager : MonoBehaviour
     [Space(5)]
     [SerializeField] float maxBonusTime;
 
+     [Header("Loose")]
+    [SerializeField] float looseScreenDelay;
+
     // LEVEL TIMER
     private float levelTimer;
     public float LevelTimer
@@ -115,7 +118,11 @@ public class LevelManager : MonoBehaviour
 
         // Erstes Rennen wird gespawnt und zugewiesen
         raceNumber = -1;
-        SpawnNextRace();
+
+        if(allRaces.Length > 0)
+             SpawnNextRace();
+             else
+             Debug.LogWarning("Kein Race in der Liste!");
     }
 
     private void Update()
@@ -154,10 +161,9 @@ public class LevelManager : MonoBehaviour
         currentGameState = gameState.running;
     }
 
-    private void GameLoose()
+    public void GameLoose()
     {
-        Debug.Log("GAME LOOSE!");
-        OnGameLoose?.Invoke();
+        StartCoroutine(GameLooseDelayTimer());
     }
 
     private void SpawnNextRace()
@@ -215,8 +221,11 @@ public class LevelManager : MonoBehaviour
 
         SpawnNextRace();
     }
-
-
-
-
+    
+    private IEnumerator GameLooseDelayTimer()
+    {
+        yield return new WaitForSeconds(looseScreenDelay);
+        OnGameLoose?.Invoke();
+    }
+    
 }

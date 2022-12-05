@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentScore: 0
+  twirlMultiplikator: 2
 --- !u!1 &3012316558295867605
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +390,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d14d92da652be84f9125c6dda2e1418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTime: 200000
+  startTime: 500
   raceMaxTime: 50
   maxBonusTime: 10
+  looseScreenDelay: 2
+  inputActions: {fileID: -944628639613478452, guid: ab222ddec1634f54081b9cfdfdfcb792, type: 3}
+  pauseAction: {fileID: -9055025534290940002, guid: ab222ddec1634f54081b9cfdfdfcb792, type: 3}
   allRaces: []
