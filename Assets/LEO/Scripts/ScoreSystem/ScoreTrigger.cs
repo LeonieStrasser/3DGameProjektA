@@ -5,17 +5,25 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class ScoreTrigger : MonoBehaviour
 {
-    [SerializeField] [Tooltip("Anzahl an Punkten die bei normalem durchfliegen auf den Score gerechnet werden")] int ScorePoints = 5;
+    [SerializeField] [Tooltip("Anzahl an Punkten die bei normalem durchfliegen auf den Score gerechnet werden")] int scorePoints = 5;
     [SerializeField] [Tooltip("Anzahl an Punkten die bei durchfliegen auf die Resource gerechnet werden")] int resourcePoints = 20;
     [SerializeField] float cooldownTime;
 
+    int activeScorepoints;
     WhingMovement01 myPlayer;
+    BonusManager myBonusManager;
 
     bool cooldownOn = false;
 
     private void Start()
     {
         myPlayer = FindObjectOfType<WhingMovement01>();
+        myBonusManager = FindObjectOfType<BonusManager>();
+
+        activeScorepoints = scorePoints;
+        myBonusManager.OnTimeEffectStart += MultiplyScorePoints;
+        myBonusManager.OnTimeEffectEnd += MultiplyScorePoints;
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,7 +33,7 @@ public class ScoreTrigger : MonoBehaviour
             if (other.tag == "Player" && ScoreSystem.Instance != null)
             {
                 cooldownOn = true;
-                ScoreSystem.Instance.AddScore(ScorePoints);
+                ScoreSystem.Instance.AddScore(activeScorepoints);
                 StartCoroutine(CooldownTimer());
             }
             else
@@ -34,6 +42,11 @@ public class ScoreTrigger : MonoBehaviour
             myPlayer.AddResourcePoints(resourcePoints);
 
         }
+    }
+
+    private void MultiplyScorePoints(float multiplyer) // WIrd angesprochen wenn im BonusManager der EffectTimer ausgelöst wird
+    {
+        activeScorepoints = Mathf.RoundToInt(scorePoints * multiplyer);
     }
 
     IEnumerator CooldownTimer()

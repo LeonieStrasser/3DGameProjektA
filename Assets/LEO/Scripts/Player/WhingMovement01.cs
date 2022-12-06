@@ -147,13 +147,15 @@ public class WhingMovement01 : MonoBehaviour
 
 
     //-------------RESOURCES
+
+    float currentMaxRecource;
     private float resourceA;
     public float ResourceA
     {
         private set
         {
-            resourceA = Mathf.Clamp(value, 0, startMaxRecourceA); // ACHTUNG! Sollte sich die max Resource im laufe des Games �ndern, muss hier der Code angepasst werden!!!
-            resourceAInRelationToMax = resourceA / startMaxRecourceA;
+            resourceA = Mathf.Clamp(value, 0, currentMaxRecource); // ACHTUNG! Sollte sich die max Resource im laufe des Games �ndern, muss hier der Code angepasst werden!!!
+            resourceAInRelationToMax = resourceA / currentMaxRecource;
         }
         get
         {
@@ -206,7 +208,8 @@ public class WhingMovement01 : MonoBehaviour
         downRotation = Quaternion.identity;
         downRotation.x = 1;
 
-        ResourceA = startMaxRecourceA; // Tank wird auf voll gesetzt
+        currentMaxRecource = startMaxRecourceA; // Später kann die maximal recource mehr sein - jetzt wird sie auf die beginn max gesetzt
+        ResourceA = currentMaxRecource; // Tank wird auf voll gesetzt
     }
 
 
@@ -622,6 +625,11 @@ public class WhingMovement01 : MonoBehaviour
     public void AddResourcePoints(int newPoints)
     {
         ResourceA += newPoints;
+    }
+
+    public void AddMaxRecourcePoints(float addProcent) // Um diesen Prozentteil wird der Tank erweitert
+    {
+        currentMaxRecource *= addProcent;
     }
 
 }
