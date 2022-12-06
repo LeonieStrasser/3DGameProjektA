@@ -435,10 +435,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d14d92da652be84f9125c6dda2e1418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTime: 500
+  allRaces:
+  - startZone: {fileID: 0}
+    goal: {fileID: 0}
+    raceMaxTime: 80
+    pointsForSuccess: 100000
+  - startZone: {fileID: 0}
+    goal: {fileID: 0}
+    raceMaxTime: 100
+    pointsForSuccess: 0
   raceMaxTime: 50
-  maxBonusTime: 10
   looseScreenDelay: 2
   inputActions: {fileID: -944628639613478452, guid: ab222ddec1634f54081b9cfdfdfcb792, type: 3}
   pauseAction: {fileID: -9055025534290940002, guid: ab222ddec1634f54081b9cfdfdfcb792, type: 3}
-  allRaces: []
