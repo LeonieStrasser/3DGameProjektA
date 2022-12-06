@@ -6,9 +6,10 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
-    [Header("Game Timer")]
+    [Header("Race Timer")]
+    [SerializeField] GameObject timeBarObject;
     [SerializeField] Image progressBarImage;
-    [SerializeField] Image raceProgressBarImage;
+    [SerializeField] Animator fuelBarAnim;
 
     [Header("Resource Bar")]
     [SerializeField] Image recourceBarImage;
@@ -42,13 +43,17 @@ public class UIController : MonoBehaviour
         ScoreSystem.Instance.OnXpChange += UpdateXpText;
         myManager.OnGameLoose += ActivateLooseScreen;
         myManager.OnGameResume += DeactivatePauseScreen;
+        myManager.OnRaceStart += ActivateRaceTimeBar;
+        myManager.OnRaceStop += DeactivateRaceTimeBar;
+
 
     }
 
     private void Update()
     {
-        progressBarImage.fillAmount = myManager.LevelProgress;
-        raceProgressBarImage.fillAmount = myManager.CurrentBonusTimeInWorldTimeProgress;
+        if (myManager.ThisRace == LevelManager.raceState.raceIsRunning) // Wenn ein Rennen läft aktualisiere den Bar
+            progressBarImage.fillAmount = myManager.RaceTimeProgress;
+
         recourceBarImage.fillAmount = myPlayer.ResourceAInRelationToMax;
 
         myManager.OnGamePaused += ActivatePauseScreen;
@@ -73,5 +78,17 @@ public class UIController : MonoBehaviour
     private void UpdateXpText(int newScore)
     {
         xpText.text = newScore.ToString();
+    }
+
+    private void ActivateRaceTimeBar()
+    {
+        timeBarObject.SetActive(true);
+        fuelBarAnim.SetBool("raceRun", true);
+    }
+
+    private void DeactivateRaceTimeBar()
+    {
+        timeBarObject.SetActive(false);
+        fuelBarAnim.SetBool("raceRun", false);
     }
 }

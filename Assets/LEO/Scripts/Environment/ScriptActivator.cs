@@ -17,9 +17,12 @@ public class ScriptActivator : MonoBehaviour
     {
         myBonusManager.OnActivateMoving += ActivateCheck;
 
-        foreach (var item in behaviourToActivate)
+        if (behaviourToActivate.Length > 0)
         {
-            item.enabled = false;
+            foreach (var item in behaviourToActivate)
+            {
+                item.enabled = false;
+            }
         }
     }
 

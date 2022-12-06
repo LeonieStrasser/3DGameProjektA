@@ -7,41 +7,30 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    [Header("Level Timer")]
-    [SerializeField] float startTime;
+
 
     [Space(20)]
     [Header("Races")]
 
 
+    [SerializeField] RaceData[] allRaces;
     [SerializeField] float raceMaxTime;
 
-    [Space(5)]
-    [SerializeField] float maxBonusTime;
 
-     [Header("Loose")]
+    [Header("Loose")]
     [SerializeField] float looseScreenDelay;
 
-    // LEVEL TIMER
-    private float levelTimer;
-    public float LevelTimer
-    {
-        get => levelTimer;
-        set
-        {
-            levelTimer = value;
-            levelProgress = levelTimer / startTime; // Direkt den Level Progress ausrechnen
-        }
-    }
+    [Header("Inputs")]
+    [SerializeField] private InputActionAsset inputActions;
+    [SerializeField] private InputActionReference pauseAction;
 
-    private float levelProgress;
-    public float LevelProgress { get => levelProgress; }
+
 
 
 
     // GAMESTATES
 
-    enum raceState
+    public enum raceState
     {
         noRace,
         raceIsRunning
@@ -52,9 +41,12 @@ public class LevelManager : MonoBehaviour
         running,
         pause
     }
-    raceState thisRace;
 
+
+    raceState thisRace;
     gameState currentGameState;
+
+
     public gameState CurrentGameState
     {
         get
@@ -62,17 +54,16 @@ public class LevelManager : MonoBehaviour
             return currentGameState;
         }
     }
+    public raceState ThisRace { get =>  thisRace; }
 
-    public event Action OnGameLoose;
-    public event Action OnGamePaused;
 
-    public event Action OnGameResume;
 
 
     // CURRENT RACE
     [Header("debug")]
     private GameObject currentGoal;
     private GameObject currentStartZone;
+    private int currentSuccessPoints;
 
     private float raceTimer;
     private float RaceTimer
@@ -81,24 +72,13 @@ public class LevelManager : MonoBehaviour
         {
             raceTimer = value;
             raceTimeProgress = raceTimer / raceMaxTime;
-            currentBonusTime = RaceTimeProgress * maxBonusTime;
-            currentBonusTimeInWorldTimeProgress = (currentBonusTime / startTime) + LevelProgress;
         }
     }
     private float raceTimeProgress; // Zahl zwischen 0 und 1 - F�r den Balken im UI
     public float RaceTimeProgress { get => raceTimeProgress; }
 
-    private float currentBonusTime;
-    public float CurrentBonusTime { get => currentBonusTime; }
-
-    private float currentBonusTimeInWorldTimeProgress;
-    public float CurrentBonusTimeInWorldTimeProgress { get => currentBonusTimeInWorldTimeProgress; }
-
-    [SerializeField] private InputActionAsset inputActions;
-    [SerializeField] private InputActionReference pauseAction;
 
 
-    [SerializeField] RaceData[] allRaces;
     private int raceNumber = 0;
 
     [System.Serializable]
@@ -107,54 +87,66 @@ public class LevelManager : MonoBehaviour
         [SerializeField] public GameObject startZone;
         [SerializeField] public GameObject goal;
         [SerializeField] public float raceMaxTime;
+        [SerializeField] public int pointsForSuccess;
     }
 
 
+
+
+
+    #region events
+
+    public event Action OnGameLoose;
+    public event Action OnGamePaused;
+    public event Action OnGameResume;
+    public event Action OnRaceStart;
+    public event Action OnRaceStop;
+
+    #endregion
     private void Start()
     {
-        ResumeGame();   
-        LevelTimer = startTime;
+        ResumeGame();
         thisRace = raceState.noRace;
 
         // Erstes Rennen wird gespawnt und zugewiesen
         raceNumber = -1;
 
-        if(allRaces.Length > 0)
-             SpawnNextRace();
-             else
-             Debug.LogWarning("Kein Race in der Liste!");
+        if (allRaces.Length > 0)
+            SpawnNextRace();
+        else
+            Debug.LogWarning("Kein Race in der Liste!");
     }
 
     private void Update()
-    {   
-        if(currentGameState == gameState.running)
+    {
+        if (currentGameState == gameState.running)
         {
             if (thisRace == raceState.raceIsRunning)
             {
                 RunRaceTimer();
             }
         }
-            if(pauseAction.action.WasPressedThisFrame())
-            {
-                PauseGame();
-            } 
+        if (pauseAction.action.WasPressedThisFrame())
+        {
+            PauseGame();
+        }
     }
 
     void PauseGame()
     {
-        if(currentGameState == gameState.running)
+        if (currentGameState == gameState.running)
         {
             OnGamePaused?.Invoke();
             currentGameState = gameState.pause;
             Time.timeScale = 0;
         }
-        else if(currentGameState == gameState.pause)
+        else if (currentGameState == gameState.pause)
         {
             ResumeGame();
         }
     }
 
-     public void ResumeGame()
+    public void ResumeGame()
     {
         OnGameResume?.Invoke();
         Time.timeScale = 1;
@@ -174,6 +166,7 @@ public class LevelManager : MonoBehaviour
         currentStartZone = allRaces[raceNumber].startZone;
         currentGoal = allRaces[raceNumber].goal;
         raceMaxTime = allRaces[raceNumber].raceMaxTime;
+        currentSuccessPoints = allRaces[raceNumber].pointsForSuccess;
 
         currentStartZone.SetActive(true);
     }
@@ -181,15 +174,13 @@ public class LevelManager : MonoBehaviour
     private void RunRaceTimer()
     {
         RaceTimer = Mathf.Clamp(raceTimer - Time.deltaTime, 0, raceMaxTime); // Timer runterz�hlen
+        if(raceTimer <= 0)
+        {
+            RaceFail();
+        }
     }
 
-    private void AddBonusTimeToWorldTimer()
-    {
-        LevelTimer += CurrentBonusTime;
-        raceTimeProgress = 0;
-        currentBonusTime = 0;
-        currentBonusTimeInWorldTimeProgress = 0;
-    }
+
 
     public void BackToMenu()
     {
@@ -210,22 +201,37 @@ public class LevelManager : MonoBehaviour
 
         currentStartZone.SetActive(false);
         currentGoal.SetActive(true);
+
+        OnRaceStart?.Invoke();
     }
 
     public void FinishRace()
     {
         thisRace = raceState.noRace;
-        AddBonusTimeToWorldTimer();
 
         currentGoal.SetActive(false);
 
+        ScoreSystem.Instance.AddScore(currentSuccessPoints);
+
         SpawnNextRace();
+
+        OnRaceStop?.Invoke();
     }
-    
+
+    private void RaceFail()
+    {
+        thisRace = raceState.noRace;
+        currentStartZone.SetActive(true);
+        currentGoal.SetActive(false);
+
+        OnRaceStop?.Invoke();
+
+    }
+
     private IEnumerator GameLooseDelayTimer()
     {
         yield return new WaitForSeconds(looseScreenDelay);
         OnGameLoose?.Invoke();
     }
-    
+
 }
