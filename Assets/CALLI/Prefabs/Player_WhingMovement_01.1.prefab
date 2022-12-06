@@ -566,7 +566,6 @@ GameObject:
   - component: {fileID: 7069661740001588461}
   - component: {fileID: 7701056464925569004}
   - component: {fileID: 1548254499}
-  - component: {fileID: 1548254500}
   - component: {fileID: 5994206608551250480}
   m_Layer: 9
   m_Name: Player_WhingMovement_01.1
@@ -773,32 +772,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9205f0ac282d08c48898b4fb5222a65a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnDelay: 0.103
-  distanceTrigger: {fileID: 2137022343}
-  points: 2
-  activateExaktDistanceMultiplyer: 0
-  detectionRadius: 100
-  maxValueMediumDistance: 80
-  maxValueCloseDistance: 40
-  multiplyerMediumZone: 2
-  multiplyerCloseZone: 5
-  spawnVFX: {fileID: 6410553321870994811, guid: 9a22dee4641e2aa489209ff3f750ce23, type: 3}
-  spawnVFXMediumState: {fileID: 841743600663670621, guid: e12f54923c9d4f641b1f2568f37d5266, type: 3}
-  spawnVFXCloseState: {fileID: 5046607309030252068, guid: 20f57ed573179334894136ac90341d57, type: 3}
---- !u!114 &1548254500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 502884031767454843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9205f0ac282d08c48898b4fb5222a65a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnDelay: 0.103
-  distanceTrigger: {fileID: 324489369}
+  spawnDelay: 0.008
+  distanceTrigger:
+  - {fileID: 2137022343}
+  - {fileID: 324489369}
+  detectionAngle: 111.5
   points: 2
   activateExaktDistanceMultiplyer: 0
   detectionRadius: 100
