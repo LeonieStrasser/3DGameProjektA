@@ -779,6 +779,10 @@ MonoBehaviour:
   detectionAngle: 111.5
   points: 2
   activateExaktDistanceMultiplyer: 0
+  breakTime: 2
+  minTimeUntilMultiplyer: 3
+  riseTimeInterval: 1
+  multiplyerAdd: 2
   detectionRadius: 100
   maxValueMediumDistance: 80
   maxValueCloseDistance: 40
@@ -787,6 +791,7 @@ MonoBehaviour:
   spawnVFX: {fileID: 6410553321870994811, guid: 9a22dee4641e2aa489209ff3f750ce23, type: 3}
   spawnVFXMediumState: {fileID: 841743600663670621, guid: e12f54923c9d4f641b1f2568f37d5266, type: 3}
   spawnVFXCloseState: {fileID: 5046607309030252068, guid: 20f57ed573179334894136ac90341d57, type: 3}
+  spawnVFXTimeMultiplyer: {fileID: 6910006207123301441, guid: 124358b5aa202374ba8ba7278fdcc391, type: 3}
 --- !u!114 &5994206608551250480
 MonoBehaviour:
   m_ObjectHideFlags: 0
