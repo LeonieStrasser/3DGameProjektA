@@ -18,7 +18,6 @@ public class Mortality : MonoBehaviour
 
     private void OnCollisionEnter(Collision other) 
     {
-        Debug.Log("Collision detected?");
         Collider[] colliderHits = Physics.OverlapSphere(this.transform.position + transform.forward * distanceToCore, detectionRadius,detectionLayers);
         if(colliderHits.Length > 0)
         {

@@ -62,7 +62,7 @@ public class ScoreSystem : MonoBehaviour
         CurrentScore = 0;
     }
 
-    public void AddScore(int newScorePoints)
+    public void AddScore(float newScorePoints)
     {
         if(myPlayer.Twirl)
         {
