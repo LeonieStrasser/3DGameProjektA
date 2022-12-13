@@ -54,7 +54,7 @@ public class LevelManager : MonoBehaviour
             return currentGameState;
         }
     }
-    public raceState ThisRace { get =>  thisRace; }
+    public raceState ThisRace { get => thisRace; }
 
 
 
@@ -96,7 +96,7 @@ public class LevelManager : MonoBehaviour
 
     #region events
 
-    public event Action OnGameLoose;
+    public event Action<int, int> OnGameLoose;
     public event Action OnGamePaused;
     public event Action OnGameResume;
     public event Action OnRaceStart;
@@ -155,7 +155,11 @@ public class LevelManager : MonoBehaviour
 
     public void GameLoose()
     {
-        StartCoroutine(GameLooseDelayTimer());
+        int myScore = Mathf.RoundToInt(ScoreSystem.Instance.CurrentScore);
+        int lastHighscore = ScoreSystem.Instance.highscore;
+        StartCoroutine(GameLooseDelayTimer(myScore, lastHighscore));
+
+       
     }
 
     private void SpawnNextRace()
@@ -174,7 +178,7 @@ public class LevelManager : MonoBehaviour
     private void RunRaceTimer()
     {
         RaceTimer = Mathf.Clamp(raceTimer - Time.deltaTime, 0, raceMaxTime); // Timer runterz�hlen
-        if(raceTimer <= 0)
+        if (raceTimer <= 0)
         {
             RaceFail();
         }
@@ -228,10 +232,13 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    private IEnumerator GameLooseDelayTimer()
+    private IEnumerator GameLooseDelayTimer(int score, int lastHighscore)
     {
         yield return new WaitForSeconds(looseScreenDelay);
-        OnGameLoose?.Invoke();
+        OnGameLoose?.Invoke(score, lastHighscore);
+
+        if (score > lastHighscore)
+            SaveSystem.SaveScore(score, "Maxime Musterfrau");
     }
 
 }

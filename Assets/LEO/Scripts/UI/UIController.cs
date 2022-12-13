@@ -20,12 +20,15 @@ public class UIController : MonoBehaviour
 
 
     [Space(20)]
-    [Header("UI-Sreens")]
+    [Header("LooseScreen")]
     [SerializeField] GameObject looseScreen;
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI highScoreText;
 
+
+
+    [Header("Pause Screen")]
     [SerializeField] GameObject pauseScreen;
-
-    [Header("Buttons")]
     [SerializeField] Button resumeButton;
     [SerializeField] Button backButtonControls;
 
@@ -59,8 +62,10 @@ public class UIController : MonoBehaviour
         myManager.OnGamePaused += ActivatePauseScreen;
     }
 
-    private void ActivateLooseScreen()
+    private void ActivateLooseScreen(int score, int lastHighscore)
     {
+        scoreText.text = "Score: " + score;
+        highScoreText.text = "Last Highscore: " + lastHighscore;
         looseScreen.SetActive(true);
     }
 

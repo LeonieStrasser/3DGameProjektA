@@ -127,7 +127,7 @@ public class DistanceTracker : MonoBehaviour
         if (activateExaktDistanceMultiplyer)
             roundedPoints = Mathf.RoundToInt(points * exaktDistanceMultiplyer);
 
-        Debug.Log(distance.ToString());
+        //Debug.Log(distance.ToString());
 
         if (distance > maxValueMediumDistance)
         {

@@ -38,6 +38,7 @@ public class ScoreSystem : MonoBehaviour
 
     WhingMovement01 myPlayer;
 
+    [HideInInspector] public int highscore;
 
     private void Awake()
     {
@@ -55,16 +56,20 @@ public class ScoreSystem : MonoBehaviour
         myPlayer = FindObjectOfType<WhingMovement01>();
     }
 
-    
+
 
     private void Start()
     {
         CurrentScore = 0;
+        ScoreData loadData = SaveSystem.LoadScore();
+        if (loadData != null)
+            highscore = loadData.GetScore();
+        Debug.Log(highscore.ToString());
     }
 
     public void AddScore(float newScorePoints)
     {
-        if(myPlayer.Twirl)
+        if (myPlayer.Twirl)
         {
             newScorePoints *= twirlMultiplikator;
         }
