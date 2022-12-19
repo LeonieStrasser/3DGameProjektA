@@ -40,7 +40,8 @@ public class WhingMovement01 : MonoBehaviour
 
     [Space(10)]
     [Tooltip("Sensitivit�t f�r den Joystick Input.")]
-    [SerializeField] [Range(0, 0.5f)] float inputSensitivity;
+    [SerializeField] [Range(0, 0.7f)] float inputSensitivity;
+    [SerializeField] [Range(0, 0.7f)] float inputSensitivityLeftRight;
 
     [Space(20)]
     [Header("Twirl")]
@@ -258,10 +259,17 @@ public class WhingMovement01 : MonoBehaviour
     void OnRightWhing(InputValue value)                                                             // Inputs vom rechten Joystick werden ausgelesen
     {
         rightStickInput = value.Get<Vector2>();
+        rightControlX = rightStickInput.x;
+
+        if (rightControlX < inputSensitivityLeftRight && rightControlX > -inputSensitivityLeftRight)                   // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
+        {
+            rightControlX = 0;
+        }
+
         if (isPlayerTopUp)
         {
             rightWhingControlStick = rightStickInput;
-            rightControlX = rightWhingControlStick.x;
+            //rightControlX = rightWhingControlStick.x;
             rightControlY = -rightWhingControlStick.y;
 
             if (rightControlY < inputSensitivity && rightControlY > -inputSensitivity)                   // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
@@ -269,16 +277,12 @@ public class WhingMovement01 : MonoBehaviour
                 rightControlY = 0;
             }
 
-            if (rightControlX < inputSensitivity && rightControlX > -inputSensitivity)                   // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
-            {
-                rightControlX = 0;
-            }
         }
         else
         {
 
             lefttWhingControlStick = rightStickInput;
-            lefttControlX = lefttWhingControlStick.x;
+            //lefttControlX = lefttWhingControlStick.x;
             lefttControlY = lefttWhingControlStick.y;
 
             if (lefttControlY < inputSensitivity && lefttControlY > -inputSensitivity)                  // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
@@ -286,10 +290,7 @@ public class WhingMovement01 : MonoBehaviour
                 lefttControlY = 0;
             }
 
-            if (lefttControlX < inputSensitivity && lefttControlX > -inputSensitivity)                  // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
-            {
-                lefttControlX = 0;
-            }
+
         }
     }
 
@@ -298,10 +299,16 @@ public class WhingMovement01 : MonoBehaviour
     void OnLeftWhing(InputValue value)                                                              // Inputs vom linken Joystick werden ausgelesen
     {
         leftStickInput = value.Get<Vector2>();
+        lefttControlX = -leftStickInput.x;
+        if (lefttControlX < inputSensitivityLeftRight && lefttControlX > -inputSensitivityLeftRight)                  // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
+        {
+            lefttControlX = 0;
+        }
+
         if (isPlayerTopUp)
         {
             lefttWhingControlStick = leftStickInput;
-            lefttControlX = -lefttWhingControlStick.x;
+            //lefttControlX = -lefttWhingControlStick.x;
             lefttControlY = -lefttWhingControlStick.y;
 
             if (lefttControlY < inputSensitivity && lefttControlY > -inputSensitivity)                  // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
@@ -309,16 +316,12 @@ public class WhingMovement01 : MonoBehaviour
                 lefttControlY = 0;
             }
 
-            if (lefttControlX < inputSensitivity && lefttControlX > -inputSensitivity)                  // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
-            {
-                lefttControlX = 0;
-            }
 
         }
         else
         {
             rightWhingControlStick = leftStickInput;
-            rightControlX = -rightWhingControlStick.x;
+            //rightControlX = -rightWhingControlStick.x;
             rightControlY = rightWhingControlStick.y;
 
             if (rightControlY < inputSensitivity && rightControlY > -inputSensitivity)                   // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
@@ -326,10 +329,7 @@ public class WhingMovement01 : MonoBehaviour
                 rightControlY = 0;
             }
 
-            if (rightControlX < inputSensitivity && rightControlX > -inputSensitivity)                   // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
-            {
-                rightControlX = 0;
-            }
+
 
         }
     }
@@ -402,7 +402,7 @@ public class WhingMovement01 : MonoBehaviour
 
 
             // Rotationen zusammenrechnen
-            
+
             Quaternion rigidbodyBasedRotation = rotationOfDirection * myRigidbody.rotation * (deltaXRotation * deltaZRotation);
 
             myRigidbody.MoveRotation(rigidbodyBasedRotation);
