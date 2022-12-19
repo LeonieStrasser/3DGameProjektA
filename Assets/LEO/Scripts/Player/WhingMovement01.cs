@@ -173,6 +173,9 @@ public class WhingMovement01 : MonoBehaviour
 
     //InputSystem
     Controls myControls;
+
+    int lastLeftInput;
+    int lastRightInput;
     #endregion
 
 
@@ -377,6 +380,15 @@ public class WhingMovement01 : MonoBehaviour
             Quaternion deltaXRotation = Quaternion.Euler(new Vector3(currentRotationUpDown, 0, 0) * Time.fixedDeltaTime);
 
 
+            // Rotation an der Blickrichtung
+
+            float currentStabilizeSpeed = stabilizeSpeed; // Wenn der Twirl Aktiv ist, wird statt dem normalenm Speed der extra Twirl speed genutzt
+            if (twirl)
+                currentStabilizeSpeed = twirlSpeed;
+
+            currentRotationForward = currentStabilizeSpeed * ((rightControlY - lefttControlY) / 2);
+            Quaternion deltaZRotation = Quaternion.Euler(new Vector3(0, 0, -currentRotationForward) * Time.fixedDeltaTime);
+
 
 
 
@@ -388,19 +400,12 @@ public class WhingMovement01 : MonoBehaviour
 
 
 
-            // Rotation an der Blickrichtung
-
-            float currentStabilizeSpeed = stabilizeSpeed; // Wenn der Twirl Aktiv ist, wird statt dem normalenm Speed der extra Twirl speed genutzt
-            if (twirl)
-                currentStabilizeSpeed = twirlSpeed;
-
-            currentRotationForward = currentStabilizeSpeed * ((rightControlY - lefttControlY) / 2);
-            Quaternion deltaZRotation = Quaternion.Euler(new Vector3(0, 0, -currentRotationForward) * Time.fixedDeltaTime);
-
 
             // Rotationen zusammenrechnen
-            Quaternion rigidbodyBasedRotation = myRigidbody.rotation * Quaternion.Euler(deltaXRotation.eulerAngles + deltaZRotation.eulerAngles);
-            myRigidbody.MoveRotation(Quaternion.Euler(rigidbodyBasedRotation.eulerAngles + rotationOfDirection.eulerAngles));
+            
+            Quaternion rigidbodyBasedRotation = rotationOfDirection * myRigidbody.rotation * (deltaXRotation * deltaZRotation);
+
+            myRigidbody.MoveRotation(rigidbodyBasedRotation);
 
 
 
@@ -513,6 +518,10 @@ public class WhingMovement01 : MonoBehaviour
 
 
 
+    //private bool CheckInputChange()
+    //{
+    //   // if()
+    //}
 
 
 
