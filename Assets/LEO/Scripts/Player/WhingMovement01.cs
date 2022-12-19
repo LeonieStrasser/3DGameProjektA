@@ -223,7 +223,9 @@ public class WhingMovement01 : MonoBehaviour
         {
             noInput = (lefttWhingControlStick == Vector2.zero && rightWhingControlStick == Vector2.zero); // CHeck ob der Player einen input gibt
                                                                                                           //Debug.Log("Speed: " + currentSpeed);
-            if (noInput && flipControls == true)
+            
+
+            if ((noInput || CheckInputChange()) && flipControls == true)
                 CheckUpPosition();
 
             if (resourceA > 0)
@@ -518,10 +520,39 @@ public class WhingMovement01 : MonoBehaviour
 
 
 
-    //private bool CheckInputChange()
-    //{
-    //   // if()
-    //}
+    private bool CheckInputChange()
+    {
+        bool HasInputChanged;
+        int newLeftInput = 0;
+        int newRightInput = 0;
+
+        if (lefttControlY < -inputSensitivity)
+            newLeftInput = -1;
+        else if (lefttControlY > inputSensitivity)
+            newLeftInput = 1;
+
+        if (rightControlY < -inputSensitivity)
+            newRightInput = -1;
+        else if (rightControlY > inputSensitivity)
+            newRightInput = 1;
+
+
+        if (newLeftInput != lastLeftInput || newRightInput != lastRightInput)
+        {
+
+            HasInputChanged = true;
+
+        }
+        else
+        {
+            HasInputChanged = false;
+        }
+
+        lastRightInput = newRightInput;
+        lastLeftInput = newLeftInput;
+
+        return HasInputChanged;
+    }
 
 
 
