@@ -215,24 +215,24 @@ public class WhingMovement01 : MonoBehaviour
 
     private void Update()
     {
-        if(myManager.CurrentGameState == LevelManager.gameState.running)
+        if (myManager.CurrentGameState == LevelManager.gameState.running)
         {
-        noInput = (lefttWhingControlStick == Vector2.zero && rightWhingControlStick == Vector2.zero); // CHeck ob der Player einen input gibt
-        //Debug.Log("Speed: " + currentSpeed);
-        if (noInput && flipControls == true)
-            CheckUpPosition();
+            noInput = (lefttWhingControlStick == Vector2.zero && rightWhingControlStick == Vector2.zero); // CHeck ob der Player einen input gibt
+                                                                                                          //Debug.Log("Speed: " + currentSpeed);
+            if (noInput && flipControls == true)
+                CheckUpPosition();
 
-        if (resourceA > 0)
-        {
-            BoostInput();
-            SlowmoInput();
-        }
+            if (resourceA > 0)
+            {
+                BoostInput();
+                SlowmoInput();
+            }
 
-        StraightUpDownFeedbackTrigger();
-        if (!easyMovement)
-            TwirlEffect();
+            StraightUpDownFeedbackTrigger();
+            if (!easyMovement)
+                TwirlEffect();
 
-        CheckDeadzonePositions();
+            CheckDeadzonePositions();
 
         }
     }
@@ -345,6 +345,8 @@ public class WhingMovement01 : MonoBehaviour
 
     #region playerMotion
 
+    
+
     private void Move()
     {
         if (transform.forward.y < 0)
@@ -362,8 +364,7 @@ public class WhingMovement01 : MonoBehaviour
 
         currentSpeed = Mathf.Clamp(currentSpeed, minSpeed, maxSpeed);                                        // Beschl�unigt nur bis zum Maximalspeed 
 
-        // Vorw�rtsbewegung
-        //myRigidbody.position += transform.forward * currentSpeed * Time.deltaTime;
+
 
         myRigidbody.AddForce(transform.forward * currentSpeed * 10, ForceMode.Force);
 
@@ -374,12 +375,18 @@ public class WhingMovement01 : MonoBehaviour
             //Rotation hoch und runter
             currentRotationUpDown = rotationSpeedUpDown * (rightControlY / 3.5f + lefttControlY / 3.5f);
             Quaternion deltaXRotation = Quaternion.Euler(new Vector3(currentRotationUpDown, 0, 0) * Time.fixedDeltaTime);
-            myRigidbody.MoveRotation(myRigidbody.rotation * deltaXRotation);
+          
+
+
+
+
 
             //Rotation rechts und links
-            currentRotationLeftRight = rotationSpeedLeftRight * ((rightControlX - lefttControlX) / 2);
-            Quaternion deltaYRotation = Quaternion.Euler(new Vector3(0, currentRotationLeftRight, 0) * Time.fixedDeltaTime);
-            myRigidbody.MoveRotation(myRigidbody.rotation * deltaYRotation);
+            currentRotationLeftRight = (rightControlX - lefttControlX) / 2;
+            Quaternion direction = Quaternion.FromToRotation(myRigidbody.transform.forward, Camera.main.transform.right * currentRotationLeftRight).normalized;
+            Quaternion rotationOfDirection = Quaternion.Euler(rotationSpeedLeftRight * Time.fixedDeltaTime * direction.x, rotationSpeedLeftRight * Time.fixedDeltaTime * direction.y, rotationSpeedLeftRight * Time.fixedDeltaTime * direction.z);
+
+
 
             // Rotation an der Blickrichtung
 
@@ -389,7 +396,18 @@ public class WhingMovement01 : MonoBehaviour
 
             currentRotationForward = currentStabilizeSpeed * ((rightControlY - lefttControlY) / 2);
             Quaternion deltaZRotation = Quaternion.Euler(new Vector3(0, 0, -currentRotationForward) * Time.fixedDeltaTime);
-            myRigidbody.MoveRotation(myRigidbody.rotation * deltaZRotation);
+           
+
+            // Rotationen zusammenrechnen
+            Quaternion rotationFusion = myRigidbody.rotation * Quaternion.Euler(deltaXRotation.eulerAngles + deltaZRotation.eulerAngles);
+            Quaternion rotti = Quaternion.FromToRotation(myRigidbody.transform.forward, rotationOfDirection * myRigidbody.transform.forward);
+            myRigidbody.MoveRotation(Quaternion.Euler(rotationFusion.eulerAngles + rotti.eulerAngles));
+
+
+
+
+
+            
         }
         else // EASY MOVEMENT
         {
@@ -420,6 +438,13 @@ public class WhingMovement01 : MonoBehaviour
 
 
     }
+
+    
+
+
+
+
+
 
     private void AddGravity()
     {
@@ -525,9 +550,9 @@ public class WhingMovement01 : MonoBehaviour
 
     private void StraightUpDownFeedbackTrigger()
     {
-        if(StraightUpDownOnceTrigger == false)
+        if (StraightUpDownOnceTrigger == false)
         {
-            if(straightDown == true)
+            if (straightDown == true)
             {
                 //HapticPatterns.PlayConstant(1.0f, 0.0f, 1.0f);
                 //HapticController.Load(straightUpDownHaptic);
@@ -537,7 +562,7 @@ public class WhingMovement01 : MonoBehaviour
                 straightUpDownVFX.SetActive(true);
                 StraightDownFeedback?.PlayFeedbacks();
             }
-            if(straightUp == true)
+            if (straightUp == true)
             {
                 //HapticController.Load(straightUpDownHaptic);
                 //HapticController.Loop(true);
@@ -550,7 +575,7 @@ public class WhingMovement01 : MonoBehaviour
             StraightUpDownOnceTrigger = true;
         }
 
-        if(straightDown == false && straightUp == false)
+        if (straightDown == false && straightUp == false)
         {
             //HapticController.Stop();
 
