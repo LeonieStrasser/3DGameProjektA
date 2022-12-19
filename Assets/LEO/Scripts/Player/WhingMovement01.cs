@@ -345,7 +345,7 @@ public class WhingMovement01 : MonoBehaviour
 
     #region playerMotion
 
-    
+
 
     private void Move()
     {
@@ -375,7 +375,7 @@ public class WhingMovement01 : MonoBehaviour
             //Rotation hoch und runter
             currentRotationUpDown = rotationSpeedUpDown * (rightControlY / 3.5f + lefttControlY / 3.5f);
             Quaternion deltaXRotation = Quaternion.Euler(new Vector3(currentRotationUpDown, 0, 0) * Time.fixedDeltaTime);
-          
+
 
 
 
@@ -396,18 +396,17 @@ public class WhingMovement01 : MonoBehaviour
 
             currentRotationForward = currentStabilizeSpeed * ((rightControlY - lefttControlY) / 2);
             Quaternion deltaZRotation = Quaternion.Euler(new Vector3(0, 0, -currentRotationForward) * Time.fixedDeltaTime);
-           
+
 
             // Rotationen zusammenrechnen
-            Quaternion rotationFusion = myRigidbody.rotation * Quaternion.Euler(deltaXRotation.eulerAngles + deltaZRotation.eulerAngles);
-            Quaternion rotti = Quaternion.FromToRotation(myRigidbody.transform.forward, rotationOfDirection * myRigidbody.transform.forward);
-            myRigidbody.MoveRotation(Quaternion.Euler(rotationFusion.eulerAngles + rotti.eulerAngles));
+            Quaternion rigidbodyBasedRotation = myRigidbody.rotation * Quaternion.Euler(deltaXRotation.eulerAngles + deltaZRotation.eulerAngles);
+            myRigidbody.MoveRotation(Quaternion.Euler(rigidbodyBasedRotation.eulerAngles + rotationOfDirection.eulerAngles));
 
 
 
 
 
-            
+
         }
         else // EASY MOVEMENT
         {
@@ -439,7 +438,7 @@ public class WhingMovement01 : MonoBehaviour
 
     }
 
-    
+
 
 
 
