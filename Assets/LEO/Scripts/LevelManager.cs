@@ -39,7 +39,8 @@ public class LevelManager : MonoBehaviour
     public enum gameState
     {
         running,
-        pause
+        pause,
+        gameOver
     }
 
 
@@ -155,6 +156,7 @@ public class LevelManager : MonoBehaviour
 
     public void GameLoose()
     {
+        currentGameState = gameState.gameOver;
         int myScore = Mathf.RoundToInt(ScoreSystem.Instance.CurrentScore);
         int lastHighscore = ScoreSystem.Instance.highscore;
         StartCoroutine(GameLooseDelayTimer(myScore, lastHighscore));
