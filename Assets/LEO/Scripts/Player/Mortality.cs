@@ -7,6 +7,7 @@ public class Mortality : MonoBehaviour
 
     [SerializeField] GameObject dieVFX;
     LevelManager myManager;
+   
     [SerializeField] float distanceToCore;
     [SerializeField] float detectionRadius;
     [SerializeField] LayerMask detectionLayers;
@@ -14,6 +15,7 @@ public class Mortality : MonoBehaviour
     private void Start()
     {
         myManager = FindObjectOfType<LevelManager>();
+      
     }
 
     private void OnCollisionEnter(Collision other)
@@ -21,13 +23,19 @@ public class Mortality : MonoBehaviour
         Collider[] colliderHits = Physics.OverlapSphere(this.transform.position + transform.forward * distanceToCore, detectionRadius, detectionLayers);
         if (colliderHits.Length > 0)
         {
-            if (myManager.CurrentGameState == LevelManager.gameState.running) // sorgt dafür dass Loose nur einmal aufgerufen wird
-            {
-                Instantiate(dieVFX, transform.position, Quaternion.identity);
-                myManager.GameLoose();
-            }
-            this.gameObject.SetActive(false);
+            Die();
         }
+
+    }
+
+    private void Die()
+    {
+        if (myManager.CurrentGameState == LevelManager.gameState.running) // sorgt dafür dass Loose nur einmal aufgerufen wird
+        {
+            Instantiate(dieVFX, transform.position, Quaternion.identity);
+            myManager.GameLoose();
+        }
+        this.gameObject.SetActive(false);
     }
 
     private void OnDrawGizmosSelected()
