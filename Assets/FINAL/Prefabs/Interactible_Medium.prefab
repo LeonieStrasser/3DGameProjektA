@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6204442988793515396}
   - component: {fileID: 7040612292877894177}
   - component: {fileID: 5067025506993223403}
+  - component: {fileID: 1168876522809786492}
   m_Layer: 0
   m_Name: Interactible_Medium
   m_TagString: Untagged
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 4e7fc70973dd0c7448bc112dd90275a2, type: 3}
+  - {fileID: 2100000, guid: 93667318b5de24146bffa2041c96fcd8, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1168876522809786492
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6724240011711158078}
+  m_Material: {fileID: 13400000, guid: b9c279df641317d4aa663e7354e203a5, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5876722744731809403, guid: 4e7fc70973dd0c7448bc112dd90275a2, type: 3}

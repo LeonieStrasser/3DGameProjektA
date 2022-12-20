@@ -7,27 +7,41 @@ using TMPro;
 
 public class Menu_Controller : MonoBehaviour
 {
-    [Header("Volume Settings")]
-    [SerializeField] private TMP_Text volumeTextValue = null;
-    [SerializeField] private Slider volumeSlider = null;
-    [SerializeField] private float defaultVolume = 0.5f;
+    [Header("Volume Settings")] // Sound & Music verknüpfen!!
+
+    [SerializeField] private TMP_Text soundTextValue = null;
+    [SerializeField] private Slider soundSlider = null;
+    [SerializeField] private float defaultSound = 0.5f;
+
+    [SerializeField] private TMP_Text musicTextValue = null;
+    [SerializeField] private Slider musicSlider = null;
+    [SerializeField] private float defaultMusic = 0.5f;
 
     [Header("Gameplay Settings")] //Controller Sensitivity verknüpfen!!
+
     [SerializeField] private TMP_Text controllerSenTextValue = null;
     [SerializeField] private Slider controllerSenSlider = null;
     [SerializeField] private int defaultSen = 1;
     public int mainControllerSen = 1;
 
     [Header("Toggle Settings")]
+
     [SerializeField] private Toggle invertYToggle = null;
 
     [Header("Confirmation")]
+
     [SerializeField] private GameObject confirmationPrompt = null;
 
 
     [Header("Levels To Load")]
+
     public string newGameLevel;
     private string levelToLoad;
+
+    public string loadTutorial;
+
+    public string loadCredits;
+
 
     public void NewGameDialogYes()
     {
@@ -36,20 +50,36 @@ public class Menu_Controller : MonoBehaviour
 
     public void LoadingGameDialogYes()
     {
-        if(PlayerPrefs.HasKey("SavedLevel"))
+        if (PlayerPrefs.HasKey("SavedLevel"))
         {
             levelToLoad = PlayerPrefs.GetString("SavedLevel"); //locale variable nimmt bezug zu dem letzten Speicherstand des Levels
         }
+    }
+
+    public void LoadingTutorialDialogYes()
+    {
+        SceneManager.LoadScene(loadTutorial);
+    }
+
+    public void LoadingCreditsDialogYes()
+    {
+        SceneManager.LoadScene(loadCredits);
     }
 
     public void ExitButton()
     {
         Application.Quit();
     }
-    public void SetVolume(float volume)
+    public void SetSound(float sound)
     {
-        AudioListener.volume = volume;
-        volumeTextValue.text = volume.ToString("0.0");
+        AudioListener.volume = sound;
+        soundTextValue.text = sound.ToString("0.0");
+    }
+
+    public void SetMusic(float music)
+    {
+        AudioListener.volume = music;
+        musicTextValue.text = music.ToString("0.0");
     }
 
     public void VolumeApply()
@@ -64,28 +94,30 @@ public class Menu_Controller : MonoBehaviour
         controllerSenTextValue.text = sensitivity.ToString("0");
     }
 
-    public void GameplayApply() // AN CONTROLLER INPUT ANPASSEN!
-    {
-        if(invertYToggle.isOn)
-        {
-            PlayerPrefs.SetInt("masterInvertY", 1);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("masterInvertY", 0);
-        }
+    //public void GameplayApply() // AN CONTROLLER INPUT ANPASSEN!
+    //{
+    //    if (invertYToggle.isOn)
+    //    {
+    //        PlayerPrefs.SetInt("masterInvertY", 1);
+    //    }
+    //    else
+    //    {
+    //        PlayerPrefs.SetInt("masterInvertY", 0);
+    //    }
 
-        PlayerPrefs.SetFloat("masterSen", mainControllerSen);
-        StartCoroutine(ConfirmationBox());
-    }
+    //    PlayerPrefs.SetFloat("masterSen", mainControllerSen);
+    //    StartCoroutine(ConfirmationBox());
+    //}
 
     public void ResetButton(string MenuType)
     {
-        if(MenuType == "Audio")
+        if (MenuType == "Audio")
         {
-            AudioListener.volume = defaultVolume;
-            volumeSlider.value = defaultVolume;
-            volumeTextValue.text = defaultVolume.ToString("0.0");
+            AudioListener.volume = defaultSound;
+            soundSlider.value = defaultSound;
+            soundTextValue.text = defaultSound.ToString("0.0");
+            musicSlider.value = defaultMusic;
+            musicTextValue.text = defaultMusic.ToString("0.0");
             VolumeApply();
         }
     }

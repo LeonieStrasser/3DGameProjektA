@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 3178360339481507647}
   - component: {fileID: 2236890194625099531}
   - component: {fileID: 958709944414854159}
+  - component: {fileID: 8540241287366532452}
   m_Layer: 0
   m_Name: Pillar_Small
   m_TagString: Untagged
@@ -93,7 +94,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: aacfef68b07790b448bbdb5522d640b9, type: 3}
+  - {fileID: 2100000, guid: 93667318b5de24146bffa2041c96fcd8, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,3 +116,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8540241287366532452
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5810722404197983999}
+  m_Material: {fileID: 13400000, guid: b9c279df641317d4aa663e7354e203a5, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1741003900092963039, guid: aacfef68b07790b448bbdb5522d640b9, type: 3}
