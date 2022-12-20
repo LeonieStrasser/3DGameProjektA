@@ -61,9 +61,12 @@ public class ScoreSystem : MonoBehaviour
     private void Start()
     {
         CurrentScore = 0;
-        ScoreData loadData = SaveSystem.LoadScore();
+        ScoreList loadData = SaveSystem.LoadScore();
         if (loadData != null)
-            highscore = loadData.GetScore();
+        {
+            highscore = loadData.scoreDataList[0].score;
+
+        }
         Debug.Log(highscore.ToString());
     }
 

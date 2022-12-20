@@ -237,7 +237,7 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(looseScreenDelay);
         OnGameLoose?.Invoke(score, lastHighscore);
 
-        if (score > lastHighscore)
+        if (score > lastHighscore) // HIER MUSS WAS VERÄNDERT WERDEN!!!!!
             SaveSystem.SaveScore(score, "Maxime Musterfrau");
     }
 

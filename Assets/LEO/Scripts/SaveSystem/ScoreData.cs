@@ -5,9 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class ScoreData
 {
-    int score;
-    string playerName;
-    string date;
+    public int score;
+    public string playerName;
+    public string date;
 
     public ScoreData(int newScore, string newName)
     {
@@ -17,4 +17,23 @@ public class ScoreData
     }
 
     public int GetScore() { return score; }
+}
+
+
+
+
+[System.Serializable]
+public class ScoreList
+{
+    public List<ScoreData> scoreDataList = new List<ScoreData>();
+
+    public ScoreList(ScoreData[] newDataArray)
+    {
+        foreach (var item in newDataArray)
+        {
+            scoreDataList.Add(item);
+        }
+    }
+
+    public List<ScoreData> GetScoreList() { return scoreDataList; }
 }
