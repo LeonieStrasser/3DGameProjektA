@@ -40,7 +40,8 @@ public class WhingMovement01 : MonoBehaviour
 
     [Space(10)]
     [Tooltip("Sensitivit�t f�r den Joystick Input.")]
-    [SerializeField] [Range(0, 0.5f)] float inputSensitivity;
+    [SerializeField] [Range(0, 0.7f)] float inputSensitivity;
+    [SerializeField] [Range(0, 0.7f)] float inputSensitivityLeftRight;
 
     [Space(20)]
     [Header("Twirl")]
@@ -173,6 +174,9 @@ public class WhingMovement01 : MonoBehaviour
 
     //InputSystem
     Controls myControls;
+
+    int lastLeftInput;
+    int lastRightInput;
     #endregion
 
 
@@ -215,24 +219,26 @@ public class WhingMovement01 : MonoBehaviour
 
     private void Update()
     {
-        if(myManager.CurrentGameState == LevelManager.gameState.running)
+        if (myManager.CurrentGameState == LevelManager.gameState.running)
         {
-        noInput = (lefttWhingControlStick == Vector2.zero && rightWhingControlStick == Vector2.zero); // CHeck ob der Player einen input gibt
-        //Debug.Log("Speed: " + currentSpeed);
-        if (noInput && flipControls == true)
-            CheckUpPosition();
+            noInput = (lefttWhingControlStick == Vector2.zero && rightWhingControlStick == Vector2.zero); // CHeck ob der Player einen input gibt
+                                                                                                          //Debug.Log("Speed: " + currentSpeed);
+            
 
-        if (resourceA > 0)
-        {
-            BoostInput();
-            SlowmoInput();
-        }
+            if ((noInput || CheckInputChange()) && flipControls == true)
+                CheckUpPosition();
 
-        StraightUpDownFeedbackTrigger();
-        if (!easyMovement)
-            TwirlEffect();
+            if (resourceA > 0)
+            {
+                BoostInput();
+                SlowmoInput();
+            }
 
-        CheckDeadzonePositions();
+            StraightUpDownFeedbackTrigger();
+            if (!easyMovement)
+                TwirlEffect();
+
+            CheckDeadzonePositions();
 
         }
     }
@@ -255,10 +261,17 @@ public class WhingMovement01 : MonoBehaviour
     void OnRightWhing(InputValue value)                                                             // Inputs vom rechten Joystick werden ausgelesen
     {
         rightStickInput = value.Get<Vector2>();
+        rightControlX = rightStickInput.x;
+
+        if (rightControlX < inputSensitivityLeftRight && rightControlX > -inputSensitivityLeftRight)                   // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
+        {
+            rightControlX = 0;
+        }
+
         if (isPlayerTopUp)
         {
             rightWhingControlStick = rightStickInput;
-            rightControlX = rightWhingControlStick.x;
+            //rightControlX = rightWhingControlStick.x;
             rightControlY = -rightWhingControlStick.y;
 
             if (rightControlY < inputSensitivity && rightControlY > -inputSensitivity)                   // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
@@ -266,16 +279,12 @@ public class WhingMovement01 : MonoBehaviour
                 rightControlY = 0;
             }
 
-            if (rightControlX < inputSensitivity && rightControlX > -inputSensitivity)                   // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
-            {
-                rightControlX = 0;
-            }
         }
         else
         {
 
             lefttWhingControlStick = rightStickInput;
-            lefttControlX = lefttWhingControlStick.x;
+            //lefttControlX = lefttWhingControlStick.x;
             lefttControlY = lefttWhingControlStick.y;
 
             if (lefttControlY < inputSensitivity && lefttControlY > -inputSensitivity)                  // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
@@ -283,10 +292,7 @@ public class WhingMovement01 : MonoBehaviour
                 lefttControlY = 0;
             }
 
-            if (lefttControlX < inputSensitivity && lefttControlX > -inputSensitivity)                  // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
-            {
-                lefttControlX = 0;
-            }
+
         }
     }
 
@@ -295,10 +301,16 @@ public class WhingMovement01 : MonoBehaviour
     void OnLeftWhing(InputValue value)                                                              // Inputs vom linken Joystick werden ausgelesen
     {
         leftStickInput = value.Get<Vector2>();
+        lefttControlX = -leftStickInput.x;
+        if (lefttControlX < inputSensitivityLeftRight && lefttControlX > -inputSensitivityLeftRight)                  // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
+        {
+            lefttControlX = 0;
+        }
+
         if (isPlayerTopUp)
         {
             lefttWhingControlStick = leftStickInput;
-            lefttControlX = -lefttWhingControlStick.x;
+            //lefttControlX = -lefttWhingControlStick.x;
             lefttControlY = -lefttWhingControlStick.y;
 
             if (lefttControlY < inputSensitivity && lefttControlY > -inputSensitivity)                  // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
@@ -306,16 +318,12 @@ public class WhingMovement01 : MonoBehaviour
                 lefttControlY = 0;
             }
 
-            if (lefttControlX < inputSensitivity && lefttControlX > -inputSensitivity)                  // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
-            {
-                lefttControlX = 0;
-            }
 
         }
         else
         {
             rightWhingControlStick = leftStickInput;
-            rightControlX = -rightWhingControlStick.x;
+            //rightControlX = -rightWhingControlStick.x;
             rightControlY = rightWhingControlStick.y;
 
             if (rightControlY < inputSensitivity && rightControlY > -inputSensitivity)                   // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
@@ -323,10 +331,7 @@ public class WhingMovement01 : MonoBehaviour
                 rightControlY = 0;
             }
 
-            if (rightControlX < inputSensitivity && rightControlX > -inputSensitivity)                   // Input wird 0 gesetzt wenn er unter der Input Sensitivity liegt
-            {
-                rightControlX = 0;
-            }
+
 
         }
     }
@@ -345,6 +350,8 @@ public class WhingMovement01 : MonoBehaviour
 
     #region playerMotion
 
+
+
     private void Move()
     {
         if (transform.forward.y < 0)
@@ -362,8 +369,7 @@ public class WhingMovement01 : MonoBehaviour
 
         currentSpeed = Mathf.Clamp(currentSpeed, minSpeed, maxSpeed);                                        // Beschl�unigt nur bis zum Maximalspeed 
 
-        // Vorw�rtsbewegung
-        //myRigidbody.position += transform.forward * currentSpeed * Time.deltaTime;
+
 
         myRigidbody.AddForce(transform.forward * currentSpeed * 10, ForceMode.Force);
 
@@ -374,12 +380,7 @@ public class WhingMovement01 : MonoBehaviour
             //Rotation hoch und runter
             currentRotationUpDown = rotationSpeedUpDown * (rightControlY / 3.5f + lefttControlY / 3.5f);
             Quaternion deltaXRotation = Quaternion.Euler(new Vector3(currentRotationUpDown, 0, 0) * Time.fixedDeltaTime);
-            myRigidbody.MoveRotation(myRigidbody.rotation * deltaXRotation);
 
-            //Rotation rechts und links
-            currentRotationLeftRight = rotationSpeedLeftRight * ((rightControlX - lefttControlX) / 2);
-            Quaternion deltaYRotation = Quaternion.Euler(new Vector3(0, currentRotationLeftRight, 0) * Time.fixedDeltaTime);
-            myRigidbody.MoveRotation(myRigidbody.rotation * deltaYRotation);
 
             // Rotation an der Blickrichtung
 
@@ -389,7 +390,30 @@ public class WhingMovement01 : MonoBehaviour
 
             currentRotationForward = currentStabilizeSpeed * ((rightControlY - lefttControlY) / 2);
             Quaternion deltaZRotation = Quaternion.Euler(new Vector3(0, 0, -currentRotationForward) * Time.fixedDeltaTime);
-            myRigidbody.MoveRotation(myRigidbody.rotation * deltaZRotation);
+
+
+
+
+
+            //Rotation rechts und links
+            currentRotationLeftRight = (rightControlX - lefttControlX) / 2;
+            Quaternion direction = Quaternion.FromToRotation(myRigidbody.transform.forward, Camera.main.transform.right * currentRotationLeftRight).normalized;
+            Quaternion rotationOfDirection = Quaternion.Euler(rotationSpeedLeftRight * Time.fixedDeltaTime * direction.x, rotationSpeedLeftRight * Time.fixedDeltaTime * direction.y, rotationSpeedLeftRight * Time.fixedDeltaTime * direction.z);
+
+
+
+
+            // Rotationen zusammenrechnen
+
+            Quaternion rigidbodyBasedRotation = rotationOfDirection * myRigidbody.rotation * (deltaXRotation * deltaZRotation);
+
+            myRigidbody.MoveRotation(rigidbodyBasedRotation);
+
+
+
+
+
+
         }
         else // EASY MOVEMENT
         {
@@ -420,6 +444,13 @@ public class WhingMovement01 : MonoBehaviour
 
 
     }
+
+
+
+
+
+
+
 
     private void AddGravity()
     {
@@ -489,6 +520,39 @@ public class WhingMovement01 : MonoBehaviour
 
 
 
+    private bool CheckInputChange()
+    {
+        bool HasInputChanged;
+        int newLeftInput = 0;
+        int newRightInput = 0;
+
+        if (lefttControlY < -inputSensitivity)
+            newLeftInput = -1;
+        else if (lefttControlY > inputSensitivity)
+            newLeftInput = 1;
+
+        if (rightControlY < -inputSensitivity)
+            newRightInput = -1;
+        else if (rightControlY > inputSensitivity)
+            newRightInput = 1;
+
+
+        if (newLeftInput != lastLeftInput || newRightInput != lastRightInput)
+        {
+
+            HasInputChanged = true;
+
+        }
+        else
+        {
+            HasInputChanged = false;
+        }
+
+        lastRightInput = newRightInput;
+        lastLeftInput = newLeftInput;
+
+        return HasInputChanged;
+    }
 
 
 
@@ -525,9 +589,9 @@ public class WhingMovement01 : MonoBehaviour
 
     private void StraightUpDownFeedbackTrigger()
     {
-        if(StraightUpDownOnceTrigger == false)
+        if (StraightUpDownOnceTrigger == false)
         {
-            if(straightDown == true)
+            if (straightDown == true)
             {
                 //HapticPatterns.PlayConstant(1.0f, 0.0f, 1.0f);
                 //HapticController.Load(straightUpDownHaptic);
@@ -537,7 +601,7 @@ public class WhingMovement01 : MonoBehaviour
                 straightUpDownVFX.SetActive(true);
                 StraightDownFeedback?.PlayFeedbacks();
             }
-            if(straightUp == true)
+            if (straightUp == true)
             {
                 //HapticController.Load(straightUpDownHaptic);
                 //HapticController.Loop(true);
@@ -550,7 +614,7 @@ public class WhingMovement01 : MonoBehaviour
             StraightUpDownOnceTrigger = true;
         }
 
-        if(straightDown == false && straightUp == false)
+        if (straightDown == false && straightUp == false)
         {
             //HapticController.Stop();
 
