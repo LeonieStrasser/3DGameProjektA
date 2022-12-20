@@ -8,6 +8,9 @@ using System.Linq;
 public static class SaveSystem
 {
     private static string folderLocalisation = "/JSONsaveFile.json";
+    private static int maxScoreListCount = 50;
+
+
     public static void SaveScore(int playerScore, string playerName)
     {
 
@@ -22,9 +25,20 @@ public static class SaveSystem
         dataList.Add(data);
         dataList = dataList.OrderByDescending (q => q.score).ToList();
 
+
+        // Sorgt dafür dass die Liste nicht die maximalanzahl übersteigt
+        int newArrayCount;
+
+        if (maxScoreListCount < dataList.Count)
+            newArrayCount = maxScoreListCount;
+        else
+            newArrayCount = dataList.Count;
+
         // Die sortierte ScoreListe wird in einen Array umgewandelt um ihn an die save methode übergeben zu können
-        ScoreData[] scoreArray = new ScoreData[dataList.Count];
-        for (int i = 0; i < scoreArray.Length; i++)
+        ScoreData[] scoreArray = new ScoreData[newArrayCount];
+
+
+        for (int i = 0; i < newArrayCount; i++)
         {
             scoreArray[i] = dataList[i];
         }
