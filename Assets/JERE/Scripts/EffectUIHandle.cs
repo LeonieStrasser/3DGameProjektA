@@ -12,7 +12,7 @@ public class EffectUIHandle : MonoBehaviour
 
     public Image Img;
 
-    //public KartItem Kart;
+    public PlayerEffect Player;
 
     private void Start()
     {
@@ -27,7 +27,7 @@ public class EffectUIHandle : MonoBehaviour
             shuffleSprite = false;
         }
 
-        //Img.sprite = Kart.ItmUse.Viusal;
+        Img.sprite = Player.EffectUse.effectSprite;
     }
 
     void Shuffle()
