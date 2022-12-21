@@ -92,7 +92,8 @@ public class LevelManager : MonoBehaviour
     }
 
 
-
+    // Bonus Management
+    EffectHandle myEffectHandle;
 
 
     #region events
@@ -104,6 +105,13 @@ public class LevelManager : MonoBehaviour
     public event Action OnRaceStop;
 
     #endregion
+    
+    
+    private void Awake()
+    {
+        myEffectHandle = FindObjectOfType<EffectHandle>();
+    }
+
     private void Start()
     {
         ResumeGame();
@@ -218,6 +226,8 @@ public class LevelManager : MonoBehaviour
         currentGoal.SetActive(false);
 
         ScoreSystem.Instance.AddScore(currentSuccessPoints);
+
+        myEffectHandle.StartBonusEffect();
 
         SpawnNextRace();
 

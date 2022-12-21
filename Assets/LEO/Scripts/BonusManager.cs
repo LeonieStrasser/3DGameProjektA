@@ -5,10 +5,8 @@ using System;
 
 public class BonusManager : MonoBehaviour
 {
-    [SerializeField] ObjectType.type typeToActivate;
-    [SerializeField] float addProcent;
-    [SerializeField] float effectTime;
-    [SerializeField] float multiplyer;
+
+
 
     WhingMovement01 myPlayer;
 
@@ -16,31 +14,69 @@ public class BonusManager : MonoBehaviour
     public event Action<float> OnTimeEffectStart;
     public event Action<float> OnTimeEffectEnd;
 
+
+    
+
+
     private void Awake()
     {
         myPlayer = FindObjectOfType<WhingMovement01>();
+
+
     }
 
-    public void ActivateMovingObject()//(ObjectType.type typeToActivate)
+    public void ActivateBonusByKey(BonusType.bonusType bonusIndexKey, float fuelVolume, float scoreEffectTime, float scoreMultiplyer, ObjectType.type typeToActivate)
     {
-        OnActivateMoving?.Invoke(this.typeToActivate);
+        switch (bonusIndexKey)
+        {
+            default:
+                break;
+            case BonusType.bonusType.addFuel:
+                AddFuelVolume(fuelVolume);
+                break;
+            case BonusType.bonusType.scoreMultiplyer:
+                StartPointMultiplyTime(scoreEffectTime, scoreMultiplyer);
+                break;
+            case BonusType.bonusType.moveObject:
+                ActivateMovingObject(typeToActivate);
+                break;
+        }
     }
 
-    public void AddFuelVolume()//(float addProcent)
+    private void AddFuelVolume(float addProcent)
     {
-        myPlayer.AddMaxRecourcePoints(this.addProcent);
+        myPlayer.AddMaxRecourcePoints(addProcent);
+
+        Debug.Log("AddFuelVolume ist Aktiv");
     }
 
-    public void StartPointMultiplyTime()// (float effectTime, float multiplyer)
+
+    private void StartPointMultiplyTime(float effectTime, float multiplyer)
     {
-        OnTimeEffectStart?.Invoke(this.multiplyer);
-        StartCoroutine(TimeEffect(this.effectTime));
+        OnTimeEffectStart?.Invoke(multiplyer);
+        StartCoroutine(TimeEffect(effectTime));
+
+        Debug.Log("StartPointMultiplyTime ist Aktiv");
     }
+
+
+    private void ActivateMovingObject(ObjectType.type typeToActivate)
+    {
+        OnActivateMoving?.Invoke(typeToActivate);
+
+        Debug.Log("ActivateMovingObject ist Aktiv");
+
+    }
+
+
 
 
     IEnumerator TimeEffect(float effectTime)
     {
         yield return new WaitForSeconds(effectTime);
         OnTimeEffectEnd?.Invoke(1); // damit der Multiplyer wieder 1 ist nach Ablauf der Zeit
+
+        Debug.Log("Zeit Abgelaufen - hehe");
+
     }
 }
