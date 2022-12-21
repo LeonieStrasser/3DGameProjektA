@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class Menu_Controller : MonoBehaviour
 {
     [Header("Volume Settings")] // Sound & Music verknüpfen!!
-
     [SerializeField] private TMP_Text soundTextValue = null;
     [SerializeField] private Slider soundSlider = null;
     [SerializeField] private float defaultSound = 0.5f;
@@ -18,24 +18,22 @@ public class Menu_Controller : MonoBehaviour
     [SerializeField] private float defaultMusic = 0.5f;
 
     [Header("Gameplay Settings")] //Controller Sensitivity verknüpfen!!
-
     [SerializeField] private TMP_Text controllerSenTextValue = null;
     [SerializeField] private Slider controllerSenSlider = null;
-    [SerializeField] private int defaultSen = 1;
-    public int mainControllerSen = 1;
+    [SerializeField] private int defaultSen = 5;
+    public int mainControllerSen = 5;
 
     [Header("Toggle Settings")]
-
     [SerializeField] private Toggle invertYToggle = null;
 
     [Header("Confirmation")]
-
     [SerializeField] private GameObject confirmationPrompt = null;
 
 
     [Header("Levels To Load")]
 
     public string newGameLevel;
+
     private string levelToLoad;
 
     public string loadTutorial;
@@ -43,6 +41,7 @@ public class Menu_Controller : MonoBehaviour
     public string loadCredits;
 
 
+    //Einstellungen für das Main Menu
     public void NewGameDialogYes()
     {
         SceneManager.LoadScene(newGameLevel);
@@ -94,20 +93,20 @@ public class Menu_Controller : MonoBehaviour
         controllerSenTextValue.text = sensitivity.ToString("0");
     }
 
-    //public void GameplayApply() // AN CONTROLLER INPUT ANPASSEN!
-    //{
-    //    if (invertYToggle.isOn)
-    //    {
-    //        PlayerPrefs.SetInt("masterInvertY", 1);
-    //    }
-    //    else
-    //    {
-    //        PlayerPrefs.SetInt("masterInvertY", 0);
-    //    }
+    public void GameplayApply() // AN CONTROLLER INPUT ANPASSEN!
+    {
+        if (invertYToggle.isOn)
+        {
+            PlayerPrefs.SetInt("masterInvertY", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("masterInvertY", 0);
+        }
 
-    //    PlayerPrefs.SetFloat("masterSen", mainControllerSen);
-    //    StartCoroutine(ConfirmationBox());
-    //}
+        PlayerPrefs.SetFloat("masterSen", mainControllerSen);
+        StartCoroutine(ConfirmationBox());
+    }
 
     public void ResetButton(string MenuType)
     {
@@ -119,6 +118,15 @@ public class Menu_Controller : MonoBehaviour
             musicSlider.value = defaultMusic;
             musicTextValue.text = defaultMusic.ToString("0.0");
             VolumeApply();
+        }
+
+        if (MenuType == "Gameplay")
+        {
+            controllerSenTextValue.text = defaultSen.ToString("0");
+            controllerSenSlider.value = defaultSen;
+            mainControllerSen = defaultSen;
+            invertYToggle.isOn = false;
+            GameplayApply();
         }
     }
 
