@@ -17,6 +17,29 @@ public class ScoreSystem : MonoBehaviour
 
 
     [SerializeField] private float currentScore;
+    [SerializeField] int twirlMultiplikator = 2;
+
+    [Space(20)]
+    [Header("Score States")]
+    [SerializeField] ComboState[] allComboStates;
+
+    private ComboState currentComboState;
+    public ComboState CurrentComboState
+    {
+        set
+        {
+            currentComboState = value;
+            OnComboStateChange?.Invoke(currentComboState.scoreColor);
+        }
+    }
+
+    private float comboTimer;
+    private float comboScore;
+    private int comboStateIndex;
+    [SerializeField] private bool comboIsActive;
+
+
+
     public float CurrentScore           // Man kann ihn von außen nur getten, Setten nur aus diesem Script
     {
         private set
@@ -31,14 +54,22 @@ public class ScoreSystem : MonoBehaviour
             return currentScore;
         }
     }
-    public event Action<int> OnXpChange;
 
-    [SerializeField] int twirlMultiplikator = 2;
 
+
+
+
+
+
+    [HideInInspector] public int highscore;
 
     WhingMovement01 myPlayer;
 
-    [HideInInspector] public int highscore;
+    #region events
+    public event Action<int> OnXpChange;
+    public event Action<Color> OnComboStateChange;
+
+    #endregion
 
     private void Awake()
     {
@@ -67,16 +98,76 @@ public class ScoreSystem : MonoBehaviour
             highscore = loadData.scoreDataList[0].score;
 
         }
-        Debug.Log(highscore.ToString());
+
+
+        //ComboStates
+        comboTimer = 0;
+        comboScore = 0;
+        comboStateIndex = 0;
+        CurrentComboState = allComboStates[comboStateIndex];
+
+       
+
+        Debug.Log("Last Highscore: " + highscore.ToString());
     }
+
+
+    private void Update()
+    {//---------------------------ACHTUNG! MUSS NOCH PAUSE UNABHÄNGIG WERDEN!!!
+        RunComboEffect();
+    }
+
+    private void RunComboEffect()
+    {
+        if (comboTimer == 0)
+        {
+            comboIsActive = false;
+            comboScore = 0;
+            comboStateIndex = 0;
+            CurrentComboState = allComboStates[comboStateIndex];
+        }
+
+        //State Levelup
+        if (comboScore >= currentComboState.neededPointsToNextState)
+        {
+            // Wenn noch ein State übrig ist, wird zum nächst höheren State gewechselt
+            if (comboStateIndex < allComboStates.Length - 1)
+            {
+                comboStateIndex++;
+            }
+
+            CurrentComboState = allComboStates[comboStateIndex];
+            // Combo timer wieder voll auf neuen max
+
+            comboTimer = currentComboState.maxTimerTime;
+
+        }
+
+        // Timer runterzählen
+        comboTimer = Mathf.Clamp(comboTimer - Time.deltaTime, 0, float.MaxValue);
+
+
+        Debug.Log("Combotimer: " + comboTimer + ", ComboScore: " + comboScore);
+
+    }
+
 
     public void AddScore(float newScorePoints)
     {
+        // Combo update
+        comboIsActive = true;
+        comboTimer = currentComboState.maxTimerTime;
+
+        newScorePoints *= currentComboState.stateMultiplyer;
+
+        // Twirl Multiplyer
         if (myPlayer.Twirl)
         {
             newScorePoints *= twirlMultiplikator;
         }
         CurrentScore += newScorePoints;
+        comboScore += newScorePoints;
+
     }
 
 }

@@ -46,6 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentScore: 0
   twirlMultiplikator: 2
+  allComboStates:
+  - {fileID: 11400000, guid: 42d0927898484c349a8ee0ffd63b7b42, type: 2}
+  - {fileID: 11400000, guid: 098e9447f7eba764fa0cde304023fb86, type: 2}
+  comboIsActive: 0
   highscore: 0
 --- !u!1 &3012316558295867605
 GameObject:
@@ -486,3 +490,4 @@ MonoBehaviour:
   looseScreenDelay: 2
   inputActions: {fileID: -944628639613478452, guid: ab222ddec1634f54081b9cfdfdfcb792, type: 3}
   pauseAction: {fileID: -9055025534290940002, guid: ab222ddec1634f54081b9cfdfdfcb792, type: 3}
+  myPlayer: {fileID: 0}

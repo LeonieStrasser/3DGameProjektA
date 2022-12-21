@@ -44,10 +44,12 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         ScoreSystem.Instance.OnXpChange += UpdateXpText;
+        ScoreSystem.Instance.OnComboStateChange += UpdateXpState;
         myManager.OnGameLoose += ActivateLooseScreen;
         myManager.OnGameResume += DeactivatePauseScreen;
         myManager.OnRaceStart += ActivateRaceTimeBar;
         myManager.OnRaceStop += DeactivateRaceTimeBar;
+
 
 
     }
@@ -83,6 +85,11 @@ public class UIController : MonoBehaviour
     private void UpdateXpText(int newScore)
     {
         xpText.text = newScore.ToString();
+    }
+
+    private void UpdateXpState(Color stateColor)
+    {
+        xpText.color = stateColor;
     }
 
     private void ActivateRaceTimeBar()
