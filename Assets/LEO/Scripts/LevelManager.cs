@@ -96,6 +96,11 @@ public class LevelManager : MonoBehaviour
     EffectHandle myEffectHandle;
 
 
+    // player
+    [HideInInspector] public WhingMovement01 myPlayer;
+    Vector3 playerPosition;
+    public Vector3 PlayerPosition { get => playerPosition; }
+
     #region events
 
     public event Action<int, int> OnGameLoose;
@@ -110,6 +115,7 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         myEffectHandle = FindObjectOfType<EffectHandle>();
+        myPlayer = FindObjectOfType<WhingMovement01>();
     }
 
     private void Start()
@@ -139,6 +145,8 @@ public class LevelManager : MonoBehaviour
         {
             PauseGame();
         }
+
+        playerPosition = myPlayer.transform.position;
     }
 
     void PauseGame()
