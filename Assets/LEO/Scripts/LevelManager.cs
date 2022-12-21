@@ -19,6 +19,9 @@ public class LevelManager : MonoBehaviour
 
     [Header("Loose")]
     [SerializeField] float looseScreenDelay;
+    public GameObject gameoverCam;
+    public GameObject ingameHUD;
+    public float gameoverTillCutsceneTime;
 
     [Header("Inputs")]
     [SerializeField] private InputActionAsset inputActions;
@@ -177,8 +180,15 @@ public class LevelManager : MonoBehaviour
         int lastHighscore = ScoreSystem.Instance.highscore;
         StartCoroutine(GameLooseDelayTimer(myScore, lastHighscore));
 
-       
+        ingameHUD.SetActive(false);
+        StartCoroutine(GameoverCamWait());
     }
+
+    IEnumerator GameoverCamWait()
+    {
+        yield return new WaitForSeconds(gameoverTillCutsceneTime);
+        gameoverCam.SetActive(true);
+    } 
 
     private void SpawnNextRace()
     {
