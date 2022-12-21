@@ -5,34 +5,71 @@ using UnityEngine.UI;
 
 public class EffectUIHandle : MonoBehaviour
 {
-    private bool shuffleSprite; //If the handle should shuffle between sprite images
+    private bool shuffleActiv; //If the handle should shuffle between sprite images
+    private bool delayActiv;
     public float timeBtwShuffle; //How long each item shuffles
-    public Sprite[] AllEffectGraphics; //to cycle through when an item is being selected
+    List<Sprite> AllEffectGraphics; //to cycle through when an item is being selected
     public Sprite EmptyEffect; //the graphic for no item
 
     public Image Img;
 
-    public PlayerEffect Player;
+    EffectHandle myEffectHandle;
 
+    private void Awake()
+    {
+
+        myEffectHandle = FindObjectOfType<EffectHandle>();
+    }
     private void Start()
     {
-        shuffleSprite = true;
+        shuffleActiv = false;
+        delayActiv = false;
+        Img.sprite = EmptyEffect;
+
+
+        myEffectHandle.OnBonusEffectActivated += StartShuffle;
+
+        AllEffectGraphics = new List<Sprite>();
     }
 
     void Update()
     {
-        if(shuffleSprite)
+        // Shuffle Effekt
+        if (shuffleActiv && !delayActiv)
         {
             Invoke("Shuffle", timeBtwShuffle);
-            shuffleSprite = false;
+            delayActiv = true;
         }
 
-        Img.sprite = Player.EffectUse.effectSprite;
+        //Img.sprite = EffectUse.effectSprite;
+    }
+
+    public void StartShuffle(Sprite useEffectSprite, List<Sprite> otherSprites, float shuffleTime)
+    {
+        shuffleActiv = true;
+
+        AllEffectGraphics.Clear();
+        foreach (var sprite in otherSprites)
+        {
+            AllEffectGraphics.Add(sprite);
+        }
+        StartCoroutine(TimerIrgendwie(useEffectSprite, shuffleTime));
     }
 
     void Shuffle()
     {
-        Img.sprite = AllEffectGraphics[Random.Range(0, AllEffectGraphics.Length)];
-        shuffleSprite = true;
+        if (shuffleActiv)
+            Img.sprite = AllEffectGraphics[Random.Range(0, AllEffectGraphics.Count)];
+        delayActiv = false;
+    }
+
+    IEnumerator TimerIrgendwie(Sprite useEffectSprite2, float shuffleTime)
+    {
+        yield return new WaitForSeconds(shuffleTime);
+        shuffleActiv = false;
+        Img.sprite = useEffectSprite2;
+
+        yield return new WaitForSeconds(2f);
+        Img.sprite = EmptyEffect;
     }
 }
