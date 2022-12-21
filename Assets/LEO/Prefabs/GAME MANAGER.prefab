@@ -309,6 +309,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4947378337752082740}
   - component: {fileID: 770948596328913818}
+  - component: {fileID: 2054758419}
   m_Layer: 0
   m_Name: BELOHNUNGS MANAGER
   m_TagString: Untagged
@@ -343,10 +344,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea49b52bd68e554459f1a0bc945ad5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeToActivate: 0
-  addProcent: 0
-  effectTime: 0
-  multiplyer: 0
+--- !u!114 &2054758419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3127011478691199697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc38823710c8b9478e026f3e353b2ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AllEffects:
+  - {fileID: 11400000, guid: 98656e1d32d242c46b84138edd41ac5c, type: 2}
+  - {fileID: 11400000, guid: 837b826de1426e54fb4a17f9632f4fe0, type: 2}
+  - {fileID: 11400000, guid: b33782fff1df72e46a9771b68cefd27c, type: 2}
+  DelayBeforeItemEffectup: 2
+  EffectUse: {fileID: 0}
 --- !u!1 &6608348121356776357
 GameObject:
   m_ObjectHideFlags: 0
