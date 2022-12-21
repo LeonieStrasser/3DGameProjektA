@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using NaughtyAttributes;
 
 public class LevelManager : MonoBehaviour
 {
@@ -92,6 +93,7 @@ public class LevelManager : MonoBehaviour
         [SerializeField] public GameObject goal;
         [SerializeField] public float raceMaxTime;
         [SerializeField] public int pointsForSuccess;
+        [ResizableTextArea] [SerializeField] public string notes;
     }
 
 
@@ -113,8 +115,8 @@ public class LevelManager : MonoBehaviour
     public event Action OnRaceStop;
 
     #endregion
-    
-    
+
+
     private void Awake()
     {
         myEffectHandle = FindObjectOfType<EffectHandle>();
@@ -188,7 +190,7 @@ public class LevelManager : MonoBehaviour
     {
         yield return new WaitForSeconds(gameoverTillCutsceneTime);
         gameoverCam.SetActive(true);
-    } 
+    }
 
     private void SpawnNextRace()
     {
@@ -267,8 +269,8 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(looseScreenDelay);
         OnGameLoose?.Invoke(score, lastHighscore);
 
-       // if (score > lastHighscore) // HIER MUSS WAS VERÄNDERT WERDEN!!!!!
-            SaveSystem.SaveScore(score, "Maxime Musterfrau");
+        // if (score > lastHighscore) // HIER MUSS WAS VERÄNDERT WERDEN!!!!!
+        SaveSystem.SaveScore(score, "Maxime Musterfrau");
     }
 
 }
