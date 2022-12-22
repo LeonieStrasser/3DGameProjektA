@@ -10,6 +10,11 @@ public static class SaveSystem
     private static string folderLocalisation = "/JSONsaveFile.json";
     private static int maxScoreListCount = 50;
 
+    private static string invertKey = "masterInvertY";
+
+    private static string sensitivitityKey = "masterSen";
+
+    private static string volumeKey = "masterVolume";
 
     public static void SaveScore(int playerScore, string playerName)
     {
@@ -23,7 +28,7 @@ public static class SaveSystem
 
         // Der neue Score wird der Scoreliste hinzugefügt und richtig eingeordnet/sortiert
         dataList.Add(data);
-        dataList = dataList.OrderByDescending (q => q.score).ToList();
+        dataList = dataList.OrderByDescending(q => q.score).ToList();
 
 
         // Sorgt dafür dass die Liste nicht die maximalanzahl übersteigt
@@ -71,6 +76,24 @@ public static class SaveSystem
             Debug.LogError("SaveScore not found in " + path);
             return null;
         }
+    }
+
+    public static void SaveOptions(int invertYValue, float convertSensitivity, float volume)
+    {
+        //speichert Y Invertierungs-Einstellungen
+        PlayerPrefs.SetInt(invertKey, invertYValue);
+
+        //speichert die Controller Sensitivity 
+        PlayerPrefs.SetFloat(sensitivitityKey, convertSensitivity);
+
+        PlayerPrefs.SetFloat(volumeKey, volume);
+    }
+
+    public static void LoadOptionValues(out int invertYValue, out float convertSensitivity, out float volume)
+    {
+        invertYValue = PlayerPrefs.GetInt(invertKey);
+        convertSensitivity = PlayerPrefs.GetFloat(sensitivitityKey);
+        volume = PlayerPrefs.GetFloat(volumeKey);
     }
 }
 
