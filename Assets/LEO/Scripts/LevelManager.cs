@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using NaughtyAttributes;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private InputActionReference pauseAction;
 
 
+    [Header("SaveDataInputs")]
+    [SerializeField] private TMP_InputField nameInput;
 
 
 
@@ -108,7 +111,7 @@ public class LevelManager : MonoBehaviour
 
     #region events
 
-    public event Action<int, int> OnGameLoose;
+    public event Action<int, int, int> OnGameLoose;
     public event Action OnGamePaused;
     public event Action OnGameResume;
     public event Action OnRaceStart;
@@ -180,7 +183,8 @@ public class LevelManager : MonoBehaviour
         currentGameState = gameState.gameOver;
         int myScore = Mathf.RoundToInt(ScoreSystem.Instance.CurrentScore);
         int lastHighscore = ScoreSystem.Instance.highscore;
-        StartCoroutine(GameLooseDelayTimer(myScore, lastHighscore));
+        int lastListScore = ScoreSystem.Instance.lastListScore;
+        StartCoroutine(GameLooseDelayTimer(myScore, lastHighscore, lastListScore));
 
         ingameHUD.SetActive(false);
         StartCoroutine(GameoverCamWait());
@@ -264,13 +268,19 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    private IEnumerator GameLooseDelayTimer(int score, int lastHighscore)
+    private IEnumerator GameLooseDelayTimer(int score, int lastHighscore, int lastListScore)
     {
         yield return new WaitForSeconds(looseScreenDelay);
-        OnGameLoose?.Invoke(score, lastHighscore);
+        OnGameLoose?.Invoke(score, lastHighscore, lastListScore);
 
-        // if (score > lastHighscore) // HIER MUSS WAS VERÄNDERT WERDEN!!!!!
-        SaveSystem.SaveScore(score, "Maxime Musterfrau");
+
+    }
+
+
+    public void SaveNewScore()
+    {
+        int score = Mathf.RoundToInt(ScoreSystem.Instance.CurrentScore);
+        SaveSystem.SaveScore(score, nameInput.text);
     }
 
 }

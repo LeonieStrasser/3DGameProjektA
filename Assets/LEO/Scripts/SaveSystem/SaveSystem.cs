@@ -8,7 +8,8 @@ using System.Linq;
 public static class SaveSystem
 {
     private static string folderLocalisation = "/JSONsaveFile.json";
-    private static int maxScoreListCount = 50;
+    private static int maxScoreListCount = 10;
+    public static int MaxScoreListCount { get => maxScoreListCount; }
 
 
     public static void SaveScore(int playerScore, string playerName)

@@ -6,6 +6,8 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
+    [SerializeField] GameObject ingameHUD;
+
     [Header("Race Timer")]
     [SerializeField] GameObject timeBarObject;
     [SerializeField] Image progressBarImage;
@@ -22,7 +24,12 @@ public class UIController : MonoBehaviour
     [Space(20)]
     [Header("LooseScreen")]
     [SerializeField] GameObject looseScreen;
-    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] GameObject newHighscorePannel;
+    [SerializeField] GameObject rankedScorePannel;
+    [SerializeField] GameObject noRankPannel;
+    [SerializeField] GameObject inputPannel;
+    [SerializeField] GameObject menuButtonPannel;
+    [SerializeField] TextMeshProUGUI[] scoreText;
     [SerializeField] TextMeshProUGUI highScoreText;
 
 
@@ -64,11 +71,41 @@ public class UIController : MonoBehaviour
         myManager.OnGamePaused += ActivatePauseScreen;
     }
 
-    private void ActivateLooseScreen(int score, int lastHighscore)
+    private void ActivateLooseScreen(int score, int lastHighscore, int lastListScore)
     {
-        scoreText.text = "Score: " + score;
+        ingameHUD.SetActive(false);
+
+        foreach (var item in scoreText)
+        {
+            item.text = "Score: " + score;
+
+        }
         highScoreText.text = "Last Highscore: " + lastHighscore;
         looseScreen.SetActive(true);
+
+
+        if (score > lastHighscore)
+        {
+            // NEW HIGHSCORE Pannel anzeigen
+            newHighscorePannel.SetActive(true);
+            inputPannel.SetActive(true);
+            menuButtonPannel.SetActive(false);
+
+        }
+        else if (score > lastListScore)
+        {
+            // RANKED PANNEL anzeigen
+            rankedScorePannel.SetActive(true);
+            inputPannel.SetActive(true);
+            menuButtonPannel.SetActive(false);
+        }
+        else
+        {
+            // NORMALES LOOSE PANNEL anzeigebn
+            noRankPannel.SetActive(true);
+            inputPannel.SetActive(false);
+            menuButtonPannel.SetActive(true);
+        }
     }
 
     private void ActivatePauseScreen()
