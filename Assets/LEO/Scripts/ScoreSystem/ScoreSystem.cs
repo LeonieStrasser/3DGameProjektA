@@ -62,6 +62,7 @@ public class ScoreSystem : MonoBehaviour
 
 
     [HideInInspector] public int highscore;
+    [HideInInspector] public int lastListScore;
 
     WhingMovement01 myPlayer;
 
@@ -96,7 +97,7 @@ public class ScoreSystem : MonoBehaviour
         if (loadData != null)
         {
             highscore = loadData.scoreDataList[0].score;
-
+            lastListScore = loadData.scoreDataList[loadData.scoreDataList.Count - 1].score; // Score des letzten auf der Liste
         }
 
 
@@ -106,7 +107,7 @@ public class ScoreSystem : MonoBehaviour
         comboStateIndex = 0;
         CurrentComboState = allComboStates[comboStateIndex];
 
-       
+
 
         Debug.Log("Last Highscore: " + highscore.ToString());
     }

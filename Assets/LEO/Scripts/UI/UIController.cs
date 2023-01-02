@@ -6,6 +6,8 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
+    [SerializeField] GameObject ingameHUD;
+
     [Header("Race Timer")]
     [SerializeField] GameObject timeBarObject;
     [SerializeField] Image progressBarImage;
@@ -22,9 +24,15 @@ public class UIController : MonoBehaviour
     [Space(20)]
     [Header("LooseScreen")]
     [SerializeField] GameObject looseScreen;
-    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] GameObject newHighscorePannel;
+    [SerializeField] GameObject rankedScorePannel;
+    [SerializeField] GameObject noRankPannel;
+    [SerializeField] GameObject inputPannel;
+    [SerializeField] GameObject menuButtonPannel;
+    [SerializeField] TextMeshProUGUI[] scoreText;
     [SerializeField] TextMeshProUGUI highScoreText;
-
+    [SerializeField] TMP_InputField nameField;
+    [SerializeField] TextMeshProUGUI rankText;
 
 
     [Header("Pause Screen")]
@@ -64,11 +72,69 @@ public class UIController : MonoBehaviour
         myManager.OnGamePaused += ActivatePauseScreen;
     }
 
-    private void ActivateLooseScreen(int score, int lastHighscore)
+    private void ActivateLooseScreen(int score, int lastHighscore, int lastListScore)
     {
-        scoreText.text = "Score: " + score;
+        ingameHUD.SetActive(false);
+
+        foreach (var item in scoreText)
+        {
+            item.text = "Score: " + score;
+
+        }
         highScoreText.text = "Last Highscore: " + lastHighscore;
         looseScreen.SetActive(true);
+
+
+        if (score > lastHighscore)
+        {
+            // NEW HIGHSCORE Pannel anzeigen
+            newHighscorePannel.SetActive(true);
+            inputPannel.SetActive(true);
+            WriteLastNameToInputField();
+            menuButtonPannel.SetActive(false);
+
+        }
+        else if (score > lastListScore)
+        {
+            // RANKED PANNEL anzeigen
+            rankedScorePannel.SetActive(true);
+            inputPannel.SetActive(true);
+            WriteLastNameToInputField();
+            menuButtonPannel.SetActive(false);
+
+            rankText.text = GetRank(score) + "."; // Hier könnte man je nach rank andere Effekte auftauchen lassen
+
+        }
+        else
+        {
+            // NORMALES LOOSE PANNEL anzeigebn
+            noRankPannel.SetActive(true);
+            inputPannel.SetActive(false);
+            menuButtonPannel.SetActive(true);
+        }
+
+
+    }
+
+    private void WriteLastNameToInputField()
+    {
+        nameField.text = PlayerPrefs.GetString(SaveSystem.LastNameKey);
+    }
+
+    private int GetRank(int score)
+    {
+        ScoreList loadData = SaveSystem.LoadScore();
+
+        for (int i = 0; i < loadData.scoreDataList.Count; i++)
+        {
+            if(score > loadData.scoreDataList[i].score)
+            {
+                return i + 1; // Das ist der erreichte rang
+            }
+        }
+
+        Debug.LogWarning("Wenn der Code hier ankommt, ist was faul. der Score sollte auf jeden fall über einem der Scores aus der Liste liegen. ", gameObject); // Ansonsten sollte diese Methode nicht aufgerufen werden sondern der "No Ranked" screen auftauchen.
+        return int.MaxValue;
     }
 
     private void ActivatePauseScreen()
