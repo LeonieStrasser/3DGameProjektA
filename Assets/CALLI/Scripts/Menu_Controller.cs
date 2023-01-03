@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 
 public class Menu_Controller : MonoBehaviour
 {
-    [Header("Volume Settings")] // Sound & Music verknüpfen!!
+    [Header("Volume Settings")] // Sound & Music verknï¿½pfen!!
     [SerializeField] private TMP_Text soundTextValue = null;
     [SerializeField] private Slider soundSlider = null;
     [SerializeField] private float defaultSound = 0.5f;
@@ -17,7 +17,7 @@ public class Menu_Controller : MonoBehaviour
     [SerializeField] private Slider musicSlider = null;
     [SerializeField] private float defaultMusic = 0.5f;
 
-    [Header("Gameplay Settings")] //Controller Sensitivity verknüpfen!!
+    [Header("Gameplay Settings")] //Controller Sensitivity verknï¿½pfen!!
     [SerializeField] private TMP_Text controllerSenTextValue = null;
     [SerializeField] private Slider controllerSenSlider = null;
     private float defaultSen;
@@ -50,7 +50,7 @@ public class Menu_Controller : MonoBehaviour
         defaultSenMax = controllerSenSlider.maxValue;
     }
 
-    //Einstellungen für das Main Menu
+    //Einstellungen fï¿½r das Main Menu
     public void NewGameDialogYes()
     {
         SceneManager.LoadScene(newGameLevel);
@@ -114,7 +114,7 @@ public class Menu_Controller : MonoBehaviour
 
         //Hier kommt immer ein Wert zwischen 0 und 2 raus
         float convertSensitivity = defaultSen / defaultSenMax;
-        SaveSystem.SaveOptions(newInvertValue, convertSensitivity); /*volume);*/
+       // SaveSystem.SaveOptions(newInvertValue, convertSensitivity); /*volume);*/
 
         //Visual Feedback
         StartCoroutine(ConfirmationBox());

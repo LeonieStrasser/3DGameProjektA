@@ -41,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Alpha_1:
-        m_Texture: {fileID: 2800000, guid: df555589867f52647854ed5f1f743086, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Alpha_2:
@@ -172,7 +172,7 @@ Material:
     - _MAIN_LIGHT_SHADOWS_CASCADE: 1
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _Opacity_1: 0.746
+    - _Opacity_1: 0
     - _Opacity_2: 0
     - _Parallax: 0.005
     - _PowerSmooth: 1
@@ -182,7 +182,7 @@ Material:
     - _RimPower: 0.3
     - _RimThickness: 1.24
     - _SHADOWS_SOFT: 1
-    - _ShadowPower: 0.72
+    - _ShadowPower: 0.354
     - _ShadowTextureBlendDistance: 6000
     - _ShadowToonGrade: 1
     - _Smoothness: 0.5
@@ -199,7 +199,7 @@ Material:
     - _TriplanarBlend_distance: 1
     - _TriplanarBlend_shadow: 1
     - _TriplanarScale: 231.31
-    - _TriplanarScale_1: 1368.73
+    - _TriplanarScale_1: 2
     - _TriplanarScale_2: 2327.95
     - _TriplanarScale_Highlight: 56448.08
     - _TriplanarScale_Highlight_dis: 0
@@ -217,19 +217,19 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _blue: 0
-    - _green: -3.31
-    - _red: -0.52
+    - _green: 0
+    - _red: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color1: {r: 0.7075472, g: 0.64516187, b: 0.43721077, a: 0}
+    - _Color1: {r: 0.8584906, g: 0.8349388, b: 0.75725347, a: 0}
     - _Color1_4: {r: 0.9137255, g: 0.3411765, b: 0.62501657, a: 0}
-    - _Color2: {r: 0.2748754, g: 0.8207547, b: 0.5588802, a: 0}
+    - _Color2: {r: 0.05098038, g: 0.3062033, b: 0.69803923, a: 0}
     - _Color2_4: {r: 0.31132078, g: 0.23961872, b: 0.19237275, a: 0}
-    - _ColorMultiply_1: {r: 1, g: 0, b: 0, a: 0}
+    - _ColorMultiply_1: {r: 0, g: 0, b: 0, a: 0}
     - _ColorMultiply_2: {r: 1, g: 1, b: 1, a: 0}
     - _ColorMultiply_5: {r: 0.3, g: 0.3, b: 0.3, a: 0}
-    - _Color_1: {r: 0.99666965, g: 1, b: 0.654902, a: 0}
+    - _Color_1: {r: 0.24688497, g: 0.33987093, b: 0.7169812, a: 0}
     - _Color_2: {r: 0.7830189, g: 0.45888937, b: 0.32872018, a: 0}
     - _DephthColor: {r: 0.9528302, g: 0.95002794, b: 0.78653437, a: 0}
     - _DephthColor_1: {r: 1, g: 1, b: 1, a: 0}
@@ -240,7 +240,7 @@ Material:
     - _DistanceOffset: {r: 0, g: 0, b: 0, a: 0}
     - _DistanceTiling: {r: 1, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FirstLayerBlend: {r: 1, g: 1, b: 1, a: 0}
+    - _FirstLayerBlend: {r: 0, g: 0, b: 0, a: 0}
     - _HighlightColor: {r: 1, g: 1, b: 1, a: 0}
     - _HighlightOffset: {r: 0, g: 0, b: 0, a: 0}
     - _HighlightOffset_dis: {r: 0, g: 0, b: 0, a: 0}
@@ -257,7 +257,7 @@ Material:
     - _RimOffset: {r: 0, g: 0, b: 0, a: 0}
     - _RimTiling: {r: 2, g: 2, b: 0, a: 0}
     - _SecondLayerBlend: {r: 0, g: 0, b: 0, a: 0}
-    - _ShadowColor: {r: 0.20469919, g: 0.22539549, b: 0.3773585, a: 0}
+    - _ShadowColor: {r: 0.21346565, g: 0.273143, b: 0.3679245, a: 0}
     - _ShadowPatternTiling: {r: 1, g: 1, b: 0, a: 0}
     - _ShadowPatternoffset: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
@@ -265,7 +265,7 @@ Material:
     - _Tiling_1: {r: 1, g: 1, b: 0, a: 0}
     - _Tiling_2: {r: 1, g: 1, b: 0, a: 0}
     - _Tiling_4: {r: 1, g: 1, b: 0, a: 0}
-    - _blueColor: {r: 0.5849056, g: 0.38349944, b: 0.565825, a: 0}
-    - _greenReplace: {r: 1, g: 0.9920438, b: 0.8254717, a: 0}
-    - _redReplace: {r: 0.3245282, g: 0.8113208, b: 0, a: 0}
+    - _blueColor: {r: 0.99056596, g: 0.24764147, b: 0.9206752, a: 0}
+    - _greenReplace: {r: 1, g: 0.653846, b: 0, a: 0}
+    - _redReplace: {r: 0.31639367, g: 0.4826436, b: 0.8490566, a: 0}
   m_BuildTextureStacks: []
