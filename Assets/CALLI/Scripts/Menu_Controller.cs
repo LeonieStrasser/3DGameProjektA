@@ -112,9 +112,9 @@ public class Menu_Controller : MonoBehaviour
             newInvertValue = 0;
         }
 
-        //Hier kommt immer ein Wert zwischen 0 und 2 raus
-        float convertSensitivity = defaultSen / defaultSenMax;
-        SaveSystem.SaveOptions(newInvertValue, convertSensitivity); /*volume);*/
+        ////Hier kommt immer ein Wert zwischen 0 und 2 raus
+        //float convertSensitivity = defaultSen / defaultSenMax;
+        //SaveSystem.SaveOptions(newInvertValue, convertSensitivity); /*volume);*/
 
         //Visual Feedback
         StartCoroutine(ConfirmationBox());
