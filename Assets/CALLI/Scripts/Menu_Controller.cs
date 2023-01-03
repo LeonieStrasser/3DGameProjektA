@@ -20,8 +20,10 @@ public class Menu_Controller : MonoBehaviour
     [Header("Gameplay Settings")] //Controller Sensitivity verknüpfen!!
     [SerializeField] private TMP_Text controllerSenTextValue = null;
     [SerializeField] private Slider controllerSenSlider = null;
-    [SerializeField] private int defaultSen = 5;
-    public int mainControllerSen = 5;
+    private float defaultSen;
+    private float defaultSenMin;
+    private float defaultSenMax;
+
 
     [Header("Toggle Settings")]
     [SerializeField] private Toggle invertYToggle = null;
@@ -40,6 +42,13 @@ public class Menu_Controller : MonoBehaviour
 
     public string loadCredits;
 
+
+    private void Start()
+    {
+        defaultSenMin = 0;
+        controllerSenSlider.minValue = 0;
+        defaultSenMax = controllerSenSlider.maxValue;
+    }
 
     //Einstellungen für das Main Menu
     public void NewGameDialogYes()
@@ -81,30 +90,33 @@ public class Menu_Controller : MonoBehaviour
         musicTextValue.text = music.ToString("0.0");
     }
 
-    public void VolumeApply()
-    {
-        PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
-        StartCoroutine(ConfirmationBox());
+    public void UIControllerSensitivity() // AN CONTROLLER SENSITIVITY ANPASSEN
+    {   
+        controllerSenTextValue.text = Mathf.RoundToInt(controllerSenSlider.value).ToString("0");
     }
 
-    public void SetControllerSensitivity(float sensitivity)
+    public void UIVolumeSlider()
     {
-        mainControllerSen = Mathf.RoundToInt(sensitivity);
-        controllerSenTextValue.text = sensitivity.ToString("0");
+        //soundTextValue.text = Mathf.RoundToInt().ToString("0.0");
     }
 
-    public void GameplayApply() // AN CONTROLLER INPUT ANPASSEN!
+    public void GameplayApply() 
     {
+        int newInvertValue;
         if (invertYToggle.isOn)
         {
-            PlayerPrefs.SetInt("masterInvertY", 1);
+            newInvertValue = 1;
         }
         else
         {
-            PlayerPrefs.SetInt("masterInvertY", 0);
+            newInvertValue = 0;
         }
 
-        PlayerPrefs.SetFloat("masterSen", mainControllerSen);
+        //Hier kommt immer ein Wert zwischen 0 und 2 raus
+        float convertSensitivity = defaultSen / defaultSenMax;
+        SaveSystem.SaveOptions(newInvertValue, convertSensitivity); /*volume);*/
+
+        //Visual Feedback
         StartCoroutine(ConfirmationBox());
     }
 
@@ -117,14 +129,14 @@ public class Menu_Controller : MonoBehaviour
             soundTextValue.text = defaultSound.ToString("0.0");
             musicSlider.value = defaultMusic;
             musicTextValue.text = defaultMusic.ToString("0.0");
-            VolumeApply();
+            //VolumeApply();
         }
 
         if (MenuType == "Gameplay")
         {
+            defaultSen = defaultSenMax / 2;
             controllerSenTextValue.text = defaultSen.ToString("0");
             controllerSenSlider.value = defaultSen;
-            mainControllerSen = defaultSen;
             invertYToggle.isOn = false;
             GameplayApply();
         }
@@ -136,5 +148,4 @@ public class Menu_Controller : MonoBehaviour
         yield return new WaitForSeconds(2);
         confirmationPrompt.SetActive(false);
     }
-
 }

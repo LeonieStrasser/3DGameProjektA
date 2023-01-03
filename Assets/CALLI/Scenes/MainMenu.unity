@@ -643,7 +643,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &94243993
 MonoBehaviour:
@@ -1078,7 +1078,7 @@ Transform:
   - {fileID: 1954821289}
   - {fileID: 523702269}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &168403704
 GameObject:
@@ -3862,7 +3862,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &622503007
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5488,8 +5488,6 @@ MonoBehaviour:
   defaultMusic: 0.5
   controllerSenTextValue: {fileID: 1207468870}
   controllerSenSlider: {fileID: 1231977697}
-  defaultSen: 5
-  mainControllerSen: 5
   invertYToggle: {fileID: 1378846912}
   confirmationPrompt: {fileID: 1379536354}
   newGameLevel: TestScene_3
@@ -5508,7 +5506,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &991216563
 GameObject:
@@ -5854,7 +5852,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1062524085
 MonoBehaviour:
@@ -6581,7 +6579,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6745,7 +6743,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1101069783}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 10
+  m_MaxValue: 100
   m_WholeNumbers: 0
   m_Value: 5
   m_OnValueChanged:
@@ -6753,13 +6751,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 981366645}
         m_TargetAssemblyTypeName: Menu_Controller, Assembly-CSharp
-        m_MethodName: SetControllerSensitivity
-        m_Mode: 0
+        m_MethodName: UIControllerSensitivity
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 5
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -9199,7 +9197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1659768034
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10641,6 +10639,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841992537}
   m_CullTransparentMesh: 1
+--- !u!4 &1858052075 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 551133825626414621, guid: 7fed5f56427589a45a92972054c1a848, type: 3}
+  m_PrefabInstance: {fileID: 1890010842}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1885038988
 GameObject:
   m_ObjectHideFlags: 0
@@ -10786,23 +10789,23 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 2098366734}
     m_Modifications:
     - target: {fileID: 551133825626414621, guid: 7fed5f56427589a45a92972054c1a848, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 551133825626414621, guid: 7fed5f56427589a45a92972054c1a848, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1380.8
+      value: 1080.3538
       objectReference: {fileID: 0}
     - target: {fileID: 551133825626414621, guid: 7fed5f56427589a45a92972054c1a848, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: -150.44046
       objectReference: {fileID: 0}
     - target: {fileID: 551133825626414621, guid: 7fed5f56427589a45a92972054c1a848, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1848.7897
+      value: 1872.5415
       objectReference: {fileID: 0}
     - target: {fileID: 551133825626414621, guid: 7fed5f56427589a45a92972054c1a848, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10938,7 +10941,7 @@ RectTransform:
   - {fileID: 1659768034}
   - {fileID: 1379536355}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -11857,9 +11860,10 @@ Transform:
   m_LocalPosition: {x: 300.44635, y: 152.44046, z: -23.751873}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1858052075}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2105889095
 GameObject:
