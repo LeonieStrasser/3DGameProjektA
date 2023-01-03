@@ -8,13 +8,18 @@ using System.Linq;
 public static class SaveSystem
 {
     private static string folderLocalisation = "/JSONsaveFile.json";
-    private static int maxScoreListCount = 50;
+    private static int maxScoreListCount = 10;
+    public static int MaxScoreListCount { get => maxScoreListCount; }
 
     private static string invertKey = "masterInvertY";
 
     private static string sensitivitityKey = "masterSen";
 
     private static string volumeKey = "masterVolume";
+
+    // Last name Save
+    private static string lastNameKey = "lastName";
+    public static string LastNameKey { get => lastNameKey; }
 
     public static void SaveScore(int playerScore, string playerName)
     {
@@ -55,6 +60,9 @@ public static class SaveSystem
         string path = Application.persistentDataPath + folderLocalisation;
 
         File.WriteAllText(path, JsonUtility.ToJson(newHighscoreListData));
+
+        // name wird als Letzter gespeicherter name eingegeben
+        PlayerPrefs.SetString(lastNameKey, playerName);
 
     }
 
