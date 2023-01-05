@@ -51,6 +51,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 098e9447f7eba764fa0cde304023fb86, type: 2}
   comboIsActive: 0
   highscore: 0
+  lastListScore: 0
 --- !u!1 &3012316558295867605
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +94,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3012316558295867605}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
@@ -119,7 +120,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 0}
+  sharedProfile: {fileID: 11400000, guid: 88a7e196ae2080341aeb97d72d26a1c2, type: 2}
 --- !u!114 &5316240001562277620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,12 +483,18 @@ MonoBehaviour:
     goal: {fileID: 0}
     raceMaxTime: 80
     pointsForSuccess: 100000
+    notes: 
   - startZone: {fileID: 0}
     goal: {fileID: 0}
     raceMaxTime: 100
     pointsForSuccess: 0
+    notes: 
   raceMaxTime: 50
   looseScreenDelay: 2
+  gameoverCam: {fileID: 0}
+  ingameHUD: {fileID: 0}
+  gameoverTillCutsceneTime: 0
   inputActions: {fileID: -944628639613478452, guid: ab222ddec1634f54081b9cfdfdfcb792, type: 3}
   pauseAction: {fileID: -9055025534290940002, guid: ab222ddec1634f54081b9cfdfdfcb792, type: 3}
+  nameInput: {fileID: 0}
   myPlayer: {fileID: 0}
