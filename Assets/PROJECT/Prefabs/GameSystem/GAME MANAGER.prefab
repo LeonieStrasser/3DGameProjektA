@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1763036441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1763036442}
+  - component: {fileID: 1763036443}
+  m_Layer: 0
+  m_Name: AUDIO MANAGER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1763036442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763036441}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7674395110787705896}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1763036443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763036441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5121a25a09154b74993ef80cb69308e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1549110324643213079
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +475,7 @@ Transform:
   - {fileID: 4947378337752082740}
   - {fileID: 7395763034817451361}
   - {fileID: 1128161600440808512}
+  - {fileID: 1763036442}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -493,7 +538,7 @@ MonoBehaviour:
   looseScreenDelay: 2
   gameoverCam: {fileID: 0}
   ingameHUD: {fileID: 0}
-  gameoverTillCutsceneTime: 0
+  gameoverTillCutsceneTime: 3
   inputActions: {fileID: -944628639613478452, guid: ab222ddec1634f54081b9cfdfdfcb792, type: 3}
   pauseAction: {fileID: -9055025534290940002, guid: ab222ddec1634f54081b9cfdfdfcb792, type: 3}
   nameInput: {fileID: 0}
