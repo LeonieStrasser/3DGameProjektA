@@ -10,6 +10,13 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody))]
 public class WhingMovement01 : MonoBehaviour
 {
+    
+
+
+
+
+
+
     #region inspectorValues
     [Header("Movement")]
 
@@ -215,6 +222,7 @@ public class WhingMovement01 : MonoBehaviour
     private void OnDisable()
     {
         myControls.Player.Disable();
+        AudioManager.instance.SoundStop();
     }
     private void Start()
     {
@@ -224,6 +232,8 @@ public class WhingMovement01 : MonoBehaviour
 
         currentMaxRecource = startMaxRecourceA; // Später kann die maximal recource mehr sein - jetzt wird sie auf die beginn max gesetzt
         ResourceA = currentMaxRecource; // Tank wird auf voll gesetzt
+
+        AudioManager.instance.SoundStart();
     }
 
 
@@ -377,7 +387,11 @@ public class WhingMovement01 : MonoBehaviour
                 currentSpeed = myRigidbody.velocity.magnitude;
         }
 
-        currentSpeed = Mathf.Clamp(currentSpeed, minSpeed, maxSpeed);                                        // Beschl�unigt nur bis zum Maximalspeed 
+        currentSpeed = Mathf.Clamp(currentSpeed, minSpeed, maxSpeed);                                        // Beschl�unigt nur bis zum Maximalspeed
+
+
+        AudioManager.instance.SetSpeedIntensity(myRigidbody.velocity.magnitude);
+
 
 
 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7125793871899651013}
   - component: {fileID: 176040722486925267}
   - component: {fileID: 1996581428926338057}
+  - component: {fileID: 4458519115784153261}
   m_Layer: 0
   m_Name: pCube1
   m_TagString: Untagged
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 93667318b5de24146bffa2041c96fcd8, type: 3}
+  - {fileID: 2100000, guid: d2d0a6cbad8fb7c4c9b29c26dba4ca66, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,6 +84,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4458519115784153261
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4153008580920424507}
+  m_Material: {fileID: 13400000, guid: b9c279df641317d4aa663e7354e203a5, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4068373912626513877, guid: de2df8e53874d5042b7158bac3b08b2d, type: 3}
 --- !u!1 &4375571406368923705
 GameObject:
   m_ObjectHideFlags: 0
