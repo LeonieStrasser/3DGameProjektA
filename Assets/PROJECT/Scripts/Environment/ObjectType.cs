@@ -10,6 +10,7 @@ public class ObjectType
         zahnradKlein,
         zahnradGroß,
         drehKürbis,
+        kleinerCube,
         none
     }
 }
