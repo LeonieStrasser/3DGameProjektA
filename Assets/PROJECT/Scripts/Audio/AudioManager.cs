@@ -71,9 +71,10 @@ public class AudioManager : MonoBehaviour
     // ---------------
     #endregion
     // ---------------------------------------------------------------------------------------------------------------------------------------
-   
+
     public static AudioManager instance = null;
-    private EventInstance WindPressureInstance; //SoundTest
+    private EventInstance WindPressureInstance; // Wind Pressure Sound (Adaptive)
+    private EventInstance BoostSingleUse; // Boost Single Use (Oneshot)
 
     private void Awake()
     {
@@ -122,6 +123,17 @@ public class AudioManager : MonoBehaviour
     }
 
 
+    // BOOST SOUNDS
+    // SINGLE USE (ONESHOT)
+
+    public void BoostOneShot()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player_related/Boost/Single_use/Boost_single_use");
+    }
+
+
+
+
     // FOR LATER
     //Oneshots-----------------
 
@@ -158,7 +170,7 @@ public class AudioManager : MonoBehaviour
     //    FMODUnity.RuntimeManager.PlayOneShot("event:/Non-Spatialized/PointsNegative");
     //}
 
-   
+
 
     //Enviromental Emitters-----------------
 

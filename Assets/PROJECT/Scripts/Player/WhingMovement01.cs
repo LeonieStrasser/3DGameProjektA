@@ -663,6 +663,8 @@ public class WhingMovement01 : MonoBehaviour
         if (myControls.Player.Boost.WasPressedThisFrame())
         {
             BoostStartFeedback?.PlayFeedbacks();
+            AudioManager.instance.BoostOneShot(); // <-- Boost Oneshot SFX
+
 
             myRigidbody.AddForce(transform.forward * initialBoostSpeed, ForceMode.VelocityChange);
             ResourceA -= initialBoostCosts; // Ressource wird verbraucht

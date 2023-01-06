@@ -15,10 +15,30 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/PLAYER.bank
   Name: PLAYER
   StudioPath: bank:/PLAYER
-  lastModified: 638085356497685385
+  lastModified: 638086144481278709
   FileSizes:
   - Name: Desktop
-    Value: 2859072
+    Value: 2905088
+  Exists: 1
+--- !u!114 &-8422648771465578008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/UI.bank
+  m_EditorClassIdentifier: 
+  Path: FMODAssets/sounddatabase/Build/Desktop/UI.bank
+  Name: UI
+  StudioPath: bank:/UI
+  lastModified: 638086144481305114
+  FileSizes:
+  - Name: Desktop
+    Value: 494
   Exists: 1
 --- !u!114 &-7206560087129074842
 MonoBehaviour:
@@ -48,6 +68,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 80844
+--- !u!114 &-2630363176036435110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player_related/Boost/Single_use/Boost_single_use
+  m_EditorClassIdentifier: 
+  Path: event:/Player_related/Boost/Single_use/Boost_single_use
+  Guid:
+    Data1: -1977840403
+    Data2: 1121865174
+    Data3: 942478469
+    Data4: 902942756
+  Banks:
+  - {fileID: -8429601900044616517}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3253
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,14 +112,16 @@ MonoBehaviour:
   - {fileID: 8020568149593387994}
   - {fileID: 2825360712542849668}
   - {fileID: -8429601900044616517}
+  - {fileID: -8422648771465578008}
   EditorEvents:
   - {fileID: -7206560087129074842}
+  - {fileID: -2630363176036435110}
   EditorParameters: []
   MasterBanks:
   - {fileID: 2825360712542849668}
   StringsBanks:
   - {fileID: 65769480030421026}
-  cacheTime: 638085356497710460
+  cacheTime: 638086144481305114
   cacheVersion: 131601
 --- !u!114 &65769480030421026
 MonoBehaviour:
@@ -89,10 +138,10 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638085356497310195
+  lastModified: 638086144480917972
   FileSizes:
   - Name: Desktop
-    Value: 930
+    Value: 1038
   Exists: 1
 --- !u!114 &2652733782580617541
 MonoBehaviour:
@@ -133,7 +182,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638085356497284335
+  lastModified: 638086144480902512
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -153,7 +202,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/ENVIRONMENT.bank
   Name: ENVIRONMENT
   StudioPath: bank:/ENVIRONMENT
-  lastModified: 638085356497710460
+  lastModified: 638086144480864582
   FileSizes:
   - Name: Desktop
     Value: 494
