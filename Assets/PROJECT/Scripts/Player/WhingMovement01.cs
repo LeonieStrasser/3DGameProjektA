@@ -10,6 +10,13 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody))]
 public class WhingMovement01 : MonoBehaviour
 {
+    
+
+
+
+
+
+
     #region inspectorValues
     [Header("Movement")]
 
@@ -88,11 +95,21 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] bool straightDown;
     [SerializeField] bool noInput;
     [SerializeField] bool twirl;
+    [SerializeField] bool boostActive;
+    [SerializeField] bool slowMoActive;
 
     public bool Twirl
     {
         get { return twirl; }
         private set { twirl = value; }
+    }
+    public bool BoostActive
+    {
+        get { return boostActive; }
+    }
+    public bool SlowMoActive
+    {
+        get { return slowMoActive; }
     }
 
     [Space(20)]
@@ -205,6 +222,7 @@ public class WhingMovement01 : MonoBehaviour
     private void OnDisable()
     {
         myControls.Player.Disable();
+        AudioManager.instance.SoundStop();
     }
     private void Start()
     {
@@ -214,6 +232,8 @@ public class WhingMovement01 : MonoBehaviour
 
         currentMaxRecource = startMaxRecourceA; // Später kann die maximal recource mehr sein - jetzt wird sie auf die beginn max gesetzt
         ResourceA = currentMaxRecource; // Tank wird auf voll gesetzt
+
+        AudioManager.instance.SoundStart();
     }
 
 
@@ -223,7 +243,7 @@ public class WhingMovement01 : MonoBehaviour
         {
             noInput = (lefttWhingControlStick == Vector2.zero && rightWhingControlStick == Vector2.zero); // CHeck ob der Player einen input gibt
                                                                                                           //Debug.Log("Speed: " + currentSpeed);
-            
+
 
             if ((noInput || CheckInputChange()) && flipControls == true)
                 CheckUpPosition();
@@ -367,7 +387,11 @@ public class WhingMovement01 : MonoBehaviour
                 currentSpeed = myRigidbody.velocity.magnitude;
         }
 
-        currentSpeed = Mathf.Clamp(currentSpeed, minSpeed, maxSpeed);                                        // Beschl�unigt nur bis zum Maximalspeed 
+        currentSpeed = Mathf.Clamp(currentSpeed, minSpeed, maxSpeed);                                        // Beschl�unigt nur bis zum Maximalspeed
+
+
+        AudioManager.instance.SetSpeedIntensity(myRigidbody.velocity.magnitude);
+
 
 
 
@@ -607,7 +631,7 @@ public class WhingMovement01 : MonoBehaviour
                 //HapticController.Loop(true);
                 //HapticController.Play();
 
-                straightUpDownVFX.SetActive(true);
+                straightUpDownVFX.SetActive(false);
                 StraightUpFeedback?.PlayFeedbacks();
             }
 
@@ -648,6 +672,7 @@ public class WhingMovement01 : MonoBehaviour
     {
         if (myControls.Player.Boost.WasPressedThisFrame())
         {
+            boostActive = true;
             BoostStartFeedback?.PlayFeedbacks();
 
             myRigidbody.AddForce(transform.forward * initialBoostSpeed, ForceMode.VelocityChange);
@@ -655,20 +680,27 @@ public class WhingMovement01 : MonoBehaviour
         }
         if (myControls.Player.Boost.IsInProgress())
         {
+            boostActive = true;
             myRigidbody.AddForce(transform.forward * boostSpeed, ForceMode.VelocityChange);
             ResourceA -= boostCosts * Time.deltaTime; // Ressource wird verbraucht in diesem frame gemessen an der Frametime verbraucht
+        }
+        if (!myControls.Player.Boost.IsInProgress())
+        {
+            boostActive = false;
         }
     }
     void SlowmoInput()
     {
         if (myControls.Player.SlowMo.WasPressedThisFrame())
         {
+            slowMoActive = true;
             Time.timeScale = slowmoTimescale;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             SlowMoFeedback?.PlayFeedbacks();
         }
         if (myControls.Player.SlowMo.IsInProgress())
         {
+            slowMoActive = true;
             ResourceA -= slowmoCosts * Time.deltaTime; // Ressource wird verbraucht in diesem frame gemessen an der Frametime verbraucht
             SlowMoHoldingFeedback?.PlayFeedbacks();
         }
@@ -677,6 +709,11 @@ public class WhingMovement01 : MonoBehaviour
             Time.timeScale = 1;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
         }
+        if (!myControls.Player.SlowMo.IsInProgress())
+        {
+            slowMoActive = false;
+        }
+
     }
 
 
