@@ -99,15 +99,24 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] bool boostActive;
     [SerializeField] bool slowMoActive;
 
+    public bool BoostActive 
+    {
+        private set
+        {
+            boostActive = value;
+        }
+        get
+        {
+            return boostActive;
+        }
+    }
+
     public bool Twirl
     {
         get { return twirl; }
         private set { twirl = value; }
     }
-    public bool BoostActive
-    {
-        get { return boostActive; }
-    }
+    
     public bool SlowMoActive
     {
         get { return slowMoActive; }
@@ -225,7 +234,10 @@ public class WhingMovement01 : MonoBehaviour
     private void OnDisable()
     {
         myControls.Player.Disable();
-        AudioManager.instance.SoundStop();
+
+        // AUDIO CONTROLL
+        AudioManager.instance.WindSoundStop();
+        // AudioManager.instance.BoostHoldSoundStop(); <-- CURRENTLY NOT WORKING
     }
     private void Start()
     {
@@ -236,7 +248,9 @@ public class WhingMovement01 : MonoBehaviour
         currentMaxRecource = startMaxRecourceA; // Später kann die maximal recource mehr sein - jetzt wird sie auf die beginn max gesetzt
         ResourceA = currentMaxRecource; // Tank wird auf voll gesetzt
 
-        AudioManager.instance.SoundStart();
+        AudioManager.instance.WindSoundStart();
+        // AudioManager.instance.BoostHoldSoundStart(); <-- CURRENTLY NOT WORKING
+        AudioManager.instance.IntroSoundOneShot();
     }
 
 
@@ -394,8 +408,6 @@ public class WhingMovement01 : MonoBehaviour
 
 
         AudioManager.instance.SetSpeedIntensity(myRigidbody.velocity.magnitude);
-
-
 
 
         myRigidbody.AddForce(transform.forward * currentSpeed * 10, ForceMode.Force);
@@ -656,7 +668,7 @@ public class WhingMovement01 : MonoBehaviour
         {
             twirl = (rightStickInput.y + leftStickInput.y < twirlSensitivity && rightStickInput.y + leftStickInput.y > -twirlSensitivity);                 // Twirl ist wahr wenn die Sticks genau entgegengesetzt zeigen
                                                                                                                                                            //TwirlFeedback?.PlayFeedbacks();
-
+            // AudioManager.instance.TwirlOneShot(); // <- idk how to make this work
         }
         else
         {
@@ -664,6 +676,8 @@ public class WhingMovement01 : MonoBehaviour
 
         }
         twirlVFX.SetActive(twirl);
+        
+
     }
 
     void ActivateBoost()
@@ -675,8 +689,11 @@ public class WhingMovement01 : MonoBehaviour
     {
         if (myControls.Player.Boost.WasPressedThisFrame())
         {
-            boostActive = true;
-            BoostStartFeedback?.PlayFeedbacks();
+            BoostActive = true;
+            AudioManager.instance.BoostOneShot(); // <-- Boost Oneshot SFX
+            BoostStartFeedback?.PlayFeedbacks(); // Audio is vor Feedback, weil Shockwave
+            
+
 
             myRigidbody.AddForce(transform.forward * initialBoostSpeed, ForceMode.VelocityChange);
             ResourceA -= initialBoostCosts; // Ressource wird verbraucht
@@ -686,14 +703,17 @@ public class WhingMovement01 : MonoBehaviour
         }
         if (myControls.Player.Boost.IsInProgress())
         {
-            boostActive = true;
+            BoostActive = true;
+            // AudioManager.instance.BoostHolding(myRigidbody.velocity.magnitude); <-- CURRENTLY NOT WORKING
             myRigidbody.AddForce(transform.forward * boostSpeed, ForceMode.VelocityChange);
             ResourceA -= boostCosts * Time.deltaTime; // Ressource wird verbraucht in diesem frame gemessen an der Frametime verbraucht
+
         }
         if (!myControls.Player.Boost.IsInProgress())
         {
-            boostActive = false;
+            BoostActive = false;
         }
+       
     }
     void SlowmoInput()
     {
