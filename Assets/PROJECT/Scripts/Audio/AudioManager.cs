@@ -74,7 +74,7 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance = null;
     private EventInstance WindPressureInstance; // Wind Pressure Sound (Adaptive)
-    private EventInstance BoostSingleUse; // Boost Single Use (Oneshot)
+    private EventInstance BoostHold; // Boost Hold (Adaptive)
 
     private void Awake()
     {
@@ -90,30 +90,57 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         WindPressureInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Wind_pressure/wind_pressure"); //     <-- PATH KORREKT
+        BoostHold = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Boost/Hold/Boost_hold");
     }
 
 
-    //  GENERAL
+    //  WIND PRESSURE START/STOP
 
-    public void SoundStart()
+    public void WindSoundStart()
     {
         if (EventIsNotPlaying(WindPressureInstance))
         {
             WindPressureInstance.start();
         }
-
     }
 
-    public void SoundStop()
+
+    public void WindSoundStop()
     {
         WindPressureInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
+    //-----------------------
+
+    // BOOST HOLD START/STOP
+
+    public void BoostHoldSoundStart()
+    {
+        if (EventIsNotPlaying(BoostHold))
+        {
+            BoostHold.start();
+        }
+    }
+
+    public void BoostHoldSoundStop()
+    {
+        BoostHold.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    // BOOST HOLD PARAMETER
+    public void BoostHolding(float boosting)
+    {
+        BoostHold.setParameterByName("isBoosting", boosting);
+    }
+
+    // WIND PARAMETER
 
     public void SetSpeedIntensity(float speedIntensity)
     {
         WindPressureInstance.setParameterByName("Speed", speedIntensity);
     }
+
+    // --------------------------
 
     bool EventIsNotPlaying(EventInstance instance)
     {
@@ -131,7 +158,27 @@ public class AudioManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player_related/Boost/Single_use/Boost_single_use");
     }
 
+    // TWIRL
+    // SINGLE USE (ONESHOT)
 
+    public void TwirlOneShot()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player_related/Twirl/Oneshot/twirl_oneshot");
+    }
+
+
+    // INTRO
+    // SOUND (ONESHOT)
+
+    public void IntroSoundOneShot()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Intro/Sound/Intro_sound");
+    }
+
+    //public void BoostHoldOneShot()
+    //{
+    //    FMODUnity.RuntimeManager.PlayOneShot("event:/Player_related/Boost/Hold/Boost_hold");
+    //}
 
 
     // FOR LATER

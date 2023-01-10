@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/PLAYER.bank
   Name: PLAYER
   StudioPath: bank:/PLAYER
-  lastModified: 638086144481278709
+  lastModified: 638089474306212895
   FileSizes:
   - Name: Desktop
-    Value: 2905088
+    Value: 2965664
   Exists: 1
 --- !u!114 &-8422648771465578008
 MonoBehaviour:
@@ -35,11 +35,39 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 638086144481305114
+  lastModified: 638089474306248014
   FileSizes:
   - Name: Desktop
     Value: 494
   Exists: 1
+--- !u!114 &-7846306395609488338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player_related/Boost/Hold/Boost_hold
+  m_EditorClassIdentifier: 
+  Path: event:/Player_related/Boost/Hold/Boost_hold
+  Guid:
+    Data1: 940776269
+    Data2: 1173383064
+    Data3: 861421997
+    Data4: 350434587
+  Banks:
+  - {fileID: -8429601900044616517}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -4646846716355901634}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3500
 --- !u!114 &-7206560087129074842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,6 +96,50 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 80844
+--- !u!114 &-5069990750940460677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/INTRO.bank
+  m_EditorClassIdentifier: 
+  Path: FMODAssets/sounddatabase/Build/Desktop/INTRO.bank
+  Name: INTRO
+  StudioPath: bank:/INTRO
+  lastModified: 638089474305602261
+  FileSizes:
+  - Name: Desktop
+    Value: 163296
+  Exists: 1
+--- !u!114 &-4646846716355901634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Boost_hold/isBoosting
+  m_EditorClassIdentifier: 
+  Name: isBoosting
+  StudioPath: 
+  Min: 300
+  Max: 1000
+  Default: 300
+  ID:
+    data1: 227806466
+    data2: 2030843007
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-2630363176036435110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +166,34 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 3253
+  Length: 2200
+--- !u!114 &-523426795578631524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Intro/Sound/Intro_sound
+  m_EditorClassIdentifier: 
+  Path: event:/Intro/Sound/Intro_sound
+  Guid:
+    Data1: -1525978026
+    Data2: 1115533910
+    Data3: 268454547
+    Data4: -1015969283
+  Banks:
+  - {fileID: -5069990750940460677}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7750
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,15 +212,19 @@ MonoBehaviour:
   - {fileID: 2825360712542849668}
   - {fileID: -8429601900044616517}
   - {fileID: -8422648771465578008}
+  - {fileID: -5069990750940460677}
   EditorEvents:
   - {fileID: -7206560087129074842}
   - {fileID: -2630363176036435110}
+  - {fileID: -7846306395609488338}
+  - {fileID: 5346315467729714895}
+  - {fileID: -523426795578631524}
   EditorParameters: []
   MasterBanks:
   - {fileID: 2825360712542849668}
   StringsBanks:
   - {fileID: 65769480030421026}
-  cacheTime: 638086144481305114
+  cacheTime: 638089474306248014
   cacheVersion: 131601
 --- !u!114 &65769480030421026
 MonoBehaviour:
@@ -138,10 +241,10 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638086144480917972
+  lastModified: 638089474305637304
   FileSizes:
   - Name: Desktop
-    Value: 1038
+    Value: 1310
   Exists: 1
 --- !u!114 &2652733782580617541
 MonoBehaviour:
@@ -182,11 +285,38 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638086144480902512
+  lastModified: 638089474305627344
   FileSizes:
   - Name: Desktop
     Value: 1036
   Exists: 1
+--- !u!114 &5346315467729714895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player_related/Twirl/Oneshot/twirl_oneshot
+  m_EditorClassIdentifier: 
+  Path: event:/Player_related/Twirl/Oneshot/twirl_oneshot
+  Guid:
+    Data1: -2131992887
+    Data2: 1185395599
+    Data3: 644631723
+    Data4: -1268442470
+  Banks:
+  - {fileID: -8429601900044616517}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4815
 --- !u!114 &8020568149593387994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +332,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/ENVIRONMENT.bank
   Name: ENVIRONMENT
   StudioPath: bank:/ENVIRONMENT
-  lastModified: 638086144480864582
+  lastModified: 638089474305279375
   FileSizes:
   - Name: Desktop
     Value: 494
