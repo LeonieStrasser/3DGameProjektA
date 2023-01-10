@@ -10256,6 +10256,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fed5f56427589a45a92972054c1a848, type: 3}
+--- !u!2083052967 &1528506089 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 1353339577427462606, guid: a7906ee02412abb4fb47cdcbf0c3c2a5, type: 3}
+  m_PrefabInstance: {fileID: 1800011360}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1537298917
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13855,6 +13860,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 502884031767454820, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
+      propertyPath: boostEffect
+      value: 
+      objectReference: {fileID: 1528506089}
     - target: {fileID: 502884031767454822, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -13925,7 +13934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5712552966011245251, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
       propertyPath: FeedbacksList.Array.size
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5712552966011245251, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
       propertyPath: FeedbacksList.Array.data[0]
@@ -13933,7 +13942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5712552966011245251, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
       propertyPath: FeedbacksList.Array.data[1]
-      value: 8885570688286195714
+      value: 8885570690185953280
       objectReference: {fileID: 0}
     - target: {fileID: 5712552966011245251, guid: 5f6676c8a1be41142a913980ef3dc219, type: 3}
       propertyPath: FeedbacksList.Array.data[2]
