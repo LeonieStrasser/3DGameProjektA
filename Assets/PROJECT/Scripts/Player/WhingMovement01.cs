@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
 using Lofelt.NiceVibrations;
 using UnityEngine.Events;
+using UnityEngine.VFX;
 
 [RequireComponent(typeof(Rigidbody))]
 public class WhingMovement01 : MonoBehaviour
@@ -115,6 +116,8 @@ public class WhingMovement01 : MonoBehaviour
     [Space(20)]
     [Header("Feedbacks")]
     public GameObject twirlVFX;
+    public VisualEffect boostEffect;
+
     /// a MMFeedbacks to play when we Boost
     public MMFeedbacks BoostStartFeedback;
     public MMFeedbacks SlowMoFeedback;
@@ -677,6 +680,9 @@ public class WhingMovement01 : MonoBehaviour
 
             myRigidbody.AddForce(transform.forward * initialBoostSpeed, ForceMode.VelocityChange);
             ResourceA -= initialBoostCosts; // Ressource wird verbraucht
+
+            // Feedback
+            boostEffect.Play();
         }
         if (myControls.Player.Boost.IsInProgress())
         {
