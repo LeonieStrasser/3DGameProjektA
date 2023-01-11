@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2782564994971041680
+--- !u!1 &1335961841447992351
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3302960084016899370}
-  - component: {fileID: 1907735305420548751}
-  - component: {fileID: 4439797643358559813}
-  - component: {fileID: 2074837832805423048}
+  - component: {fileID: 3642503495078309508}
+  - component: {fileID: 8944815575066993027}
+  - component: {fileID: 6400480076645027613}
   m_Layer: 0
-  m_Name: Interactible_Small
+  m_Name: Chainlink_01_Metall_Schrauben
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3302960084016899370
+--- !u!4 &3642503495078309508
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2782564994971041680}
-  m_LocalRotation: {x: 0, y: 0, z: 0.704107, w: 0.710094}
-  m_LocalPosition: {x: -6.90358, y: -1.4274627, z: 21.407772}
-  m_LocalScale: {x: 79.19052, y: 65.05676, z: 65.05676}
+  m_GameObject: {fileID: 1335961841447992351}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 7547186055366443027}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1907735305420548751
+--- !u!33 &8944815575066993027
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2782564994971041680}
-  m_Mesh: {fileID: 1865056248366311061, guid: 77a1977e30a0ea74eaf2c19055590ad9, type: 3}
---- !u!23 &4439797643358559813
+  m_GameObject: {fileID: 1335961841447992351}
+  m_Mesh: {fileID: -7441350372966311585, guid: 67a133ccd4843f74b9ba657007aabb1b, type: 3}
+--- !u!23 &6400480076645027613
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2782564994971041680}
+  m_GameObject: {fileID: 1335961841447992351}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -84,17 +83,35 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2074837832805423048
-MeshCollider:
+--- !u!1 &7203275708248251049
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2782564994971041680}
-  m_Material: {fileID: 13400000, guid: b9c279df641317d4aa663e7354e203a5, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1865056248366311061, guid: 77a1977e30a0ea74eaf2c19055590ad9, type: 3}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7547186055366443027}
+  m_Layer: 0
+  m_Name: Chainlink_01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7547186055366443027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7203275708248251049}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8302, y: 533, z: -3622.7761}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3642503495078309508}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
