@@ -5,14 +5,19 @@ using System;
 
 public class ColorChanger : MonoBehaviour
 {
-    [SerializeField] Color newColor;
-    Material myMaterial;
-    private void Awake()
-    {
-        myMaterial = GetComponent<MeshRenderer>().material;   
-    }
+    [SerializeField] Material newColor;
+    [SerializeField] MeshRenderer[] meshesToChange;
+
     private void OnTriggerEnter(Collider other)
     {
-        myMaterial.color = newColor;
+        ChangeColor(newColor);
+    }
+
+    public void ChangeColor(Material newMaterial)
+    {
+        foreach (var item in meshesToChange)
+        {
+            item.material = newMaterial;
+        }
     }
 }
