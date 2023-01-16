@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class FuelCollectible : ScoreTrigger
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject fuelVisual; // NUR Visuelle Komponente
+
+    public override void FuelTrigger(Collider other)
     {
-        
+        base.FuelTrigger(other);
+
+        DisableFuel();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnCooldownEnd()
     {
-        
+        base.OnCooldownEnd();
+
+        EnableFuel();
+    }
+
+    private void DisableFuel()
+    {
+        fuelVisual.SetActive(false);
+    }
+
+    private void EnableFuel()
+    {
+        fuelVisual.SetActive(true);
     }
 }
