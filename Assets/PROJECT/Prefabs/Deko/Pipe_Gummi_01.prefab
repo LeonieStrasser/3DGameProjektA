@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2801004386008951124}
   - component: {fileID: 4059625006850628945}
   - component: {fileID: 9152569221430487141}
+  - component: {fileID: 6116907006578579990}
   m_Layer: 0
   m_Name: Pipe_Gummi_01_Gummi
   m_TagString: Untagged
@@ -83,6 +84,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6116907006578579990
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3673805228962186917}
+  m_Material: {fileID: 13400000, guid: b9c279df641317d4aa663e7354e203a5, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2656146043191591354, guid: 0d623d7f665f3594f8fcc6f77fae521e, type: 3}
 --- !u!1 &8232231652358532272
 GameObject:
   m_ObjectHideFlags: 0
