@@ -24,11 +24,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AlphaPattern:
-        m_Texture: {fileID: 2800000, guid: ea744b693846710418b107a8f0662463, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6d68af15a7f89174d9d00ffabec5c9c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Alpha_1:
-        m_Texture: {fileID: 2800000, guid: 5ca3cd4b612e578429275c9d1fdd2ff5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1901da16b3cb84c4ca3e82cf4b9debad, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Alpha_2:
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DepthPattern:
-        m_Texture: {fileID: 2800000, guid: b6856c85a45856442a795eacaea268db, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0ea7efee104df0d48b5333663c43ce3f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -100,7 +100,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadowTexture:
-        m_Texture: {fileID: 2800000, guid: ea744b693846710418b107a8f0662463, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6d68af15a7f89174d9d00ffabec5c9c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -108,7 +108,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularRamp:
-        m_Texture: {fileID: 2800000, guid: 26d01f8063226a74099b829c1e8d121e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6d68af15a7f89174d9d00ffabec5c9c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureAlpha_4:
@@ -116,7 +116,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ToonRamp:
-        m_Texture: {fileID: 2800000, guid: a88a99fa58cfcdb42ac15e47d246e1ac, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6d68af15a7f89174d9d00ffabec5c9c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -141,7 +141,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DepthBlendRange: 400000
+    - _DepthBlendRange: 10000000
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DirectionPower: 0.9
@@ -150,17 +150,17 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HighlightOpacity: 0.174
-    - _HighlightSmoothness: 0.18
-    - _HighlightStep: 0.568
-    - _HighlightToonGrade: 0.572
-    - _HighlighttextureBlendDistance: 500000
+    - _HighlightOpacity: 0
+    - _HighlightSmoothness: 0.12
+    - _HighlightStep: 0
+    - _HighlightToonGrade: 1
+    - _HighlighttextureBlendDistance: 500
     - _MAIN_LIGHT_CALCULATE_SHADOWS: 1
     - _MAIN_LIGHT_SHADOWS_CASCADE: 1
     - _Metallic: 0
     - _NearPlane: 0
     - _OcclusionStrength: 1
-    - _Opacity_1: 0.235
+    - _Opacity_1: 0
     - _Opacity_2: 0
     - _Parallax: 0.005
     - _PowerSmooth: 0.1
@@ -170,38 +170,38 @@ Material:
     - _RimPower: 0
     - _RimThickness: 1.04
     - _SHADOWS_SOFT: 1
-    - _ShadowPower: 0.659
-    - _ShadowTextureBlendDistance: 15000
-    - _ShadowToonGrade: 1
+    - _ShadowPower: 0
+    - _ShadowTextureBlendDistance: 5000000
+    - _ShadowToonGrade: 0.5
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
     - _TriplanarBlend: 1
-    - _TriplanarBlend_1: 0
+    - _TriplanarBlend_1: 1
     - _TriplanarBlend_2: 1
-    - _TriplanarBlend_Highlight: 1
+    - _TriplanarBlend_Highlight: 0
     - _TriplanarBlend_Highlight_dis: 0
     - _TriplanarBlend_dir: 0
     - _TriplanarBlend_distance: 0
-    - _TriplanarBlend_shadow: 1
-    - _TriplanarScale: 4609
-    - _TriplanarScale_1: 53915
+    - _TriplanarBlend_shadow: 0
+    - _TriplanarScale: 200
+    - _TriplanarScale_1: 2
     - _TriplanarScale_2: 0
-    - _TriplanarScale_Highlight: 2.02
+    - _TriplanarScale_Highlight: 0
     - _TriplanarScale_Highlight_dis: 0
     - _TriplanarScale_dir: 0
     - _TriplanarScale_distance: 0
-    - _TriplanarScale_shadow: 2608
+    - _TriplanarScale_shadow: 0
     - _TriplanarSmooth: 89.9
-    - _TriplanarSmooth_1: 61.4
+    - _TriplanarSmooth_1: 60
     - _TriplanarSmooth_2: 0
-    - _TriplanarSmooth_Highlight: 60
+    - _TriplanarSmooth_Highlight: 0
     - _TriplanarSmooth_Highlight_dis: 0
     - _TriplanarSmooth_dir: 0
     - _TriplanarSmooth_distance: 0
-    - _TriplanarSmooth_shadow: 60
+    - _TriplanarSmooth_shadow: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _blue: 0
@@ -210,26 +210,26 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color1: {r: 0.076762185, g: 0.6509434, b: 0.47546735, a: 0}
+    - _Color1: {r: 1, g: 0.004716992, b: 0.4924718, a: 0}
     - _Color1_4: {r: 0.8679245, g: 0.495372, b: 0.7310691, a: 0}
-    - _Color2: {r: 0.048949793, g: 0.41509432, b: 0.37348703, a: 0}
+    - _Color2: {r: 0.95283014, g: 0.8407752, b: 0.49888742, a: 0}
     - _Color2_4: {r: 0.7264151, g: 0.20008916, b: 0.11992697, a: 0}
-    - _ColorMultiply_1: {r: 1, g: 1, b: 1, a: 0}
-    - _ColorMultiply_2: {r: 0, g: 0, b: 0, a: 0}
+    - _ColorMultiply_1: {r: 0, g: 0, b: 0, a: 0}
+    - _ColorMultiply_2: {r: 1, g: 1, b: 1, a: 0}
     - _ColorMultiply_5: {r: 0, g: 0, b: 0, a: 0}
-    - _Color_1: {r: 0, g: 1, b: 0.6132076, a: 0}
+    - _Color_1: {r: 0.24688497, g: 0.33987093, b: 0.7169812, a: 0}
     - _Color_2: {r: 0.30787227, g: 0.8301887, b: 0.21537915, a: 0}
-    - _DephthColor: {r: 0.4764151, g: 1, b: 0.8031148, a: 0}
-    - _DephthColor_1: {r: 0.04819329, g: 0.5377358, b: 0.46177563, a: 0}
+    - _DephthColor: {r: 1, g: 1, b: 1, a: 0}
+    - _DephthColor_1: {r: 0.16055535, g: 0.32167432, b: 0.8301887, a: 0}
     - _DepthPatternOffset: {r: 0, g: 0, b: 0, a: 0}
     - _DepthPatternTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _Direction: {r: 1, g: 0, b: -1, a: 0}
+    - _Direction: {r: 0, g: 1, b: 0, a: 0}
     - _DirectionalPatternBlend: {r: 0, g: 0, b: 0, a: 0}
     - _DistanceOffset: {r: 0, g: 0, b: 0, a: 0}
     - _DistanceTiling: {r: 1, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FirstLayerBlend: {r: 0, g: 0, b: 0, a: 0}
-    - _HighlightColor: {r: 1, g: 0.95659935, b: 0.7783019, a: 0}
+    - _HighlightColor: {r: 1, g: 1, b: 1, a: 0}
     - _HighlightOffset: {r: 0, g: 0, b: 0, a: 0}
     - _HighlightOffset_dis: {r: 0, g: 0, b: 0, a: 0}
     - _HighlightTiling: {r: 0, g: 0, b: 0, a: 0}
@@ -245,12 +245,12 @@ Material:
     - _RimOffset: {r: 0, g: 0, b: 0, a: 0}
     - _RimTiling: {r: 1, g: 1, b: 0, a: 0}
     - _SecondLayerBlend: {r: 0, g: 0, b: 0, a: 0}
-    - _ShadowColor: {r: 0.23584908, g: 0.15241191, b: 0.19167645, a: 0}
+    - _ShadowColor: {r: 1, g: 1, b: 1, a: 0}
     - _ShadowPatternTiling: {r: 1, g: 1, b: 0, a: 0}
     - _ShadowPatternoffset: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tiling_0: {r: 1, g: 1, b: 0, a: 0}
-    - _Tiling_1: {r: 0, g: 0, b: 0, a: 0}
+    - _Tiling_1: {r: 1, g: 1, b: 0, a: 0}
     - _Tiling_2: {r: 1, g: 1, b: 0, a: 0}
     - _Tiling_4: {r: 0, g: 0, b: 0, a: 0}
     - _blueColor: {r: 0.99056596, g: 0.24764147, b: 0.9206752, a: 0}
