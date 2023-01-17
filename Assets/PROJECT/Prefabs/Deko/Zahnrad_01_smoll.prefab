@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &168982651507169919
+--- !u!1 &4922936891127990
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,31 +8,31 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 654016450460745925}
+  - component: {fileID: 818157382765240844}
   m_Layer: 0
-  m_Name: DCube_16
+  m_Name: Zahnrad_01_smoll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &654016450460745925
+--- !u!4 &818157382765240844
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168982651507169919}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7700, y: -509.44666, z: -18503.074}
+  m_GameObject: {fileID: 4922936891127990}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15404.784, y: 0, z: 7835.576}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1866253395172320455}
+  - {fileID: 1250238958881099464}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6017583332720602358
+--- !u!1 &259646189671641402
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,46 +40,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1866253395172320455}
-  - component: {fileID: 7605202283855562076}
-  - component: {fileID: 7670138115338812899}
+  - component: {fileID: 1250238958881099464}
+  - component: {fileID: 4769099860554394524}
+  - component: {fileID: 8098104707010223158}
+  - component: {fileID: 1812831932392667232}
   m_Layer: 0
-  m_Name: DCube_16_initialShadingGroup.004
+  m_Name: Zahnrad_01_smoll.001_Metall_Schrauben
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1866253395172320455
+--- !u!4 &1250238958881099464
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6017583332720602358}
+  m_GameObject: {fileID: 259646189671641402}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 654016450460745925}
+  m_Father: {fileID: 818157382765240844}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7605202283855562076
+--- !u!33 &4769099860554394524
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6017583332720602358}
-  m_Mesh: {fileID: -8419420433064965710, guid: 783acb7b0ee064c47b59849f360abee4, type: 3}
---- !u!23 &7670138115338812899
+  m_GameObject: {fileID: 259646189671641402}
+  m_Mesh: {fileID: 3815758147996724003, guid: 7bb7f579b804df340bdf5cb243e0ff09, type: 3}
+--- !u!23 &8098104707010223158
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6017583332720602358}
+  m_GameObject: {fileID: 259646189671641402}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -115,3 +116,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1812831932392667232
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259646189671641402}
+  m_Material: {fileID: 13400000, guid: b9c279df641317d4aa663e7354e203a5, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3815758147996724003, guid: 7bb7f579b804df340bdf5cb243e0ff09, type: 3}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8597781246433804608}
   - component: {fileID: 4095722757765420187}
   - component: {fileID: 3743982394214335885}
+  - component: {fileID: 8254643446824792597}
   m_Layer: 0
   m_Name: DCube_14_initialShadingGroup.004
   m_TagString: Untagged
@@ -83,6 +84,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8254643446824792597
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272178181899041563}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -734028435381076100, guid: 139dbf9e55a17f14ca2a653bbe6a1388, type: 3}
 --- !u!1 &8195392795347960010
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8858636538157898352}
   m_Layer: 0
-  m_Name: DCube_14
+  m_Name: Pilar_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
