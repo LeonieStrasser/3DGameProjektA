@@ -17,6 +17,23 @@ public class ScoreSystem : MonoBehaviour
 
 
     [SerializeField] private float currentScore;
+    public float CurrentScore           // Man kann ihn von auﬂen nur getten, Setten nur aus diesem Script
+    {
+        private set
+        {
+            currentScore = value;
+
+            OnXpChange?.Invoke(Mathf.RoundToInt(value));
+        }
+
+        get
+        {
+            return currentScore;
+        }
+    }
+
+
+
     [SerializeField] int twirlMultiplikator = 2;
 
     [Space(20)]
@@ -35,25 +52,14 @@ public class ScoreSystem : MonoBehaviour
 
     private float comboTimer;
     private float comboScore;
+    public float ComboScore { get { return comboScore; } private set { comboScore = value; } }
     private int comboStateIndex;
     [SerializeField] private bool comboIsActive;
 
 
+    private float contactScore;
+    public float ContactScore { get { return contactScore; } private set { contactScore = value; } }
 
-    public float CurrentScore           // Man kann ihn von auﬂen nur getten, Setten nur aus diesem Script
-    {
-        private set
-        {
-            currentScore = value;
-
-            OnXpChange?.Invoke(Mathf.RoundToInt(value));
-        }
-
-        get
-        {
-            return currentScore;
-        }
-    }
 
 
 
@@ -65,6 +71,7 @@ public class ScoreSystem : MonoBehaviour
     [HideInInspector] public int lastListScore;
 
     WhingMovement01 myPlayer;
+    DistanceTracker disTracker;
 
     #region events
     public event Action<int> OnXpChange;
@@ -86,6 +93,10 @@ public class ScoreSystem : MonoBehaviour
         }
 
         myPlayer = FindObjectOfType<WhingMovement01>();
+        disTracker = myPlayer.GetComponent<DistanceTracker>();
+
+
+        disTracker.OnContactBreak += AddContactScore;
     }
 
 
@@ -135,12 +146,12 @@ public class ScoreSystem : MonoBehaviour
             if (comboStateIndex < allComboStates.Length - 1)
             {
                 comboStateIndex++;
+
+                CurrentComboState = allComboStates[comboStateIndex];
+                // Combo timer wieder voll auf neuen max
+
+                comboTimer = currentComboState.maxTimerTime;
             }
-
-            CurrentComboState = allComboStates[comboStateIndex];
-            // Combo timer wieder voll auf neuen max
-
-            comboTimer = currentComboState.maxTimerTime;
 
         }
 
@@ -152,6 +163,10 @@ public class ScoreSystem : MonoBehaviour
 
     }
 
+    private void AddContactScore() // wird durch ein Event im Distance Tracker getriggert wenn der Spark Kontakt abbricht
+    {
+        contactScore = 0;
+    }
 
     public void AddScore(float newScorePoints)
     {
@@ -168,7 +183,10 @@ public class ScoreSystem : MonoBehaviour
         }
         CurrentScore += newScorePoints;
         comboScore += newScorePoints;
+        contactScore += newScorePoints;
 
     }
+
+
 
 }

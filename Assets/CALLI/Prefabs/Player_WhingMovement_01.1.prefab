@@ -669,6 +669,7 @@ MonoBehaviour:
   boostActive: 0
   slowMoActive: 0
   twirlVFX: {fileID: 4379381803757851854}
+  boostEffect: {fileID: 0}
   BoostStartFeedback: {fileID: 5712552966011245251}
   SlowMoFeedback: {fileID: 3226967423938592378}
   SlowMoHoldingFeedback: {fileID: 4789549624721229703}
@@ -783,7 +784,7 @@ MonoBehaviour:
   detectionAngle: 111.5
   points: 2
   activateExaktDistanceMultiplyer: 0
-  breakTime: 2
+  breakTime: 0.5
   minTimeUntilMultiplyer: 3
   riseTimeInterval: 1
   multiplyerAdd: 2

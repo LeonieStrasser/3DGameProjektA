@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,6 +43,8 @@ public class DistanceTracker : MonoBehaviour
     float continuouseContactTime;
     float timeMultiplyer = 1;
 
+    public event Action OnContactBreak;
+
     private void Awake()
     {
         myManager = FindObjectOfType<LevelManager>();
@@ -69,6 +72,8 @@ public class DistanceTracker : MonoBehaviour
             {
                 continuouseContactTime = 0;
                 timeMultiplyer = 1; // Wieder auf normal zurückgesetzt
+
+                OnContactBreak?.Invoke();
             }
         }
 

@@ -18,6 +18,7 @@ public class UIController : MonoBehaviour
 
     [Header("XP")]
     [SerializeField] TextMeshProUGUI xpText;
+    [SerializeField] TextMeshProUGUI contactScoreText;
 
 
 
@@ -42,11 +43,13 @@ public class UIController : MonoBehaviour
 
     LevelManager myManager;
     WhingMovement01 myPlayer;
+    DistanceTracker disTracker;
 
     private void Awake()
     {
         myManager = FindObjectOfType<LevelManager>();
         myPlayer = FindObjectOfType<WhingMovement01>();
+        disTracker = myPlayer.GetComponent<DistanceTracker>();
 
     }
     private void Start()
@@ -57,7 +60,8 @@ public class UIController : MonoBehaviour
         myManager.OnGameResume += DeactivatePauseScreen;
         myManager.OnRaceStart += ActivateRaceTimeBar;
         myManager.OnRaceStop += DeactivateRaceTimeBar;
-
+        disTracker.OnContactBreak += UpdateContactScoreText;
+        //disTracker.OnContactBreak += DeactivateContactScore;
 
 
     }
@@ -127,7 +131,7 @@ public class UIController : MonoBehaviour
 
         for (int i = 0; i < loadData.scoreDataList.Count; i++)
         {
-            if(score > loadData.scoreDataList[i].score)
+            if (score > loadData.scoreDataList[i].score)
             {
                 return i + 1; // Das ist der erreichte rang
             }
@@ -151,11 +155,27 @@ public class UIController : MonoBehaviour
     private void UpdateXpText(int newScore)
     {
         xpText.text = newScore.ToString();
+        UpdateContactScoreText();
+       
     }
 
     private void UpdateXpState(Color stateColor)
     {
         xpText.color = stateColor;
+
+    }
+
+    private void UpdateContactScoreText()
+    {
+        contactScoreText.text = ScoreSystem.Instance.ContactScore.ToString();
+
+        // Animation zum Score hin
+
+    }
+
+    private void DeactivateContactScore()
+    {
+        contactScoreText.gameObject.SetActive(false);
     }
 
     private void ActivateRaceTimeBar()
