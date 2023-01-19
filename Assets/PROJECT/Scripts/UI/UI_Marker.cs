@@ -4,33 +4,42 @@ using UnityEngine;
 
 public class UI_Marker : MonoBehaviour
 {
-    [SerializeField]
-    Transform followTarget;
+    [Header("Target Follow")]
+    [SerializeField] Transform followTarget;
     Camera usedCamera;
-    [SerializeField]
-    GameObject marker;
-    [SerializeField]
-    RectTransform markerAnchor;
-    [SerializeField]
-    Canvas markerCanvas;
-    [SerializeField]
-    Vector2 borderHorizontal = new Vector2(25f, 25f); // So viel Pixel soll die Marker Anchor Position vom Rand weg sein
-    [SerializeField]
-    Vector2 borderVertical = new Vector2(25f, 25f);
+    [SerializeField] GameObject marker;
+    [SerializeField] RectTransform markerAnchor;
+    [SerializeField] Canvas markerCanvas;
+    [SerializeField] Vector2 borderHorizontal = new Vector2(25f, 25f); // So viel Pixel soll die Marker Anchor Position vom Rand weg sein
+    [SerializeField] Vector2 borderVertical = new Vector2(25f, 25f);
+
+    [Header("Fadeout")]
+    [SerializeField] Transform fadeoutTarget;
+    [SerializeField] float fadeoutSpeed;
+    [SerializeField] float FadeoutTime;
 
     Vector3 transformRelativePosition;
 
-    bool alarmIsActive = true;
+    bool followIsActive = true;
 
-    
+
 
     // Manager
     LevelManager myManager;
+
+
+
+
+    // FEEDBACK-----------------
+    Animator anim;
+
 
     private void Awake()
     {
         usedCamera = Camera.main;
         myManager = FindObjectOfType<LevelManager>();
+
+        anim = GetComponent<Animator>();
     }
     private void Update()
     {
@@ -38,12 +47,15 @@ public class UI_Marker : MonoBehaviour
         {
             if (followTarget != null)
             {
-                if (alarmIsActive)
+                if (followIsActive) // Wenn der follow state aktiv ist folgt das ui dem target
                 {
-                    UpdatePosition();
+                    UpdateFollowPosition();
                 }
-                else
-                    marker.SetActive(false);
+                else // ansonsten bewegt sich das UI zum Score Target und verschwindet dort
+                {
+
+                    UpdateFadeoutPosition();
+                }
             }
             else
             {
@@ -53,7 +65,7 @@ public class UI_Marker : MonoBehaviour
         }
     }
 
-    private void UpdatePosition()
+    private void UpdateFollowPosition()
     {
         // Gibt die Position relativ zur kamera zurück - in einem normalizeten Space (0,0 -> 1,1 etc.)
         transformRelativePosition = usedCamera.WorldToViewportPoint(followTarget.position);
@@ -83,10 +95,30 @@ public class UI_Marker : MonoBehaviour
         markerAnchor.anchoredPosition = screenPosition;
     }
 
+    private void UpdateFadeoutPosition()
+    {
+        // In diese Richtung muss sich der Marker bewegen
+        Vector2 moveDirection = (fadeoutTarget.transform.position - markerAnchor.position).normalized;
+
+        markerAnchor.anchoredPosition = markerAnchor.anchoredPosition + (moveDirection * fadeoutSpeed * Time.deltaTime);
+    }
+
     public void SetFollowTarget(Transform target)
     {
         followTarget = target;
     }
+    public void SetFadeoutTarget(Transform target)
+    {
+        followTarget = target;
+    }
 
-   
+    public void DeactivatePlayerFollow()
+    {
+        followIsActive = false;
+
+        Destroy(markerCanvas.gameObject, FadeoutTime);
+
+        anim.SetTrigger("fadeout");
+    }
+
 }

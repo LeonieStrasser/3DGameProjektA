@@ -18,9 +18,10 @@ public class UIController : MonoBehaviour
 
     [Header("XP")]
     [SerializeField] TextMeshProUGUI xpText;
-    [SerializeField] TextMeshProUGUI contactScoreText;
+    [SerializeField] GameObject contactScoreTemplate;
+    [SerializeField] GameObject contactTextContainer;
 
-
+    TextMeshProUGUI contactScoreText;
 
     [Space(20)]
     [Header("LooseScreen")]
@@ -45,11 +46,14 @@ public class UIController : MonoBehaviour
     WhingMovement01 myPlayer;
     DistanceTracker disTracker;
 
+
+
     private void Awake()
     {
         myManager = FindObjectOfType<LevelManager>();
         myPlayer = FindObjectOfType<WhingMovement01>();
         disTracker = myPlayer.GetComponent<DistanceTracker>();
+
 
     }
     private void Start()
@@ -60,8 +64,11 @@ public class UIController : MonoBehaviour
         myManager.OnGameResume += DeactivatePauseScreen;
         myManager.OnRaceStart += ActivateRaceTimeBar;
         myManager.OnRaceStop += DeactivateRaceTimeBar;
-        disTracker.OnContactBreak += UpdateContactScoreText;
-        //disTracker.OnContactBreak += DeactivateContactScore;
+        disTracker.OnContactBreak += DeactivateContactScore;
+        disTracker.OnContact += ActivateContactScore;
+
+        // Contact score objekt wird zum instantiaten vorbereitet
+        contactScoreTemplate.SetActive(false);
 
 
     }
@@ -75,6 +82,8 @@ public class UIController : MonoBehaviour
 
         myManager.OnGamePaused += ActivatePauseScreen;
     }
+
+
 
     private void ActivateLooseScreen(int score, int lastHighscore, int lastListScore)
     {
@@ -156,7 +165,7 @@ public class UIController : MonoBehaviour
     {
         xpText.text = newScore.ToString();
         UpdateContactScoreText();
-       
+
     }
 
     private void UpdateXpState(Color stateColor)
@@ -165,18 +174,41 @@ public class UIController : MonoBehaviour
 
     }
 
+
+
+
+    #region contactScore
+    private void SpawnNewContactText()
+    {
+        GameObject newMarker = Instantiate(contactScoreTemplate, contactTextContainer.transform);
+        contactScoreText = newMarker.GetComponentInChildren<TextMeshProUGUI>();
+        newMarker.SetActive(true);
+    }
+
     private void UpdateContactScoreText()
     {
-        contactScoreText.text = ScoreSystem.Instance.ContactScore.ToString();
+        if (contactScoreText)
+            contactScoreText.text = ScoreSystem.Instance.ContactScore.ToString();
 
         // Animation zum Score hin
 
     }
 
+    private void ActivateContactScore()
+    {
+        SpawnNewContactText();
+    }
+
     private void DeactivateContactScore()
     {
-        contactScoreText.gameObject.SetActive(false);
+        if (contactScoreText.gameObject.activeSelf)
+        {
+            contactScoreText.GetComponentInParent<UI_Marker>().DeactivatePlayerFollow();
+        }
+        contactScoreText = null;
     }
+
+    #endregion
 
     private void ActivateRaceTimeBar()
     {
