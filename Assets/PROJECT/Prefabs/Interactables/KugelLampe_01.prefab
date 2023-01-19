@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4234005652807428699}
-  - component: {fileID: 200930759032684927}
   m_Layer: 0
   m_Name: KugelLampe_01
   m_TagString: Untagged
@@ -33,21 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &200930759032684927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5761697653363292275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8021199fe3f8ff849929e4ddf787d55c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newColor: {fileID: -7877617298642209856, guid: 848abd87d531e514e8caec8d51725682, type: 3}
-  meshesToChange:
-  - {fileID: 7459626525130239552}
 --- !u!1001 &6230985219925609891
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -154,8 +138,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 32
   m_Center: {x: 0, y: 42.93, z: 0}
---- !u!23 &7459626525130239552 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 3602038326814057443, guid: df24232c636437e47b4b650b71f8fb3d, type: 3}
+--- !u!1 &8797891426936981072 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3197709292885543923, guid: df24232c636437e47b4b650b71f8fb3d, type: 3}
   m_PrefabInstance: {fileID: 6230985219925609891}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3779358194049924418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8797891426936981072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8021199fe3f8ff849929e4ddf787d55c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newColor: {fileID: 2100000, guid: 0e101a7ba1d245e4cabfc4f6ee4b747a, type: 2}
+  meshesToChange: []
