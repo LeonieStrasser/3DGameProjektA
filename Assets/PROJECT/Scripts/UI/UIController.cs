@@ -20,7 +20,9 @@ public class UIController : MonoBehaviour
     [SerializeField] TextMeshProUGUI xpText;
     [SerializeField] GameObject contactScoreTemplate;
     [SerializeField] GameObject contactTextContainer;
-
+    [SerializeField] float scoreAddDelayAfterContactBreak;
+    [SerializeField] float countDelay = 1;
+    [SerializeField][Tooltip("Zeit die der score bei einem Schub Punkte zum Hiochzählen braucht.")] float totalCountUpTime = 2;
     TextMeshProUGUI contactScoreText;
 
     [Space(20)]
@@ -46,6 +48,12 @@ public class UIController : MonoBehaviour
     WhingMovement01 myPlayer;
     DistanceTracker disTracker;
 
+    // Count Up Text
+
+    int scoreToReach = 0;
+    float currentViewScore;
+
+    float countTimer = 0;
 
 
     private void Awake()
@@ -58,7 +66,7 @@ public class UIController : MonoBehaviour
     }
     private void Start()
     {
-        ScoreSystem.Instance.OnXpChange += UpdateXpText;
+        ScoreSystem.Instance.OnXpChange += UpdateContactScoreText;
         ScoreSystem.Instance.OnComboStateChange += UpdateXpState;
         myManager.OnGameLoose += ActivateLooseScreen;
         myManager.OnGameResume += DeactivatePauseScreen;
@@ -81,8 +89,25 @@ public class UIController : MonoBehaviour
         recourceBarImage.fillAmount = myPlayer.ResourceAInRelationToMax;
 
         myManager.OnGamePaused += ActivatePauseScreen;
+
+        CountUpXPText();
     }
 
+    private void CountUpXPText()
+    {
+
+        // Hier zählt der SCore die Zahlen einzeln hoch
+        if (scoreToReach > currentViewScore)
+        {
+            countTimer += Time.deltaTime;
+            if (countTimer > countDelay)
+            {
+                countTimer = 0;
+                currentViewScore += 1 + (scoreToReach - currentViewScore) / (totalCountUpTime / countDelay);
+                xpText.text = Mathf.RoundToInt(currentViewScore).ToString();
+            }
+        }
+    }
 
 
     private void ActivateLooseScreen(int score, int lastHighscore, int lastListScore)
@@ -161,12 +186,17 @@ public class UIController : MonoBehaviour
         pauseScreen.SetActive(false);
     }
 
-    private void UpdateXpText(int newScore)
+    private void UpdateXPTextReachValue()
     {
-        xpText.text = newScore.ToString();
-        UpdateContactScoreText();
-
+        StartCoroutine(ScoreAddUpdateTimer());
     }
+    IEnumerator ScoreAddUpdateTimer()
+    {
+        yield return new WaitForSeconds(scoreAddDelayAfterContactBreak);
+        scoreToReach = Mathf.RoundToInt(ScoreSystem.Instance.CurrentScore);
+    }
+
+
 
     private void UpdateXpState(Color stateColor)
     {
@@ -206,7 +236,11 @@ public class UIController : MonoBehaviour
             contactScoreText.GetComponentInParent<UI_Marker>().DeactivatePlayerFollow();
         }
         contactScoreText = null;
+
+        UpdateXPTextReachValue();
     }
+
+
 
     #endregion
 

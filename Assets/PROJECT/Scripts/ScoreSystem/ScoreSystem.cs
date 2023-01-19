@@ -23,7 +23,7 @@ public class ScoreSystem : MonoBehaviour
         {
             currentScore = value;
 
-            OnXpChange?.Invoke(Mathf.RoundToInt(value));
+            OnXpChange?.Invoke();
         }
 
         get
@@ -74,7 +74,7 @@ public class ScoreSystem : MonoBehaviour
     DistanceTracker disTracker;
 
     #region events
-    public event Action<int> OnXpChange;
+    public event Action OnXpChange;
     public event Action<Color> OnComboStateChange;
 
     #endregion

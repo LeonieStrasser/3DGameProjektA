@@ -75,8 +75,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 3657433087
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.8509804}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 561495453428742110}
   - component: {fileID: 561495453428742096}
   - component: {fileID: 2379581121422672524}
+  - component: {fileID: 1991688189}
   m_Layer: 5
   m_Name: Marker Anker
   m_TagString: Untagged
@@ -276,6 +277,29 @@ MonoBehaviour:
   markerCanvas: {fileID: 561495454148375418}
   borderHorizontal: {x: 25, y: 25}
   borderVertical: {x: 25, y: 25}
+  fadeoutTarget: {fileID: 0}
+  fadeoutSpeed: 300
+  FadeoutTime: 1
+--- !u!95 &1991688189
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561495453428742111}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3b720190da1cf1b44af752240afb99ba, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &561495454148375417
 GameObject:
   m_ObjectHideFlags: 0
