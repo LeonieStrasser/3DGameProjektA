@@ -78,6 +78,7 @@ public class AudioManager : MonoBehaviour
     private EventInstance RaceInProgress; // Race in Progress (Adaptive)
     private EventInstance Pulse3D; // Pulse Sphere (3D Sound)
     private EventInstance EdgeSpark; // Edge Spark (Adaptive)
+    private EventInstance RaceInProgresss; // Race in Progress (Adaptive)
 
     private void Awake()
     {
@@ -95,6 +96,7 @@ public class AudioManager : MonoBehaviour
         WindPressureInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Wind_pressure/wind_pressure");
         BoostHold = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Boost/Hold/Boost_hold");
         RaceInProgress = FMODUnity.RuntimeManager.CreateInstance("event:/Races/Race_Music/Race_Music");
+        RaceInProgresss = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Twirl/Oneshot/twirl_oneshot"); // DAS HIER IST DER TWIRL VERDAMMTE AXT
         EdgeSpark = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Edge_Sparks/Edge_Sparks");
     }
 
@@ -114,6 +116,17 @@ public class AudioManager : MonoBehaviour
         EdgeSpark.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
+
+    // TWIRL
+    public void TwirlStart()
+    {
+        RaceInProgresss.start();
+    }
+
+    public void TwirlStop()
+    {
+        RaceInProgresss.stop(STOP_MODE.ALLOWFADEOUT);
+    }
 
 
     //  RACE IN PROGRESS START/STOP
@@ -269,13 +282,7 @@ public class AudioManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player_related/Boost/Empty/Boost_Empty");
     }
 
-    // TWIRL
-    // SINGLE USE (ONESHOT)
 
-    public void TwirlOneShot()
-    {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Player_related/Twirl/Oneshot/twirl_oneshot");
-    }
 
 
     // INTRO
