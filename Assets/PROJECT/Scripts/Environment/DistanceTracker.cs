@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,32 @@ public class DistanceTracker : MonoBehaviour
     [SerializeField] float riseTimeInterval;
     [SerializeField] float multiplyerAdd;
 
+    private bool distanceActive;
+    public bool DistanceActive
+    {
+        get
+        {
+            return distanceActive;
+        }
+        private set
+        {
+            if (distanceActive != value)
+            {
+                if (value == true)
+                {
+                    OnContact?.Invoke();
+                }
+                else if (value == false)
+                {
+
+                    OnContactBreak?.Invoke();
+                }
+            }
+
+            distanceActive = value;
+        }
+    }
+
     [Space(20)]
     [Header("Distance States")]
     [SerializeField] float detectionRadius;
@@ -41,6 +68,9 @@ public class DistanceTracker : MonoBehaviour
     float timeFromLastContact;
     float continuouseContactTime;
     float timeMultiplyer = 1;
+
+    public event Action OnContactBreak;
+    public event Action OnContact;
 
     private void Awake()
     {
@@ -69,10 +99,11 @@ public class DistanceTracker : MonoBehaviour
             {
                 continuouseContactTime = 0;
                 timeMultiplyer = 1; // Wieder auf normal zurückgesetzt
+                DistanceActive = false;
             }
         }
 
-      
+
     }
 
 
@@ -108,7 +139,7 @@ public class DistanceTracker : MonoBehaviour
         {
             spawnTimer = true;
             DistanceEffect(distanceToCenter, spawnPosition);
-            if(continuouseContactTime >= minTimeUntilMultiplyer)
+            if (continuouseContactTime >= minTimeUntilMultiplyer)
             {
                 TimeMultiplyerEffect(spawnPosition);
             }
@@ -116,6 +147,7 @@ public class DistanceTracker : MonoBehaviour
             timeFromLastContact = 0;
             yield return new WaitForSeconds(spawnDelay);
             spawnTimer = false;
+            DistanceActive = true;
         }
     }
 

@@ -18,8 +18,12 @@ public class UIController : MonoBehaviour
 
     [Header("XP")]
     [SerializeField] TextMeshProUGUI xpText;
-
-
+    [SerializeField] GameObject contactScoreTemplate;
+    [SerializeField] GameObject contactTextContainer;
+    [SerializeField] float scoreAddDelayAfterContactBreak;
+    [SerializeField] float countDelay = 1;
+    [SerializeField][Tooltip("Zeit die der score bei einem Schub Punkte zum Hiochzählen braucht.")] float totalCountUpTime = 2;
+    TextMeshProUGUI contactScoreText;
 
     [Space(20)]
     [Header("LooseScreen")]
@@ -42,22 +46,37 @@ public class UIController : MonoBehaviour
 
     LevelManager myManager;
     WhingMovement01 myPlayer;
+    DistanceTracker disTracker;
+
+    // Count Up Text
+
+    int scoreToReach = 0;
+    float currentViewScore;
+
+    float countTimer = 0;
+
 
     private void Awake()
     {
         myManager = FindObjectOfType<LevelManager>();
         myPlayer = FindObjectOfType<WhingMovement01>();
+        disTracker = myPlayer.GetComponent<DistanceTracker>();
+
 
     }
     private void Start()
     {
-        ScoreSystem.Instance.OnXpChange += UpdateXpText;
+        ScoreSystem.Instance.OnXpChange += UpdateContactScoreText;
         ScoreSystem.Instance.OnComboStateChange += UpdateXpState;
         myManager.OnGameLoose += ActivateLooseScreen;
         myManager.OnGameResume += DeactivatePauseScreen;
         myManager.OnRaceStart += ActivateRaceTimeBar;
         myManager.OnRaceStop += DeactivateRaceTimeBar;
+        disTracker.OnContactBreak += DeactivateContactScore;
+        disTracker.OnContact += ActivateContactScore;
 
+        // Contact score objekt wird zum instantiaten vorbereitet
+        contactScoreTemplate.SetActive(false);
 
 
     }
@@ -70,7 +89,26 @@ public class UIController : MonoBehaviour
         recourceBarImage.fillAmount = myPlayer.ResourceAInRelationToMax;
 
         myManager.OnGamePaused += ActivatePauseScreen;
+
+        CountUpXPText();
     }
+
+    private void CountUpXPText()
+    {
+
+        // Hier zählt der SCore die Zahlen einzeln hoch
+        if (scoreToReach > currentViewScore)
+        {
+            countTimer += Time.deltaTime;
+            if (countTimer > countDelay)
+            {
+                countTimer = 0;
+                currentViewScore += 1 + (scoreToReach - currentViewScore) / (totalCountUpTime / countDelay);
+                xpText.text = Mathf.RoundToInt(currentViewScore).ToString();
+            }
+        }
+    }
+
 
     private void ActivateLooseScreen(int score, int lastHighscore, int lastListScore)
     {
@@ -127,7 +165,7 @@ public class UIController : MonoBehaviour
 
         for (int i = 0; i < loadData.scoreDataList.Count; i++)
         {
-            if(score > loadData.scoreDataList[i].score)
+            if (score > loadData.scoreDataList[i].score)
             {
                 return i + 1; // Das ist der erreichte rang
             }
@@ -148,15 +186,63 @@ public class UIController : MonoBehaviour
         pauseScreen.SetActive(false);
     }
 
-    private void UpdateXpText(int newScore)
+    private void UpdateXPTextReachValue()
     {
-        xpText.text = newScore.ToString();
+        StartCoroutine(ScoreAddUpdateTimer());
     }
+    IEnumerator ScoreAddUpdateTimer()
+    {
+        yield return new WaitForSeconds(scoreAddDelayAfterContactBreak);
+        scoreToReach = Mathf.RoundToInt(ScoreSystem.Instance.CurrentScore);
+    }
+
+
 
     private void UpdateXpState(Color stateColor)
     {
         xpText.color = stateColor;
+
     }
+
+
+
+
+    #region contactScore
+    private void SpawnNewContactText()
+    {
+        GameObject newMarker = Instantiate(contactScoreTemplate, contactTextContainer.transform);
+        contactScoreText = newMarker.GetComponentInChildren<TextMeshProUGUI>();
+        newMarker.SetActive(true);
+    }
+
+    private void UpdateContactScoreText()
+    {
+        if (contactScoreText)
+            contactScoreText.text = ScoreSystem.Instance.ContactScore.ToString();
+
+        // Animation zum Score hin
+
+    }
+
+    private void ActivateContactScore()
+    {
+        SpawnNewContactText();
+    }
+
+    private void DeactivateContactScore()
+    {
+        if (contactScoreText.gameObject.activeSelf)
+        {
+            contactScoreText.GetComponentInParent<UI_Marker>().DeactivatePlayerFollow();
+        }
+        contactScoreText = null;
+
+        UpdateXPTextReachValue();
+    }
+
+
+
+    #endregion
 
     private void ActivateRaceTimeBar()
     {
