@@ -11,6 +11,7 @@ public class BoosterUp : MonoBehaviour
         if (other.tag == "Player")
         {
             effectRb = other.GetComponent<Rigidbody>();
+            AudioManager.instance.ExternalBoost();
         }
     }
 

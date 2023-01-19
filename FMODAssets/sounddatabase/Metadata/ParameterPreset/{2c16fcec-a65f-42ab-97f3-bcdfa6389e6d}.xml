@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{2c16fcec-a65f-42ab-97f3-bcdfa6389e6d}">
+		<property name="name">
+			<value>inRace</value>
+		</property>
+		<relationship name="folder">
+			<destination>{d0379f4d-fff5-4f0b-a1d1-55f7ca35c642}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{36d25941-ccb5-4264-bbe0-cf3256458dea}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{36d25941-ccb5-4264-bbe0-cf3256458dea}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>1</value>
+		</property>
+		<property name="seekSpeedDescending">
+			<value>0.80000001192092896</value>
+		</property>
+		<property name="seekSpeedAsymmetric">
+			<value>true</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

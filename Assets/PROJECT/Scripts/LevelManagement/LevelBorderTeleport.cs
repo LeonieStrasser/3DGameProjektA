@@ -36,6 +36,8 @@ public class LevelBorderTeleport : MonoBehaviour
             // transportiert den Transporter zum neuen Ort
             transportBox.transform.position = respawnPoint;
 
+            AudioManager.instance.Teleport(); //<--- Teleport SFX
+
             // Transportbox auspacken
             myManager.myPlayer.transform.SetParent(null);
             Camera.main.transform.SetParent(null);

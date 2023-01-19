@@ -270,6 +270,10 @@ public class WhingMovement01 : MonoBehaviour
                 BoostInput();
                 SlowmoInput();
             }
+            else
+            {
+                BoostRessourceEmptyInput(); // spiel Sound wenn Ressource leer ist
+            }
 
             StraightUpDownFeedbackTrigger();
             if (!easyMovement)
@@ -715,6 +719,7 @@ public class WhingMovement01 : MonoBehaviour
         }
        
     }
+
     void SlowmoInput()
     {
         if (myControls.Player.SlowMo.WasPressedThisFrame())
@@ -742,6 +747,14 @@ public class WhingMovement01 : MonoBehaviour
 
     }
 
+
+    private void BoostRessourceEmptyInput()
+    {
+        if (myControls.Player.Boost.WasPressedThisFrame() || myControls.Player.SlowMo.WasPressedThisFrame())
+        {
+            AudioManager.instance.BoostEmpty();
+        }
+    }
 
 
     //-------------------------------------------------------------------------------------------------------------------------------------------

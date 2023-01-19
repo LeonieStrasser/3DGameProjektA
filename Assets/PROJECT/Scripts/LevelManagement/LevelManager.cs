@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] RaceData[] allRaces;
     [SerializeField] float raceMaxTime;
+    [SerializeField] float raceSpawnFeedbackDelay;
 
 
     [Header("Loose")]
@@ -164,6 +165,7 @@ public class LevelManager : MonoBehaviour
             OnGamePaused?.Invoke();
             currentGameState = gameState.pause;
             Time.timeScale = 0;
+            AudioManager.instance.PauseRaceInProgress();
         }
         else if (currentGameState == gameState.pause)
         {
@@ -176,6 +178,7 @@ public class LevelManager : MonoBehaviour
         OnGameResume?.Invoke();
         Time.timeScale = 1;
         currentGameState = gameState.running;
+        AudioManager.instance.SetRaceInProgress();
     }
 
     public void GameLoose()
@@ -197,7 +200,7 @@ public class LevelManager : MonoBehaviour
     }
 
     private void SpawnNextRace()
-    {
+    {   
         raceNumber++; // Racenummer wird erstmal hochgerechnet - hei�t die Rennen laufen der Reihe nach ab. Sp�ter sollten wir hier ein zuf�lliges Ziehen ohne zur�cklegen reinbauen.
         if (raceNumber > allRaces.Length - 1) { raceNumber = 1; } // Tutorial Strecke wird nicht wiederholt
 
@@ -207,6 +210,15 @@ public class LevelManager : MonoBehaviour
         currentSuccessPoints = allRaces[raceNumber].pointsForSuccess;
 
         currentStartZone.SetActive(true);
+
+        // Audio Feedback
+        StartCoroutine(RaceSpawnFeedbackDelay());
+    }
+
+    IEnumerator RaceSpawnFeedbackDelay()
+    {
+        yield return new WaitForSeconds(raceSpawnFeedbackDelay);
+        AudioManager.instance.NewRaceSpawn(); // <-- New Race Spawn Sound
     }
 
     private void RunRaceTimer()
@@ -241,6 +253,10 @@ public class LevelManager : MonoBehaviour
         currentGoal.SetActive(true);
 
         OnRaceStart?.Invoke();
+
+        AudioManager.instance.StartRace(); // <-- Start Race SFX
+        AudioManager.instance.RaceInProgressStart(); // <-- Race Music
+        AudioManager.instance.SetRaceInProgress();
     }
 
     public void FinishRace()
@@ -256,6 +272,10 @@ public class LevelManager : MonoBehaviour
         SpawnNextRace();
 
         OnRaceStop?.Invoke();
+
+        // Audio Feedbacks
+        AudioManager.instance.RaceInProgressStop();
+        AudioManager.instance.RaceFinished(); // <-- Finish Race Sound , needs time to play (BAM, finished race, Points, ... 1 or 2 sec delay -> dann Gambling
     }
 
     private void RaceFail()
@@ -265,6 +285,9 @@ public class LevelManager : MonoBehaviour
         currentGoal.SetActive(false);
 
         OnRaceStop?.Invoke();
+
+        AudioManager.instance.RaceInProgressStop();
+        AudioManager.instance.RaceTimeUp();
 
     }
 

@@ -45,6 +45,7 @@ public class EffectHandle : MonoBehaviour
         EffectUse = AllEffects[EffectRand];
 
         //play animation
+        AudioManager.instance.GamblingInProgress(); // <-- Gambling Sound takes about 5 secs
         yield return new WaitForSeconds(DelayBeforeItemEffectup);
 
 

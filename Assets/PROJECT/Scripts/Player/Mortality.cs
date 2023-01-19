@@ -34,6 +34,8 @@ public class Mortality : MonoBehaviour
         {
             Instantiate(dieVFX, transform.position, Quaternion.identity);
             myManager.GameLoose();
+            AudioManager.instance.PlayerCrash(); // <- Player Crash SFX
+            AudioManager.instance.PauseRaceInProgress(); // <-- if Player cashes in Race, Race Music Fades Out
         }
         this.gameObject.SetActive(false);
     }

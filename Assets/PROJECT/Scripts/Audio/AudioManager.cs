@@ -75,6 +75,9 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance = null;
     private EventInstance WindPressureInstance; // Wind Pressure Sound (Adaptive)
     private EventInstance BoostHold; // Boost Hold (Adaptive)
+    private EventInstance RaceInProgress; // Race in Progress (Adaptive)
+    private EventInstance Pulse3D; // Pulse Sphere (3D Sound)
+    private EventInstance EdgeSpark; // Edge Spark (Adaptive)
 
     private void Awake()
     {
@@ -89,8 +92,59 @@ public class AudioManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        WindPressureInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Wind_pressure/wind_pressure"); //     <-- PATH KORREKT
+        WindPressureInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Wind_pressure/wind_pressure");
         BoostHold = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Boost/Hold/Boost_hold");
+        RaceInProgress = FMODUnity.RuntimeManager.CreateInstance("event:/Races/Race_Music/Race_Music");
+        EdgeSpark = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Edge_Sparks/Edge_Sparks");
+    }
+
+    // EDGE SPARK START/STOP
+
+    public void EdgeSparkStart()
+    {
+        if (EventIsNotPlaying(EdgeSpark))
+        {
+            EdgeSpark.start();
+        }
+    }
+
+    public void EdgeSparkStop()
+    {
+        EdgeSpark.setParameterByName("closeToEdge", 0f);
+        EdgeSpark.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+
+
+    //  RACE IN PROGRESS START/STOP
+
+    public void RaceInProgressStart()
+    {
+        if (EventIsNotPlaying(RaceInProgress))
+        {
+            RaceInProgress.start();
+        }
+    }
+
+    public void RaceInProgressStop()
+    {
+        RaceInProgress.setParameterByName("inRace", 0f);
+        RaceInProgress.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    //  PULSE3D START/STOP
+    public void Pulse3DStart()
+    {
+        if (EventIsNotPlaying(Pulse3D))
+        { 
+            Pulse3D.start();
+        }
+    }
+
+    public void Pulse3DStop()
+    {
+        Pulse3D.setParameterByName("inRace", 0f);
+        Pulse3D.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
 
@@ -140,6 +194,57 @@ public class AudioManager : MonoBehaviour
         WindPressureInstance.setParameterByName("Speed", speedIntensity);
     }
 
+    // RACE MUSIC PARAMETER
+    public void SetRaceInProgress()
+    {
+        RaceInProgress.setParameterByName("inRace", 1f);
+    }
+
+    // EDGE SPARK PARAMETERS
+    // WEITE DISTANZ
+    public void SetEdgeSparkLongDistance()
+    {
+        EdgeSpark.setParameterByName("closeToEdge", 0.6f);
+    }
+
+    // MEDIUM DISTANZ
+    public void SetEdgeSparkMediumDistance()
+    {
+        EdgeSpark.setParameterByName("closeToEdge", 0.8f);
+    }
+
+    // CLOSEST DISTANZ
+    public void SetEdgeSparkCloseDistance()
+    {
+        EdgeSpark.setParameterByName("closeToEdge", 1f);
+    }
+
+    // EDGE SPARK PAUSE PARAMETER
+    public void PauseEdgeSpark()
+    {
+        EdgeSpark.setParameterByName("closeToEdge", 0f);
+    }
+
+    // RACE MUSIC PAUSE PARAMETER
+    public void PauseRaceInProgress()
+    {
+        RaceInProgress.setParameterByName("inRace", 0f);
+    }
+
+    // PULSE3D PARAMETER
+    public void SetPulse3D()
+    {
+        Pulse3D.setParameterByName("inRace", 1f);
+    }
+
+    // RACE MUSIC PAUSE PARAMETER
+    public void PausePulse3D()
+    {
+        Pulse3D.setParameterByName("inRace", 0f);
+    }
+
+
+
     // --------------------------
 
     bool EventIsNotPlaying(EventInstance instance)
@@ -158,6 +263,12 @@ public class AudioManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player_related/Boost/Single_use/Boost_single_use");
     }
 
+    // BOOST RESSOURCE EMPTY
+    public void BoostEmpty()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player_related/Boost/Empty/Boost_Empty");
+    }
+
     // TWIRL
     // SINGLE USE (ONESHOT)
 
@@ -174,6 +285,107 @@ public class AudioManager : MonoBehaviour
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Intro/Sound/Intro_sound");
     }
+
+    // RACE
+    // NEW RACE SPAWN (ONESHOT)
+    public void NewRaceSpawn()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Races/Race_Spawn/Race_Spawn");
+    }
+
+    // RACE START (ONESHOT)
+    public void StartRace()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Races/Race_Start/Race_Start");
+    }
+
+    // RACE TIME UP (ONESHOT)
+    public void RaceTimeUp()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Races/Race_Time_Up/Race_Time_Up");
+    }
+
+    // RACE FINISHED (ONESHOT)
+    public void RaceFinished()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Races/Race_Finished/Race_Finished");
+    }
+
+    // GAMBLING
+    // IN PROGRESS (ONESHOT)
+    public void GamblingInProgress()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Races/Gambling/In_Progress/Gambling_in_Progress");
+    }
+
+    // PLAYERCRASH (ONESHOT)
+    public void PlayerCrash()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player_related/Crash/Crash");
+    }
+
+    // EXTERNAL BOOST (ONESHOT)
+    public void ExternalBoost()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Environment/External_Boost/External_Boost");
+    }
+
+    // TELEPORT (ONESHOT)
+    public void Teleport()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player_related/Teleport/Teleport");
+    }
+
+
+
+
+
+    //---------------------------------------- W I P S --------------------------------------------
+    // PASSING THROUGH RING (ONESHOT)
+    public void PassingRing()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Environment/Passing_Ring/Passing_Ring");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //public void BoostHoldOneShot()
     //{
