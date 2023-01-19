@@ -9,8 +9,16 @@ public class ObjectType
     {
         zahnradKlein,
         zahnradGroß,
-        drehKürbis,
+        drehKürbisKlein,
+        drehKürbisMittel,
         kleinerCube,
+        drehenderKran,
+        zahnradBiggest,
+        zahnradMittel,
+        kralle,
+        mobileKralle,
+        müllpresse,
+        pillarKlein,
         none
     }
 }
