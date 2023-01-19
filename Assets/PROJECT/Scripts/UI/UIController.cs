@@ -22,7 +22,8 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject contactTextContainer;
     [SerializeField] float scoreAddDelayAfterContactBreak;
     [SerializeField] float countDelay = 1;
-    [SerializeField][Tooltip("Zeit die der score bei einem Schub Punkte zum Hiochzählen braucht.")] float totalCountUpTime = 2;
+    [SerializeField] [Tooltip("Zeit die der score bei einem Schub Punkte zum Hiochzählen braucht.")] float totalCountUpTime = 2;
+    [SerializeField] Animator xpAnimator;
     TextMeshProUGUI contactScoreText;
 
     [Space(20)]
@@ -106,6 +107,12 @@ public class UIController : MonoBehaviour
                 currentViewScore += 1 + (scoreToReach - currentViewScore) / (totalCountUpTime / countDelay);
                 xpText.text = Mathf.RoundToInt(currentViewScore).ToString();
             }
+
+            xpAnimator.SetBool("countIsActive", true);
+        }
+        else
+        {
+            xpAnimator.SetBool("countIsActive", false);
         }
     }
 
@@ -194,6 +201,9 @@ public class UIController : MonoBehaviour
     {
         yield return new WaitForSeconds(scoreAddDelayAfterContactBreak);
         scoreToReach = Mathf.RoundToInt(ScoreSystem.Instance.CurrentScore);
+
+        // Animation
+        xpAnimator.SetTrigger("scoreBurst");
     }
 
 
@@ -219,14 +229,12 @@ public class UIController : MonoBehaviour
     {
         if (contactScoreText)
             contactScoreText.text = ScoreSystem.Instance.ContactScore.ToString();
-
-        // Animation zum Score hin
-
     }
 
     private void ActivateContactScore()
     {
         SpawnNewContactText();
+
     }
 
     private void DeactivateContactScore()
@@ -238,6 +246,7 @@ public class UIController : MonoBehaviour
         contactScoreText = null;
 
         UpdateXPTextReachValue();
+
     }
 
 
