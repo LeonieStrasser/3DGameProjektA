@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/PLAYER.bank
   Name: PLAYER
   StudioPath: bank:/PLAYER
-  lastModified: 638095707625128812
+  lastModified: 638097301845129894
   FileSizes:
   - Name: Desktop
-    Value: 3019776
+    Value: 3062464
   Exists: 1
 --- !u!114 &-8422648771465578008
 MonoBehaviour:
@@ -62,7 +62,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 638095707625447932
+  lastModified: 638097301845588744
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -165,7 +165,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/SCORESYSTEM.bank
   Name: SCORESYSTEM
   StudioPath: bank:/SCORESYSTEM
-  lastModified: 638095707625663239
+  lastModified: 638097301845568773
   FileSizes:
   - Name: Desktop
     Value: 177440
@@ -185,7 +185,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/INTRO.bank
   Name: INTRO
   StudioPath: bank:/INTRO
-  lastModified: 638095707624688318
+  lastModified: 638097301844663133
   FileSizes:
   - Name: Desktop
     Value: 163296
@@ -205,7 +205,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/RACES.bank
   Name: RACES
   StudioPath: bank:/RACES
-  lastModified: 638095707625417976
+  lastModified: 638097301845356949
   FileSizes:
   - Name: Desktop
     Value: 269952
@@ -569,7 +569,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/3D.bank
   Name: 3D
   StudioPath: bank:/3D
-  lastModified: 638095707625863418
+  lastModified: 638097301844088309
   FileSizes:
   - Name: Desktop
     Value: 41504
@@ -620,12 +620,13 @@ MonoBehaviour:
   - {fileID: 2008070396396966613}
   - {fileID: -874040479403362206}
   - {fileID: -866862976808609798}
+  - {fileID: 681507855890518843}
   EditorParameters: []
   MasterBanks:
   - {fileID: 2825360712542849668}
   StringsBanks:
   - {fileID: 65769480030421026}
-  cacheTime: 638095707625863418
+  cacheTime: 638097301845588744
   cacheVersion: 131601
 --- !u!114 &65769480030421026
 MonoBehaviour:
@@ -642,11 +643,39 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638095707624728604
+  lastModified: 638097301844709785
   FileSizes:
   - Name: Desktop
-    Value: 2542
+    Value: 2638
   Exists: 1
+--- !u!114 &681507855890518843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player_related/Edge_Sparks/Edge_Sparks
+  m_EditorClassIdentifier: 
+  Path: event:/Player_related/Edge_Sparks/Edge_Sparks
+  Guid:
+    Data1: 1002063188
+    Data2: 1281150470
+    Data3: -721336937
+    Data4: 1816494986
+  Banks:
+  - {fileID: -8429601900044616517}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 4502218651034627997}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2333
 --- !u!114 &944371889241690306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,7 +691,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/GAMBLING.bank
   Name: GAMBLING
   StudioPath: bank:/GAMBLING
-  lastModified: 638095707624501778
+  lastModified: 638097301844476832
   FileSizes:
   - Name: Desktop
     Value: 84288
@@ -814,7 +843,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638095707624708453
+  lastModified: 638097301844694386
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -846,6 +875,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 7000
+--- !u!114 &4502218651034627997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Edge_Sparks/closeToEdge
+  m_EditorClassIdentifier: 
+  Name: closeToEdge
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3168369038
+    data2: 42999183
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &5346315467729714895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888,7 +941,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/ENVIRONMENT.bank
   Name: ENVIRONMENT
   StudioPath: bank:/ENVIRONMENT
-  lastModified: 638095707624310394
+  lastModified: 638097301844283181
   FileSizes:
   - Name: Desktop
     Value: 125696

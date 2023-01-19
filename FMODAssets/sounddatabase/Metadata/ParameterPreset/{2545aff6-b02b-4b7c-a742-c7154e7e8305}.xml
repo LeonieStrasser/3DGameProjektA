@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{2545aff6-b02b-4b7c-a742-c7154e7e8305}">
+		<property name="name">
+			<value>closeToEdge</value>
+		</property>
+		<relationship name="folder">
+			<destination>{d0379f4d-fff5-4f0b-a1d1-55f7ca35c642}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{77a67fb0-551d-4e35-ada1-70122ea80d86}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{77a67fb0-551d-4e35-ada1-70122ea80d86}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeedDescending">
+			<value>1</value>
+		</property>
+		<property name="seekSpeedAsymmetric">
+			<value>true</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

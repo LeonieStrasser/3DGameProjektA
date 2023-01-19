@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] RaceData[] allRaces;
     [SerializeField] float raceMaxTime;
+    [SerializeField] float raceSpawnFeedbackDelay;
 
 
     [Header("Loose")]
@@ -210,6 +211,13 @@ public class LevelManager : MonoBehaviour
 
         currentStartZone.SetActive(true);
 
+        // Audio Feedback
+        StartCoroutine(RaceSpawnFeedbackDelay());
+    }
+
+    IEnumerator RaceSpawnFeedbackDelay()
+    {
+        yield return new WaitForSeconds(raceSpawnFeedbackDelay);
         AudioManager.instance.NewRaceSpawn(); // <-- New Race Spawn Sound
     }
 
@@ -259,15 +267,15 @@ public class LevelManager : MonoBehaviour
 
         ScoreSystem.Instance.AddScore(currentSuccessPoints);
 
-        AudioManager.instance.RaceInProgressStop();
-
-        AudioManager.instance.RaceFinished(); // <-- Finish Race Sound , needs time to play (BAM, finished race, Points, ... 1 or 2 sec delay -> dann Gambling
-
         myEffectHandle.StartBonusEffect();
 
         SpawnNextRace();
 
         OnRaceStop?.Invoke();
+
+        // Audio Feedbacks
+        AudioManager.instance.RaceInProgressStop();
+        AudioManager.instance.RaceFinished(); // <-- Finish Race Sound , needs time to play (BAM, finished race, Points, ... 1 or 2 sec delay -> dann Gambling
     }
 
     private void RaceFail()
