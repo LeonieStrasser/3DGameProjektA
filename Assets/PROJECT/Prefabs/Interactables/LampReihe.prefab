@@ -73,6 +73,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8023845249713600025}
     m_Modifications:
+    - target: {fileID: 3779358194049924418, guid: 7669f850de6809e45b42589efe63086a, type: 3}
+      propertyPath: meshesToChange.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3779358194049924418, guid: 7669f850de6809e45b42589efe63086a, type: 3}
+      propertyPath: meshesToChange.Array.data[0]
+      value: 
+      objectReference: {fileID: 4445509348516066431}
     - target: {fileID: 4234005652807428699, guid: 7669f850de6809e45b42589efe63086a, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -123,6 +131,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7669f850de6809e45b42589efe63086a, type: 3}
+--- !u!23 &4445509348516066431 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7459626525130239552, guid: 7669f850de6809e45b42589efe63086a, type: 3}
+  m_PrefabInstance: {fileID: 6499949903375129151}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6986842562109075556 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4234005652807428699, guid: 7669f850de6809e45b42589efe63086a, type: 3}
