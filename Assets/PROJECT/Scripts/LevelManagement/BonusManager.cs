@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using NaughtyAttributes;
 
 public class BonusManager : MonoBehaviour
 {
@@ -59,7 +60,7 @@ public class BonusManager : MonoBehaviour
         Debug.Log("StartPointMultiplyTime ist Aktiv");
     }
 
-
+    
     private void ActivateMovingObject(ObjectType.type typeToActivate)
     {
         OnActivateMoving?.Invoke(typeToActivate);
@@ -78,5 +79,13 @@ public class BonusManager : MonoBehaviour
 
         Debug.Log("Zeit Abgelaufen - hehe");
 
+    }
+
+
+    [SerializeField] ObjectType.type debugMoveType;
+    [Button]
+    public void DebugMoveObjects()
+    {
+        ActivateMovingObject(debugMoveType);
     }
 }

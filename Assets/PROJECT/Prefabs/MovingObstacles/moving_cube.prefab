@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: -7483710234241619597}
   - component: {fileID: 8733186038116810901}
   m_Layer: 0
-  m_Name: Cube_Small
+  m_Name: moving_cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,10 +144,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4958124f0674bd44ea825786fe29a466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 0.1
   xdistanceToCover: 0
   ydistanceToCover: 0
-  zdistanceToCover: 0
+  zdistanceToCover: -6
 --- !u!114 &8733186038116810901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,5 +160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08d79ef9789119408f84d9c23dd02ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviourToActivate: []
+  behaviourToActivate:
+  - {fileID: -7483710234241619597}
   myObjectType: 4
