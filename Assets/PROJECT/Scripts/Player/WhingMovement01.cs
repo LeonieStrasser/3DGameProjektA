@@ -668,17 +668,34 @@ public class WhingMovement01 : MonoBehaviour
 
     private void TwirlEffect()
     {
+        bool altTwirlState = twirl;
         if (Mathf.Abs(rightStickInput.y) >= twirlInput && Mathf.Abs(leftStickInput.y) >= twirlInput)
         {
             twirl = (rightStickInput.y + leftStickInput.y < twirlSensitivity && rightStickInput.y + leftStickInput.y > -twirlSensitivity);                 // Twirl ist wahr wenn die Sticks genau entgegengesetzt zeigen
-                                                                                                                                                           //TwirlFeedback?.PlayFeedbacks();
-            // AudioManager.instance.TwirlOneShot(); // <- idk how to make this work
+            
+            
+
         }
         else
         {
             twirl = false;
 
         }
+
+        if (twirl != altTwirlState)
+        {
+            if (twirl)
+            {
+                Debug.Log("Twirl Sound start");
+                AudioManager.instance.TwirlStart();
+            }
+            else
+            {
+                Debug.Log("Twirl Sound stop");
+                AudioManager.instance.TwirlStop();
+            }
+        }
+
         twirlVFX.SetActive(twirl);
         
 
