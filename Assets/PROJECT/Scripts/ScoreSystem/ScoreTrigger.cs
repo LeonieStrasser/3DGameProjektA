@@ -28,6 +28,11 @@ public class ScoreTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        FuelTrigger(other);
+    }
+
+    public virtual void FuelTrigger(Collider other)
+    {
         if (!cooldownOn)
         {
             if (other.tag == "Player" && ScoreSystem.Instance != null)
@@ -42,6 +47,7 @@ public class ScoreTrigger : MonoBehaviour
             myPlayer.AddResourcePoints(resourcePoints);
 
         }
+
     }
 
     private void MultiplyScorePoints(float multiplyer) // WIrd angesprochen wenn im BonusManager der EffectTimer ausgelöst wird
@@ -53,5 +59,11 @@ public class ScoreTrigger : MonoBehaviour
     {
         yield return new WaitForSeconds(cooldownTime);
         cooldownOn = false;
+        OnCooldownEnd();
+    }
+
+    public virtual void OnCooldownEnd()
+    {
+
     }
 }
