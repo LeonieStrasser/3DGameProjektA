@@ -78,7 +78,7 @@ public class AudioManager : MonoBehaviour
     private EventInstance RaceInProgress; // Race in Progress (Adaptive)
     private EventInstance Pulse3D; // Pulse Sphere (3D Sound)
     private EventInstance EdgeSpark; // Edge Spark (Adaptive)
-    private EventInstance RaceInProgresss; // Race in Progress (Adaptive)
+    private EventInstance TwirlInProgresss; // Race in Progress (Adaptive)
 
     private void Awake()
     {
@@ -96,7 +96,7 @@ public class AudioManager : MonoBehaviour
         WindPressureInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Wind_pressure/wind_pressure");
         BoostHold = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Boost/Hold/Boost_hold");
         RaceInProgress = FMODUnity.RuntimeManager.CreateInstance("event:/Races/Race_Music/Race_Music");
-        RaceInProgresss = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Twirl/Oneshot/twirl_oneshot"); // DAS HIER IST DER TWIRL VERDAMMTE AXT
+        TwirlInProgresss = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Twirl/Oneshot/twirl_oneshot"); // DAS HIER IST DER TWIRL VERDAMMTE AXT
         EdgeSpark = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Edge_Sparks/Edge_Sparks");
     }
 
@@ -120,12 +120,12 @@ public class AudioManager : MonoBehaviour
     // TWIRL
     public void TwirlStart()
     {
-        RaceInProgresss.start();
+        TwirlInProgresss.start();
     }
 
     public void TwirlStop()
     {
-        RaceInProgresss.stop(STOP_MODE.ALLOWFADEOUT);
+        TwirlInProgresss.stop(STOP_MODE.ALLOWFADEOUT);
     }
 
 
@@ -148,10 +148,9 @@ public class AudioManager : MonoBehaviour
     //  PULSE3D START/STOP
     public void Pulse3DStart()
     {
-        if (EventIsNotPlaying(Pulse3D))
-        { 
+        
             Pulse3D.start();
-        }
+        
     }
 
     public void Pulse3DStop()
@@ -159,6 +158,12 @@ public class AudioManager : MonoBehaviour
         Pulse3D.setParameterByName("inRace", 0f);
         Pulse3D.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
+
+    public void Pulse3DPosition(Vector3 position)
+    {
+        Pulse3D.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(position));
+    }
+
 
 
     //  WIND PRESSURE START/STOP
