@@ -36,7 +36,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Alpha_CloseDetails:
-        m_Texture: {fileID: 2800000, guid: d3af3531adfbb8b409be9f9d13d582ac, type: 3}
+        m_Texture: {fileID: 2800000, guid: 907ef30435b82df4c84a5158fe44decf, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -88,7 +88,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTexture_1:
-        m_Texture: {fileID: 2800000, guid: 86bd078a4c26b8d42aec9483a155650e, type: 3}
+        m_Texture: {fileID: 2800000, guid: d0c32df1a5e3d4e4393f145495c12ebc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -116,7 +116,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureAlpha_4:
-        m_Texture: {fileID: 2800000, guid: 0ea7efee104df0d48b5333663c43ce3f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6d5982617d7e03c47b9f575dfa9ca637, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ToonRamp:
@@ -139,17 +139,17 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 0
-    - _BorderSmooth: 2.9
+    - _BorderSmooth: 2
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DephBlendRange_CloseDetails: 900
+    - _DephBlendRange_CloseDetails: 800
     - _DepthBlendRange: 10000
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DirectionPower: 0.9
+    - _DirectionPower: 2
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
@@ -160,6 +160,7 @@ Material:
     - _HighlightStep: 0
     - _HighlightToonGrade: 1
     - _HighlighttextureBlendDistance: 900
+    - _InvertAlpha_CloseDetails: 1
     - _MAIN_LIGHT_CALCULATE_SHADOWS: 1
     - _MAIN_LIGHT_SHADOWS_CASCADE: 1
     - _Metallic: 0
@@ -168,9 +169,9 @@ Material:
     - _OcclusionStrength: 1
     - _Opacity_1: 0.192
     - _Opacity_2: 0.303
-    - _Opacity_CloseDetails: 0
+    - _Opacity_CloseDetails: 0.395
     - _Parallax: 0.005
-    - _PowerSmooth: 0.1
+    - _PowerSmooth: -1.7
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -200,7 +201,7 @@ Material:
     - _TriplanarScale_CloseDetails: 0
     - _TriplanarScale_Highlight: 0
     - _TriplanarScale_Highlight_dis: 0
-    - _TriplanarScale_dir: 0
+    - _TriplanarScale_dir: 1
     - _TriplanarScale_distance: 0
     - _TriplanarScale_shadow: 0
     - _TriplanarSmooth: 20
@@ -209,34 +210,35 @@ Material:
     - _TriplanarSmooth_CloseDetails: 0
     - _TriplanarSmooth_Highlight: 0
     - _TriplanarSmooth_Highlight_dis: 0
-    - _TriplanarSmooth_dir: 0
+    - _TriplanarSmooth_dir: 100
     - _TriplanarSmooth_distance: 0
     - _TriplanarSmooth_shadow: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _blue: 0
     - _green: 0
+    - _normalStrengh_CloseDetails: 0
     - _red: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color1: {r: 0.7075472, g: 0.6947355, b: 0.6841848, a: 0}
-    - _Color1_4: {r: 0.8679245, g: 0.495372, b: 0.7310691, a: 0}
-    - _Color2: {r: 0.6509434, g: 0.60488605, b: 0.6367719, a: 0}
-    - _Color2_4: {r: 0.7264151, g: 0.20008916, b: 0.11992697, a: 0}
+    - _Color1: {r: 0.7830189, g: 0.66305417, b: 0.5798772, a: 0}
+    - _Color1_4: {r: 0.509434, g: 0.42129982, b: 0.1273585, a: 0}
+    - _Color2: {r: 0.6509804, g: 0.6470914, b: 0.6313726, a: 0}
+    - _Color2_4: {r: 0.4665743, g: 0.5188679, b: 0.06608224, a: 0}
     - _ColorMultiply_1: {r: 0, g: 0, b: 0, a: 0}
     - _ColorMultiply_2: {r: 1, g: 1, b: 1, a: 0}
     - _ColorMultiply_5: {r: 0, g: 0, b: 0, a: 0}
     - _ColorMultiply_CloseDetails: {r: 0, g: 0, b: 0, a: 0}
-    - _Color_1: {r: 0.1509434, g: 0.12175152, b: 0.14901564, a: 0}
+    - _Color_1: {r: 0.46226418, g: 0.054512277, b: 0.46226418, a: 0}
     - _Color_2: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 0}
-    - _Color_CloseDetails: {r: 1, g: 0.10178608, b: 0, a: 0}
+    - _Color_CloseDetails: {r: 1, g: 0.33166334, b: 0, a: 0}
     - _DephthColor: {r: 0.9622641, g: 0.56078434, b: 0.41176468, a: 0}
     - _DephthColor_1: {r: 0.32894263, g: 0.076628685, b: 0.3962264, a: 0}
     - _DepthPatternOffset: {r: 0, g: 0, b: 0, a: 0}
     - _DepthPatternTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _Direction: {r: 0, g: -1, b: 0, a: 0}
-    - _DirectionalPatternBlend: {r: 0, g: 0, b: 0, a: 0}
+    - _Direction: {r: 0, g: 1, b: 0, a: 0}
+    - _DirectionalPatternBlend: {r: 1, g: 1, b: 1, a: 0}
     - _DistanceOffset: {r: 0, g: 0, b: 0, a: 0}
     - _DistanceTiling: {r: 1, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
@@ -247,7 +249,7 @@ Material:
     - _HighlightTiling: {r: 0, g: 0, b: 0, a: 0}
     - _HighlightTiling_dis: {r: 0, g: 0, b: 0, a: 0}
     - _NoiseOffset_1: {r: 0, g: 0, b: 0, a: 0}
-    - _NoiseTiling_1: {r: 1, g: 1, b: 0, a: 0}
+    - _NoiseTiling_1: {r: 10, g: 10, b: 0, a: 0}
     - _Offset_0: {r: 0, g: 0, b: 0, a: 0}
     - _Offset_1: {r: 0, g: 0, b: 0, a: 0}
     - _Offset_2: {r: 0, g: 0, b: 0, a: 0}
@@ -265,8 +267,8 @@ Material:
     - _Tiling_0: {r: 1, g: 1, b: 0, a: 0}
     - _Tiling_1: {r: 1, g: 1, b: 0, a: 0}
     - _Tiling_2: {r: 1, g: 1, b: 0, a: 0}
-    - _Tiling_4: {r: 0, g: 0, b: 0, a: 0}
-    - _Tiling_CloseDetails: {r: 12, g: 12, b: 0, a: 0}
+    - _Tiling_4: {r: 2, g: 2, b: 0, a: 0}
+    - _Tiling_CloseDetails: {r: 500, g: 500, b: 0, a: 0}
     - _blueColor: {r: 0.99056596, g: 0.24764147, b: 0.9206752, a: 0}
     - _greenReplace: {r: 1, g: 0.653846, b: 0, a: 0}
     - _redReplace: {r: 0.31639367, g: 0.4826436, b: 0.8490566, a: 0}
