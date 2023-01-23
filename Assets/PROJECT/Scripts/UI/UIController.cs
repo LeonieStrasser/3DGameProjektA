@@ -13,6 +13,9 @@ public class UIController : MonoBehaviour
     [SerializeField] Image progressBarImage;
     [SerializeField] Animator fuelBarAnim;
 
+    [Header("EffectHandle")]
+    [SerializeField] Animator effectHandleAnim;
+
     [Header("Resource Bar")]
     [SerializeField] Image recourceBarImage;
 
@@ -22,7 +25,7 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject contactTextContainer;
     [SerializeField] float scoreAddDelayAfterContactBreak;
     [SerializeField] float countDelay = 1;
-    [SerializeField] [Tooltip("Zeit die der score bei einem Schub Punkte zum Hiochzählen braucht.")] float totalCountUpTime = 2;
+    [SerializeField] [Tooltip("Zeit die der score bei einem Schub Punkte zum Hiochzï¿½hlen braucht.")] float totalCountUpTime = 2;
     [SerializeField] Animator xpAnimator;
     TextMeshProUGUI contactScoreText;
 
@@ -67,6 +70,7 @@ public class UIController : MonoBehaviour
     }
     private void Start()
     {
+
         ScoreSystem.Instance.OnXpChange += UpdateContactScoreText;
         ScoreSystem.Instance.OnComboStateChange += UpdateXpState;
         myManager.OnGameLoose += ActivateLooseScreen;
@@ -84,7 +88,7 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
-        if (myManager.ThisRace == LevelManager.raceState.raceIsRunning) // Wenn ein Rennen läft aktualisiere den Bar
+        if (myManager.ThisRace == LevelManager.raceState.raceIsRunning) // Wenn ein Rennen lï¿½ft aktualisiere den Bar
             progressBarImage.fillAmount = myManager.RaceTimeProgress;
 
         recourceBarImage.fillAmount = myPlayer.ResourceAInRelationToMax;
@@ -97,7 +101,7 @@ public class UIController : MonoBehaviour
     private void CountUpXPText()
     {
 
-        // Hier zählt der SCore die Zahlen einzeln hoch
+        // Hier zï¿½hlt der SCore die Zahlen einzeln hoch
         if (scoreToReach > currentViewScore)
         {
             countTimer += Time.deltaTime;
@@ -147,7 +151,7 @@ public class UIController : MonoBehaviour
             WriteLastNameToInputField();
             menuButtonPannel.SetActive(false);
 
-            rankText.text = GetRank(score) + "."; // Hier könnte man je nach rank andere Effekte auftauchen lassen
+            rankText.text = GetRank(score) + "."; // Hier kï¿½nnte man je nach rank andere Effekte auftauchen lassen
 
         }
         else
@@ -178,7 +182,7 @@ public class UIController : MonoBehaviour
             }
         }
 
-        Debug.LogWarning("Wenn der Code hier ankommt, ist was faul. der Score sollte auf jeden fall über einem der Scores aus der Liste liegen. ", gameObject); // Ansonsten sollte diese Methode nicht aufgerufen werden sondern der "No Ranked" screen auftauchen.
+        Debug.LogWarning("Wenn der Code hier ankommt, ist was faul. der Score sollte auf jeden fall ï¿½ber einem der Scores aus der Liste liegen. ", gameObject); // Ansonsten sollte diese Methode nicht aufgerufen werden sondern der "No Ranked" screen auftauchen.
         return int.MaxValue;
     }
 
@@ -263,5 +267,7 @@ public class UIController : MonoBehaviour
     {
         timeBarObject.SetActive(false);
         fuelBarAnim.SetBool("raceRun", false);
+
+        effectHandleAnim.SetBool("RaceWon", true);
     }
 }

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84e04ee75c0d37a4ebef2b63bf587fe6, type: 3}
-  m_Name: "K\xFCrbisOn"
+  m_Name: ScoreMultiplyer
   m_EditorClassIdentifier: 
-  effectSprite: {fileID: 21300012, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
-  effectName: "K\xFCrbisOn"
-  effectDescription: "Bewegt alle K\xFCrbisse "
+  effectSprite: {fileID: 21300000, guid: 4f8db620904c2be4b9feb4d9f6744ccc, type: 3}
+  effectName: ScoreMultiplyer
+  effectDescription: Multipliziert den Score um X
   spawnChance: 0
-  bonusType: 2
-  singleUse: 1
-  typeToActivate: 2
+  bonusType: 1
+  singleUse: 0
+  typeToActivate: 3
   fuelVolume: 0
-  scoreEffectTime: 0
-  scoreMultiplyer: 0
+  scoreEffectTime: 10
+  scoreMultiplyer: 2
