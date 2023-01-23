@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2185748891628095491}
   - component: {fileID: 2518655556574099591}
   - component: {fileID: 5270557138479091233}
-  - component: {fileID: 3394588605919496274}
+  - component: {fileID: 3684400090826981131}
   m_Layer: 0
   m_Name: Schraube_01_bigKreuz.045_Metall_Schrauben
   m_TagString: Untagged
@@ -84,20 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3394588605919496274
-MeshCollider:
+--- !u!65 &3684400090826981131
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7515787793873350836}
-  m_Material: {fileID: 13400000, guid: b9c279df641317d4aa663e7354e203a5, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 504497745107779252, guid: 49ad44495f8e09b44ac4d4d3063f9f79, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 3.3735, y: 11.710236, z: 12.003616}
+  m_Center: {x: 1.6839501, y: 0, z: 0}
 --- !u!1 &8051764283342943295
 GameObject:
   m_ObjectHideFlags: 0
