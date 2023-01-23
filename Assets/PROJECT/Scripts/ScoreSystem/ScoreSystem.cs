@@ -159,7 +159,7 @@ public class ScoreSystem : MonoBehaviour
         comboTimer = Mathf.Clamp(comboTimer - Time.deltaTime, 0, float.MaxValue);
 
 
-        Debug.Log("Combotimer: " + comboTimer + ", ComboScore: " + comboScore);
+       // Debug.Log("Combotimer: " + comboTimer + ", ComboScore: " + comboScore);
 
     }
 
