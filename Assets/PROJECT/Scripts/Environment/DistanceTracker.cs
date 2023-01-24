@@ -8,7 +8,7 @@ public class DistanceTracker : MonoBehaviour
 {
     [SerializeField] [Range(0, 0.5f)] float spawnDelay;
     [SerializeField] SphereCollider[] distanceTrigger;
-    [Tooltip("WInkel in dem von der Flügelrichtung aus EdgeVFXe noch gespawnt werden.")]
+    [Tooltip("WInkel in dem von der Flï¿½gelrichtung aus EdgeVFXe noch gespawnt werden.")]
     [SerializeField] [Range(90, 180)] float detectionAngle;
     [SerializeField] int points;
     [Space(10)]
@@ -19,7 +19,7 @@ public class DistanceTracker : MonoBehaviour
     [Header("Contact Duration")]
     [SerializeField] float breakTime;
     [SerializeField] float minTimeUntilMultiplyer;
-    [Tooltip("Zeitinterval nachdem der Multiplyer bei anhaltendem Kontakt um den MultiplyerAdd hochgezählt wird.")]
+    [Tooltip("Zeitinterval nachdem der Multiplyer bei anhaltendem Kontakt um den MultiplyerAdd hochgezï¿½hlt wird.")]
     [SerializeField] float riseTimeInterval;
     [SerializeField] float multiplyerAdd;
 
@@ -95,10 +95,10 @@ public class DistanceTracker : MonoBehaviour
             continuouseContactTime += Time.fixedDeltaTime;
 
 
-            if (timeFromLastContact > breakTime)         // Wenn der letzte Kontakt kürzer zurückliegt als die Breaktime, ist der ContinuouseCounter an - sonst wird er zurückgesetzt
+            if (timeFromLastContact > breakTime)         // Wenn der letzte Kontakt kï¿½rzer zurï¿½ckliegt als die Breaktime, ist der ContinuouseCounter an - sonst wird er zurï¿½ckgesetzt
             {
                 continuouseContactTime = 0;
-                timeMultiplyer = 1; // Wieder auf normal zurückgesetzt
+                timeMultiplyer = 1; // Wieder auf normal zurï¿½ckgesetzt
                 DistanceActive = false;
             }
         }
@@ -153,7 +153,7 @@ public class DistanceTracker : MonoBehaviour
 
     private void DistanceEffect(float distance, Vector3 spawnPosition)
     {
-        float exaktDistanceMultiplyer = 1 - (Mathf.Clamp(distance, 0, detectionRadius) / detectionRadius); // Je kürzer die Distanz desto höher der Wert von 0 bis 1
+        float exaktDistanceMultiplyer = 1 - (Mathf.Clamp(distance, 0, detectionRadius) / detectionRadius); // Je kï¿½rzer die Distanz desto hï¿½her der Wert von 0 bis 1
 
         int roundedPoints = points;
         if (activateExaktDistanceMultiplyer)
@@ -165,7 +165,7 @@ public class DistanceTracker : MonoBehaviour
         {
             // weite Distanz VFX
 
-            Instantiate(spawnVFX, spawnPosition, Quaternion.identity);
+            Instantiate(spawnVFX, spawnPosition, this.transform.rotation);
             ScoreSystem.Instance.AddScore(roundedPoints * timeMultiplyer);
         }
         else
@@ -173,7 +173,7 @@ public class DistanceTracker : MonoBehaviour
         {
             // mittlere Distanz VFX
 
-            Instantiate(spawnVFXMediumState, spawnPosition, Quaternion.identity);
+            Instantiate(spawnVFXMediumState, spawnPosition,  this.transform.rotation);
             ScoreSystem.Instance.AddScore(roundedPoints * multiplyerMediumZone * timeMultiplyer);
         }
         else
@@ -181,17 +181,17 @@ public class DistanceTracker : MonoBehaviour
         {
             // clostest Distanz VFX
 
-            Instantiate(spawnVFXCloseState, spawnPosition, Quaternion.identity);
+            Instantiate(spawnVFXCloseState, spawnPosition,  this.transform.rotation);
             ScoreSystem.Instance.AddScore(roundedPoints * multiplyerCloseZone * timeMultiplyer);
         }
     }
 
     private void TimeMultiplyerEffect(Vector3 spawnPosition)
     {
-        Instantiate(spawnVFXTimeMultiplyer, spawnPosition, Quaternion.identity);
+        Instantiate(spawnVFXTimeMultiplyer, spawnPosition,  this.transform.rotation);
 
         float multiplyedContactTime = continuouseContactTime - breakTime;
-        float intervalCount = multiplyedContactTime / riseTimeInterval; // Hier wissen wir wie oft das riseTime Interval in die vergangene als multiplyerTime gezählte Zeit passt
+        float intervalCount = multiplyedContactTime / riseTimeInterval; // Hier wissen wir wie oft das riseTime Interval in die vergangene als multiplyerTime gezï¿½hlte Zeit passt
 
         timeMultiplyer = 1 + (intervalCount * multiplyerAdd);  // Hier wird der aktuelle Contact-Time basierte Multiplayer berechnet
     }
