@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 3863134427608874809}
+  - {fileID: 7232786311615040638}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -98,28 +98,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 5
---- !u!1001 &4245677434872977336
+--- !u!1001 &7716695580932891903
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 5046607309030252064}
     m_Modifications:
+    - target: {fileID: 1114413766906980480, guid: b7318a6854f07a941a23bd2600c7d0c3, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114413766906980480, guid: b7318a6854f07a941a23bd2600c7d0c3, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[2].m_Value
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114413766906980480, guid: b7318a6854f07a941a23bd2600c7d0c3, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1114413766906980481, guid: b7318a6854f07a941a23bd2600c7d0c3, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1114413766906980481, guid: b7318a6854f07a941a23bd2600c7d0c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0009765625
+      value: 0.004995
       objectReference: {fileID: 0}
     - target: {fileID: 1114413766906980481, guid: b7318a6854f07a941a23bd2600c7d0c3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00048828125
+      value: 0.29
       objectReference: {fileID: 0}
     - target: {fileID: 1114413766906980481, guid: b7318a6854f07a941a23bd2600c7d0c3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.65
+      value: -0.91
       objectReference: {fileID: 0}
     - target: {fileID: 1114413766906980481, guid: b7318a6854f07a941a23bd2600c7d0c3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -151,12 +163,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1114413766906980482, guid: b7318a6854f07a941a23bd2600c7d0c3, type: 3}
       propertyPath: m_Name
-      value: Test_Effect 1
+      value: EdgeSpark
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7318a6854f07a941a23bd2600c7d0c3, type: 3}
---- !u!4 &3863134427608874809 stripped
+--- !u!4 &7232786311615040638 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1114413766906980481, guid: b7318a6854f07a941a23bd2600c7d0c3, type: 3}
-  m_PrefabInstance: {fileID: 4245677434872977336}
+  m_PrefabInstance: {fileID: 7716695580932891903}
   m_PrefabAsset: {fileID: 0}

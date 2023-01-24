@@ -156,7 +156,7 @@ public class DistanceTracker : MonoBehaviour
 
     private void TimeMultiplyerEffect(Vector3 spawnPosition)
     {
-        //Instantiate(spawnVFXTimeMultiplyer, spawnPosition,  this.transform.rotation);
+        Instantiate(spawnVFXTimeMultiplyer, spawnPosition,  this.transform.rotation);
 
         float multiplyedContactTime = continuouseContactTime - breakTime;
         float intervalCount = multiplyedContactTime / riseTimeInterval; // Hier wissen wir wie oft das riseTime Interval in die vergangene als multiplyerTime gez�hlte Zeit passt
