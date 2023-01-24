@@ -35,6 +35,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 554df34bae4023e488402e22b4324f62, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Alpha_CloseDetails:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -141,6 +145,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
+    - _DephBlendRange_CloseDetails: 0
     - _DepthBlendRange: 10000
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
@@ -155,13 +160,16 @@ Material:
     - _HighlightStep: 0
     - _HighlightToonGrade: 1
     - _HighlighttextureBlendDistance: 5000
+    - _InvertAlpha_CloseDetails: 0
     - _MAIN_LIGHT_CALCULATE_SHADOWS: 1
     - _MAIN_LIGHT_SHADOWS_CASCADE: 1
     - _Metallic: 0
     - _NearPlane: 0
+    - _NearPlane_CloseDetails: 0
     - _OcclusionStrength: 1
     - _Opacity_1: 0
     - _Opacity_2: 0
+    - _Opacity_CloseDetails: 1
     - _Parallax: 0.005
     - _PowerSmooth: -0.05
     - _QueueControl: 0
@@ -181,6 +189,7 @@ Material:
     - _TriplanarBlend: 1
     - _TriplanarBlend_1: 1
     - _TriplanarBlend_2: 1
+    - _TriplanarBlend_CloseDetails: 0
     - _TriplanarBlend_Highlight: 1
     - _TriplanarBlend_Highlight_dis: 1
     - _TriplanarBlend_dir: 0
@@ -189,6 +198,7 @@ Material:
     - _TriplanarScale: 6139.29
     - _TriplanarScale_1: 1674
     - _TriplanarScale_2: 5128
+    - _TriplanarScale_CloseDetails: 0
     - _TriplanarScale_Highlight: 1268.3
     - _TriplanarScale_Highlight_dis: 19100
     - _TriplanarScale_dir: 0
@@ -197,6 +207,7 @@ Material:
     - _TriplanarSmooth: 147
     - _TriplanarSmooth_1: 60
     - _TriplanarSmooth_2: 60
+    - _TriplanarSmooth_CloseDetails: 0
     - _TriplanarSmooth_Highlight: 60
     - _TriplanarSmooth_Highlight_dis: 60
     - _TriplanarSmooth_dir: 0
@@ -206,6 +217,7 @@ Material:
     - _ZWrite: 1
     - _blue: 0
     - _green: 0
+    - _normalStrengh_CloseDetails: 1
     - _red: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
@@ -217,8 +229,10 @@ Material:
     - _ColorMultiply_1: {r: 0, g: 0, b: 0, a: 0}
     - _ColorMultiply_2: {r: 1, g: 1, b: 1, a: 0}
     - _ColorMultiply_5: {r: 1, g: 1, b: 1, a: 0}
+    - _ColorMultiply_CloseDetails: {r: 0, g: 0, b: 0, a: 0}
     - _Color_1: {r: 1, g: 0.8622429, b: 0.7971698, a: 0}
     - _Color_2: {r: 0.6037736, g: 0.14524741, b: 0.30205813, a: 0}
+    - _Color_CloseDetails: {r: 0, g: 0, b: 0, a: 0}
     - _DephthColor: {r: 1, g: 0.074380405, b: 0, a: 0}
     - _DephthColor_1: {r: 1, g: 0.63676953, b: 0, a: 0}
     - _DepthPatternOffset: {r: 0, g: 0, b: 0, a: 0}
@@ -240,6 +254,7 @@ Material:
     - _Offset_1: {r: 0, g: 0, b: 0, a: 0}
     - _Offset_2: {r: 0, g: 0, b: 0, a: 0}
     - _Offset_4: {r: 0, g: 0, b: 0, a: 0}
+    - _Offset_CloseDetails: {r: 0, g: 0, b: 0, a: 0}
     - _RimColor: {r: 0.050273143, g: 0.03484337, b: 0.254717, a: 0}
     - _RimEffectBlend: {r: 1, g: 1, b: 1, a: 0}
     - _RimOffset: {r: 0, g: 0, b: 0, a: 0}
@@ -253,6 +268,7 @@ Material:
     - _Tiling_1: {r: 1, g: 1, b: 0, a: 0}
     - _Tiling_2: {r: 1, g: 1, b: 0, a: 0}
     - _Tiling_4: {r: 1, g: 1, b: 0, a: 0}
+    - _Tiling_CloseDetails: {r: 0, g: 0, b: 0, a: 0}
     - _blueColor: {r: 0.99056596, g: 0.24764147, b: 0.9206752, a: 0}
     - _greenReplace: {r: 1, g: 0.653846, b: 0, a: 0}
     - _redReplace: {r: 0.31639367, g: 0.4826436, b: 0.8490566, a: 0}
