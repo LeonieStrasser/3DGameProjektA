@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2578193566807057094
 Transform:
@@ -45,7 +45,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2578193567588922118
 Transform:
@@ -76,7 +76,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2578193568077428089
 Transform:
@@ -227,9 +227,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2578193568077428089}
     m_Modifications:
+    - target: {fileID: 878014757678467652, guid: 444412d3a230cae43a69b3c6adf5efa8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2573675785594131421, guid: 444412d3a230cae43a69b3c6adf5efa8, type: 3}
       propertyPath: m_Name
       value: Cube_Medium (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573675785594131421, guid: 444412d3a230cae43a69b3c6adf5efa8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2953333111090088295, guid: 444412d3a230cae43a69b3c6adf5efa8, type: 3}
       propertyPath: m_RootOrder
