@@ -126,10 +126,10 @@ public class UIController : MonoBehaviour
 
         foreach (var item in scoreText)
         {
-            item.text = "Score: " + score;
+            item.text = "SCORE " + score;
 
         }
-        highScoreText.text = "Last Highscore: " + lastHighscore;
+        highScoreText.text = "LAST HIGHSCORE " + lastHighscore;
         looseScreen.SetActive(true);
 
 
