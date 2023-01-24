@@ -79,6 +79,8 @@ public class AudioManager : MonoBehaviour
     private EventInstance Pulse3D; // Pulse Sphere (3D Sound)
     private EventInstance EdgeSpark; // Edge Spark (Adaptive)
 
+    private EventInstance slowMo; // Slowmo Lowpass Pitch
+
     private void Awake()
     {
         if (instance == null)
@@ -96,7 +98,25 @@ public class AudioManager : MonoBehaviour
         BoostHold = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Boost/Hold/Boost_hold");
         RaceInProgress = FMODUnity.RuntimeManager.CreateInstance("event:/Races/Race_Music/Race_Music");
         EdgeSpark = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Edge_Sparks/Edge_Sparks");
+        slowMo = FMODUnity.RuntimeManager.CreateInstance("snapshot:/Slowmo");
     }
+
+    // SLOW MO SNAPSHOT
+    public void SlowMoStart()
+    {
+        slowMo.start();
+    }
+
+    public void SlowMoStop()
+    {
+        slowMo.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    /*public void SetSlowMo()
+    {
+        slowMo.setParameterByName("SlowmoActive", 1f);
+    }*/
+
 
     // EDGE SPARK START/STOP
 
@@ -275,6 +295,13 @@ public class AudioManager : MonoBehaviour
     public void TwirlOneShot()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player_related/Twirl/Oneshot/twirl_oneshot");
+    }
+
+    // LICHT AN
+    // SOUND (ONESHOT)
+    public void LichtAn()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Environment/Passing_Ring/Licht_an");
     }
 
 

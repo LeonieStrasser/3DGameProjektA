@@ -237,7 +237,6 @@ public class WhingMovement01 : MonoBehaviour
 
         // AUDIO CONTROLL
         AudioManager.instance.WindSoundStop();
-        // AudioManager.instance.BoostHoldSoundStop(); <-- CURRENTLY NOT WORKING
     }
     private void Start()
     {
@@ -249,8 +248,8 @@ public class WhingMovement01 : MonoBehaviour
         ResourceA = currentMaxRecource; // Tank wird auf voll gesetzt
 
         AudioManager.instance.WindSoundStart();
-        // AudioManager.instance.BoostHoldSoundStart(); <-- CURRENTLY NOT WORKING
         AudioManager.instance.IntroSoundOneShot();
+        
     }
 
 
@@ -708,7 +707,6 @@ public class WhingMovement01 : MonoBehaviour
         if (myControls.Player.Boost.IsInProgress())
         {
             BoostActive = true;
-            // AudioManager.instance.BoostHolding(myRigidbody.velocity.magnitude); <-- CURRENTLY NOT WORKING
             myRigidbody.AddForce(transform.forward * boostSpeed, ForceMode.VelocityChange);
             ResourceA -= boostCosts * Time.deltaTime; // Ressource wird verbraucht in diesem frame gemessen an der Frametime verbraucht
 
@@ -728,12 +726,17 @@ public class WhingMovement01 : MonoBehaviour
             Time.timeScale = slowmoTimescale;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             SlowMoFeedback?.PlayFeedbacks();
+            AudioManager.instance.SlowMoStart();
+
         }
         if (myControls.Player.SlowMo.IsInProgress())
         {
             slowMoActive = true;
             ResourceA -= slowmoCosts * Time.deltaTime; // Ressource wird verbraucht in diesem frame gemessen an der Frametime verbraucht
             SlowMoHoldingFeedback?.PlayFeedbacks();
+
+            
+
         }
         if (myControls.Player.SlowMo.WasReleasedThisFrame())
         {
@@ -743,6 +746,7 @@ public class WhingMovement01 : MonoBehaviour
         if (!myControls.Player.SlowMo.IsInProgress())
         {
             slowMoActive = false;
+            AudioManager.instance.SlowMoStop();
         }
 
     }
