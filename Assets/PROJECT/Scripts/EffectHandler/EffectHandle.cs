@@ -52,7 +52,7 @@ public class EffectHandle : MonoBehaviour
 
         ActivateEffect();
 
-        // Löscht einmal wirkende Effekte aus der Liste
+        // Lï¿½scht einmal wirkende Effekte aus der Liste
         if(EffectUse.singleUse)
         {
             AllEffects.Remove(EffectUse);

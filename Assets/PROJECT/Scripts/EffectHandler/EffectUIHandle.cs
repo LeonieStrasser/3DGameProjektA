@@ -11,6 +11,9 @@ public class EffectUIHandle : MonoBehaviour
     List<Sprite> AllEffectGraphics; //to cycle through when an item is being selected
     public Sprite EmptyEffect; //the graphic for no item
 
+    [Header("EffectHandle")]
+    [SerializeField] Animator effectHandleAnim;
+
     public Image Img;
 
     EffectHandle myEffectHandle;
@@ -39,6 +42,7 @@ public class EffectUIHandle : MonoBehaviour
         {
             Invoke("Shuffle", timeBtwShuffle);
             delayActiv = true;
+            effectHandleAnim.SetBool("RaceWon", true);    //Effectimage pulsiert
         }
 
         //Img.sprite = EffectUse.effectSprite;
@@ -68,8 +72,10 @@ public class EffectUIHandle : MonoBehaviour
         yield return new WaitForSeconds(shuffleTime);
         shuffleActiv = false;
         Img.sprite = useEffectSprite2;
+        effectHandleAnim.SetBool("RaceWon", false); 
 
         yield return new WaitForSeconds(2f);
         Img.sprite = EmptyEffect;
+
     }
 }

@@ -13,8 +13,6 @@ public class UIController : MonoBehaviour
     [SerializeField] Image progressBarImage;
     [SerializeField] Animator fuelBarAnim;
 
-    [Header("EffectHandle")]
-    [SerializeField] Animator effectHandleAnim;
 
     [Header("Resource Bar")]
     [SerializeField] Image recourceBarImage;
@@ -51,6 +49,7 @@ public class UIController : MonoBehaviour
     LevelManager myManager;
     WhingMovement01 myPlayer;
     DistanceTracker disTracker;
+
 
     // Count Up Text
 
@@ -268,6 +267,7 @@ public class UIController : MonoBehaviour
         timeBarObject.SetActive(false);
         fuelBarAnim.SetBool("raceRun", false);
 
-        effectHandleAnim.SetBool("RaceWon", true);
     }
+
+    
 }
