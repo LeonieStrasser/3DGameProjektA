@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8310858478408457005}
   - component: {fileID: 5617339875776583447}
   - component: {fileID: 6012998133314493499}
-  - component: {fileID: 1452312095828749618}
+  - component: {fileID: 4536131868873097764}
   m_Layer: 0
   m_Name: "Aufziehschl\xFCsselloch_01.001_Messger\xE4t_Metall"
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1452312095828749618
-MeshCollider:
+--- !u!65 &4536131868873097764
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -94,10 +94,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2099474560220403819, guid: 41b37f14c14669549887413a3a91df44, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 29.99707, y: 16.093899, z: 28.784668}
+  m_Center: {x: -0.025878906, y: 8.046949, z: -0.20043945}
 --- !u!1 &670679619956637101
 GameObject:
   m_ObjectHideFlags: 0

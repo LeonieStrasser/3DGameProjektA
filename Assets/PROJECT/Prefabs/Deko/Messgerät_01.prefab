@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7883676982253866679}
   - component: {fileID: 5615718013673397693}
   - component: {fileID: 7666796696947396448}
-  - component: {fileID: 6272156674864340820}
+  - component: {fileID: 2172726565734800419}
   m_Layer: 0
   m_Name: "Messger\xE4t_01.001_Messger\xE4t_Metall"
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6272156674864340820
-MeshCollider:
+--- !u!65 &2172726565734800419
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -94,10 +94,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4893798988060947093, guid: 297fa7d315047f942823ec38bd0ecbc4, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 16.1494, y: 63.916298, z: 55.058105}
+  m_Center: {x: 8.0747, y: 1.8670692, z: 0}
 --- !u!1 &1704707078392672103
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,7 +191,6 @@ GameObject:
   - component: {fileID: 127185597255959661}
   - component: {fileID: 323322431753567248}
   - component: {fileID: 1211408258706990185}
-  - component: {fileID: 5507676210814494697}
   m_Layer: 0
   m_Name: "Messger\xE4t_01.001_Messger\xE4t_Uhr"
   m_TagString: Untagged
@@ -265,20 +263,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5507676210814494697
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6888550139634770717}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5316091392158311569, guid: 297fa7d315047f942823ec38bd0ecbc4, type: 3}
 --- !u!1 &8570929651000883974
 GameObject:
   m_ObjectHideFlags: 0

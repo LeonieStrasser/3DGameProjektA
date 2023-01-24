@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4061499132369154365}
   - component: {fileID: 8885633906491605290}
   - component: {fileID: 5709607139981558636}
-  - component: {fileID: 3920990884829182146}
+  - component: {fileID: 4067468635977647317}
   m_Layer: 0
   m_Name: Schraube_02_smoll.001_Metall_Mutter
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3920990884829182146
-MeshCollider:
+--- !u!65 &4067468635977647317
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -94,10 +94,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3961846633252423670, guid: f2417d1ea85cdae47aee0e548ca2f781, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 4.5951, y: 12.529181, z: 10.840608}
+  m_Center: {x: 2.2942498, y: 0.00014996529, z: -0.80145}
 --- !u!1 &5216684784984450031
 GameObject:
   m_ObjectHideFlags: 0
