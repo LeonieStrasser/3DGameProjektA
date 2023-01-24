@@ -126,7 +126,7 @@ public class UIController : MonoBehaviour
 
         foreach (var item in scoreText)
         {
-            item.text = "SCORE " + score;
+            item.text = score.ToString();
 
         }
         highScoreText.text = "LAST HIGHSCORE " + lastHighscore;

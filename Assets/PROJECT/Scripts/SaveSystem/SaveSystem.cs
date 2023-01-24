@@ -64,6 +64,9 @@ public static class SaveSystem
         // name wird als Letzter gespeicherter name eingegeben
         PlayerPrefs.SetString(lastNameKey, playerName);
 
+
+        // Debug
+        Debug.Log("Saved at: " + path);
     }
 
     public static ScoreList LoadScore()
