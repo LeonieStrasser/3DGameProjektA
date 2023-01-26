@@ -40,6 +40,9 @@ public class UIController : MonoBehaviour
     [SerializeField] TMP_InputField nameField;
     [SerializeField] TextMeshProUGUI rankText;
 
+    [SerializeField] GameObject BlendPlanes;
+    [SerializeField] Animator blendAnim;
+
 
     [Header("Pause Screen")]
     [SerializeField] GameObject pauseScreen;
@@ -73,6 +76,7 @@ public class UIController : MonoBehaviour
         ScoreSystem.Instance.OnXpChange += UpdateContactScoreText;
         ScoreSystem.Instance.OnComboStateChange += UpdateXpState;
         myManager.OnGameLoose += ActivateLooseScreen;
+        myManager.OnCrashed += BlendToLooseScreen;
         myManager.OnGameResume += DeactivatePauseScreen;
         myManager.OnRaceStart += ActivateRaceTimeBar;
         myManager.OnRaceStop += DeactivateRaceTimeBar;
@@ -80,6 +84,7 @@ public class UIController : MonoBehaviour
         disTracker.OnContact += ActivateContactScore;
 
         // Contact score objekt wird zum instantiaten vorbereitet
+        BlendPlanes.SetActive(false);
         contactScoreTemplate.SetActive(false);
 
 
@@ -119,6 +124,11 @@ public class UIController : MonoBehaviour
         }
     }
 
+    private void BlendToLooseScreen()
+    {
+        BlendPlanes.SetActive(true);
+        blendAnim.SetTrigger("GameOver");
+    }
 
     private void ActivateLooseScreen(int score, int lastHighscore, int lastListScore)
     {

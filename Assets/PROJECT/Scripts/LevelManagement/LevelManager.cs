@@ -36,6 +36,7 @@ public class LevelManager : MonoBehaviour
 
 
 
+
     // GAMESTATES
 
     public enum raceState
@@ -117,6 +118,8 @@ public class LevelManager : MonoBehaviour
     public event Action OnGameResume;
     public event Action OnRaceStart;
     public event Action OnRaceStop;
+
+    public event Action OnCrashed;
 
     #endregion
 
@@ -293,6 +296,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator GameLooseDelayTimer(int score, int lastHighscore, int lastListScore)
     {
+        OnCrashed?.Invoke();
         yield return new WaitForSeconds(looseScreenDelay);
         OnGameLoose?.Invoke(score, lastHighscore, lastListScore);
 
