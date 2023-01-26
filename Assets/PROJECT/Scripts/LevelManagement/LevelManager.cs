@@ -325,7 +325,6 @@ public class LevelManager : MonoBehaviour
     private void RaceFail()
     {
         thisRace = raceState.noRace;
-        currentStartZone.SetActive(true);
         currentGoal.SetActive(false);
 
         // Hier müssen die Start Zones wieder angestellt werden
