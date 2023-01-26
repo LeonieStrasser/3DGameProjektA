@@ -88,8 +88,6 @@ public class LevelManager : MonoBehaviour
 
 
 
-    private int raceNumber = 0;
-
     [System.Serializable]
     public struct RaceData
     {
@@ -98,6 +96,7 @@ public class LevelManager : MonoBehaviour
         [SerializeField] public float raceMaxTime;
         [SerializeField] public int pointsForSuccess;
         [ResizableTextArea] [SerializeField] public string notes;
+        [ResizableTextArea] [SerializeField] public string difficulty;
     }
 
 
@@ -132,11 +131,10 @@ public class LevelManager : MonoBehaviour
         ResumeGame();
         thisRace = raceState.noRace;
 
-        // Erstes Rennen wird gespawnt und zugewiesen
-        raceNumber = -1;
+
 
         if (allRaces.Length > 0)
-            SpawnNextRace();
+            SpawnAllRaces();
         else
             Debug.LogWarning("Kein Race in der Liste!");
     }
@@ -199,20 +197,31 @@ public class LevelManager : MonoBehaviour
         gameoverCam.SetActive(true);
     }
 
-    private void SpawnNextRace()
-    {   
-        raceNumber++; // Racenummer wird erstmal hochgerechnet - hei�t die Rennen laufen der Reihe nach ab. Sp�ter sollten wir hier ein zuf�lliges Ziehen ohne zur�cklegen reinbauen.
-        if (raceNumber > allRaces.Length - 1) { raceNumber = 1; } // Tutorial Strecke wird nicht wiederholt
-
-        currentStartZone = allRaces[raceNumber].startZone;
-        currentGoal = allRaces[raceNumber].goal;
-        raceMaxTime = allRaces[raceNumber].raceMaxTime;
-        currentSuccessPoints = allRaces[raceNumber].pointsForSuccess;
-
-        currentStartZone.SetActive(true);
+    private void SpawnAllRaces()
+    {
+        foreach (var item in allRaces)
+        {
+            item.startZone.SetActive(true);
+        }
 
         // Audio Feedback
         StartCoroutine(RaceSpawnFeedbackDelay());
+    }
+
+    private void DeactivateAllRaces()
+    {
+        foreach (var item in allRaces)
+        {
+            item.startZone.SetActive(false);
+        }
+    }
+
+    private void SetCurrentRace(RaceData newRace)
+    {
+        currentStartZone = newRace.startZone;
+        currentGoal = newRace.goal;
+        raceMaxTime = newRace.raceMaxTime;
+        currentSuccessPoints = newRace.pointsForSuccess;
     }
 
     IEnumerator RaceSpawnFeedbackDelay()
@@ -244,13 +253,46 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex);
     }
 
-    public void StartRace()
+    public void StartRace(int raceID)
     {
+        //Finde Raus zu welchem Race die RaceID gehört
+        RaceData triggeredRace = new RaceData();
+        bool raceFound = false;
+
+        foreach (var item in allRaces)
+        {
+            StartZone itemStartZone = item.startZone.GetComponent<StartZone>();
+            if (itemStartZone.RaceID == raceID)
+            {
+                triggeredRace = item;
+                raceFound = true;
+            }
+            else
+            {
+                // Deaktiviere alle anderen Race STarts
+                itemStartZone.gameObject.SetActive(false);
+            }
+        }
+
+        if (!raceFound)
+        {
+            Debug.LogError("Can´t find a race in the array with this goalID: " + raceID, gameObject);
+            SpawnAllRaces();
+            return;
+        }
+
+
+        SetCurrentRace(triggeredRace);
+
         thisRace = raceState.raceIsRunning;
         RaceTimer = raceMaxTime;
 
+
+
+        // Start/goal handler
         currentStartZone.SetActive(false);
         currentGoal.SetActive(true);
+        //-------------------------
 
         OnRaceStart?.Invoke();
 
@@ -263,13 +305,15 @@ public class LevelManager : MonoBehaviour
     {
         thisRace = raceState.noRace;
 
+        // Start/goal handler
         currentGoal.SetActive(false);
+        //-----------------
 
         ScoreSystem.Instance.AddScore(currentSuccessPoints);
 
         myEffectHandle.StartBonusEffect();
 
-        SpawnNextRace();
+        SpawnAllRaces();
 
         OnRaceStop?.Invoke();
 
@@ -283,6 +327,9 @@ public class LevelManager : MonoBehaviour
         thisRace = raceState.noRace;
         currentStartZone.SetActive(true);
         currentGoal.SetActive(false);
+
+        // Hier müssen die Start Zones wieder angestellt werden
+        SpawnAllRaces();
 
         OnRaceStop?.Invoke();
 
