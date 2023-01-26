@@ -96,7 +96,14 @@ public class AudioManager : MonoBehaviour
 
         WindPressureInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Wind_pressure/wind_pressure");
         BoostHold = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Boost/Hold/Boost_hold");
+
         RaceInProgress = FMODUnity.RuntimeManager.CreateInstance("event:/Races/Race_Music/Race_Music");
+        /* Race track variants zum kopieren & ausprobieren:
+         * VAR_1: event:/Races/Race_Music/Race_Music_var1
+         * VAR_2: event:/Races/Race_Music/Race_Music _var2
+         * VAR_3: event:/Races/Race_Music/Race_Music _var3
+         * */
+
         EdgeSpark = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Edge_Sparks/Edge_Sparks");
         slowMo = FMODUnity.RuntimeManager.CreateInstance("snapshot:/Slowmo");
     }
@@ -156,7 +163,7 @@ public class AudioManager : MonoBehaviour
     public void Pulse3DStart()
     {
         if (EventIsNotPlaying(Pulse3D))
-        { 
+        {
             Pulse3D.start();
         }
     }
@@ -363,17 +370,25 @@ public class AudioManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player_related/Teleport/Teleport");
     }
 
-
-
-
-
-    //---------------------------------------- W I P S --------------------------------------------
     // PASSING THROUGH RING (ONESHOT)
     public void PassingRing()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Environment/Passing_Ring/Passing_Ring");
     }
 
+    //---------------------------------------- 4Later ---------------------------------------
+
+    // FUEL PICK UP (ONESHOT)
+    public void FuelPickUp()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Environment/Fuel_Pickup/Fuel_pickup");
+    }
+
+    // RACE TIMER WARNING (ONESHOT)
+    public void RaceTimerWarning()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Races/Timer_warning/timer_warning");
+    }
 
 
 
