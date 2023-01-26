@@ -7,18 +7,12 @@ public class ObjectType
 {
     public enum type
     {
-        zahnradKlein,
-        zahnradGroß,
-        drehKürbisKlein,
-        drehKürbisMittel,
-        kleinerCube,
+        zahnrad,
         drehenderKran,
-        zahnradBiggest,
-        zahnradMittel,
         kralle,
-        mobileKralle,
         müllpresse,
-        pillarKlein,
+        cube,
+        windmill,
         none
     }
 }

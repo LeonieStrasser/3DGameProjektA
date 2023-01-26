@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3591888423185648165}
   - component: {fileID: 3177749784617088498}
   - component: {fileID: 8957603439844261698}
-  - component: {fileID: 8355502059592342614}
   m_Layer: 0
   m_Name: windmill_5blades
   m_TagString: Untagged
@@ -50,7 +49,7 @@ MonoBehaviour:
   Rotating: 1
   RotationSpace: 1
   UpdateMode: 0
-  RotationSpeed: {x: 100, y: 0, z: 0}
+  RotationSpeed: {x: 0, y: 100, z: 0}
   Orbiting: 0
   AdditiveOrbitRotation: 0
   OrbitCenterTransform: {fileID: 0}
@@ -78,24 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08d79ef9789119408f84d9c23dd02ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviourToActivate:
-  - {fileID: 3177749784617088498}
-  myObjectType: 0
---- !u!114 &8355502059592342614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4220756656774041759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eea2434947366fc459d12227b06975e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xRotationSpeed: 0
-  yRotationSpeed: 0
-  zRotationSpeed: 0
+  behaviourToActivate: []
+  myObjectType: 5
 --- !u!1001 &9112465690473755578
 PrefabInstance:
   m_ObjectHideFlags: 0

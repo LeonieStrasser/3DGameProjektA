@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 518192194746738487}
   - component: {fileID: 8585366140094780833}
-  - component: {fileID: -5902127222961167057}
+  - component: {fileID: 2684084525186036675}
   m_Layer: 0
   m_Name: Gear_Holes02
   m_TagString: Untagged
@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   behaviourToActivate: []
-  myObjectType: 6
---- !u!114 &-5902127222961167057
+  myObjectType: 0
+--- !u!114 &2684084525186036675
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,12 +57,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 899362727216168333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eea2434947366fc459d12227b06975e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f009572b4d918346b24337ef83f88c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xRotationSpeed: 0
-  yRotationSpeed: 0
-  zRotationSpeed: 0
+  Rotating: 1
+  RotationSpace: 1
+  UpdateMode: 2
+  RotationSpeed: {x: 100, y: 0, z: 0}
+  Orbiting: 0
+  AdditiveOrbitRotation: 0
+  OrbitCenterTransform: {fileID: 0}
+  OrbitCenterOffset: {x: 0, y: 0, z: 0}
+  OrbitRotationAxis: {x: 0, y: 1, z: 0}
+  OrbitRotationSpeed: 10
+  OrbitRadius: 3
+  OrbitCorrectionSpeed: 10
+  DrawGizmos: 1
+  OrbitPlaneColor: {r: 54, g: 169, b: 225, a: 0.02}
+  OrbitLineColor: {r: 225, g: 225, b: 225, a: 0.1}
+  _orbitCenter: {x: 0, y: 0, z: 0}
+  _worldRotationAxis: {x: 0, y: 0, z: 0}
+  _snappedPosition: {x: 0, y: 0, z: 0}
+  _radius: {x: 0, y: 0, z: 0}
 --- !u!1001 &6387047461672017431
 PrefabInstance:
   m_ObjectHideFlags: 0
