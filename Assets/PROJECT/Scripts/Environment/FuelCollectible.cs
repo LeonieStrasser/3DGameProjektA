@@ -9,8 +9,8 @@ public class FuelCollectible : ScoreTrigger
     public override void FuelTrigger(Collider other)
     {
         base.FuelTrigger(other);
-
         DisableFuel();
+        AudioManager.instance.FuelPickUp();
     }
 
     public override void OnCooldownEnd()
