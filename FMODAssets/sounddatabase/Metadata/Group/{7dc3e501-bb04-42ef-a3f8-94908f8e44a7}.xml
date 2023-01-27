@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{7dc3e501-bb04-42ef-a3f8-94908f8e44a7}">
+		<property name="name">
+			<value>Game_Audio</value>
+		</property>
+		<relationship name="automators">
+			<destination>{b182e510-ddb2-4799-8bc9-0dee990c34c0}</destination>
+		</relationship>
+		<relationship name="effectChain">
+			<destination>{90ab0a4e-317c-46f2-ac45-17c3ca6a9f20}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{fb231167-4c6a-4fe1-87c0-f7730337d04b}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{dccd2ec0-d129-4784-a238-c3d985d59758}</destination>
+		</relationship>
+	</object>
+	<object class="Automator" id="{b182e510-ddb2-4799-8bc9-0dee990c34c0}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>pitch</value>
+		</property>
+	</object>
+	<object class="MixerBusEffectChain" id="{90ab0a4e-317c-46f2-ac45-17c3ca6a9f20}">
+		<relationship name="effects">
+			<destination>{f26b97c2-482e-4a83-b8b7-0ea3b5e81dec}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{fb231167-4c6a-4fe1-87c0-f7730337d04b}" />
+	<object class="MixerBusFader" id="{f26b97c2-482e-4a83-b8b7-0ea3b5e81dec}" />
+</objects>

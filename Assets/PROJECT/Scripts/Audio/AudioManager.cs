@@ -78,7 +78,8 @@ public class AudioManager : MonoBehaviour
     private EventInstance RaceInProgress; // Race in Progress (Adaptive)
     private EventInstance Pulse3D; // Pulse Sphere (3D Sound)
     private EventInstance EdgeSpark; // Edge Spark (Adaptive)
-    private EventInstance TwirlInProgresss; // Race in Progress (Adaptive)
+
+    private EventInstance slowMo; // Slowmo Lowpass Pitch
 
     private void Awake()
     {
@@ -95,10 +96,34 @@ public class AudioManager : MonoBehaviour
 
         WindPressureInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Wind_pressure/wind_pressure");
         BoostHold = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Boost/Hold/Boost_hold");
+
         RaceInProgress = FMODUnity.RuntimeManager.CreateInstance("event:/Races/Race_Music/Race_Music");
-        TwirlInProgresss = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Twirl/Oneshot/twirl_oneshot"); // DAS HIER IST DER TWIRL VERDAMMTE AXT
+        /* Race track variants zum kopieren & ausprobieren:
+         * VAR_1: event:/Races/Race_Music/Race_Music_var1
+         * VAR_2: event:/Races/Race_Music/Race_Music _var2
+         * VAR_3: event:/Races/Race_Music/Race_Music _var3
+         * */
+
         EdgeSpark = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Edge_Sparks/Edge_Sparks");
+        slowMo = FMODUnity.RuntimeManager.CreateInstance("snapshot:/Slowmo");
     }
+
+    // SLOW MO SNAPSHOT
+    public void SlowMoStart()
+    {
+        slowMo.start();
+    }
+
+    public void SlowMoStop()
+    {
+        slowMo.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    /*public void SetSlowMo()
+    {
+        slowMo.setParameterByName("SlowmoActive", 1f);
+    }*/
+
 
     // EDGE SPARK START/STOP
 
@@ -116,17 +141,6 @@ public class AudioManager : MonoBehaviour
         EdgeSpark.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
-
-    // TWIRL
-    public void TwirlStart()
-    {
-        TwirlInProgresss.start();
-    }
-
-    public void TwirlStop()
-    {
-        TwirlInProgresss.stop(STOP_MODE.ALLOWFADEOUT);
-    }
 
 
     //  RACE IN PROGRESS START/STOP
@@ -148,9 +162,10 @@ public class AudioManager : MonoBehaviour
     //  PULSE3D START/STOP
     public void Pulse3DStart()
     {
-        
+        if (EventIsNotPlaying(Pulse3D))
+        {
             Pulse3D.start();
-        
+        }
     }
 
     public void Pulse3DStop()
@@ -158,12 +173,6 @@ public class AudioManager : MonoBehaviour
         Pulse3D.setParameterByName("inRace", 0f);
         Pulse3D.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
-
-    public void Pulse3DPosition(Vector3 position)
-    {
-        Pulse3D.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(position));
-    }
-
 
 
     //  WIND PRESSURE START/STOP
@@ -287,7 +296,20 @@ public class AudioManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player_related/Boost/Empty/Boost_Empty");
     }
 
+    // TWIRL
+    // SINGLE USE (ONESHOT)
 
+    public void TwirlOneShot()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player_related/Twirl/Oneshot/twirl_oneshot");
+    }
+
+    // LICHT AN
+    // SOUND (ONESHOT)
+    public void LichtAn()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Environment/Passing_Ring/Licht_an");
+    }
 
 
     // INTRO
@@ -348,17 +370,25 @@ public class AudioManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player_related/Teleport/Teleport");
     }
 
-
-
-
-
-    //---------------------------------------- W I P S --------------------------------------------
     // PASSING THROUGH RING (ONESHOT)
     public void PassingRing()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Environment/Passing_Ring/Passing_Ring");
     }
 
+    //---------------------------------------- 4Later ---------------------------------------
+
+    // FUEL PICK UP (ONESHOT)
+    public void FuelPickUp()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Environment/Fuel_Pickup/Fuel_pickup");
+    }
+
+    // RACE TIMER WARNING (ONESHOT)
+    public void RaceTimerWarning()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Races/Timer_warning/timer_warning");
+    }
 
 
 
