@@ -269,7 +269,7 @@ public class WhingMovement01 : MonoBehaviour
             SlowmoInput();
 
 
-            if (resourceA !> 0)
+            if (resourceA <= 0)
             {
                 BoostRessourceEmptyInput(); // spiel Sound wenn Ressource leer ist
             }
