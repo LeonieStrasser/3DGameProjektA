@@ -11,7 +11,7 @@ using UnityEngine.VFX;
 [RequireComponent(typeof(Rigidbody))]
 public class WhingMovement01 : MonoBehaviour
 {
-    
+
 
 
 
@@ -22,7 +22,7 @@ public class WhingMovement01 : MonoBehaviour
     [Header("Movement")]
 
     [SerializeField] bool easyMovement;
-    [SerializeField] [Range(1, 10)] float easyMovementRotSpeed;
+    [SerializeField][Range(1, 10)] float easyMovementRotSpeed;
 
     //[Tooltip("Speed der am Start gesetzt wird.")]
     //[SerializeField] float startSpeed = 10f;
@@ -36,26 +36,26 @@ public class WhingMovement01 : MonoBehaviour
     [Tooltip("Maximal erreichbarer Speed im Sturzflug.")]
     [SerializeField] float maxSpeed = float.MaxValue;
     [Tooltip("Geschwindigkeit mit der der Flieger an der x-Achse rotiert.")]
-    [SerializeField] [Range(10, 800)] float rotationSpeedUpDown;
+    [SerializeField][Range(10, 800)] float rotationSpeedUpDown;
     [Tooltip("Geschwindigkeit mit der der Flieger an der y-Achse rotiert.")]
-    [SerializeField] [Range(10, 800)] float rotationSpeedLeftRight;
+    [SerializeField][Range(10, 800)] float rotationSpeedLeftRight;
     [Tooltip("Geschwindigkeit mit der der Flieger an der z-Achse rotiert rotiert.")]
-    [SerializeField] [Range(10, 800)] float stabilizeSpeed;
+    [SerializeField][Range(10, 800)] float stabilizeSpeed;
     [Tooltip("Kraft mit der der Flugk�rper richtung Boden gedr�ckt wird.")]
-    [SerializeField] [Range(0, 0.5f)] float gravity;
+    [SerializeField][Range(0, 0.5f)] float gravity;
     [Tooltip("Geschwindigkeits Obergrenze ab der die Kraft nach Unten anf�ngt zu wirken. (Von da an wirkt sie umso st�rker, je langsamer das Flugobjekt wird)")]
     [SerializeField] float gravitySpeedBoundery = 20f;
 
     [Space(10)]
     [Tooltip("Sensitivit�t f�r den Joystick Input.")]
-    [SerializeField] [Range(0, 0.7f)] float inputSensitivity;
-    [SerializeField] [Range(0, 0.7f)] float inputSensitivityLeftRight;
+    [SerializeField][Range(0, 0.7f)] float inputSensitivity;
+    [SerializeField][Range(0, 0.7f)] float inputSensitivityLeftRight;
 
     [Space(20)]
     [Header("Twirl")]
-    [SerializeField] [Tooltip("Mit diesem Wert kann man einstellen ab welcher Twirlgeschwindigkeit der Twirl-Effect getriggert wird")] [Range(0, 1)] float twirlInput;
-    [SerializeField] [Tooltip("Inputsensitivity ab der der Twirl-Effect getriggert wird. (0 => beide Sticks m�ssen exakt die entgegengesetzte Position auf Y erreichen)")] [Range(0, 1)] float twirlSensitivity;
-    [SerializeField] [Range(10, 800)] float twirlSpeed;
+    [SerializeField][Tooltip("Mit diesem Wert kann man einstellen ab welcher Twirlgeschwindigkeit der Twirl-Effect getriggert wird")][Range(0, 1)] float twirlInput;
+    [SerializeField][Tooltip("Inputsensitivity ab der der Twirl-Effect getriggert wird. (0 => beide Sticks m�ssen exakt die entgegengesetzte Position auf Y erreichen)")][Range(0, 1)] float twirlSensitivity;
+    [SerializeField][Range(10, 800)] float twirlSpeed;
 
 
 
@@ -81,12 +81,12 @@ public class WhingMovement01 : MonoBehaviour
 
     [Space(5)]
     [Header("Slowmotion Power")]
-    [SerializeField] [Range(0.1f, 1)] float slowmoTimescale;
+    [SerializeField][Range(0.1f, 1)] float slowmoTimescale;
     [SerializeField] float slowmoCosts;
 
     [Space(20)]
     [Header("Camera behaviour")]
-    [SerializeField] [Range(0, 60)] float deadZoneRadius;
+    [SerializeField][Range(0, 60)] float deadZoneRadius;
 
 
     [Space(20)]
@@ -99,7 +99,7 @@ public class WhingMovement01 : MonoBehaviour
     [SerializeField] bool boostActive;
     [SerializeField] bool slowMoActive;
 
-    public bool BoostActive 
+    public bool BoostActive
     {
         private set
         {
@@ -116,7 +116,7 @@ public class WhingMovement01 : MonoBehaviour
         get { return twirl; }
         private set { twirl = value; }
     }
-    
+
     public bool SlowMoActive
     {
         get { return slowMoActive; }
@@ -249,7 +249,7 @@ public class WhingMovement01 : MonoBehaviour
 
         AudioManager.instance.WindSoundStart();
         AudioManager.instance.IntroSoundOneShot();
-        
+
     }
 
 
@@ -264,12 +264,12 @@ public class WhingMovement01 : MonoBehaviour
             if ((noInput || CheckInputChange()) && flipControls == true)
                 CheckUpPosition();
 
-            if (resourceA > 0)
-            {
-                BoostInput();
-                SlowmoInput();
-            }
-            else
+
+            BoostInput();
+            SlowmoInput();
+
+
+            if (resourceA !> 0)
             {
                 BoostRessourceEmptyInput(); // spiel Sound wenn Ressource leer ist
             }
@@ -671,8 +671,8 @@ public class WhingMovement01 : MonoBehaviour
         if (Mathf.Abs(rightStickInput.y) >= twirlInput && Mathf.Abs(leftStickInput.y) >= twirlInput)
         {
             twirl = (rightStickInput.y + leftStickInput.y < twirlSensitivity && rightStickInput.y + leftStickInput.y > -twirlSensitivity);                 // Twirl ist wahr wenn die Sticks genau entgegengesetzt zeigen
-            
-            
+
+
 
         }
         else
@@ -695,7 +695,7 @@ public class WhingMovement01 : MonoBehaviour
         }
 
         twirlVFX.SetActive(twirl);
-        
+
 
     }
 
@@ -706,52 +706,56 @@ public class WhingMovement01 : MonoBehaviour
 
     private void BoostInput()
     {
-        if (myControls.Player.Boost.WasPressedThisFrame())
+        if (resourceA > 0)
         {
-            BoostActive = true;
-            AudioManager.instance.BoostOneShot(); // <-- Boost Oneshot SFX
-            BoostStartFeedback?.PlayFeedbacks(); // Audio is vor Feedback, weil Shockwave
-            
+            if (myControls.Player.Boost.WasPressedThisFrame())
+            {
+                BoostActive = true;
+                AudioManager.instance.BoostOneShot(); // <-- Boost Oneshot SFX
+                BoostStartFeedback?.PlayFeedbacks(); // Audio is vor Feedback, weil Shockwave
 
 
-            myRigidbody.AddForce(transform.forward * initialBoostSpeed, ForceMode.VelocityChange);
-            ResourceA -= initialBoostCosts; // Ressource wird verbraucht
 
-            // Feedback
-            boostEffect.Play();
+                myRigidbody.AddForce(transform.forward * initialBoostSpeed, ForceMode.VelocityChange);
+                ResourceA -= initialBoostCosts; // Ressource wird verbraucht
+
+                // Feedback
+                boostEffect.Play();
+            }
+            if (myControls.Player.Boost.IsInProgress())
+            {
+                BoostActive = true;
+                myRigidbody.AddForce(transform.forward * boostSpeed, ForceMode.VelocityChange);
+                ResourceA -= boostCosts * Time.deltaTime; // Ressource wird verbraucht in diesem frame gemessen an der Frametime verbraucht
+
+            }
+            if (!myControls.Player.Boost.IsInProgress())
+            {
+                BoostActive = false;
+            }
         }
-        if (myControls.Player.Boost.IsInProgress())
-        {
-            BoostActive = true;
-            myRigidbody.AddForce(transform.forward * boostSpeed, ForceMode.VelocityChange);
-            ResourceA -= boostCosts * Time.deltaTime; // Ressource wird verbraucht in diesem frame gemessen an der Frametime verbraucht
 
-        }
-        if (!myControls.Player.Boost.IsInProgress())
-        {
-            BoostActive = false;
-        }
-       
     }
 
     void SlowmoInput()
     {
-        if (myControls.Player.SlowMo.WasPressedThisFrame())
+        if (resourceA > 0)
         {
-            slowMoActive = true;
-            Time.timeScale = slowmoTimescale;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale;
-            SlowMoFeedback?.PlayFeedbacks();
-            AudioManager.instance.SlowMoStart();
+            if (myControls.Player.SlowMo.WasPressedThisFrame())
+            {
+                slowMoActive = true;
+                Time.timeScale = slowmoTimescale;
+                Time.fixedDeltaTime = 0.02f * Time.timeScale;
+                SlowMoFeedback?.PlayFeedbacks();
+                AudioManager.instance.SlowMoStart();
 
-        }
-        if (myControls.Player.SlowMo.IsInProgress())
-        {
-            slowMoActive = true;
-            ResourceA -= slowmoCosts * Time.deltaTime; // Ressource wird verbraucht in diesem frame gemessen an der Frametime verbraucht
-            SlowMoHoldingFeedback?.PlayFeedbacks();
-
-            
+            }
+            if (myControls.Player.SlowMo.IsInProgress())
+            {
+                slowMoActive = true;
+                ResourceA -= slowmoCosts * Time.deltaTime; // Ressource wird verbraucht in diesem frame gemessen an der Frametime verbraucht
+                SlowMoHoldingFeedback?.PlayFeedbacks();
+            }
 
         }
         if (myControls.Player.SlowMo.WasReleasedThisFrame())
