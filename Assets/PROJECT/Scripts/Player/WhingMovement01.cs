@@ -686,12 +686,11 @@ public class WhingMovement01 : MonoBehaviour
             if (twirl)
             {
                 Debug.Log("Twirl Sound start");
-                //AudioManager.instance.TwirlStart();
+                //AudioManager.instance.TwirlOneShot();
             }
             else
             {
                 Debug.Log("Twirl Sound stop");
-                //AudioManager.instance.TwirlStop();
             }
         }
 

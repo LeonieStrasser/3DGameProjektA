@@ -78,7 +78,6 @@ public class AudioManager : MonoBehaviour
     private EventInstance RaceInProgress; // Race in Progress (Adaptive)
     private EventInstance Pulse3D; // Pulse Sphere (3D Sound)
     private EventInstance EdgeSpark; // Edge Spark (Adaptive)
-
     private EventInstance slowMo; // Slowmo Lowpass Pitch
 
     private void Awake()

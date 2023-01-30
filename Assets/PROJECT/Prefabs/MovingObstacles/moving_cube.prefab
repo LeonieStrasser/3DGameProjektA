@@ -107,7 +107,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3714223041009136314}
-  - component: {fileID: -7483710234241619597}
   - component: {fileID: 8733186038116810901}
   m_Layer: 0
   m_Name: moving_cube
@@ -132,22 +131,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-7483710234241619597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4089341587050194944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4958124f0674bd44ea825786fe29a466, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.1
-  xdistanceToCover: 0
-  ydistanceToCover: 0
-  zdistanceToCover: -6
 --- !u!114 &8733186038116810901
 MonoBehaviour:
   m_ObjectHideFlags: 0
