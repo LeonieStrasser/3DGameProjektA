@@ -299,6 +299,12 @@ public class LevelManager : MonoBehaviour
         currentGoal.SetActive(true);
         //-------------------------
 
+        // Player bekommt einen vollen Tank
+        myPlayer.RefillResourcePoints();
+
+
+
+
         OnRaceStart?.Invoke();
 
         AudioManager.instance.StartRace(); // <-- Start Race SFX

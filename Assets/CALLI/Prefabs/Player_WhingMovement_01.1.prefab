@@ -643,15 +643,15 @@ MonoBehaviour:
   easyMovementRotSpeed: 2.12
   fallVelocity: 8
   glideUpVelocity: 0.3
-  minSpeed: 100
-  maxSpeed: 300
+  minSpeed: 175
+  maxSpeed: 350
   rotationSpeedUpDown: 300
   rotationSpeedLeftRight: 188
   stabilizeSpeed: 436
   gravity: 0.28
   gravitySpeedBoundery: 100
   inputSensitivity: 0.17
-  inputSensitivityLeftRight: 0.476
+  inputSensitivityLeftRight: 0.5
   twirlInput: 0.826
   twirlSensitivity: 0.135
   twirlSpeed: 800
@@ -661,11 +661,11 @@ MonoBehaviour:
   maxRotation: 0.3
   minRotation: -0.3
   neutralRotation: 0
-  startMaxRecourceA: 100
+  startMaxRecourceA: 150
   boostSpeed: 20
   initialBoostSpeed: 1000
   initialBoostCosts: 10
-  boostCosts: 3
+  boostCosts: 10
   slowmoTimescale: 0.32
   slowmoCosts: 5
   deadZoneRadius: 20
@@ -790,17 +790,17 @@ MonoBehaviour:
   - {fileID: 2137022343}
   - {fileID: 324489369}
   detectionAngle: 111.5
-  points: 2
+  points: 1
   activateExaktDistanceMultiplyer: 0
   breakTime: 0.05
-  minTimeUntilMultiplyer: 3
-  riseTimeInterval: 1
-  multiplyerAdd: 2
+  minTimeUntilMultiplyer: 10
+  riseTimeInterval: 1.2
+  multiplyerAdd: 1
   detectionRadius: 100
-  maxValueMediumDistance: 80
-  maxValueCloseDistance: 40
-  multiplyerMediumZone: 2
-  multiplyerCloseZone: 5
+  maxValueMediumDistance: 60
+  maxValueCloseDistance: 15
+  multiplyerMediumZone: 1
+  multiplyerCloseZone: 2
   spawnVFX: {fileID: 6410553321870994811, guid: 9a22dee4641e2aa489209ff3f750ce23, type: 3}
   spawnVFXMediumState: {fileID: 841743600663670621, guid: e12f54923c9d4f641b1f2568f37d5266, type: 3}
   spawnVFXCloseState: {fileID: 5046607309030252068, guid: 20f57ed573179334894136ac90341d57, type: 3}
@@ -819,7 +819,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieVFX: {fileID: 1496046887641411033, guid: 0424d3e62f85de34bbf4989e51c24aac, type: 3}
   distanceToCore: 1.5
-  detectionRadius: 0.3
+  detectionRadius: 0.5
   detectionLayers:
     serializedVersion: 2
     m_Bits: 375

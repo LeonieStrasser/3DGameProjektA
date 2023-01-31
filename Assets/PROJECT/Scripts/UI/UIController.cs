@@ -248,7 +248,7 @@ public class UIController : MonoBehaviour
     private void UpdateContactScoreText()
     {
         if (contactScoreText)
-            contactScoreText.text = ScoreSystem.Instance.ContactScore.ToString();
+            contactScoreText.text = Mathf.RoundToInt(ScoreSystem.Instance.ContactScore).ToString();
     }
 
     private void ActivateContactScore()

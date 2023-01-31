@@ -791,6 +791,10 @@ public class WhingMovement01 : MonoBehaviour
         ResourceA += newPoints;
     }
 
+    public void RefillResourcePoints()
+    {
+        ResourceA = currentMaxRecource;
+    }
     public void AddMaxRecourcePoints(float addProcent) // Um diesen Prozentteil wird der Tank erweitert
     {
         currentMaxRecource *= addProcent;
