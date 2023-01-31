@@ -393,6 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea49b52bd68e554459f1a0bc945ad5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMoveType: 0
 --- !u!114 &2054758419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,19 +527,45 @@ MonoBehaviour:
   allRaces:
   - startZone: {fileID: 0}
     goal: {fileID: 0}
-    raceMaxTime: 80
-    pointsForSuccess: 100000
-    notes: 
+    raceMaxTime: 25
+    pointsForSuccess: 10000
+    notes: 'Start: Lowest Floor End: Lamp lowground'
   - startZone: {fileID: 0}
     goal: {fileID: 0}
-    raceMaxTime: 100
-    pointsForSuccess: 0
-    notes: 
+    raceMaxTime: 25
+    pointsForSuccess: 10000
+    notes: 'Start: Lowest Floor End: Midground between Pillars'
+  - startZone: {fileID: 0}
+    goal: {fileID: 0}
+    raceMaxTime: 25
+    pointsForSuccess: 10000
+    notes: 'Start: Lowest Floor End: Midground after big external Boost'
+  - startZone: {fileID: 0}
+    goal: {fileID: 0}
+    raceMaxTime: 10
+    pointsForSuccess: 10000
+    notes: Short Tunnel
+  - startZone: {fileID: 0}
+    goal: {fileID: 0}
+    raceMaxTime: 25
+    pointsForSuccess: 10000
+    notes: "Start: Mid Floor at Zahnr\xE4der End: Highest Point"
+  - startZone: {fileID: 0}
+    goal: {fileID: 0}
+    raceMaxTime: 25
+    pointsForSuccess: 10000
+    notes: "Start: Low Floor at Tunnels  End: Mid Floor im K\xFCrbis"
+  - startZone: {fileID: 0}
+    goal: {fileID: 0}
+    raceMaxTime: 25
+    pointsForSuccess: 10000
+    notes: 'Start: Mid Area   End: High at Pillars'
   raceMaxTime: 50
-  looseScreenDelay: 2
+  raceSpawnFeedbackDelay: 0
+  looseScreenDelay: 2.5
   gameoverCam: {fileID: 0}
   ingameHUD: {fileID: 0}
-  gameoverTillCutsceneTime: 3
+  gameoverTillCutsceneTime: 2.5
   inputActions: {fileID: -944628639613478452, guid: ab222ddec1634f54081b9cfdfdfcb792, type: 3}
   pauseAction: {fileID: -9055025534290940002, guid: ab222ddec1634f54081b9cfdfdfcb792, type: 3}
   nameInput: {fileID: 0}
