@@ -53,7 +53,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Noise:
-        m_Texture: {fileID: 2800000, guid: 13d35dfe001ee9d4cbfd86cf83bd5c28, type: 3}
+        m_Texture: {fileID: 2800000, guid: 939781b433a8cfb43a425a4ccd962df7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -98,10 +98,10 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _NoiseMax: 0.1
-    - _NoiseMin: 0.31
+    - _NoiseMin: 1.1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _Power: 0.1
+    - _Power: 0.032
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -110,14 +110,14 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _Thickness: 90
-    - _Tiling: 1
-    - _TriplanarBlend: 1
+    - _Thickness: 180
+    - _Tiling: 0.0045
+    - _TriplanarBlend: 60
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.8773585, g: 0.8083278, b: 0.25244746, a: 1}
+    - _Color: {r: 0.28235295, g: 1.8352941, b: 1.9294118, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

@@ -8,11 +8,15 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] GameObject ingameHUD;
 
-    [Header("Race Timer")]
+    [Header("Race UI")]
     [SerializeField] GameObject timeBarObject;
     [SerializeField] Image progressBarImage;
     [SerializeField] Animator fuelBarAnim;
-
+    [SerializeField] TextMeshProUGUI raceText;
+    [SerializeField] Animator raceTextAnim;
+    [SerializeField] string raceStartText;
+    [SerializeField] string[] raceFinishText;
+    [SerializeField] string raceFailText;
 
     [Header("Resource Bar")]
     [SerializeField] Image recourceBarImage;
@@ -79,7 +83,10 @@ public class UIController : MonoBehaviour
         myManager.OnCrashed += BlendToLooseScreen;
         myManager.OnGameResume += DeactivatePauseScreen;
         myManager.OnRaceStart += ActivateRaceTimeBar;
+        myManager.OnRaceStart += RaceStartText;
         myManager.OnRaceStop += DeactivateRaceTimeBar;
+        myManager.OnRaceFinish += RaceFinishText;
+        myManager.OnRaceFail += RaceFailText;
         disTracker.OnContactBreak += DeactivateContactScore;
         disTracker.OnContact += ActivateContactScore;
 
@@ -279,5 +286,23 @@ public class UIController : MonoBehaviour
 
     }
 
-    
+    private void RaceStartText()
+    {
+        raceText.text = raceStartText;
+        raceTextAnim.SetTrigger("activate");
+    }
+
+    private void RaceFinishText()
+    {
+        int randomNr = Random.Range(0, raceFinishText.Length);
+        raceText.text = raceFinishText[randomNr];
+        raceTextAnim.SetTrigger("activate");
+    }
+
+    private void RaceFailText()
+    {
+        raceText.text = raceFailText;
+        raceTextAnim.SetTrigger("activate");
+    }
+
 }

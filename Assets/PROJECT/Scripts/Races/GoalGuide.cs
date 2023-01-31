@@ -27,6 +27,11 @@ public class GoalGuide : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        timerIsRunning = false;
+    }
+
     IEnumerator spawnTimer()
     {
         yield return new WaitForSeconds(timeDelay);

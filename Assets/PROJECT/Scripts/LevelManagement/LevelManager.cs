@@ -117,6 +117,8 @@ public class LevelManager : MonoBehaviour
     public event Action OnGameResume;
     public event Action OnRaceStart;
     public event Action OnRaceStop;
+    public event Action OnRaceFinish;
+    public event Action OnRaceFail;
 
     public event Action OnCrashed;
 
@@ -319,6 +321,7 @@ public class LevelManager : MonoBehaviour
         SpawnAllRaces();
 
         OnRaceStop?.Invoke();
+        OnRaceFinish?.Invoke();
 
         // Audio Feedbacks
         AudioManager.instance.RaceInProgressStop();
@@ -334,6 +337,7 @@ public class LevelManager : MonoBehaviour
         SpawnAllRaces();
 
         OnRaceStop?.Invoke();
+        OnRaceFail?.Invoke();
 
         AudioManager.instance.RaceInProgressStop();
         AudioManager.instance.RaceTimeUp();
