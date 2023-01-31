@@ -8,11 +8,11 @@ public class ColorChanger : MonoBehaviour
     [SerializeField] Material newColor;
     [SerializeField] MeshRenderer[] meshesToChange;
     [SerializeField] GameObject spawnVFX;
+    [SerializeField] float lifetimeElectricity;
 
     private void OnTriggerEnter(Collider other)
     {
         ChangeColor(newColor);
-        Instantiate(spawnVFX);
     }
 
     public void ChangeColor(Material newMaterial)
@@ -21,5 +21,6 @@ public class ColorChanger : MonoBehaviour
         {
             item.material = newMaterial;
         }
+        Destroy(Instantiate(spawnVFX, this.transform.position, this.transform.rotation), lifetimeElectricity);
     }
 }
