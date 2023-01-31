@@ -7,10 +7,12 @@ public class ColorChanger : MonoBehaviour
 {
     [SerializeField] Material newColor;
     [SerializeField] MeshRenderer[] meshesToChange;
+    [SerializeField] GameObject spawnVFX;
 
     private void OnTriggerEnter(Collider other)
     {
         ChangeColor(newColor);
+        Instantiate(spawnVFX);
     }
 
     public void ChangeColor(Material newMaterial)
