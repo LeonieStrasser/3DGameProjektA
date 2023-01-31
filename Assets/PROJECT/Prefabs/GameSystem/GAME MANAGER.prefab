@@ -407,10 +407,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AllEffects:
-  - {fileID: 11400000, guid: 98656e1d32d242c46b84138edd41ac5c, type: 2}
-  - {fileID: 11400000, guid: 837b826de1426e54fb4a17f9632f4fe0, type: 2}
   - {fileID: 11400000, guid: b33782fff1df72e46a9771b68cefd27c, type: 2}
-  DelayBeforeItemEffectup: 2
+  DelayBeforeItemEffectup: 5.3
   EffectUse: {fileID: 0}
 --- !u!1 &6608348121356776357
 GameObject:
@@ -527,45 +525,58 @@ MonoBehaviour:
   allRaces:
   - startZone: {fileID: 0}
     goal: {fileID: 0}
-    raceMaxTime: 25
-    pointsForSuccess: 10000
+    raceMaxTime: 28
+    pointsForSuccess: 14000
     notes: 'Start: Lowest Floor End: Lamp lowground'
+    difficulty: Easy?
   - startZone: {fileID: 0}
     goal: {fileID: 0}
-    raceMaxTime: 25
-    pointsForSuccess: 10000
+    raceMaxTime: 30
+    pointsForSuccess: 16000
     notes: 'Start: Lowest Floor End: Midground between Pillars'
+    difficulty: 
   - startZone: {fileID: 0}
     goal: {fileID: 0}
-    raceMaxTime: 25
-    pointsForSuccess: 10000
+    raceMaxTime: 30
+    pointsForSuccess: 2000
     notes: 'Start: Lowest Floor End: Midground after big external Boost'
-  - startZone: {fileID: 0}
-    goal: {fileID: 0}
-    raceMaxTime: 10
-    pointsForSuccess: 10000
-    notes: Short Tunnel
+    difficulty: 
   - startZone: {fileID: 0}
     goal: {fileID: 0}
     raceMaxTime: 25
-    pointsForSuccess: 10000
+    pointsForSuccess: 16000
+    notes: 'Start: Lowgroud End: Under Dose'
+    difficulty: 
+  - startZone: {fileID: 0}
+    goal: {fileID: 0}
+    raceMaxTime: 20
+    pointsForSuccess: 18000
     notes: "Start: Mid Floor at Zahnr\xE4der End: Highest Point"
+    difficulty: Normal?
   - startZone: {fileID: 0}
     goal: {fileID: 0}
-    raceMaxTime: 25
-    pointsForSuccess: 10000
+    raceMaxTime: 30
+    pointsForSuccess: 15000
     notes: "Start: Low Floor at Tunnels  End: Mid Floor im K\xFCrbis"
+    difficulty: 
   - startZone: {fileID: 0}
     goal: {fileID: 0}
-    raceMaxTime: 25
+    raceMaxTime: 30
+    pointsForSuccess: 15000
+    notes: 'Start: Mid Area   End: High at Pillars'
+    difficulty: 
+  - startZone: {fileID: 0}
+    goal: {fileID: 0}
+    raceMaxTime: 35
     pointsForSuccess: 10000
     notes: 'Start: Mid Area   End: High at Pillars'
+    difficulty: 
   raceMaxTime: 50
   raceSpawnFeedbackDelay: 0
   looseScreenDelay: 2.5
   gameoverCam: {fileID: 0}
   ingameHUD: {fileID: 0}
-  gameoverTillCutsceneTime: 2.5
+  gameoverTillCutsceneTime: 3
   inputActions: {fileID: -944628639613478452, guid: ab222ddec1634f54081b9cfdfdfcb792, type: 3}
   pauseAction: {fileID: -9055025534290940002, guid: ab222ddec1634f54081b9cfdfdfcb792, type: 3}
   nameInput: {fileID: 0}
