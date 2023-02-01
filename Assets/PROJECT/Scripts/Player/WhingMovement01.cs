@@ -22,7 +22,7 @@ public class WhingMovement01 : MonoBehaviour
     [Header("Movement")]
 
     [SerializeField] bool easyMovement;
-    [SerializeField][Range(1, 10)] float easyMovementRotSpeed;
+    [SerializeField] [Range(1, 10)] float easyMovementRotSpeed;
 
     //[Tooltip("Speed der am Start gesetzt wird.")]
     //[SerializeField] float startSpeed = 10f;
@@ -36,26 +36,26 @@ public class WhingMovement01 : MonoBehaviour
     [Tooltip("Maximal erreichbarer Speed im Sturzflug.")]
     [SerializeField] float maxSpeed = float.MaxValue;
     [Tooltip("Geschwindigkeit mit der der Flieger an der x-Achse rotiert.")]
-    [SerializeField][Range(10, 800)] float rotationSpeedUpDown;
+    [SerializeField] [Range(10, 800)] float rotationSpeedUpDown;
     [Tooltip("Geschwindigkeit mit der der Flieger an der y-Achse rotiert.")]
-    [SerializeField][Range(10, 800)] float rotationSpeedLeftRight;
+    [SerializeField] [Range(10, 800)] float rotationSpeedLeftRight;
     [Tooltip("Geschwindigkeit mit der der Flieger an der z-Achse rotiert rotiert.")]
-    [SerializeField][Range(10, 800)] float stabilizeSpeed;
+    [SerializeField] [Range(10, 800)] float stabilizeSpeed;
     [Tooltip("Kraft mit der der Flugk�rper richtung Boden gedr�ckt wird.")]
-    [SerializeField][Range(0, 0.5f)] float gravity;
+    [SerializeField] [Range(0, 0.5f)] float gravity;
     [Tooltip("Geschwindigkeits Obergrenze ab der die Kraft nach Unten anf�ngt zu wirken. (Von da an wirkt sie umso st�rker, je langsamer das Flugobjekt wird)")]
     [SerializeField] float gravitySpeedBoundery = 20f;
 
     [Space(10)]
     [Tooltip("Sensitivit�t f�r den Joystick Input.")]
-    [SerializeField][Range(0, 0.7f)] float inputSensitivity;
-    [SerializeField][Range(0, 0.7f)] float inputSensitivityLeftRight;
+    [SerializeField] [Range(0, 0.7f)] float inputSensitivity;
+    [SerializeField] [Range(0, 0.7f)] float inputSensitivityLeftRight;
 
     [Space(20)]
     [Header("Twirl")]
-    [SerializeField][Tooltip("Mit diesem Wert kann man einstellen ab welcher Twirlgeschwindigkeit der Twirl-Effect getriggert wird")][Range(0, 1)] float twirlInput;
-    [SerializeField][Tooltip("Inputsensitivity ab der der Twirl-Effect getriggert wird. (0 => beide Sticks m�ssen exakt die entgegengesetzte Position auf Y erreichen)")][Range(0, 1)] float twirlSensitivity;
-    [SerializeField][Range(10, 800)] float twirlSpeed;
+    [SerializeField] [Tooltip("Mit diesem Wert kann man einstellen ab welcher Twirlgeschwindigkeit der Twirl-Effect getriggert wird")] [Range(0, 1)] float twirlInput;
+    [SerializeField] [Tooltip("Inputsensitivity ab der der Twirl-Effect getriggert wird. (0 => beide Sticks m�ssen exakt die entgegengesetzte Position auf Y erreichen)")] [Range(0, 1)] float twirlSensitivity;
+    [SerializeField] [Range(10, 800)] float twirlSpeed;
 
 
 
@@ -81,12 +81,12 @@ public class WhingMovement01 : MonoBehaviour
 
     [Space(5)]
     [Header("Slowmotion Power")]
-    [SerializeField][Range(0.1f, 1)] float slowmoTimescale;
+    [SerializeField] [Range(0.1f, 1)] float slowmoTimescale;
     [SerializeField] float slowmoCosts;
 
     [Space(20)]
     [Header("Camera behaviour")]
-    [SerializeField][Range(0, 60)] float deadZoneRadius;
+    [SerializeField] [Range(0, 60)] float deadZoneRadius;
 
 
     [Space(20)]
@@ -212,6 +212,12 @@ public class WhingMovement01 : MonoBehaviour
     #region events
 
     public event Action<bool, bool> OnDeadzoneValueChanged; // erster bool ist up, zweiter bool ist down
+    public event Action OnBoostStart;
+    public event Action OnBoostEnd;
+    public event Action OnSlowMoStart;
+    public event Action OnSlowMoEnd;
+    public event Action OnRessourceEmpty;
+    public event Action OnRessourceAdd;
 
     #endregion
 
@@ -721,6 +727,7 @@ public class WhingMovement01 : MonoBehaviour
 
                 // Feedback
                 boostEffect.Play();
+                OnBoostStart?.Invoke();
             }
             if (myControls.Player.Boost.IsInProgress())
             {
@@ -733,6 +740,12 @@ public class WhingMovement01 : MonoBehaviour
             {
                 BoostActive = false;
             }
+
+        }
+
+        if (myControls.Player.Boost.WasReleasedThisFrame())
+        {
+            OnBoostEnd?.Invoke();
         }
 
     }
@@ -749,6 +762,7 @@ public class WhingMovement01 : MonoBehaviour
                 SlowMoFeedback?.PlayFeedbacks();
                 AudioManager.instance.SlowMoStart();
 
+                OnSlowMoStart?.Invoke();
             }
             if (myControls.Player.SlowMo.IsInProgress())
             {
@@ -762,6 +776,8 @@ public class WhingMovement01 : MonoBehaviour
         {
             Time.timeScale = 1;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
+
+            OnSlowMoEnd?.Invoke();
         }
         if (!myControls.Player.SlowMo.IsInProgress())
         {
@@ -777,6 +793,7 @@ public class WhingMovement01 : MonoBehaviour
         if (myControls.Player.Boost.WasPressedThisFrame() || myControls.Player.SlowMo.WasPressedThisFrame())
         {
             AudioManager.instance.BoostEmpty();
+            OnRessourceEmpty?.Invoke();
         }
     }
 
@@ -789,15 +806,18 @@ public class WhingMovement01 : MonoBehaviour
     public void AddResourcePoints(int newPoints)
     {
         ResourceA += newPoints;
+        OnRessourceAdd?.Invoke();
     }
 
     public void RefillResourcePoints()
     {
         ResourceA = currentMaxRecource;
+        OnRessourceAdd?.Invoke();
     }
     public void AddMaxRecourcePoints(float addProcent) // Um diesen Prozentteil wird der Tank erweitert
     {
         currentMaxRecource *= addProcent;
+
     }
 
 }
