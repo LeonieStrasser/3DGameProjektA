@@ -11,7 +11,6 @@ public class UIController : MonoBehaviour
     [Header("Race UI")]
     [SerializeField] GameObject timeBarObject;
     [SerializeField] Image progressBarImage;
-    [SerializeField] Animator fuelBarAnim;
     [SerializeField] TextMeshProUGUI raceText;
     [SerializeField] Animator raceTextAnim;
     [SerializeField] string raceStartText;
@@ -19,7 +18,7 @@ public class UIController : MonoBehaviour
     [SerializeField] string raceFailText;
 
     [Header("Resource Bar")]
-    [SerializeField] Image recourceBarImage;
+    [SerializeField] Image[] recourceBarImage;
 
     [Header("XP")]
     [SerializeField] TextMeshProUGUI xpText;
@@ -102,7 +101,10 @@ public class UIController : MonoBehaviour
         if (myManager.ThisRace == LevelManager.raceState.raceIsRunning) // Wenn ein Rennen l�ft aktualisiere den Bar
             progressBarImage.fillAmount = myManager.RaceTimeProgress;
 
-        recourceBarImage.fillAmount = myPlayer.ResourceAInRelationToMax;
+        foreach (var item in recourceBarImage)
+        {
+            item.fillAmount = myPlayer.ResourceAInRelationToMax;
+        }
 
         myManager.OnGamePaused += ActivatePauseScreen;
 
@@ -276,13 +278,11 @@ public class UIController : MonoBehaviour
     private void ActivateRaceTimeBar()
     {
         timeBarObject.SetActive(true);
-        fuelBarAnim.SetBool("raceRun", true);
     }
 
     private void DeactivateRaceTimeBar()
     {
         timeBarObject.SetActive(false);
-        fuelBarAnim.SetBool("raceRun", false);
 
     }
 
