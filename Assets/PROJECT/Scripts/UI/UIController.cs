@@ -33,7 +33,9 @@ public class UIController : MonoBehaviour
     [SerializeField] Animator xpAnimator;
     TextMeshProUGUI contactScoreText;
 
-  
+    [Header("Multiplyer")]
+    [SerializeField] GameObject twirlMultiplyMarker;
+
 
     [Space(20)]
     [Header("LooseScreen")]
@@ -92,6 +94,8 @@ public class UIController : MonoBehaviour
         myManager.OnRaceStop += DeactivateRaceTimeBar;
         myManager.OnRaceFinish += RaceFinishText;
         myManager.OnRaceFail += RaceFailText;
+        myPlayer.OnTwirlStart += ActivateTwirlUIBoolCheck;
+        myPlayer.OnTwirlEnd += ActivateTwirlUIBoolCheck;
         disTracker.OnContactBreak += DeactivateContactScore;
         disTracker.OnContact += ActivateContactScore;
 
@@ -263,7 +267,10 @@ public class UIController : MonoBehaviour
     private void ActivateContactScore()
     {
         SpawnNewContactText();
-
+        if (myPlayer.Twirl)
+        {
+            ActivateTwirlUI();
+        }
     }
 
     private void DeactivateContactScore()
@@ -275,6 +282,7 @@ public class UIController : MonoBehaviour
         contactScoreText = null;
 
         UpdateXPTextReachValue();
+        DeactivateTwirlUI();
 
     }
     #endregion
@@ -312,7 +320,26 @@ public class UIController : MonoBehaviour
     }
 
     #endregion
+    #region twirlUI
+    private void ActivateTwirlUI()
+    {
 
+        twirlMultiplyMarker.SetActive(true);
+    }
+
+    private void DeactivateTwirlUI()
+    {
+
+        twirlMultiplyMarker.SetActive(false);
+    }
+    private void ActivateTwirlUIBoolCheck(bool twirlState)
+    {
+        if (disTracker.DistanceActive)
+            twirlMultiplyMarker.SetActive(twirlState);
+    }
+
+
+    #endregion
 
 
 
