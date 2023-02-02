@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7067530493295417126}
   - component: {fileID: 8630298937229516158}
   - component: {fileID: 1009839771761321448}
+  - component: {fileID: 8802504436846767996}
   m_Layer: 0
   m_Name: StabLampe
   m_TagString: Untagged
@@ -63,6 +64,24 @@ MonoBehaviour:
   newColor: {fileID: 2100000, guid: 73e4691181275124f9fcac6a38e6d146, type: 2}
   meshesToChange:
   - {fileID: 5854291235081135756}
+  spawnVFX: {fileID: 0}
+  lifetimeElectricity: 0
+--- !u!114 &8802504436846767996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3452777315304982487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5493486822d499646969d9820ccd7c5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scorePoints: 40
+  resourcePoints: 0
+  cooldownTime: 15
+  myScoreType: 1
 --- !u!1001 &7095137577174881784
 PrefabInstance:
   m_ObjectHideFlags: 0
