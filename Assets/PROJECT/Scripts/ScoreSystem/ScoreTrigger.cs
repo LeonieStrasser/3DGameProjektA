@@ -9,6 +9,7 @@ public class ScoreTrigger : MonoBehaviour
     [SerializeField] [Tooltip("Anzahl an Punkten die bei normalem durchfliegen auf den Score gerechnet werden")] int scorePoints = 5;
     [SerializeField] [Tooltip("Anzahl an Punkten die bei durchfliegen auf die Resource gerechnet werden")] int resourcePoints = 20;
     [SerializeField] float cooldownTime;
+    [SerializeField] ScoreSystem.scoreType myScoreType;
 
     int activeScorepoints;
     WhingMovement01 myPlayer;
@@ -39,14 +40,18 @@ public class ScoreTrigger : MonoBehaviour
         {
             if (other.tag == "Player" && ScoreSystem.Instance != null)
             {
-                cooldownOn = true;
-                ScoreSystem.Instance.AddScoreImediatly(activeScorepoints);
-                StartCoroutine(CooldownTimer());
+                if (activeScorepoints != 0)
+                {
+                    cooldownOn = true;
+                    ScoreSystem.Instance.AddScoreImediatly(activeScorepoints, myScoreType);
+                    StartCoroutine(CooldownTimer());
+                }
             }
             else
                 Debug.LogWarning("Es fehlt ein ScoreSystem-Script in der Szene ihr Volldeppen!", this.gameObject);
 
-            myPlayer.AddResourcePoints(resourcePoints);
+            if (resourcePoints != 0)
+                myPlayer.AddResourcePoints(resourcePoints);
 
         }
 

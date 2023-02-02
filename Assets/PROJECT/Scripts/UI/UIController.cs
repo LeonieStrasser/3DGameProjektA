@@ -24,11 +24,16 @@ public class UIController : MonoBehaviour
     [SerializeField] TextMeshProUGUI xpText;
     [SerializeField] GameObject contactScoreTemplate;
     [SerializeField] GameObject contactTextContainer;
+    [SerializeField] Color normalPointColor;
+    [SerializeField] Color fuelPointColor;
+    [SerializeField] Color lightPointColor;
     [SerializeField] float scoreAddDelayAfterContactBreak;
     [SerializeField] float countDelay = 1;
     [SerializeField] [Tooltip("Zeit die der score bei einem Schub Punkte zum Hiochz�hlen braucht.")] float totalCountUpTime = 2;
     [SerializeField] Animator xpAnimator;
     TextMeshProUGUI contactScoreText;
+
+  
 
     [Space(20)]
     [Header("LooseScreen")]
@@ -245,6 +250,7 @@ public class UIController : MonoBehaviour
     {
         GameObject newMarker = Instantiate(contactScoreTemplate, contactTextContainer.transform);
         contactScoreText = newMarker.GetComponentInChildren<TextMeshProUGUI>();
+        contactScoreText.color = normalPointColor;
         newMarker.SetActive(true);
     }
 
@@ -274,15 +280,26 @@ public class UIController : MonoBehaviour
     #endregion
     #region imediatlyScore
 
-    private void SpawnNewImediateText(float scoreValue)
+    private void SpawnNewImediateText(float scoreValue, ScoreSystem.scoreType typeOfScore)
     {
         // Neues UI TextMarker Objekt spawnen
         GameObject newMarker = Instantiate(contactScoreTemplate, contactTextContainer.transform);
         // Text setzen
-        newMarker.GetComponentInChildren<TextMeshProUGUI>().text = Mathf.RoundToInt(scoreValue).ToString();
+        TextMeshProUGUI markerTMP = newMarker.GetComponentInChildren<TextMeshProUGUI>();
+        markerTMP.text = Mathf.RoundToInt(scoreValue).ToString();
         newMarker.SetActive(true);
-
-
+        // color setzen
+        switch (typeOfScore)
+        {
+            case ScoreSystem.scoreType.fuelBubblePoints:
+                markerTMP.color = fuelPointColor;
+                break;
+            case ScoreSystem.scoreType.lightPoints:
+                markerTMP.color = lightPointColor;
+                break;
+            default:
+                break;
+        }
 
         // Vom Player entkoppeln
         StartCoroutine(ImetiatlyPointDisconnectTimer(newMarker));

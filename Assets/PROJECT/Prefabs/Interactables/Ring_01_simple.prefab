@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 527314777157756503}
   - component: {fileID: 5483678578562050541}
   - component: {fileID: 8543921829529374973}
+  - component: {fileID: 1426284832759646514}
   m_Layer: 0
   m_Name: Lamps
   m_TagString: Untagged
@@ -141,6 +142,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 385.01596, y: 712.0594, z: 87.412254}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1426284832759646514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3981933182298277949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5493486822d499646969d9820ccd7c5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scorePoints: 100
+  resourcePoints: 0
+  cooldownTime: 15
+  myScoreType: 1
 --- !u!1001 &31878427359384753
 PrefabInstance:
   m_ObjectHideFlags: 0

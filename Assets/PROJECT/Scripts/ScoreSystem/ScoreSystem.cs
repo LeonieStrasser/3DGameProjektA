@@ -61,7 +61,12 @@ public class ScoreSystem : MonoBehaviour
     public float ContactScore { get { return contactScore; } private set { contactScore = value; } }
 
 
-
+    public enum scoreType
+    {
+        fuelBubblePoints,
+        lightPoints,
+        none
+    }
 
 
 
@@ -76,7 +81,7 @@ public class ScoreSystem : MonoBehaviour
     #region events
     public event Action OnXpChange;
     public event Action<Color> OnComboStateChange;
-    public event Action<float> OnAddScoreImediatly;
+    public event Action<float, scoreType> OnAddScoreImediatly;
 
     #endregion
 
@@ -196,14 +201,14 @@ public class ScoreSystem : MonoBehaviour
 
     }
 
-    public void AddScoreImediatly(float newScorePoints)
+    public void AddScoreImediatly(float newScorePoints, scoreType typeOfNewScore)
     {
         newScorePoints = CalculateNewScorePoints(newScorePoints);
 
         CurrentScore += newScorePoints;
         comboScore += newScorePoints;
 
-        OnAddScoreImediatly?.Invoke(newScorePoints);
+        OnAddScoreImediatly?.Invoke(newScorePoints, typeOfNewScore);
     }
 
 
