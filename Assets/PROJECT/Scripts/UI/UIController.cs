@@ -78,6 +78,7 @@ public class UIController : MonoBehaviour
 
         ScoreSystem.Instance.OnXpChange += UpdateContactScoreText;
         ScoreSystem.Instance.OnComboStateChange += UpdateXpState;
+        ScoreSystem.Instance.OnAddScoreImediatly += SpawnNewImediateText;
         myManager.OnGameLoose += ActivateLooseScreen;
         myManager.OnCrashed += BlendToLooseScreen;
         myManager.OnGameResume += DeactivatePauseScreen;
@@ -270,10 +271,29 @@ public class UIController : MonoBehaviour
         UpdateXPTextReachValue();
 
     }
+    #endregion
+    #region imediatlyScore
+
+    private void SpawnNewImediateText(float scoreValue)
+    {
+        // Neues UI TextMarker Objekt spawnen
+        GameObject newMarker = Instantiate(contactScoreTemplate, contactTextContainer.transform);
+        // Text setzen
+        newMarker.GetComponentInChildren<TextMeshProUGUI>().text = Mathf.RoundToInt(scoreValue).ToString();
+        newMarker.SetActive(true);
 
 
+
+        // Vom Player entkoppeln
+        newMarker.GetComponentInParent<UI_Marker>().DeactivatePlayerFollow();
+
+    }
 
     #endregion
+
+
+
+
 
     private void ActivateRaceTimeBar()
     {

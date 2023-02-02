@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class ScoreTrigger : MonoBehaviour
     BonusManager myBonusManager;
 
     bool cooldownOn = false;
+
 
     private void Start()
     {
@@ -38,7 +40,7 @@ public class ScoreTrigger : MonoBehaviour
             if (other.tag == "Player" && ScoreSystem.Instance != null)
             {
                 cooldownOn = true;
-                ScoreSystem.Instance.AddScore(activeScorepoints);
+                ScoreSystem.Instance.AddScoreImediatly(activeScorepoints);
                 StartCoroutine(CooldownTimer());
             }
             else

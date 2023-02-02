@@ -76,6 +76,7 @@ public class ScoreSystem : MonoBehaviour
     #region events
     public event Action OnXpChange;
     public event Action<Color> OnComboStateChange;
+    public event Action<float> OnAddScoreImediatly;
 
     #endregion
 
@@ -159,7 +160,7 @@ public class ScoreSystem : MonoBehaviour
         comboTimer = Mathf.Clamp(comboTimer - Time.deltaTime, 0, float.MaxValue);
 
 
-       // Debug.Log("Combotimer: " + comboTimer + ", ComboScore: " + comboScore);
+        // Debug.Log("Combotimer: " + comboTimer + ", ComboScore: " + comboScore);
 
     }
 
@@ -187,6 +188,9 @@ public class ScoreSystem : MonoBehaviour
 
     }
 
-
+    public void AddScoreImediatly(float newScorePoints)
+    {
+        OnAddScoreImediatly?.Invoke(newScorePoints);
+    }
 
 }
