@@ -169,7 +169,7 @@ public class ScoreSystem : MonoBehaviour
         contactScore = 0;
     }
 
-    public void AddScore(float newScorePoints)
+    private float CalculateNewScorePoints(float newScorePoints)
     {
         // Combo update
         comboIsActive = true;
@@ -182,6 +182,14 @@ public class ScoreSystem : MonoBehaviour
         {
             newScorePoints *= twirlMultiplikator;
         }
+
+        return newScorePoints;
+    }
+
+    public void AddScore(float newScorePoints)
+    {
+        newScorePoints = CalculateNewScorePoints(newScorePoints);
+
         CurrentScore += newScorePoints;
         comboScore += newScorePoints;
         contactScore += newScorePoints;
@@ -190,7 +198,14 @@ public class ScoreSystem : MonoBehaviour
 
     public void AddScoreImediatly(float newScorePoints)
     {
+        newScorePoints = CalculateNewScorePoints(newScorePoints);
+
+        CurrentScore += newScorePoints;
+        comboScore += newScorePoints;
+
         OnAddScoreImediatly?.Invoke(newScorePoints);
     }
+
+
 
 }

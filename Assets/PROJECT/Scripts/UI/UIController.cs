@@ -285,8 +285,13 @@ public class UIController : MonoBehaviour
 
 
         // Vom Player entkoppeln
-        newMarker.GetComponentInParent<UI_Marker>().DeactivatePlayerFollow();
-
+        StartCoroutine(ImetiatlyPointDisconnectTimer(newMarker));
+    }
+    IEnumerator ImetiatlyPointDisconnectTimer(GameObject marker)
+    {
+        yield return new WaitForEndOfFrame();
+        marker.GetComponentInChildren<UI_Marker>().DeactivatePlayerFollow();
+        UpdateXPTextReachValue();
     }
 
     #endregion
