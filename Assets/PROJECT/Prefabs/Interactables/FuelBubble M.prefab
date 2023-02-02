@@ -45,7 +45,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 40
+  m_Radius: 90
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8694139502929754290
 MonoBehaviour:
@@ -63,6 +63,8 @@ MonoBehaviour:
   resourcePoints: 20
   cooldownTime: 15
   fuelVisual: {fileID: 8256819265502431953}
+  popVFX: {fileID: 5577103607986645442, guid: 9629bd3692f45764a9a16ba316cd3e63, type: 3}
+  colliCollider: {fileID: 6097078398653317217}
 --- !u!1 &8256819265502431953
 GameObject:
   m_ObjectHideFlags: 0
