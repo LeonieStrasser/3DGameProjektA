@@ -218,6 +218,8 @@ public class WhingMovement01 : MonoBehaviour
     public event Action OnSlowMoEnd;
     public event Action OnRessourceEmpty;
     public event Action OnRessourceAdd;
+    public event Action <bool> OnTwirlStart;
+    public event Action<bool> OnTwirlEnd;
 
     #endregion
 
@@ -691,12 +693,12 @@ public class WhingMovement01 : MonoBehaviour
         {
             if (twirl)
             {
-                Debug.Log("Twirl Sound start");
+                OnTwirlStart?.Invoke(true);
                 //AudioManager.instance.TwirlOneShot();
             }
             else
             {
-                Debug.Log("Twirl Sound stop");
+                OnTwirlEnd?.Invoke(false);
             }
         }
 
