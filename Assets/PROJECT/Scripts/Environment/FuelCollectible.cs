@@ -27,13 +27,13 @@ public class FuelCollectible : ScoreTrigger
     private void DisableFuel()
     {
         Instantiate(popVFX, transform.position, Quaternion.identity);
-        colliCollider.SetActive(false);
+        colliCollider.enabled = false;
         fuelVisual.SetActive(false);
     }
 
     private void EnableFuel()
     {
-        colliCollider.SetActive(true);
+        colliCollider.enabled = true;
         fuelVisual.SetActive(true);
     }
 }
