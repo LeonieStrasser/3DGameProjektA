@@ -11,6 +11,7 @@ public class Mortality : MonoBehaviour
     [SerializeField] float distanceToCore;
     [SerializeField] float detectionRadius;
     [SerializeField] LayerMask detectionLayers;
+    [SerializeField] float vfxSpawnOffsetDistance;
 
     private void Start()
     {
@@ -30,9 +31,10 @@ public class Mortality : MonoBehaviour
 
     private void Die()
     {
-        if (myManager.CurrentGameState == LevelManager.gameState.running) // sorgt dafür dass Loose nur einmal aufgerufen wird
+        if (myManager.CurrentGameState == LevelManager.gameState.running) // sorgt dafï¿½r dass Loose nur einmal aufgerufen wird
         {
-            Instantiate(dieVFX, transform.position, Quaternion.identity);
+            Vector3 spawnPosition = transform.position - transform.forward * vfxSpawnOffsetDistance;
+            Instantiate(dieVFX, spawnPosition, Quaternion.identity);
             myManager.GameLoose();
             AudioManager.instance.PlayerCrash(); // <- Player Crash SFX
             AudioManager.instance.PauseRaceInProgress(); // <-- if Player cashes in Race, Race Music Fades Out
