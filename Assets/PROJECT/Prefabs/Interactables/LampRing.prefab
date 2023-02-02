@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7241993149840894366}
   - component: {fileID: 8874315907571969042}
   - component: {fileID: 6799909952741554335}
+  - component: {fileID: 5962245124364427809}
   m_Layer: 0
   m_Name: LampRing
   m_TagString: Untagged
@@ -82,6 +83,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 300, y: 300, z: 200}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5962245124364427809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6514854271439209393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5493486822d499646969d9820ccd7c5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scorePoints: 40
+  resourcePoints: 0
+  cooldownTime: 15
 --- !u!1001 &121926444038041704
 PrefabInstance:
   m_ObjectHideFlags: 0
