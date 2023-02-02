@@ -5,6 +5,10 @@ using UnityEngine;
 public class FuelCollectible : ScoreTrigger
 {
     [SerializeField] GameObject fuelVisual; // NUR Visuelle Komponente
+    [SerializeField] GameObject popVFX;
+    [SerializeField] Collider colliCollider;
+
+
 
     public override void FuelTrigger(Collider other)
     {
@@ -22,11 +26,14 @@ public class FuelCollectible : ScoreTrigger
 
     private void DisableFuel()
     {
+        Instantiate(popVFX, transform.position, Quaternion.identity);
+        colliCollider.SetActive(false);
         fuelVisual.SetActive(false);
     }
 
     private void EnableFuel()
     {
+        colliCollider.SetActive(true);
         fuelVisual.SetActive(true);
     }
 }
