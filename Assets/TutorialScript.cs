@@ -19,12 +19,21 @@ public class TutorialScript : MonoBehaviour
     public GameObject rbThirdSlide;
     public GameObject lbFourthSlide;
 
+     [Header("Animator")]
+     public Animator anim;
+    private void Start() 
+    {
+        anim.SetBool("FirstSlide", true);
+    }
 
     //METHODS
     // We start at Slide #1
     // Change from Slide #1 to #2
    public void ChangeToSecondSlide()
    {    
+
+        anim.SetBool("FirstSlide", true);
+        
         //SET ACTIVE
         //SLIDES
         secondSlide.SetActive(true);
