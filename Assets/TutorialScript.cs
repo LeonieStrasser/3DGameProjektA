@@ -31,8 +31,9 @@ public class TutorialScript : MonoBehaviour
     // Change from Slide #1 to #2
    public void ChangeToSecondSlide()
    {    
-
-        anim.SetBool("FirstSlide", true);
+        anim.SetBool("SecondSlide", true);
+        anim.SetBool("FirstSlide", false);
+        anim.SetBool("ThirdSlide", false);
         
         //SET ACTIVE
         //SLIDES
@@ -59,6 +60,9 @@ public class TutorialScript : MonoBehaviour
    // Go back from Slide #2 to #1
     public void ChangeToFirstSlide()
    {
+        anim.SetBool("FirstSlide", true);
+        anim.SetBool("SecondSlide", false);
+        anim.SetBool("ThirdSlide", false);
         //SET ACTIVE
         //SLIDES
         firstSlide.SetActive(true);
@@ -84,6 +88,8 @@ public class TutorialScript : MonoBehaviour
     // Go from Slide #2 to #3
    public void ChangeToThirdSlide()
    {
+        anim.SetBool("ThirdSlide", true);
+        anim.SetBool("SecondSlide", false);
         //SET ACTIVE
         //SLIDES
         thirdSlide.SetActive(true);
@@ -109,6 +115,7 @@ public class TutorialScript : MonoBehaviour
     // Go from Slide #3 to #4
    public void ChangeToFourthSlide()
    {
+        anim.SetBool("ThirdSlide", false);
         //SET ACTIVE
         //SLIDES
         fourthSlide.SetActive(true);
