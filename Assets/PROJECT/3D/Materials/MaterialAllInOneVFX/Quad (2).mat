@@ -14,14 +14,12 @@ Material:
   - FADE_ON
   - HSV_ON
   - MASK_ON
-  - SHAPE1DISTORT_ON
-  - SHAPE1ROTATE_ON
   - TWISTUV_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -56,7 +54,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f8690109736988242b210237e766323c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 76a8eace6555b6b438ba095330fcdfd5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -97,7 +95,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.285
+    - _Alpha: 1
     - _AlphaCutoffValue: 0.25
     - _AlphaFadeAmount: -0.1
     - _AlphaFadePow: 1
@@ -198,11 +196,11 @@ Material:
     - _ShapeBrightness: 0
     - _ShapeColorWeight: 1
     - _ShapeContrast: 1
-    - _ShapeDistortAmount: 0.02
-    - _ShapeDistortXSpeed: 0.1
-    - _ShapeDistortYSpeed: 0.1
-    - _ShapeRotationOffset: 2.42
-    - _ShapeRotationSpeed: 6.86
+    - _ShapeDistortAmount: 2.73
+    - _ShapeDistortXSpeed: 0
+    - _ShapeDistortYSpeed: 0
+    - _ShapeRotationOffset: 3.62
+    - _ShapeRotationSpeed: 0
     - _ShapeXSpeed: 0
     - _ShapeYSpeed: 0
     - _SoftFactor: 0.5
