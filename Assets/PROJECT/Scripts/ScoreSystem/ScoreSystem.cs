@@ -65,6 +65,7 @@ public class ScoreSystem : MonoBehaviour
     {
         fuelBubblePoints,
         lightPoints,
+        racePoints,
         none
     }
 
