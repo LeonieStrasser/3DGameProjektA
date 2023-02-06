@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using NaughtyAttributes;
 
 public class StartZone : MonoBehaviour
 {
     [SerializeField] GameObject packageMarkerPrefab;
-    [SerializeField] int raceID;
+   
+    [HideInInspector] public int raceID;
 
     TextMeshPro idText;
 
