@@ -341,6 +341,7 @@ public class LevelManager : MonoBehaviour
                 if (allRaces[i].raceID == currentRace.raceID)
                 {
                     allRaces[i].raceWon = true;
+                    allRaces[i].startZone.GetComponent<StartZone>().ChangeVisualToRaceWon();
                 }
             }
 
