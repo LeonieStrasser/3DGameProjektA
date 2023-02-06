@@ -126,6 +126,8 @@ public class WhingMovement01 : MonoBehaviour
     [Header("Feedbacks")]
     public GameObject twirlVFX;
     public VisualEffect boostEffect;
+    public GameObject trailVFX;
+    public GameObject boostTrailVFX;
 
     /// a MMFeedbacks to play when we Boost
     public MMFeedbacks BoostStartFeedback;
@@ -184,8 +186,19 @@ public class WhingMovement01 : MonoBehaviour
     {
         private set
         {
+            if (resourceA == 0 && value != 0)
+            {
+                trailVFX.SetActive(true); // Wenn das leere Fuel wieder gefüllt wird
+            }
+
             resourceA = Mathf.Clamp(value, 0, currentMaxRecource); // ACHTUNG! Sollte sich die max Resource im laufe des Games �ndern, muss hier der Code angepasst werden!!!
             resourceAInRelationToMax = resourceA / currentMaxRecource;
+
+            if (resourceA == 0)
+            {
+                trailVFX.SetActive(false);
+                boostTrailVFX.SetActive(false);
+            }
         }
         get
         {
@@ -218,7 +231,7 @@ public class WhingMovement01 : MonoBehaviour
     public event Action OnSlowMoEnd;
     public event Action OnRessourceEmpty;
     public event Action OnRessourceAdd;
-    public event Action <bool> OnTwirlStart;
+    public event Action<bool> OnTwirlStart;
     public event Action<bool> OnTwirlEnd;
 
     #endregion
@@ -254,6 +267,7 @@ public class WhingMovement01 : MonoBehaviour
 
         currentMaxRecource = startMaxRecourceA; // Später kann die maximal recource mehr sein - jetzt wird sie auf die beginn max gesetzt
         ResourceA = currentMaxRecource; // Tank wird auf voll gesetzt
+        trailVFX.SetActive(true);
 
         AudioManager.instance.WindSoundStart();
         AudioManager.instance.IntroSoundOneShot();
@@ -730,6 +744,8 @@ public class WhingMovement01 : MonoBehaviour
                 // Feedback
                 boostEffect.Play();
                 OnBoostStart?.Invoke();
+
+                boostTrailVFX.SetActive(true);
             }
             if (myControls.Player.Boost.IsInProgress())
             {
@@ -748,6 +764,7 @@ public class WhingMovement01 : MonoBehaviour
         if (myControls.Player.Boost.WasReleasedThisFrame())
         {
             OnBoostEnd?.Invoke();
+            boostTrailVFX.SetActive(false);
         }
 
     }
