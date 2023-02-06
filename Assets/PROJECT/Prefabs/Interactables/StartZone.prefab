@@ -1084,8 +1084,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2478225675878064591}
-  - component: {fileID: 2478225675878064578}
   - component: {fileID: 2478225675878064579}
+  - component: {fileID: 2773022732816704814}
   m_Layer: 0
   m_Name: StartZone
   m_TagString: Untagged
@@ -1113,19 +1113,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2478225675878064578
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2478225675878064580}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0879002, y: 1.1058081, z: 1.0116802}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2478225675878064579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1142,6 +1129,19 @@ MonoBehaviour:
   raceInfoObject: {fileID: 6992927329236768371}
   raceWonObject: {fileID: 6688530657492851035}
   raceID: 8
+--- !u!135 &2773022732816704814
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2478225675878064580}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4768403640887897662
 GameObject:
   m_ObjectHideFlags: 0
