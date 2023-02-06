@@ -16,6 +16,9 @@ public class UIController : MonoBehaviour
     [SerializeField] string raceStartText;
     [SerializeField] string[] raceFinishText;
     [SerializeField] string raceFailText;
+    [SerializeField] TextMeshProUGUI progressTextmesh;
+    [SerializeField] string raceProgressText;
+    [SerializeField] Animator raceProgressTextAnim;
 
     [Header("Resource Bar")]
     [SerializeField] Image[] recourceBarImage;
@@ -371,6 +374,10 @@ public class UIController : MonoBehaviour
         int randomNr = Random.Range(0, raceFinishText.Length);
         raceText.text = raceFinishText[randomNr];
         raceTextAnim.SetTrigger("activate");
+
+        progressTextmesh.text = myManager.RaceProgress + " / " + myManager.AllRacesCount + " " + raceProgressText;
+        // Textanimation
+        raceProgressTextAnim.SetTrigger("raceFinish");
     }
 
     private void RaceFailText()

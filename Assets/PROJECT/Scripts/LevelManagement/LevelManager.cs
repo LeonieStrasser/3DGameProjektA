@@ -18,7 +18,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] RaceData[] allRaces;
     [SerializeField] float raceMaxTime;
     [SerializeField] float raceSpawnFeedbackDelay;
-    int raceProgress = 0;
+  
 
 
     [Header("Loose")]
@@ -68,7 +68,9 @@ public class LevelManager : MonoBehaviour
     public raceState ThisRace { get => thisRace; }
 
 
-
+   private int raceProgress = 0; // Anzahl der bisher geschafften races
+    public int RaceProgress { get { return raceProgress; } }
+    public int AllRacesCount { get { return allRaces.Length; } }
 
     // CURRENT RACE
     [Header("debug")]
