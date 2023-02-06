@@ -320,7 +320,7 @@ public class LevelManager : MonoBehaviour
         currentGoal.SetActive(false);
         //-----------------
 
-        ScoreSystem.Instance.AddScore(currentSuccessPoints);
+        ScoreSystem.Instance.AddScoreImediatly(currentSuccessPoints, ScoreSystem.scoreType.racePoints);
 
         myEffectHandle.StartBonusEffect();
 

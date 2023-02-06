@@ -27,6 +27,7 @@ public class UIController : MonoBehaviour
     [SerializeField] Color normalPointColor;
     [SerializeField] Color fuelPointColor;
     [SerializeField] Color lightPointColor;
+    [SerializeField] float racePointFontSize = 50;
     [SerializeField] float scoreAddDelayAfterContactBreak;
     [SerializeField] float countDelay = 1;
     [SerializeField] [Tooltip("Zeit die der score bei einem Schub Punkte zum Hiochz�hlen braucht.")] float totalCountUpTime = 2;
@@ -304,6 +305,10 @@ public class UIController : MonoBehaviour
                 break;
             case ScoreSystem.scoreType.lightPoints:
                 markerTMP.color = lightPointColor;
+                break;
+            case ScoreSystem.scoreType.racePoints:
+                markerTMP.color = normalPointColor;
+                markerTMP.fontSize = racePointFontSize;
                 break;
             default:
                 break;
