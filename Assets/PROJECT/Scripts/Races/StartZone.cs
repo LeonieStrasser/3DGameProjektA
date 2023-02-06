@@ -7,6 +7,8 @@ using NaughtyAttributes;
 public class StartZone : MonoBehaviour
 {
     [SerializeField] GameObject packageMarkerPrefab;
+    [SerializeField] GameObject raceInfoObject;
+    [SerializeField] GameObject raceWonObject;
    
     [HideInInspector] public int raceID;
 
@@ -40,5 +42,11 @@ public class StartZone : MonoBehaviour
             myLevelManager.StartRace(raceID);
             
         }
+    }
+
+    public void ChangeVisualToRaceWon()
+    {
+        raceInfoObject.SetActive(false);
+        raceWonObject.SetActive(true);
     }
 }
