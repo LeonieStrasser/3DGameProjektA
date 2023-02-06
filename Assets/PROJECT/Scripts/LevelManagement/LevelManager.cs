@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] RaceData[] allRaces;
     [SerializeField] float raceMaxTime;
     [SerializeField] float raceSpawnFeedbackDelay;
+    int raceProgress = 0;
 
 
     [Header("Loose")]
@@ -71,6 +72,7 @@ public class LevelManager : MonoBehaviour
 
     // CURRENT RACE
     [Header("debug")]
+    private RaceData currentRace;
     private GameObject currentGoal;
     private GameObject currentStartZone;
     private int currentSuccessPoints;
@@ -96,8 +98,11 @@ public class LevelManager : MonoBehaviour
         [SerializeField] public GameObject goal;
         [SerializeField] public float raceMaxTime;
         [SerializeField] public int pointsForSuccess;
+        [SerializeField] public bool raceWon;
         [ResizableTextArea] [SerializeField] public string notes;
         [ResizableTextArea] [SerializeField] public string difficulty;
+
+        [SerializeField] public int raceID;
     }
 
 
@@ -129,6 +134,12 @@ public class LevelManager : MonoBehaviour
     {
         myEffectHandle = FindObjectOfType<EffectHandle>();
         myPlayer = FindObjectOfType<WhingMovement01>();
+
+        // Gib den Races ihre IDs
+        foreach (var item in allRaces)
+        {
+            item.startZone.GetComponent<StartZone>().raceID = item.raceID;
+        }
     }
 
     private void Start()
@@ -142,6 +153,8 @@ public class LevelManager : MonoBehaviour
             SpawnAllRaces();
         else
             Debug.LogWarning("Kein Race in der Liste!");
+
+
     }
 
     private void Update()
@@ -223,6 +236,7 @@ public class LevelManager : MonoBehaviour
 
     private void SetCurrentRace(RaceData newRace)
     {
+        currentRace = newRace;
         currentStartZone = newRace.startZone;
         currentGoal = newRace.goal;
         raceMaxTime = newRace.raceMaxTime;
@@ -316,6 +330,29 @@ public class LevelManager : MonoBehaviour
     {
         thisRace = raceState.noRace;
 
+        // Counte den Race Progress hoch wenn das rennen zum ersten mal geschafft wird
+        if (!currentRace.raceWon)
+        {
+            for (int i = 0; i < allRaces.Length; i++)
+            {
+                // Finde das Race mit der currentrace ID und ändere seinen bool
+                if (allRaces[i].raceID == currentRace.raceID)
+                {
+                    allRaces[i].raceWon = true;
+                }
+            }
+
+            currentRace.raceWon = true;
+            raceProgress++;
+            Debug.Log(raceProgress + " von " + allRaces.Length + " Races geschafft!");
+
+            // ALle Races geschafft
+            if(raceProgress == allRaces.Length)
+            {
+                AllRacesDone();
+            }
+        }
+
         // Start/goal handler
         currentGoal.SetActive(false);
         //-----------------
@@ -347,6 +384,11 @@ public class LevelManager : MonoBehaviour
 
         AudioManager.instance.RaceInProgressStop();
         AudioManager.instance.RaceTimeUp();
+
+    }
+
+    private void AllRacesDone()
+    {
 
     }
 
