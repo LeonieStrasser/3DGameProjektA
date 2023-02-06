@@ -79,6 +79,7 @@ public class AudioManager : MonoBehaviour
     private EventInstance Pulse3D; // Pulse Sphere (3D Sound)
     private EventInstance EdgeSpark; // Edge Spark (Adaptive)
     private EventInstance slowMo; // Slowmo Lowpass Pitch
+    private EventInstance pointsUp; // Punkte werden generiert
 
     private void Awake()
     {
@@ -105,6 +106,7 @@ public class AudioManager : MonoBehaviour
 
         EdgeSpark = FMODUnity.RuntimeManager.CreateInstance("event:/Player_related/Edge_Sparks/Edge_Sparks");
         slowMo = FMODUnity.RuntimeManager.CreateInstance("snapshot:/Slowmo");
+        pointsUp = FMODUnity.RuntimeManager.CreateInstance("event:/Score_System/Points_Up/Count_Points_Up");
     }
 
     // SLOW MO SNAPSHOT
@@ -122,6 +124,42 @@ public class AudioManager : MonoBehaviour
     {
         slowMo.setParameterByName("SlowmoActive", 1f);
     }*/
+
+    // PUNKTE WERDEN GENERIERT START/STOP
+
+    public void PointsUpStart()
+    {
+        if (EventIsNotPlaying(pointsUp))
+        {
+            pointsUp.start();
+        }
+    }
+
+    public void PointsUpStop()
+    {
+        pointsUp.setParameterByName("PointsGenerated", 0f);
+        pointsUp.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    // PUNKTE WERDEN GENERIERT PARAMETER
+
+    public void PointsUpActive()
+    {
+        pointsUp.setParameterByName("PointsGenerated", 1f);
+    }
+
+    // PUNKTE MOVEN RUNTER
+    public void PointsMovingDown()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Score_System/Points_Move_Down/Points_Move_Down");
+    }
+
+    // PUNKTE ADD
+    public void PointsAdd()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Score_System/Points_Add/Points_Add");
+    }
+
 
 
     // EDGE SPARK START/STOP
@@ -303,11 +341,18 @@ public class AudioManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Player_related/Twirl/Oneshot/twirl_oneshot");
     }
 
-    // LICHT AN
+    // LICHT AN (GLÜHLAMPE)
     // SOUND (ONESHOT)
     public void LichtAn()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Environment/Passing_Ring/Licht_an");
+    }
+
+    // LICHT AN (RÖHRE)
+    // SOUND (ONESHOT)
+    public void LichtAnRöhre()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Environment/Passing_Ring/Röhrenlicht_an");
     }
 
 

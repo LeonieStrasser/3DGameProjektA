@@ -37,11 +37,13 @@ public class DistanceTracker : MonoBehaviour
                 if (value == true)
                 {
                     OnContact?.Invoke();
+                    AudioManager.instance.EdgeSparkStart();
                 }
                 else if (value == false)
                 {
 
                     OnContactBreak?.Invoke();
+                    AudioManager.instance.EdgeSparkStop();
                 }
             }
 
@@ -167,6 +169,7 @@ public class DistanceTracker : MonoBehaviour
 
             Instantiate(spawnVFX, spawnPosition, this.transform.rotation);
             ScoreSystem.Instance.AddScore(roundedPoints * timeMultiplyer);
+            AudioManager.instance.SetEdgeSparkLongDistance();
         }
         else
          if (distance < maxValueMediumDistance && distance > maxValueCloseDistance)
@@ -175,6 +178,7 @@ public class DistanceTracker : MonoBehaviour
 
             Instantiate(spawnVFXMediumState, spawnPosition,  this.transform.rotation);
             ScoreSystem.Instance.AddScore(roundedPoints * multiplyerMediumZone * timeMultiplyer);
+            AudioManager.instance.SetEdgeSparkMediumDistance();
         }
         else
         if (distance < maxValueCloseDistance)
@@ -183,6 +187,7 @@ public class DistanceTracker : MonoBehaviour
 
             Instantiate(spawnVFXCloseState, spawnPosition,  this.transform.rotation);
             ScoreSystem.Instance.AddScore(roundedPoints * multiplyerCloseZone * timeMultiplyer);
+            AudioManager.instance.SetEdgeSparkCloseDistance();
         }
     }
 

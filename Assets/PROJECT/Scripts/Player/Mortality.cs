@@ -36,6 +36,9 @@ public class Mortality : MonoBehaviour
             myManager.GameLoose();
             AudioManager.instance.PlayerCrash(); // <- Player Crash SFX
             AudioManager.instance.PauseRaceInProgress(); // <-- if Player cashes in Race, Race Music Fades Out
+            // KILL ALL OTHER SFXs
+            AudioManager.instance.PointsUpStop();
+            AudioManager.instance.EdgeSparkStop();
         }
         this.gameObject.SetActive(false);
     }

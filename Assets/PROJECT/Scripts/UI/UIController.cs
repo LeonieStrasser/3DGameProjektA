@@ -95,6 +95,8 @@ public class UIController : MonoBehaviour
         contactScoreTemplate.SetActive(false);
 
 
+
+
     }
 
     private void Update()
@@ -123,6 +125,10 @@ public class UIController : MonoBehaviour
                 xpText.text = Mathf.RoundToInt(currentViewScore).ToString();
             }
 
+            if (xpAnimator.GetBool("countIsActive") == false)
+            {
+                AudioManager.instance.PointsAdd();
+            }
             xpAnimator.SetBool("countIsActive", true);
         }
         else
@@ -224,6 +230,7 @@ public class UIController : MonoBehaviour
 
         // Animation
         xpAnimator.SetTrigger("scoreBurst");
+
     }
 
 
@@ -248,7 +255,11 @@ public class UIController : MonoBehaviour
     private void UpdateContactScoreText()
     {
         if (contactScoreText)
+        {
             contactScoreText.text = Mathf.RoundToInt(ScoreSystem.Instance.ContactScore).ToString();
+            AudioManager.instance.PointsUpStart();
+            AudioManager.instance.PointsUpActive();
+        }
     }
 
     private void ActivateContactScore()
@@ -262,6 +273,8 @@ public class UIController : MonoBehaviour
         if (contactScoreText.gameObject.activeSelf)
         {
             contactScoreText.GetComponentInParent<UI_Marker>().DeactivatePlayerFollow();
+            AudioManager.instance.PointsUpStop();
+            AudioManager.instance.PointsMovingDown();
         }
         contactScoreText = null;
 
