@@ -49,6 +49,7 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject noRankPannel;
     [SerializeField] GameObject inputPannel;
     [SerializeField] GameObject menuButtonPannel;
+    [SerializeField] Button retryButton;
     [SerializeField] TextMeshProUGUI[] scoreText;
     [SerializeField] TextMeshProUGUI highScoreText;
     [SerializeField] TMP_InputField nameField;
@@ -60,7 +61,14 @@ public class UIController : MonoBehaviour
 
     [Header("Pause Screen")]
     [SerializeField] GameObject pauseScreen;
+    [SerializeField] GameObject pauseButtons;
+    [SerializeField] GameObject pauseControlls;
+    [SerializeField] GameObject slide1Controlls;
+    [SerializeField] GameObject slide2Controlls;
+    [SerializeField] GameObject slide3Controlls;
+    [SerializeField] GameObject slide4Controlls;
     [SerializeField] Button resumeButton;
+    [SerializeField] Button saveScoreButton;
     [SerializeField] Button backButtonControls;
 
     LevelManager myManager;
@@ -179,6 +187,7 @@ public class UIController : MonoBehaviour
             inputPannel.SetActive(true);
             WriteLastNameToInputField();
             menuButtonPannel.SetActive(false);
+            saveScoreButton.Select();
 
         }
         else if (score > lastListScore)
@@ -188,7 +197,7 @@ public class UIController : MonoBehaviour
             inputPannel.SetActive(true);
             WriteLastNameToInputField();
             menuButtonPannel.SetActive(false);
-
+            saveScoreButton.Select();
             rankText.text = GetRank(score) + "."; // Hier k�nnte man je nach rank andere Effekte auftauchen lassen
 
         }
@@ -198,6 +207,7 @@ public class UIController : MonoBehaviour
             noRankPannel.SetActive(true);
             inputPannel.SetActive(false);
             menuButtonPannel.SetActive(true);
+            retryButton.Select();
         }
 
 
@@ -232,6 +242,12 @@ public class UIController : MonoBehaviour
 
     public void DeactivatePauseScreen()
     {
+        pauseButtons.SetActive(true);
+        slide1Controlls.SetActive(true);
+        slide2Controlls.SetActive(false);
+        slide3Controlls.SetActive(false);
+        slide4Controlls.SetActive(false);
+        pauseControlls.SetActive(false);
         pauseScreen.SetActive(false);
     }
 
