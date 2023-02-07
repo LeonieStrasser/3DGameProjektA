@@ -395,7 +395,10 @@ public class AudioManager : MonoBehaviour
     // IN PROGRESS (ONESHOT)
     public void GamblingInProgress()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Races/Gambling/In_Progress/Gambling_in_Progress");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Score_System/Highscore/Highscore");
+        // Soundwechsel, cuz Gambling wird noch nicht genutzt
+        // event:/Score_System/Highscore/Highscore
+        // event:/Races/Gambling/In_Progress/Gambling_in_Progress
     }
 
     // PLAYERCRASH (ONESHOT)
