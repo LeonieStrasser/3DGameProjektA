@@ -36,7 +36,6 @@ public class Menu_Controller : MonoBehaviour
 
     public string newGameLevel;
 
-    private string levelToLoad;
 
     public string loadTutorial;
 
@@ -53,14 +52,14 @@ public class Menu_Controller : MonoBehaviour
     //Einstellungen für das Main Menu
     public void NewGameDialogYes()
     {
-        SceneManager.LoadScene(newGameLevel);
+        SceneManager.LoadScene(1);
     }
 
     public void LoadingGameDialogYes()
     {
         if (PlayerPrefs.HasKey("SavedLevel"))
         {
-            levelToLoad = PlayerPrefs.GetString("SavedLevel"); //locale variable nimmt bezug zu dem letzten Speicherstand des Levels
+           // levelToLoad = PlayerPrefs.GetString("SavedLevel"); //locale variable nimmt bezug zu dem letzten Speicherstand des Levels ---> BRAUCHEN WIR DAS??? (LEO)
         }
     }
 
