@@ -267,6 +267,7 @@ public class WhingMovement01 : MonoBehaviour
     private void OnDisable()
     {
         myControls.Player.Disable();
+        ResetSlowMotion();
 
         // AUDIO CONTROLL
         AudioManager.instance.WindSoundStop();
@@ -336,8 +337,7 @@ public class WhingMovement01 : MonoBehaviour
 
     }
 
-
-
+    
 
 
     #region inputs
@@ -799,8 +799,7 @@ public class WhingMovement01 : MonoBehaviour
             if (myControls.Player.SlowMo.WasPressedThisFrame())
             {
                 slowMoActive = true;
-                Time.timeScale = slowmoTimescale;
-                Time.fixedDeltaTime = 0.02f * Time.timeScale;
+                SetSlowMotion();
                 SlowMoFeedback?.PlayFeedbacks();
                 AudioManager.instance.SlowMoStart();
 
@@ -816,8 +815,7 @@ public class WhingMovement01 : MonoBehaviour
         }
         if (myControls.Player.SlowMo.WasReleasedThisFrame())
         {
-            Time.timeScale = 1;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            ResetSlowMotion();
 
             OnSlowMoEnd?.Invoke();
         }
@@ -827,6 +825,17 @@ public class WhingMovement01 : MonoBehaviour
             AudioManager.instance.SlowMoStop();
         }
 
+    }
+
+    private void SetSlowMotion()
+    {
+        Time.timeScale = slowmoTimescale;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+    }
+    private void ResetSlowMotion()
+    {
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
     }
 
     private void BoostPostProcessing()
