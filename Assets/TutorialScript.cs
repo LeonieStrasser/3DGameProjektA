@@ -10,7 +10,9 @@ public class TutorialScript : MonoBehaviour
 
      public void FirstSlideAnim()
      {
-        anim.SetBool("FirstSlide", true);
+         anim.SetBool("FirstSlide", true);
+         anim.SetBool("SecondSlide", false);
+         anim.SetBool("ThirdSlide", false);
      }
 
      public void SecondSlideAnim()
@@ -24,10 +26,7 @@ public class TutorialScript : MonoBehaviour
      {
         anim.SetBool("ThirdSlide", true);
         anim.SetBool("SecondSlide", false);
+        anim.SetBool("FirstSlide", false);
      }
 
-   public void FourthSlideAnim()
-   {
-        anim.SetBool("ThirdSlide", false);
-   }
 }
