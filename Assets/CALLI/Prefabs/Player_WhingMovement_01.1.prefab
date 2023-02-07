@@ -692,6 +692,7 @@ MonoBehaviour:
   slowMoActive: 0
   twirlVFX: {fileID: 4379381803757851854}
   boostEffect: {fileID: 0}
+  volume: {fileID: 0}
   BoostStartFeedback: {fileID: 5712552966011245251}
   SlowMoFeedback: {fileID: 3226967423938592378}
   SlowMoHoldingFeedback: {fileID: 4789549624721229703}
@@ -1172,7 +1173,7 @@ MonoBehaviour:
     - rid: 5692273982613487617
       type: {class: MMF_NVClip, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Feedbacks.NiceVibrations}
       data:
-        Active: 1
+        Active: 0
         UniqueID: -1991325498
         Label: Haptic Clip
         ChannelMode: 0
@@ -2203,7 +2204,7 @@ MonoBehaviour:
     - rid: 5354585492912865280
       type: {class: MMF_ChromaticAberration_URP, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Feedbacks.URP}
       data:
-        Active: 1
+        Active: 0
         UniqueID: 1410066475
         Label: Chromatic Aberration URP
         ChannelMode: 0
@@ -2308,7 +2309,7 @@ MonoBehaviour:
     - rid: 5354585492912865281
       type: {class: MMF_LensDistortion_URP, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Feedbacks.URP}
       data:
-        Active: 1
+        Active: 0
         UniqueID: 847822117
         Label: Lens Distortion URP
         ChannelMode: 0

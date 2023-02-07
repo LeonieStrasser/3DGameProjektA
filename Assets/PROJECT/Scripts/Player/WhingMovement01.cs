@@ -7,6 +7,8 @@ using MoreMountains.Feedbacks;
 using Lofelt.NiceVibrations;
 using UnityEngine.Events;
 using UnityEngine.VFX;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(Rigidbody))]
 public class WhingMovement01 : MonoBehaviour
@@ -126,6 +128,16 @@ public class WhingMovement01 : MonoBehaviour
     [Header("Feedbacks")]
     public GameObject twirlVFX;
     public VisualEffect boostEffect;
+    //PostProcessing
+    public AnimationCurve lDistortionLerpIn;
+    public AnimationCurve chromaticAberrationLerpIn;
+    public AnimationCurve lDistortionLerpOut;
+    public AnimationCurve chromaticAberrationLerpOut;
+    public Volume volume;
+    LensDistortion lDistortion;
+    ChromaticAberration chromatic;
+    float boostPPTimer = 0;
+    bool fadeOutDone = true;
 
     /// a MMFeedbacks to play when we Boost
     public MMFeedbacks BoostStartFeedback;
@@ -257,6 +269,8 @@ public class WhingMovement01 : MonoBehaviour
 
         AudioManager.instance.WindSoundStart();
         AudioManager.instance.IntroSoundOneShot();
+        volume.profile.TryGet<ChromaticAberration>(out chromatic);
+        volume.profile.TryGet<LensDistortion>(out lDistortion);
 
     }
 
@@ -276,6 +290,14 @@ public class WhingMovement01 : MonoBehaviour
             BoostInput();
             SlowmoInput();
 
+            if(boostActive == true)
+            {
+                BoostPostProcessing();
+            }
+            if(fadeOutDone == false)
+            {
+                PostProcessingFadeOut();
+            }
 
             if (resourceA <= 0)
             {
@@ -748,6 +770,7 @@ public class WhingMovement01 : MonoBehaviour
         if (myControls.Player.Boost.WasReleasedThisFrame())
         {
             OnBoostEnd?.Invoke();
+            BoostPostProcessingEnd();
         }
 
     }
@@ -789,6 +812,36 @@ public class WhingMovement01 : MonoBehaviour
 
     }
 
+    private void BoostPostProcessing()
+    {
+        boostPPTimer += Time.deltaTime;
+
+        chromatic.intensity.value = chromaticAberrationLerpIn.Evaluate(boostPPTimer); //Chromatic Aberation
+        lDistortion.intensity.value = lDistortionLerpIn.Evaluate(boostPPTimer);
+    }
+
+    private void BoostPostProcessingEnd()
+    {
+        fadeOutDone = false;
+        boostPPTimer = 0;
+
+        chromatic.intensity.value = 0; //chromaticAberrationLerpOut.Evaluate(boostPPTimer); //Chromatic Aberation
+        lDistortion.intensity.value = 0; //lDistortionLerpOut.Evaluate(boostPPTimer);
+    }
+
+    private void PostProcessingFadeOut()
+    {
+        boostPPTimer += Time.deltaTime;
+
+        chromatic.intensity.value = chromaticAberrationLerpOut.Evaluate(boostPPTimer); //Chromatic Aberation
+        lDistortion.intensity.value = lDistortionLerpOut.Evaluate(boostPPTimer);
+        if(boostPPTimer >= 1)
+        {
+            fadeOutDone = true;
+            boostPPTimer = 0;
+
+        }
+    }
 
     private void BoostRessourceEmptyInput()
     {
