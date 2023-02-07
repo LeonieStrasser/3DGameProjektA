@@ -210,6 +210,7 @@ public class WhingMovement01 : MonoBehaviour
             {
                 trailVFX.SetActive(false);
                 boostTrailVFX.SetActive(false);
+                BoostPostProcessingEnd();
             }
         }
         get
