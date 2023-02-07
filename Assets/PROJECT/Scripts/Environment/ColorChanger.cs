@@ -9,10 +9,16 @@ public class ColorChanger : MonoBehaviour
     [SerializeField] MeshRenderer[] meshesToChange;
     [SerializeField] GameObject spawnVFX;
     [SerializeField] float lifetimeElectricity;
+    bool isActive = false;
 
     private void OnTriggerEnter(Collider other)
     {
         ChangeColor(newColor);
+        if (!isActive)
+        {
+            isActive = true;
+            AudioManager.instance.LichtAnRöhre();
+        }
     }
 
     public void ChangeColor(Material newMaterial)

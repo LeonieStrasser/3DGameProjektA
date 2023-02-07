@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/PLAYER.bank
   Name: PLAYER
   StudioPath: bank:/PLAYER
-  lastModified: 638107764698510958
+  lastModified: 638113721589795231
   FileSizes:
   - Name: Desktop
     Value: 3064960
@@ -35,7 +35,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 638094621886191722
+  lastModified: 638113721590358882
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -119,6 +119,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-7625896076584557738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Score_System/Points_Move_Down/Points_Move_Down
+  m_EditorClassIdentifier: 
+  Path: event:/Score_System/Points_Move_Down/Points_Move_Down
+  Guid:
+    Data1: -772476879
+    Data2: 1152332391
+    Data3: -1400034432
+    Data4: -1246265885
+  Banks:
+  - {fileID: -6295970679571160763}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 997
 --- !u!114 &-7206560087129074842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +252,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 440
+--- !u!114 &-6429290126726347774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/Environment/Passing_Ring/R\xF6hrenlicht_an"
+  m_EditorClassIdentifier: 
+  Path: "event:/Environment/Passing_Ring/R\xF6hrenlicht_an"
+  Guid:
+    Data1: 252098748
+    Data2: 1328660849
+    Data3: 2119098514
+    Data4: 827650174
+  Banks:
+  - {fileID: 8020568149593387994}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1671
 --- !u!114 &-6295970679571160763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,10 +294,10 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/SCORESYSTEM.bank
   Name: SCORESYSTEM
   StudioPath: bank:/SCORESYSTEM
-  lastModified: 638107764698670419
+  lastModified: 638113721590348887
   FileSizes:
   - Name: Desktop
-    Value: 177440
+    Value: 243680
   Exists: 1
 --- !u!114 &-5958276663049289331
 MonoBehaviour:
@@ -297,6 +351,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-5691373537526073851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Score_System/Points_Add/Points_Add
+  m_EditorClassIdentifier: 
+  Path: event:/Score_System/Points_Add/Points_Add
+  Guid:
+    Data1: -245746615
+    Data2: 1221472046
+    Data3: 1958692533
+    Data4: -804806650
+  Banks:
+  - {fileID: -6295970679571160763}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1001
 --- !u!114 &-5445705806692228576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,7 +420,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/INTRO.bank
   Name: INTRO
   StudioPath: bank:/INTRO
-  lastModified: 638107764698331327
+  lastModified: 638113721589097718
   FileSizes:
   - Name: Desktop
     Value: 163296
@@ -359,10 +440,10 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/RACES.bank
   Name: RACES
   StudioPath: bank:/RACES
-  lastModified: 638107764698650484
+  lastModified: 638113721590074005
   FileSizes:
   - Name: Desktop
-    Value: 1891104
+    Value: 1891328
   Exists: 1
 --- !u!114 &-4646846716355901634
 MonoBehaviour:
@@ -444,6 +525,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 69098
+--- !u!114 &-4026009541488538347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Score_System/Points_Add/Points_Add_2
+  m_EditorClassIdentifier: 
+  Path: event:/Score_System/Points_Add/Points_Add_2
+  Guid:
+    Data1: 1918894959
+    Data2: 1175542314
+    Data3: 1404451736
+    Data4: -2085651089
+  Banks:
+  - {fileID: -6295970679571160763}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1250
 --- !u!114 &-3560229966037919866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,6 +603,34 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-3117877780192466689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Score_System/Points_Up/Count_Points_Up
+  m_EditorClassIdentifier: 
+  Path: event:/Score_System/Points_Up/Count_Points_Up
+  Guid:
+    Data1: -2095485954
+    Data2: 1084968942
+    Data3: 1966787486
+    Data4: 202745021
+  Banks:
+  - {fileID: -6295970679571160763}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 1409494623094523485}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1161
 --- !u!114 &-2630363176036435110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,7 +658,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2200
---- !u!114 &-2081103735617433692
+--- !u!114 &-1933824081262284921
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -532,9 +668,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Score_System/Highscore/Highscore (WIP)
+  m_Name: event:/Score_System/Highscore/Highscore
   m_EditorClassIdentifier: 
-  Path: event:/Score_System/Highscore/Highscore (WIP)
+  Path: event:/Score_System/Highscore/Highscore
   Guid:
     Data1: -641958209
     Data2: 1197224740
@@ -775,7 +911,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/3D.bank
   Name: 3D
   StudioPath: bank:/3D
-  lastModified: 638107764698281667
+  lastModified: 638113721588485854
   FileSizes:
   - Name: Desktop
     Value: 41504
@@ -817,7 +953,6 @@ MonoBehaviour:
   - {fileID: -6533702009054345609}
   - {fileID: -4454564542186800605}
   - {fileID: 1437331731902813091}
-  - {fileID: -2081103735617433692}
   - {fileID: 8953300808924585910}
   - {fileID: 1090670310712561944}
   - {fileID: 2008070396396966613}
@@ -837,13 +972,19 @@ MonoBehaviour:
   - {fileID: -5445705806692228576}
   - {fileID: -6515864950086068216}
   - {fileID: -5958276663049289331}
+  - {fileID: -6429290126726347774}
+  - {fileID: -3117877780192466689}
+  - {fileID: -7625896076584557738}
+  - {fileID: -5691373537526073851}
+  - {fileID: -4026009541488538347}
+  - {fileID: -1933824081262284921}
   EditorParameters:
   - {fileID: -844647738296826059}
   MasterBanks:
   - {fileID: 2825360712542849668}
   StringsBanks:
   - {fileID: 65769480030421026}
-  cacheTime: 638107764698670419
+  cacheTime: 638113721590358882
   cacheVersion: 131601
 --- !u!114 &65769480030421026
 MonoBehaviour:
@@ -860,10 +1001,10 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638107764698421087
+  lastModified: 638113721589354695
   FileSizes:
   - Name: Desktop
-    Value: 3292
+    Value: 3604
   Exists: 1
 --- !u!114 &468705879805428133
 MonoBehaviour:
@@ -907,7 +1048,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/GAMBLING.bank
   Name: GAMBLING
   StudioPath: bank:/GAMBLING
-  lastModified: 638107764698321364
+  lastModified: 638113721588918532
   FileSizes:
   - Name: Desktop
     Value: 110688
@@ -938,7 +1079,31 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 5000
+  Length: 4250
+--- !u!114 &1409494623094523485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Count_Points_Up/PointsGenerated
+  m_EditorClassIdentifier: 
+  Name: PointsGenerated
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 4263268900
+    data2: 3536219433
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &1437331731902813091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1086,7 +1251,7 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638107764698411383
+  lastModified: 638113721589329482
   FileSizes:
   - Name: Desktop
     Value: 1202784
@@ -1295,10 +1460,10 @@ MonoBehaviour:
   Path: FMODAssets/sounddatabase/Build/Desktop/ENVIRONMENT.bank
   Name: ENVIRONMENT
   StudioPath: bank:/ENVIRONMENT
-  lastModified: 638107764698311386
+  lastModified: 638113721588716646
   FileSizes:
   - Name: Desktop
-    Value: 395712
+    Value: 417952
   Exists: 1
 --- !u!114 &8095795268169904769
 MonoBehaviour:
