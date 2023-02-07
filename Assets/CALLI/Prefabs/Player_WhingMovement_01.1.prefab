@@ -671,6 +671,103 @@ MonoBehaviour:
   boostEffect: {fileID: 0}
   trailVFX: {fileID: 2124341391303203925}
   boostTrailVFX: {fileID: 7564514152745125157}
+  lDistortionLerpIn:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: -0.0000074635027
+      inSlope: -0.02466095
+      outSlope: -0.02466095
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.20314246
+    - serializedVersion: 3
+      time: 1
+      value: 0.24998574
+      inSlope: 0.29348335
+      outSlope: 0.29348335
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.20420694
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chromaticAberrationLerpIn:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  lDistortionLerpOut:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.25004607
+      inSlope: -0.043607585
+      outSlope: -0.043607585
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.1633987
+    - serializedVersion: 3
+      time: 1
+      value: -0.000045440123
+      inSlope: -0.53671604
+      outSlope: -0.53671604
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.14161217
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chromaticAberrationLerpOut:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.9999958
+      inSlope: -0.019328807
+      outSlope: -0.019328807
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.12200434
+    - serializedVersion: 3
+      time: 1
+      value: 0.0000000055879354
+      inSlope: -1.7320788
+      outSlope: -1.7320788
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06535947
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  volume: {fileID: 0}
   BoostStartFeedback: {fileID: 5712552966011245251}
   SlowMoFeedback: {fileID: 3226967423938592378}
   SlowMoHoldingFeedback: {fileID: 4789549624721229703}
