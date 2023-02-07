@@ -157,7 +157,9 @@ public class AudioManager : MonoBehaviour
     // PUNKTE ADD
     public void PointsAdd()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Score_System/Points_Add/Points_Add");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Score_System/Points_Add/Points_Add_2");
+        //  event:/Score_System/Points_Add/Points_Add_2
+        //  event:/Score_System/Points_Add/Points_Add
     }
 
 
