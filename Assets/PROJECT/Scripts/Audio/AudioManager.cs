@@ -363,7 +363,7 @@ public class AudioManager : MonoBehaviour
 
     public void IntroSoundOneShot()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Intro/Sound/Intro_sound");
+        //FMODUnity.RuntimeManager.PlayOneShot("event:/Intro/Sound/Intro_sound");
     }
 
     // RACE
