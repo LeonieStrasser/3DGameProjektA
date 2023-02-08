@@ -116,7 +116,7 @@ public class UIController : MonoBehaviour
         contactScoreTemplate.SetActive(false);
 
 
-
+        Cursor.visible = false;
 
     }
 
@@ -169,6 +169,7 @@ public class UIController : MonoBehaviour
 
     private void ActivateLooseScreen(int score, int lastHighscore, int lastListScore)
     {
+        Cursor.visible = true;
         ingameHUD.SetActive(false);
 
         foreach (var item in scoreText)
@@ -238,6 +239,7 @@ public class UIController : MonoBehaviour
     {
         pauseScreen.SetActive(true);
         resumeButton.Select();
+        Cursor.visible = true;
     }
 
     public void DeactivatePauseScreen()
@@ -249,6 +251,8 @@ public class UIController : MonoBehaviour
         slide4Controlls.SetActive(false);
         pauseControlls.SetActive(false);
         pauseScreen.SetActive(false);
+
+        Cursor.visible = false;
     }
 
     private void UpdateXPTextReachValue()
