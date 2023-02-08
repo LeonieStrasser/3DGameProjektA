@@ -185,6 +185,7 @@ public class LevelManager : MonoBehaviour
             currentGameState = gameState.pause;
             Time.timeScale = 0;
             AudioManager.instance.PauseRaceInProgress();
+            AudioManager.instance.PointsUpStop();
         }
         else if (currentGameState == gameState.pause)
         {

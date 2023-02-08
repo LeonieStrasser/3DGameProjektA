@@ -285,7 +285,7 @@ public class WhingMovement01 : MonoBehaviour
         trailVFX.SetActive(true);
 
         AudioManager.instance.WindSoundStart();
-        AudioManager.instance.IntroSoundOneShot();
+        //AudioManager.instance.IntroSoundOneShot();
         volume.profile.TryGet<ChromaticAberration>(out chromatic);
         volume.profile.TryGet<LensDistortion>(out lDistortion);
 
