@@ -15,7 +15,7 @@ public class StartCutscene : MonoBehaviour
     private void Start()
     {
         cutsceneCam.SetActive(true);
-        playerMovemengt.enabled = false;
+        //playerMovemengt.enabled = false;
         StartCoroutine(FinishStartCutscene());
     }
 
@@ -23,7 +23,7 @@ public class StartCutscene : MonoBehaviour
     {
         yield return new WaitForSeconds(cutsceneTime);
         cutsceneCam.SetActive(false);
-        playerMovemengt.enabled = true;
+       // playerMovemengt.enabled = true;
         Destroy(cutsceneCam);
     } 
 }
