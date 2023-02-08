@@ -165,6 +165,7 @@ public class UIController : MonoBehaviour
     {
         BlendPlanes.SetActive(true);
         blendAnim.SetTrigger("GameOver");
+        contactTextContainer.SetActive(false);
     }
 
     private void ActivateLooseScreen(int score, int lastHighscore, int lastListScore)
@@ -240,6 +241,7 @@ public class UIController : MonoBehaviour
         pauseScreen.SetActive(true);
         resumeButton.Select();
         Cursor.visible = true;
+        contactTextContainer.SetActive(false);
     }
 
     public void DeactivatePauseScreen()
@@ -253,6 +255,7 @@ public class UIController : MonoBehaviour
         pauseScreen.SetActive(false);
 
         Cursor.visible = false;
+        contactTextContainer.SetActive(true);
     }
 
     private void UpdateXPTextReachValue()
