@@ -5,16 +5,21 @@ using UnityEngine;
 public class StartCutscene : MonoBehaviour
 {
     public GameObject cutsceneCam;
-    private WhingMovement01 playerMovemengt;
+    private WhingMovement01 playerMovement;
+    private CutsceneMovement cutscnMovement;
     public float cutsceneTime;
 
     private void Awake()
     {
-        playerMovemengt = FindObjectOfType<WhingMovement01>();
+        playerMovement = FindObjectOfType<WhingMovement01>();
+        cutscnMovement = FindObjectOfType<CutsceneMovement>();
     }
     private void Start()
     {
         cutsceneCam.SetActive(true);
+
+        playerMovement.enabled = false;
+        cutscnMovement.enabled = true;
         //playerMovemengt.enabled = false;
         StartCoroutine(FinishStartCutscene());
     }
@@ -25,5 +30,8 @@ public class StartCutscene : MonoBehaviour
         cutsceneCam.SetActive(false);
        // playerMovemengt.enabled = true;
         Destroy(cutsceneCam);
+
+        playerMovement.enabled = true;
+        cutscnMovement.enabled = false;
     } 
 }
